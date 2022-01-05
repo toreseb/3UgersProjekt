@@ -7,10 +7,10 @@ import java.util.TimerTask;
 
 import gameObjects.*;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
+import javafx.scene.paint.*;
+import javafx.scene.shape.*;
+import javafx.scene.text.*;
 import javafx.stage.*;
 
 public class Main extends Application {
@@ -25,7 +25,8 @@ public class Main extends Application {
         
         
         Text text = new Text();
-        Rectangle rect = new Rectangle();
+        Rectangle rect = new Rectangle(20,20,20,20);
+        
         text.setText("HI");
         text.setX(10);
         text.setY(20);
