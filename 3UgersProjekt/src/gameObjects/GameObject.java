@@ -1,11 +1,11 @@
 package gameObjects;
 
-import framework.main;
+import framework.Main;
 
 public class GameObject {
 	
 	public GameObject() {
-		main.objList.add(this);
+		Main.objList.add(this);
 	}
 
 }
