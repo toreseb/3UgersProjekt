@@ -12,7 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class main extends Application {
+public class Main extends Application {
 	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
@@ -30,7 +30,7 @@ public class main extends Application {
     	t.scheduleAtFixedRate(new TimerTask(){
 		    @Override
 		    public void run(){
-		       main.run();
+		       Main.run();
 		    }
 		},0,16);
         launch(args);
