@@ -2,10 +2,14 @@ package gameObjects;
 
 import framework.Main;
 
-public class GameObject {
+public abstract class GameObject {
 	
 	public GameObject() {
 		Main.objList.add(this);
+	}
+	
+	public void run() {
+		
 	}
 
 }
