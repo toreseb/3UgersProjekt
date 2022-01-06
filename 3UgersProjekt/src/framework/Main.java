@@ -1,6 +1,5 @@
 package framework;
 
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,6 +14,8 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
@@ -23,56 +24,74 @@ import javafx.stage.*;
 
 public class Main extends Application {
 	public static int n, m;
-	
+
 	public static Stage mainStage;
 	public static Scene mainScene;
-	
+
 	public static Timer mainT = new Timer();
-	
+
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
-	
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-    	mainStage = primaryStage;
+
+	/*
+	 * start()
+	 * 
+	 * Creates the first scene/stage.
+	 * 
+	 * Asks for two integer values as the dimensions of the game.
+	 * 
+	 * By: Helene Moesgaard.
+	 */
+	public void start(Stage primaryStage) throws Exception {
+		mainStage = primaryStage;
 		mainStage.setTitle("SimpGorillas");
-		
-		// GridPane setup.
+
+		Group root = new Group();
+
+		// BorderPane setup
+		BorderPane border = new BorderPane();
+		border.setPadding(new Insets(10, 10, 10, 10));
+
+		// GridPane setup
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
-		mainStage.setScene(new Scene(grid, 300, 200));
-		
-		
+		// Window icon
+//		Image icon = new Image("Banan.png");
+//		mainStage.getIcons().add(icon);
+
+		root.getChildren().add(grid);
+		root.getChildren().add(border);
+
+		mainStage.setScene(new Scene(root, 300, 200));
+
 		Text text = new Text();
 		TextField setN = new TextField();
 		TextField setM = new TextField();
 		Label askN = new Label();
 		Label askM = new Label();
 		Button btn = new Button();
-				
 
 		text.setText("Please define dimentions of game:");
 
 		// Place text
-		GridPane.setConstraints(text, 1, 3);
+		border.setTop(text);
 
 		// Place setN
-		GridPane.setConstraints(setN, 2, 4);
+		GridPane.setConstraints(setN, 1, 4);
 
 		// Place setM
-		GridPane.setConstraints(setM, 2, 5);
-		
+		GridPane.setConstraints(setM, 1, 5);
+
 		askN.setText("Width:");
 		// Place askN
-		GridPane.setConstraints(askN, 1, 4);
+		GridPane.setConstraints(askN, 0, 4);
 
 		askM.setText("Height:");
 		// Place askM
-		GridPane.setConstraints(askM, 1, 5);
-		
-		
+		GridPane.setConstraints(askM, 0, 5);
+
 		btn.setText("Submit");
 		btn.setLayoutX(150);
 		btn.setLayoutY(80);
@@ -84,45 +103,45 @@ public class Main extends Application {
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
 					Group root = new Group();
-					Scene scene = new Scene(root,m,n);
+					Scene scene = new Scene(root, n, m);
 					mainStage.setScene(scene);
-					
+
 				} catch (Exception e) {
 					text.setText("Please enter integers only!");
 				}
 			}
 		});
-		
-		//Place btn
-		GridPane.setConstraints(btn, 2, 6);
 
-		grid.getChildren().addAll(text,askN,setN,askM,setM,btn);
+		// Place btn
+		GridPane.setConstraints(btn, 1, 6);
+
+		grid.getChildren().addAll(askN, setN, askM, setM, btn);
 
 		primaryStage.show();
 	}
-    
-    // Main method 
-    public static void main(String[] args) {
-        launch(args);
-        mainT.cancel();
-        System.out.println("Hi3");
-    }
-    
-    static void run() {
-    	for (GameObject gO : objList) {
+
+	// Main method
+	public static void main(String[] args) {
+		launch(args);
+		mainT.cancel();
+		System.out.println("Hi3");
+	}
+
+	static void run() {
+		for (GameObject gO : objList) {
 			gO.run();
 		}
-    	
-    }
-    
-    public static void initMain() {
-		Main.mainT.scheduleAtFixedRate(new TimerTask(){
-		    @Override
-		    public void run(){
-		       Main.run();
-		    }
-		},0,16);
-    	Gorilla g = new Gorilla(40, 500);
-    }
-    
+
+	}
+
+	public static void initMain() {
+		Main.mainT.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				Main.run();
+			}
+		}, 0, 16);
+		Gorilla g = new Gorilla(40, 500);
+	}
+
 }
