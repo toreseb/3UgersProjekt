@@ -31,9 +31,6 @@ public class Main extends Application {
 	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
-	public static Stage mainStage;
-	public static Scene mainScene;
-	
     @Override
     public void start(Stage primaryStage) throws Exception {
     	mainStage = primaryStage;
@@ -56,27 +53,25 @@ public class Main extends Application {
 		Button btn = new Button();
 				
 
-		text.setText("Angiv venligst dimensioner af spilleplade:");
+		text.setText("Please define dimentions of game:");
 
 		// Place text
 		GridPane.setConstraints(text, 1, 3);
 
-
 		// Place setN
-
+		GridPane.setConstraints(setN, 2, 4);
 
 		// Place setM
-
-
-		askN.setText("Angiv bredde:");
-
+		GridPane.setConstraints(setM, 2, 5);
+		
+		askN.setText("Width:");
 		// Place askN
+		GridPane.setConstraints(askN, 1, 4);
 
-
-		askM.setText("Angiv h�jde:");
-
+		askM.setText("Height:");
 		// Place askM
-
+		GridPane.setConstraints(askM, 1, 5);
+		
 		
 		btn.setText("Submit");
 		btn.setLayoutX(150);
@@ -93,17 +88,13 @@ public class Main extends Application {
 					mainStage.setScene(scene);
 					
 				} catch (Exception e) {
-					text.setText("Skriv venligst kun hele tal");
-					
+					text.setText("Please enter integers only!");
 				}
 			}
 		});
 		
+		//Place btn
 		GridPane.setConstraints(btn, 2, 6);
-		GridPane.setConstraints(askN, 1, 4);
-		GridPane.setConstraints(setN, 2, 4);
-		GridPane.setConstraints(askM, 1, 5);
-		GridPane.setConstraints(setM, 2, 5);
 
 		grid.getChildren().addAll(text,askN,setN,askM,setM,btn);
 
