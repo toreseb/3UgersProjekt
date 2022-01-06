@@ -13,8 +13,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class StartWindow extends Application{
-	public int width = 0;
-	public int height = 0;
+	public int n = 0;
+	public int m = 0;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -28,10 +28,10 @@ public class StartWindow extends Application{
         //Brug HBox, Vbox, eller GridPane til at placere tingene.
         
         Text text = new Text();
-        TextField setWidth = new TextField();
-        TextField setHeight = new TextField();
-        Label askWidth = new Label();
-        Label askHeight = new Label();
+        TextField setN = new TextField();
+        TextField setM = new TextField();
+        Label askN = new Label();
+        Label askM = new Label();
         Button btn = new Button();
         
         text.setText("Angiv venligst dimensioner af spilleplade:");
@@ -44,12 +44,12 @@ public class StartWindow extends Application{
         //setHeight.setLayoutX(100);
         //setHeight.setLayoutY(60);
         
-        askWidth.setText("Angiv bredde:");
+        askN.setText("Angiv bredde:");
         //askWidth.setLayoutX(100);
         //askWidth.setLayoutY(40);
         
         
-        askHeight.setText("Angiv højde:");
+        askM.setText("Angiv højde:");
         //askHeight.setLayoutX(100);
         //askHeight.setLayoutY(60);
 
@@ -62,8 +62,8 @@ public class StartWindow extends Application{
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					width = Integer.parseInt(setWidth.getText());
-					height = Integer.parseInt(setHeight.getText());
+					n = Integer.parseInt(setN.getText());
+					m = Integer.parseInt(setM.getText());
 					
 					
 				}catch(Exception e) {
@@ -73,10 +73,10 @@ public class StartWindow extends Application{
         });
         
         root.getChildren().add(text);
-        root.getChildren().add(setWidth);
-        root.getChildren().add(setHeight);
-        root.getChildren().add(askWidth);
-        root.getChildren().add(askHeight);
+        root.getChildren().add(setN);
+        root.getChildren().add(setM);
+        root.getChildren().add(askN);
+        root.getChildren().add(askM);
         root.getChildren().add(btn);
 
         

@@ -23,7 +23,6 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         
-        
         Text text = new Text();
         Rectangle rect = new Rectangle(20,20,20,20);
         
