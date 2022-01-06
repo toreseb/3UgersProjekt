@@ -4,7 +4,7 @@ import framework.Main;
 import java.util.Vector;
 
 /**
- * @author williamholberg
+ * The function of this class is:
  *
  */
 
