@@ -16,7 +16,7 @@ public abstract class GameObject {
 	
 
 	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the players
-	private int width, height; 				// the width and height of the shapes
+	protected int width, height; 				// the width and height of the shapes
 	
 	
 	// Constructor
