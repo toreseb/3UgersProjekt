@@ -17,21 +17,14 @@ public class Main extends Application {
 	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
+	public static int n,m;
+	
     @Override
     public void start(Stage primaryStage) throws Exception{
     	Group root = new Group();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         
-        Text text = new Text();
-        Rectangle rect = new Rectangle(20,20,20,20);
-        
-        text.setText("HI");
-        text.setX(10);
-        text.setY(20);
-        
-        root.getChildren().add(text);
-        root.getChildren().add(rect);
         
         primaryStage.show();
     }
