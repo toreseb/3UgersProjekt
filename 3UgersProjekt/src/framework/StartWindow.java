@@ -85,22 +85,12 @@ public class StartWindow extends Application {
 		
 		GridPane.setConstraints(btn, 3, 1);
 		
-		
 		GridPane.setConstraints(askN, 1, 4);
 		GridPane.setConstraints(setN, 2, 4);
 		GridPane.setConstraints(askM, 1, 5);
 		GridPane.setConstraints(setM, 2, 5);
 
 		grid.getChildren().addAll(text,askN,setN,askM,setM,btn);
-		
-
-		//grid.add(btn, 5, 7);
-
-		/*
-		 * root.getChildren().add(text); root.getChildren().add(setN);
-		 * root.getChildren().add(setM); root.getChildren().add(askN);
-		 * root.getChildren().add(askM); root.getChildren().add(btn);
-		 */
 
 		primaryStage.show();
 	}
