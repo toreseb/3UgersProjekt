@@ -32,6 +32,7 @@ public class Main extends Application {
     	mainScene = new Scene(root);
         mainStage.setTitle("Hello World");
         mainStage.setScene(mainScene);
+        mainStage.setResizable(false);
         mainStage.show();
     }
     
