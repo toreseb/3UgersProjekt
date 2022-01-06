@@ -78,8 +78,7 @@ public class StartWindow extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					n = Integer.parseInt(setN.getText());
-					m = Integer.parseInt(setM.getText());
+					
 
 				} catch (Exception e) {
 					text.setText("Skriv venligst kun hele tal");
