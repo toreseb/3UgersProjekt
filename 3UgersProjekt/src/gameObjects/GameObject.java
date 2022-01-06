@@ -12,13 +12,14 @@ import java.util.Vector;
 public abstract class GameObject {
 	
 
-	protected Vector<Integer> vectorPos; 		// The position for the players
+	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the players
 	protected int width, height; 				// the width and height of the shapes
 	
 	
 	// Constructor
 	public GameObject(int posX, int posY, int width, int height) {
-		vectorPos = new Vector<Integer>(posX, posY);
+		vectorPos.add(posX);
+		vectorPos.add(posY);
 		this.width = width;
 		this.height = height;
 		
