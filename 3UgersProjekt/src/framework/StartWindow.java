@@ -51,20 +51,24 @@ public class StartWindow extends Application {
 
 
 		// Place setN
+		GridPane.setConstraints(setN, 2, 4);
 
 
 		// Place setM
-
+		GridPane.setConstraints(setM, 2, 5);
+		
 
 		askN.setText("Angiv bredde:");
 
 		// Place askN
+		GridPane.setConstraints(askN, 1, 4);
 
 
-		askM.setText("Angiv højde:");
+		askM.setText("Angiv hï¿½jde:");
 
-		// Place askM
-
+		//Place askM
+		GridPane.setConstraints(askM, 1, 5);
+		
 		
 		btn.setText("Submit");
 		btn.setLayoutX(150);
@@ -83,15 +87,11 @@ public class StartWindow extends Application {
 			}
 		});
 		
+		//Place btn
 		GridPane.setConstraints(btn, 3, 1);
 		
-		GridPane.setConstraints(askN, 1, 4);
-		GridPane.setConstraints(setN, 2, 4);
-		GridPane.setConstraints(askM, 1, 5);
-		GridPane.setConstraints(setM, 2, 5);
-
 		grid.getChildren().addAll(text,askN,setN,askM,setM,btn);
-
+		
 		primaryStage.show();
 	}
 }
