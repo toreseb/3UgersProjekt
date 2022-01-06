@@ -21,14 +21,9 @@ public class Controller {
 	
 	public void changeScene() {
 		Group root = new Group();
+		
 		Scene scene = new Scene(root,Integer.parseInt(widthTextField.getText()),Integer.parseInt(heightTextField.getText()));
 		Main.mainStage.setScene(scene);
-		Main.mainT.scheduleAtFixedRate(new TimerTask(){
-		    @Override
-		    public void run(){
-		       Main.run();
-		    }
-		},0,16);
 		Main.initMain();
 	}
 }

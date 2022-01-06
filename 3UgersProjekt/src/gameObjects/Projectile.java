@@ -1,8 +1,11 @@
 package gameObjects;
 
+import framework.*;
+
 import java.lang.Math.*;
 
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 
@@ -18,6 +21,13 @@ public class Projectile extends GameObject{
 	public void drawShape() {
 		
 		Circle circle = new Circle(vectorPos.get(0),vectorPos.get(1),5);
+		
+		
+		Group root = (Group) Main.mainScene.getRoot();
+		root.getChildren().add(circle);
+		Scene scene = new Scene(root);
+		
+		Main.mainStage.setScene(scene);
 
         // root.getChildren().add(circle);
 		// skal tilføjes til vores main-scene
