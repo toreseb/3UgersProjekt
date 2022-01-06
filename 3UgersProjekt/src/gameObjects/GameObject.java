@@ -44,6 +44,8 @@ public abstract class GameObject {
 	public void collision() {
 		if (vectorPos.get(1) > Main.m)
 			vectorPos.set(1, Main.m);
+		if (vectorPos.get(1) < 0)
+			vectorPos.set(1, 0);
 		if (vectorPos.get(0)< 0)
 			vectorPos.set(0,0);
 		if (vectorPos.get(0)>Main.n)
