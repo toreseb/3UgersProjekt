@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-
+import javafx.scene.shape.Shape;
 /**
  * The function of this class is.
  * 
@@ -20,14 +20,10 @@ public class Gorilla extends GameObject {
 	}
 
 	@Override
-	public void drawShape() {
-		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1), 5);
-
-		Group root = (Group) Main.mainScene.getRoot();
-		root.getChildren().add(circle);
-		Scene scene = new Scene(root);
-
-		Main.mainStage.setScene(scene);
+	public void drawShape(Group root) {
+		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1), 5);  // Creates our circle
+		//root.getChildren().add(circle);    // adding the circle to the group
+		System.out.println("Hey");
 	}
 
 	@Override

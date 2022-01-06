@@ -26,6 +26,7 @@ public class Main extends Application {
 	
 	public static Stage mainStage;
 	public static Scene mainScene;
+	public static Group root2 = new Group(); 
 	
 	public static Timer mainT = new Timer();
 	
@@ -82,9 +83,9 @@ public class Main extends Application {
 				try {
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
-					Group root = new Group();
-					Scene scene = new Scene(root,m,n);
+					Scene scene = new Scene(root2,m,n);
 					mainStage.setScene(scene);
+					initMain();
 					
 				} catch (Exception e) {
 					text.setText("Please enter integers only!");
@@ -109,7 +110,7 @@ public class Main extends Application {
     
     static void run() {
     	for (GameObject gO : objList) {
-			gO.run();
+			gO.run(root2);
 		}
     	
     }

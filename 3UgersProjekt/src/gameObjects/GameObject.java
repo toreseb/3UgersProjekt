@@ -3,6 +3,9 @@ package gameObjects;
 import framework.Main;
 import java.util.Vector;
 
+import javafx.scene.Group;
+import javafx.scene.shape.Shape;
+
 /**
  * @author williamholberg
  *
@@ -27,14 +30,14 @@ public abstract class GameObject {
 	}
 	
 	
-	public abstract void drawShape();
+	public abstract void drawShape(Group root);
 	
 	public abstract void step();
 	
-	public void run() {
+	public void run(Group root) {
 		step();
 		collision();
-		drawShape();
+		drawShape(root);
 	}
 	
 	public void collision() {

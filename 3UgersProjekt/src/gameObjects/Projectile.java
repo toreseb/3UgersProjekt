@@ -18,12 +18,11 @@ public class Projectile extends GameObject{
 		direction = Math.toRadians(direction); // konverteres til radianer
 		speed = 5; // skal hentes fra StartWindow
 	}
-	public void drawShape() {
+	
+	@Override
+	public void drawShape(Group root) {
 		
 		Circle circle = new Circle(vectorPos.get(0),vectorPos.get(1),5);
-		
-		
-		Group root = (Group) Main.mainScene.getRoot();
 		root.getChildren().add(circle);
 		Scene scene = new Scene(root);
 		
