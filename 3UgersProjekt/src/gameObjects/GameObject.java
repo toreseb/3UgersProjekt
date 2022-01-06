@@ -12,8 +12,8 @@ import java.util.Vector;
 public abstract class GameObject {
 	
 
-	private Vector<Integer> vectorPos; 		// The position for the palyers
-	private int width, height; 				// the width and hight of the shaps
+	private Vector<Integer> vectorPos; 		// The position for the players
+	private int width, height; 				// the width and height of the shapes
 	
 	
 	// Constructor
@@ -22,13 +22,19 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 		
-		Main.objList.add(this);// Adds the playr to a list.
+		Main.objList.add(this);// Adds the player to a list.
 	}
 	
 	
-	public abstract void shape();
+	public abstract void drawShape();
 	
-	public abstract void run();
+	public abstract void step();
+	
+	public void run() {
+		step();
+		collision();
+		drawShape();
+	}
 	
 	
 	public void updatePosition() {
@@ -36,7 +42,9 @@ public abstract class GameObject {
 	}
 	
 	public void collision() {
-		
+		if (vectorPos.get(0) < 0) {
+			vectorPos.set(0, 0);
+		}
 	}
 	
 	// Getters
@@ -47,7 +55,7 @@ public abstract class GameObject {
 	
 	// to string method
 	public String toString() {
-		return "Players position: " ;
+		return "Objects position: " ;
 	}
 	
  
