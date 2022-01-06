@@ -17,31 +17,33 @@ import javafx.stage.*;
 public class Main extends Application {
 	public static int n, m;
 	
+	public static Stage mainStage;
+	public static Scene mainScene;
+	
+	public static Timer mainT = new Timer();
+	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
     @Override
     public void start(Stage stage) throws Exception{
     	Parent root = FXMLLoader.load(getClass().getResource("startScene.fxml"));
-    	
-    	Scene scene = new Scene(root);
-        stage.setTitle("Hello World");
-        stage.setScene(scene);
-        stage.show();
+
+    	mainStage = stage;
+    	mainScene = new Scene(root);
+        mainStage.setTitle("Hello World");
+        mainStage.setScene(mainScene);
+        mainStage.show();
     }
     
     // Main method 
     public static void main(String[] args) {
     	
     	System.out.println("Hi");
-    	Timer t = new Timer();
-    	t.scheduleAtFixedRate(new TimerTask(){
-		    @Override
-		    public void run(){
-		       Main.run();
-		    }
-		},0,16);
+    	
+    	
+    	startMain();
         launch(args);
-        t.cancel();
+        mainT.cancel();
         System.out.println("Hi3");
     }
     
@@ -51,4 +53,9 @@ public class Main extends Application {
 		}
     	
     }
+    
+    static void startMain() {
+    	
+    }
+    
 }
