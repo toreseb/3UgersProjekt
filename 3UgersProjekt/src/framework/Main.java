@@ -22,13 +22,13 @@ public class Main extends Application {
 	public static int n,m;
 	
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage Stage) throws Exception{
     	Group root = new Group();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Stage.setTitle("Hello World");
+        Stage.setScene(new Scene(root, 300, 275));
         
         
-        primaryStage.show();
+        Stage.show();
     }
     
     public static void main(String[] args) {
