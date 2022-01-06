@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import framework.StartWindow;
+
 import gameObjects.*;
 import javafx.application.Application;
 import javafx.scene.*;
@@ -30,8 +32,8 @@ public class Main extends Application {
     }
     
     public static void main(String[] args) {
-    	
-    	System.out.println("Hi");
+    	String[] a = args;
+    	startProgram(args);
     	Timer t = new Timer();
     	t.scheduleAtFixedRate(new TimerTask(){
 		    @Override
@@ -39,9 +41,14 @@ public class Main extends Application {
 		       Main.run();
 		    }
 		},0,16);
+    	
         launch(args);
         t.cancel();
-        System.out.println("Hi3");
+        endProgram();
+    }
+    
+    static void startProgram(String[] args) {
+    	//Application.launch(StartWindow.class,args);
     }
     
     static void run() {
@@ -51,4 +58,9 @@ public class Main extends Application {
 		}
     	
     }
+    
+    static void endProgram() {
+    	
+    }
+    
 }

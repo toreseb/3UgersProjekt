@@ -1,5 +1,7 @@
 package gameObjects;
 
+import framework.*;
+
 public class Gorilla extends GameObject {
 
 	public Gorilla(int posX, int posY) {
@@ -17,7 +19,7 @@ public class Gorilla extends GameObject {
 
 	@Override
 	public void drawShape() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
