@@ -36,7 +36,7 @@ public class Main extends Application {
 	/*
 	 * start()
 	 *
-	 * Creates the first scene/stage.
+	 * Creates the first scene/stage. xxx hvilken en?
 	 *
 	 * Asks for two integer values as the dimensions of the game.
 	 *
