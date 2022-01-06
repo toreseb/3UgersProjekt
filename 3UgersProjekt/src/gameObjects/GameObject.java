@@ -2,6 +2,7 @@ package gameObjects;
 
 import framework.Main;
 import java.util.Vector;
+import java.lang.Math.*;
 
 /**
  * @author williamholberg
