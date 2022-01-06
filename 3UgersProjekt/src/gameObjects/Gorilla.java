@@ -1,5 +1,5 @@
 package gameObjects;
-
+/*
 public class Gorilla extends GameObject {
 
 	public Gorilla() {
@@ -11,4 +11,4 @@ public class Gorilla extends GameObject {
 		
 	}
 
-}
+}*/

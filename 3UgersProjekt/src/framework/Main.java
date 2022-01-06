@@ -18,24 +18,14 @@ public class Main extends Application {
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage stage) throws Exception{
     	Group root = new Group();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        
-        Text text = new Text();
-        Rectangle rect = new Rectangle(20,20,20,20);
-        
-        text.setText("HI");
-        text.setX(10);
-        text.setY(20);
-        
-        root.getChildren().add(text);
-        root.getChildren().add(rect);
-        
-        primaryStage.show();
+        stage.setTitle("Hello World");
+        stage.setScene(new Scene(root, 1200, 700));
+        stage.show();
     }
     
+    // Main method 
     public static void main(String[] args) {
     	
     	System.out.println("Hi");
@@ -52,7 +42,6 @@ public class Main extends Application {
     }
     
     static void run() {
-    	
     	for (GameObject gO : objList) {
 			gO.run();
 		}
