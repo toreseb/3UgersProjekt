@@ -51,6 +51,12 @@ public class Main extends Application {
     }
     
     public static void initMain() {
+		Main.mainT.scheduleAtFixedRate(new TimerTask(){
+		    @Override
+		    public void run(){
+		       Main.run();
+		    }
+		},0,16);
     	Gorilla g = new Gorilla(40, 500);
     }
     
