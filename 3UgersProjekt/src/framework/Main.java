@@ -17,18 +17,15 @@ public class Main extends Application {
 	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
-	public static int n,m;
-	
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage stage) throws Exception{
     	Group root = new Group();
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        
-        
-        primaryStage.show();
+        stage.setTitle("Hello World");
+        stage.setScene(new Scene(root, 1200, 700));
+        stage.show();
     }
     
+    // Main method 
     public static void main(String[] args) {
     	
     	System.out.println("Hi");
@@ -45,7 +42,6 @@ public class Main extends Application {
     }
     
     static void run() {
-    	
     	for (GameObject gO : objList) {
 			gO.run();
 		}

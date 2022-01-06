@@ -37,11 +37,6 @@ public abstract class GameObject {
 		drawShape();
 	}
 	
-	
-	public void updatePosition() {
-		
-	}
-	
 	public void collision() {
 		if (vectorPos.get(1) > Main.m)
 			vectorPos.set(1, Main.m);
@@ -62,7 +57,7 @@ public abstract class GameObject {
 	
 	// to string method
 	public String toString() {
-		return "Objects position: " ;
+		return "Objects position: " + "[" + vectorPos.get(0) + ";" + vectorPos.get(1) + "]";
 	}
 	
  

@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 public class StartWindow extends Application{
 	public int n = 0;
 	public int m = 0;
+	
+	
 
 	public static void main(String[] args) {
 		launch(args);
