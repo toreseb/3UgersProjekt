@@ -2,10 +2,9 @@ package gameObjects;
 
 import framework.Main;
 import java.util.Vector;
-import java.lang.Math.*;
 
 /**
- * The function of this class is:
+ * @author williamholberg
  *
  */
 
@@ -13,7 +12,7 @@ import java.lang.Math.*;
 public abstract class GameObject {
 	
 
-	private Vector<Integer> vectorPos; 		// The position for the players
+	protected Vector<Integer> vectorPos; 		// The position for the players
 	private int width, height; 				// the width and height of the shapes
 	
 	
