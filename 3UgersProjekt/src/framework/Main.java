@@ -31,9 +31,6 @@ public class Main extends Application {
 	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
-	public static Stage mainStage;
-	public static Scene mainScene;
-	
     @Override
     public void start(Stage primaryStage) throws Exception {
     	mainStage = primaryStage;
@@ -54,7 +51,6 @@ public class Main extends Application {
 		Label askN = new Label();
 		Label askM = new Label();
 		Button btn = new Button();
-				
 
 		text.setText("Angiv venligst dimensioner af spilleplade:");
 
