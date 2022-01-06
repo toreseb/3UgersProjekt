@@ -31,9 +31,13 @@ public class Main extends Application {
 	
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	
+	public static Stage mainStage;
+	public static Scene mainScene;
+	
     @Override
     public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("SimpGorillas");
+    	mainStage = primaryStage;
+		mainStage.setTitle("SimpGorillas");
 		
 		// GridPane setup.
 		GridPane grid = new GridPane();
@@ -41,7 +45,7 @@ public class Main extends Application {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
-		primaryStage.setScene(new Scene(grid, 300, 200));
+		mainStage.setScene(new Scene(grid, 300, 200));
 		
 		
 		Text text = new Text();
@@ -84,9 +88,13 @@ public class Main extends Application {
 				try {
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
-					System.out.println("Dette virker");
+					Group root = new Group();
+					Scene scene = new Scene(root,m,n);
+					mainStage.setScene(scene);
+					
 				} catch (Exception e) {
 					text.setText("Skriv venligst kun hele tal");
+					
 				}
 			}
 		});
