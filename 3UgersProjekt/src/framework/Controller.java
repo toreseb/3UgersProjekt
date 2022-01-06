@@ -29,6 +29,6 @@ public class Controller {
 		       Main.run();
 		    }
 		},0,16);
-		
+		Main.initMain();
 	}
 }

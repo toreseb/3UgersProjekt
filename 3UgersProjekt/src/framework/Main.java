@@ -36,11 +36,6 @@ public class Main extends Application {
     
     // Main method 
     public static void main(String[] args) {
-    	
-    	System.out.println("Hi");
-    	
-    	
-    	startMain();
         launch(args);
         mainT.cancel();
         System.out.println("Hi3");
@@ -53,8 +48,8 @@ public class Main extends Application {
     	
     }
     
-    static void startMain() {
-    	
+    public static void initMain() {
+    	Gorilla g = new Gorilla(40, 500);
     }
     
 }
