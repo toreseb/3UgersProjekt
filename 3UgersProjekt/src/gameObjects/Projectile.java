@@ -49,10 +49,18 @@ public class Projectile extends GameObject {
 		if (vectorPos.get(1) + height / 2 > Main.m) {
 			vectorPos.set(1, Main.m - height / 2);
 			xSpeed = 0;
-			Gorilla gorilla = Main.pList.get((Main.cPlayer + 1) % 1);
-			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 50
-					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > -Main.n / 50) {
-				// Main.pList.get(Main.cPlayer).point ++; vent til point eksisterer
+			Gorilla gorilla = Main.pList.get((Main.cPlayer+1) % 2);
+			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 30
+					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > -Main.n / 30) {
+				System.out.println("Hi");
+				Main.pList.get(Main.cPlayer).point ++;
+				for (Gorilla p : Main.pList) {
+					System.out.println(p.point);
+				}
+			}
+			Main.cPlayer++;
+			if(Main.cPlayer > Main.pList.size()-1) {
+				Main.cPlayer = 0;
 			}
 			this.deleteObject();
 		}
