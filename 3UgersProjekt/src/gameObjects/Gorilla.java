@@ -27,7 +27,11 @@ public class Gorilla extends GameObject {
 	}
 
 	@Override
-	public void step() {} // This class is not used here 
+	public void step() {
+		vectorPos.set(0,vectorPos.get(0)+1);
+		vectorPos.set(1,vectorPos.get(1)+1);
+		
+	} // This class is not used here 
 
 	private void throwBanana() {
 		Projectile banana = new Projectile(100, 100); // Create an instance of projectile with x and y set to 100

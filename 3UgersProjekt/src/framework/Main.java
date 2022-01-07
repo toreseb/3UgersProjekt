@@ -29,16 +29,14 @@ public class Main extends Application {
 
 	public static Stage mainStage;
 	public static Scene mainScene;
-	//public static Group root2 = new Group();
+	// public static Group root2 = new Group();
 
 	public static Timer mainT = new Timer();
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 
-	static Group root2 = new Group();    // @TEST
-	
-	
-	
+	static Group root2 = new Group(); // @TEST
+
 	/*
 	 * start()
 	 *
@@ -107,16 +105,11 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					Gorilla g = new Gorilla(40, 500);
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
 					root2 = new Group();
-					Scene scene = new Scene(root2,Main.n,Main.m);
+					Scene scene = new Scene(root2, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
-					
-					
-					
-					
 					initMain();
 				} catch (Exception e) {
 					text.setText("Please enter integers only!");
@@ -132,42 +125,48 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
-    // Main method
-    public static void main(String[] args) {
-        launch(args);
-        mainT.cancel();
-        System.out.println("Hi3");
-    }
+	// Main method
+	public static void main(String[] args) {
+		launch(args);
+		mainT.cancel();
+		System.out.println("Hi3");
+	}
 
-    static void run() {
-    	for (GameObject gO : objList) {
+	static void run() {
+		Rectangle rect = new Rectangle(0, 0, n, m);
+		rect.setFill(Color.WHITE);
+		root2.getChildren().add(rect);
+		for (GameObject gO : objList) {
 			gO.run(root2);
 		}
 
 	}
 
 	public static void initMain() {
-		AnimationTimer timer =
-		        new AnimationTimer() {
-
-		          private long lastToggle;
-
-		          @Override
-		          public void handle(long now) {
-		            if (lastToggle == 0L) {
-		              lastToggle = now;
-		            } else {
-		              long diff = now - lastToggle;
-		              if (diff >= 16_000_000L) { // 500,000,000ns == 500ms
-		                Main.run();
-		                lastToggle = now;
-		              }
-		            }
-		          }
-		        };
-		    timer.start();
+		initTimer();
+		Gorilla g = new Gorilla(40, 500);
 	}
 	
 	
+	static void initTimer() {
+		AnimationTimer timer = new AnimationTimer() {
+
+			private long lastToggle;
+
+			@Override
+			public void handle(long now) {
+				if (lastToggle == 0L) {
+					lastToggle = now;
+				} else {
+					long diff = now - lastToggle;
+					if (diff >= 16_000_000L) { // 500,000,000ns == 500ms
+						Main.run();
+						lastToggle = now;
+					}
+				}
+			}
+		};
+		timer.start();
+	}
 
 }
