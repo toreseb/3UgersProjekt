@@ -201,10 +201,12 @@ public class Main extends Application {
 					}
 					
 					promptPlayer();
+					Main.frameworkRoot.getChildren().remove(placement);
 				} catch (Exception e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
 				}
+				
 			}
 		});
 		
