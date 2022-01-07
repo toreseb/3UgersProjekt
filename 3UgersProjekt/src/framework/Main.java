@@ -117,7 +117,7 @@ public class Main extends Application {
 					 * @TODO: Write a function that returns a scene
 					 *  * And then use the scene her insted.
 					 */
-					Scene scene = new Scene(finalRoot);
+					Scene scene = new Scene(finalRoot, n, m);
 					mainStage.setScene(scene);
 					initMain();
 				} catch (Exception e) {
@@ -130,7 +130,8 @@ public class Main extends Application {
 		GridPane.setConstraints(btn, 1, 6);
 
 		grid.getChildren().addAll(askN, setN, askM, setM, btn);
-
+		
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 

@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 /**
- * The function of this class is.
+ * The function of this class is:
  * 
  *
  */
@@ -31,8 +31,7 @@ public class Gorilla extends GameObject {
 
 	private void throwBanana() {
 		Projectile banana = new Projectile(100, 100); // Create an instance of projectile with x and y set to 100
-	
-		// if the angle and the throw strength is grater than 0 / null and space is pressed then throw the banana
+
 		
 	}
 
