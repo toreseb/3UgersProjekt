@@ -178,8 +178,8 @@ public class Main extends Application {
 	 */
 	public static void promptPlayer() {
 		//Create components
-		Label player = new Label("Player "+(cPlayer+1) + ":");
-		Label score = new Label ((pList.get(cPlayer).point) + "> Points < " + pList.get(cPlayer).point);
+		Label player = new Label("Player "+(((cPlayer+1)%2)) + ":");
+		Label score = new Label ((pList.get(0).point) + "> Points < " + pList.get(1).point);
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
 		TextField speedText = new TextField();
@@ -198,10 +198,7 @@ public class Main extends Application {
 				// TODO Auto-generated method stub
 				try {
 					pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
-					cPlayer++;
-					if(cPlayer > pList.size()-1) {
-						cPlayer = 0;
-					}
+					
 					
 					promptPlayer();
 					Main.frameworkRoot.getChildren().remove(placement);

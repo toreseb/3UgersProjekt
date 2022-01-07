@@ -43,7 +43,7 @@ public abstract class GameObject {
 		
 		Group root = new Group();
 		drawShape(root);
-		root2.getChildren().add(id,root);
+		root2.getChildren().add(root);
 	}
 	
 	public void run(Group root) {
