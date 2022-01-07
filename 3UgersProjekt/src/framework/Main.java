@@ -43,7 +43,9 @@ public class Main extends Application {
 	
 	public static int cPlayer = 0;
 
-	static Group root2 = new Group(); // @TEST
+	public static Group gameRoot = new Group(); // @TEST
+	public static Group frameworkRoot = new Group(); // @TEST
+	public static Group mainRoot = new Group(); // @TEST
 
 	/*
 	 * start()
@@ -115,8 +117,9 @@ public class Main extends Application {
 				try {
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
-					root2 = new Group();
-					Scene scene = new Scene(root2, Main.n, Main.m);
+					mainRoot = new Group();
+					mainRoot.getChildren().addAll(frameworkRoot,gameRoot);
+					Scene scene = new Scene(mainRoot, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
 					initMain();
 				} catch (Exception e) {
@@ -142,11 +145,12 @@ public class Main extends Application {
 	}
 
 	static void run() {
-		//root2.getChildren().clear();
+		gameRoot.getChildren().clear();
 		for (GameObject gO : objList) {
-			gO.run(root2);
+			gO.run(gameRoot);
 		}
 		clearLists();
+		
 	}
 
 	public static void initMain() {
@@ -158,7 +162,7 @@ public class Main extends Application {
 		
 		System.out.println("Hey!");
 		//Kald tur
-		promptPlayer(1);
+		promptPlayer();
 	}
 	
 	
@@ -171,7 +175,7 @@ public class Main extends Application {
 	 * 
 	 * By: Helene Moesgaard.
 	 */
-	public static void promptPlayer(int player) {
+	public static void promptPlayer() {
 		//Create components
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
@@ -183,8 +187,8 @@ public class Main extends Application {
 		placement.setPadding(new Insets(10,10,10,10));
 		
 		//Set size and event of button
-		submit.setLayoutX(150);
-		submit.setLayoutY(80);
+		//submit.setLayoutX(150);
+		//submit.setLayoutY(80);
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -196,7 +200,7 @@ public class Main extends Application {
 					if(cPlayer > pList.size()) {
 						cPlayer = 0;
 					}
-					promptPlayer(cPlayer);
+					promptPlayer();
 				} catch (Exception e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
@@ -212,17 +216,12 @@ public class Main extends Application {
 		GridPane.setConstraints(speedText, 1, 0);
 		GridPane.setConstraints(angleText, 1, 1);
 		GridPane.setConstraints(submit, 0, 2);
-		
 		group.getChildren().addAll(speedLabel,angleLabel,speedText,angleText,submit);
 		
 		
-		if (cPlayer==2) {
-			placement.setLeft(group);
-		}else {
-			placement.setRight(group);
-		}
+		placement.setRight(group);
 				
-		root2.getChildren().add(placement);
+		frameworkRoot.getChildren().add(placement);
 	}
 
 	static void initTimer() {

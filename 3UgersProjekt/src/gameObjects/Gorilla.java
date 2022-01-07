@@ -1,8 +1,10 @@
 package gameObjects;
 
 import framework.Main;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -18,7 +20,6 @@ import javafx.scene.shape.Shape;
 public class Gorilla extends GameObject {
 	public static int width = 50;
 	public static int height = 50;
-	
 	// Constructor
 	public Gorilla(int posX, int posY) {
 		super(posX, posY, width, height);
@@ -26,8 +27,11 @@ public class Gorilla extends GameObject {
 
 	@Override
 	public void drawShape(Group root) {
-		Rectangle rect = new Rectangle(vectorPos.get(0)-height/2, vectorPos.get(1)-height/2,width,height);  // Creates our circle
-		root.getChildren().add(rect);    // adding the circle to the group
+		Rectangle rect1 = new Rectangle(vectorPos.get(0), vectorPos.get(1),2,2);
+		rect1.setFill(Color.BLUE);
+		Rectangle rect2 = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our circle
+		rect2.setFill(Color.BLACK);
+		root.getChildren().addAll(rect1,rect2);    // adding the circle to the group
 	}
 
 	@Override

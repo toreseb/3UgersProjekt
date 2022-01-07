@@ -15,9 +15,11 @@ import javafx.scene.shape.Circle;
 
 public abstract class GameObject {
 	
-
-	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the players
-	protected int width, height; 				// the width and height of the shapes
+	public int id;
+	static int idCounter = 0;
+	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the objects
+	
+	public int width, height; 				// the width and height of the shapes
 	
 	
 	// Constructor
@@ -27,6 +29,8 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 		
+		id = idCounter;
+		idCounter++;
 		Main.objList.add(this);// Adds the player to a list.
 	}
 	
@@ -39,7 +43,7 @@ public abstract class GameObject {
 		
 		Group root = new Group();
 		drawShape(root);
-		root2.getChildren().add(root); 
+		root2.getChildren().add(id,root);
 	}
 	
 	public void run(Group root) {
