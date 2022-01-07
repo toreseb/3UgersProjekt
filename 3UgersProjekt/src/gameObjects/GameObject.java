@@ -4,7 +4,7 @@ import framework.Main;
 import java.util.Vector;
 
 import javafx.scene.Group;
-import javafx.scene.shape.Shape;
+import javafx.scene.Scene;
 
 /**
  * @author williamholberg
@@ -30,7 +30,7 @@ public abstract class GameObject {
 	}
 	
 	
-	public abstract void drawShape(Group root);
+	public abstract Group drawShape(Group root);
 	
 	public abstract void step();
 	

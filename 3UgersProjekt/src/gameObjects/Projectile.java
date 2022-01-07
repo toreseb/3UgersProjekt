@@ -8,7 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
-
+/*
 public class Projectile extends GameObject{
 	double direction;
 	double speed;
@@ -43,4 +43,4 @@ public class Projectile extends GameObject{
 		 vectorPos.set(1,(int)(vectorPos.get(1) + ySpeed-yConst));
 
 	}
-}
+}*/

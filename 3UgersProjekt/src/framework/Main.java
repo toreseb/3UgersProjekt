@@ -27,12 +27,16 @@ public class Main extends Application {
 
 	public static Stage mainStage;
 	public static Scene mainScene;
-	public static Group root2 = new Group();
+	//public static Group root2 = new Group();
 
 	public static Timer mainT = new Timer();
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 
+	static Group root2 = new Group();    // @TEST
+	
+	
+	
 	/*
 	 * start()
 	 *
@@ -101,9 +105,19 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
+					Gorilla g = new Gorilla(40, 500);
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
-					Scene scene = new Scene(root2,n,m);
+					
+					Group finalRoot = new Group();
+					
+					finalRoot.getChildren().add(g.drawShape(root2)); 
+					
+					/**
+					 * @TODO: Write a function that returns a scene
+					 *  * And then use the scene her insted.
+					 */
+					Scene scene = new Scene(finalRoot);
 					mainStage.setScene(scene);
 					initMain();
 				} catch (Exception e) {
@@ -141,7 +155,6 @@ public class Main extends Application {
 				Main.run();
 			}
 		}, 0, 16);
-		Gorilla g = new Gorilla(40, 500);
 	}
 
 }
