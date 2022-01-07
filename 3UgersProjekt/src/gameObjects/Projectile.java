@@ -15,15 +15,16 @@ import javafx.scene.shape.Circle;
 public class Projectile extends GameObject{
 	private double xSpeed;
 	private double ySpeed;
+	private double direction;
 	double g = 9.82;
 
 	public Projectile(int posX, int posY, int direction, int speed) {
+		
 		super(posX, posY, 2, 2);
-		direction = 5; 
-		direction = (int)Math.toRadians(direction);
-		speed = 5; 
-		xSpeed = Math.cos(direction)*speed;
-		ySpeed = Math.sin(direction)*speed;
+		this.direction = Math.toRadians(direction);
+		System.out.println(direction);
+		xSpeed = Math.cos(this.direction)*speed;
+		ySpeed = -Math.sin(this.direction)*speed;
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class Projectile extends GameObject{
 	}
 	
 	public void step() {
-		 ySpeed-= g;
+		 ySpeed+= g/60;
 		 vectorPos.set(0,(int)(vectorPos.get(0) + xSpeed));
 		 vectorPos.set(1,(int)(vectorPos.get(1) + ySpeed));
 	}
