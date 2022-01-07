@@ -5,12 +5,12 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 /**
- * William har lavet denne class
  * The function of this class is:
  * 		Create the gorilla
  * 		Draw the gorilla
- * 		Giv it the abilliti to throw a bananan
+ *		Enables the gorilla to throw the banana
  *
+ * by: William Holberg
  */
 
 public class Gorilla extends GameObject {

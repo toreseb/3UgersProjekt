@@ -8,12 +8,22 @@ import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 
 /**
+ * The function of this class is:
+ * 		function as a super class for all the other classes in the gameObjecte package
+ *		Initialize the objects a position and width and height
+ *		Draw the objects and update their position
+ *		Check for collisions with the gameWorld
+ *		Gets the position of the vector
+ *		Makes it possible to print the state of the object
+ *		Makes it possible to delete the Objects form the game world.
  *
- *
+ * By: Tore og William 		
  */
-
-
 public abstract class GameObject {
+	
+	/********************
+	 *     William      *
+	 ********************/ 
 	
 	public int id;
 	static int idCounter = 0;
@@ -39,12 +49,15 @@ public abstract class GameObject {
 	
 	public abstract void step();
 	
-	void draw(Group root2) {
-		
+	void draw(Group root2) {	
 		Group root = new Group();
 		drawShape(root);
 		root2.getChildren().add(id,root);
 	}
+	
+	/******************
+	 *      Tore      *
+	 ******************/
 	
 	public void run(Group root) {
 		step();
@@ -65,6 +78,11 @@ public abstract class GameObject {
 		
 	}
 	
+	
+	/***************
+	 *   William   *
+	 ***************/
+	
 	// Getters
 	public Vector<Integer> getVectorPos() {
 		return vectorPos;
@@ -75,6 +93,11 @@ public abstract class GameObject {
 	public String toString() {
 		return "Objects position: " + "[" + vectorPos.get(0) + ";" + vectorPos.get(1) + "]";
 	}
+	
+	
+	/**********
+	 *  Tore  *
+	 *********/
 	
 	public void deleteObject() {
 		Main.delList.add(this);
