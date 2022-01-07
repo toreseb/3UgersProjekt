@@ -37,6 +37,7 @@ public class Main extends Application {
 	public static Timer mainT = new Timer();
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
+	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
 
 	static Group root2 = new Group(); // @TEST
 
@@ -137,13 +138,11 @@ public class Main extends Application {
 	}
 
 	static void run() {
-		Rectangle rect = new Rectangle(0, 0, n, m);
-		rect.setFill(Color.WHITE);
-		root2.getChildren().add(rect);
+		root2.getChildren().clear();
 		for (GameObject gO : objList) {
 			gO.run(root2);
 		}
-
+		clearLists();
 	}
 
 	public static void initMain() {
@@ -171,6 +170,12 @@ public class Main extends Application {
 			}
 		};
 		timer.start();
+	}
+	
+	private static void clearLists() {
+		for (GameObject gameObject : delList) {
+			objList.remove(gameObject);
+		}
 	}
 
 }

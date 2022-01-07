@@ -14,8 +14,8 @@ import javafx.scene.shape.Shape;
  */
 
 public class Gorilla extends GameObject {
-	public static int width = 30;
-	public static int height = 30;
+	public static int width = 50;
+	public static int height = 50;
 	
 	// Constructor
 	public Gorilla(int posX, int posY) {
@@ -30,10 +30,10 @@ public class Gorilla extends GameObject {
 
 	@Override
 	public void step() {
-		/*
+		
 		vectorPos.set(0,vectorPos.get(0)+1);
 		vectorPos.set(1,vectorPos.get(1)-1);
-		*/
+		
 	} // This class is not used here 
 
 	private void throwBanana(int angle, int throwStrangth) {

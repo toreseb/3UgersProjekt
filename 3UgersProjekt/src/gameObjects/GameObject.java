@@ -35,7 +35,8 @@ public abstract class GameObject {
 	
 	public abstract void step();
 	
-	void draw(Group root2) {		
+	void draw(Group root2) {
+		
 		Group root = new Group();
 		drawShape(root);
 		root2.getChildren().add(root); 
@@ -69,6 +70,10 @@ public abstract class GameObject {
 	// to string method
 	public String toString() {
 		return "Objects position: " + "[" + vectorPos.get(0) + ";" + vectorPos.get(1) + "]";
+	}
+	
+	public void deleteObject() {
+		Main.delList.add(this);
 	}
 	
  
