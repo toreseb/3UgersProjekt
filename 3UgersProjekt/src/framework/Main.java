@@ -66,7 +66,7 @@ public class Main extends Application {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		// Window icon
-		Image icon = new Image("Beutiful_Bannana.png");
+		Image icon = new Image("Beutiful_Banana.png");
 		mainStage.getIcons().add(icon);
 
 		root.getChildren().add(grid);
