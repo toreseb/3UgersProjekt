@@ -194,7 +194,6 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					System.out.println(cPlayer);
 					pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
 					cPlayer++;
 					if(cPlayer > pList.size()-1) {
