@@ -14,20 +14,27 @@ import javafx.scene.shape.Shape;
  */
 
 public class Gorilla extends GameObject {
+	public static int width = 50;
+	public static int height = 50;
 	
 	// Constructor
 	public Gorilla(int posX, int posY) {
-		super(posX, posY, 50, 50);
+		super(posX, posY, width, height);
 	}
 
 	@Override
 	public void drawShape(Group root) {
-		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1),50);  // Creates our circle
-		root.getChildren().add(circle);    // adding the circle to the group
+		Rectangle rect = new Rectangle(vectorPos.get(0)-height/2, vectorPos.get(1)-height/2,width,height);  // Creates our circle
+		root.getChildren().add(rect);    // adding the circle to the group
 	}
 
 	@Override
-	public void step() {} // This class is not used here 
+	public void step() {
+		
+		vectorPos.set(0,vectorPos.get(0)+1);
+		vectorPos.set(1,vectorPos.get(1)-1);
+		
+	} // This class is not used here 
 
 	public void throwBanana(int angle, int throwStrangth) {
 		Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 

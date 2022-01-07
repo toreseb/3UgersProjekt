@@ -12,12 +12,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
@@ -40,6 +37,7 @@ public class Main extends Application {
 	public static Timer mainT = new Timer();
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
+	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
 
 	static Group root2 = new Group(); // @TEST
 
@@ -69,8 +67,8 @@ public class Main extends Application {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		// Window icon
-//		Image icon = new Image("Banan.png");
-//		mainStage.getIcons().add(icon);
+		Image icon = new Image("Beutiful_Banana.png");
+		mainStage.getIcons().add(icon);
 
 		root.getChildren().add(grid);
 		root.getChildren().add(border);
@@ -140,18 +138,17 @@ public class Main extends Application {
 	}
 
 	static void run() {
-		Rectangle rect = new Rectangle(0, 0, n, m);
-		rect.setFill(Color.WHITE);
-		root2.getChildren().add(rect);
+		root2.getChildren().clear();
 		for (GameObject gO : objList) {
 			gO.run(root2);
 		}
-
+		clearLists();
 	}
 
 	public static void initMain() {
-		initTimer();
-		Gorilla g = new Gorilla(40, 500);
+		initTimer();		
+		Gorilla p1 = new Gorilla(Gorilla.width*2,m-Gorilla.height/2);
+		Gorilla p2 = new Gorilla(n-(Gorilla.width*2),m-Gorilla.height/2);
 		
 		System.out.println("Hey!");
 		//Kald tur
@@ -223,8 +220,7 @@ public class Main extends Application {
 				
 		root2.getChildren().add(placement);
 	}
-	
-	
+
 	static void initTimer() {
 		AnimationTimer timer = new AnimationTimer() {
 
@@ -244,6 +240,12 @@ public class Main extends Application {
 			}
 		};
 		timer.start();
+	}
+	
+	private static void clearLists() {
+		for (GameObject gameObject : delList) {
+			objList.remove(gameObject);
+		}
 	}
 
 }
