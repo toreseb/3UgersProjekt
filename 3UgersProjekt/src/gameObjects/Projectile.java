@@ -18,7 +18,7 @@ public class Projectile extends GameObject{
 	private double direction;
 	double g = 9.82;
 
-	public Projectile(int posX, int posY, int direction, int speed) {
+	public Projectile(int posX, int posY, double direction, double speed) {
 		
 		super(posX, posY, 2, 2);
 		this.direction = Math.toRadians(direction);

@@ -177,6 +177,7 @@ public class Main extends Application {
 	 */
 	public static void promptPlayer() {
 		//Create components
+		Label player = new Label("Player "+(cPlayer+1) + ":");
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
 		TextField speedText = new TextField();
@@ -194,7 +195,6 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					System.out.println(cPlayer);
 					pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
 					cPlayer++;
 					if(cPlayer > pList.size()-1) {
@@ -202,22 +202,25 @@ public class Main extends Application {
 					}
 					
 					promptPlayer();
+					Main.frameworkRoot.getChildren().remove(placement);
 				} catch (Exception e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
 				}
+				
 			}
 		});
 		
 		//Place components
 		GridPane group = new GridPane();
-				
-		GridPane.setConstraints(speedLabel, 0, 0);
-		GridPane.setConstraints(angleLabel, 0, 1);
-		GridPane.setConstraints(speedText, 1, 0);
-		GridPane.setConstraints(angleText, 1, 1);
-		GridPane.setConstraints(submit, 0, 2);
-		group.getChildren().addAll(speedLabel,angleLabel,speedText,angleText,submit);
+		
+		GridPane.setConstraints(player, 0, 0);
+		GridPane.setConstraints(speedLabel, 0, 1);
+		GridPane.setConstraints(angleLabel, 0, 2);
+		GridPane.setConstraints(speedText, 1, 1);
+		GridPane.setConstraints(angleText, 1, 2);
+		GridPane.setConstraints(submit, 0, 3);
+		group.getChildren().addAll(player,speedLabel,angleLabel,speedText,angleText,submit);
 		
 		
 		placement.setRight(group);
