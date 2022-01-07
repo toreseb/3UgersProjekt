@@ -9,7 +9,9 @@ import javafx.scene.shape.Shape;
 /**
  * William har lavet denne class
  * The function of this class is:
- * 
+ * 		Create the gorilla 
+ * 		Draw the gorilla
+ * 		Giv it the abilliti to throw a bananan
  *
  */
 
@@ -36,7 +38,7 @@ public class Gorilla extends GameObject {
 		
 	} // This class is not used here 
 
-	private void throwBanana(int angle, int throwStrangth) {
+	public void throwBanana(int angle, int throwStrangth) {
 		Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 
 		banana.step();
 	}

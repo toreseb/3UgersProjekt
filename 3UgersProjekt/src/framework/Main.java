@@ -149,6 +149,76 @@ public class Main extends Application {
 		initTimer();		
 		Gorilla p1 = new Gorilla(Gorilla.width*2,m-Gorilla.height/2);
 		Gorilla p2 = new Gorilla(n-(Gorilla.width*2),m-Gorilla.height/2);
+		
+		System.out.println("Hey!");
+		//Kald tur
+		promptPlayer(1);
+	}
+	
+	
+	/*
+	 * promptPlayer()
+	 * 
+	 * Parses an integer as parameter.
+	 * 
+	 * Creates a prompt for a player to set values for throw.
+	 * 
+	 * By: Helene Moesgaard.
+	 */
+	public static void promptPlayer(int player) {
+		//Create components
+		Label speedLabel = new Label("Set speed:");
+		Label angleLabel = new Label("Set angle:");
+		TextField speedText = new TextField();
+		TextField angleText = new TextField();
+		Button submit = new Button("Submit");
+		
+		BorderPane placement = new BorderPane();
+		placement.setPadding(new Insets(10,10,10,10));
+		
+		//Set size and event of button
+		submit.setLayoutX(150);
+		submit.setLayoutY(80);
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				try {
+					Gorilla dummyPlayer = new Gorilla(23,436);
+					dummyPlayer.throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
+					
+					//Test
+					if (player == 1) {
+						promptPlayer(2);
+					}else {
+						promptPlayer(1);
+					}
+				} catch (Exception e) {
+					Text advarsel = new Text("Angiv venligst kun hele tal!");
+					placement.setTop(advarsel);
+				}
+			}
+		});
+		
+		//Place components
+		GridPane group = new GridPane();
+				
+		GridPane.setConstraints(speedLabel, 0, 0);
+		GridPane.setConstraints(angleLabel, 0, 1);
+		GridPane.setConstraints(speedText, 1, 0);
+		GridPane.setConstraints(angleText, 1, 1);
+		GridPane.setConstraints(submit, 0, 2);
+		
+		group.getChildren().addAll(speedLabel,angleLabel,speedText,angleText);
+		
+		
+		if (player==1) {
+			placement.setLeft(group);
+		}else {
+			placement.setRight(group);
+		}
+				
+		root2.getChildren().add(placement);
 	}
 
 	static void initTimer() {
