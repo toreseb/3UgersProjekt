@@ -23,8 +23,8 @@ public class Projectile extends GameObject{
 		super(posX, posY, 2, 2);
 		this.direction = Math.toRadians(direction);
 		System.out.println(direction);
-		xSpeed = Math.cos(this.direction)*speed;
-		ySpeed = -Math.sin(this.direction)*speed;
+		xSpeed = Math.cos(this.direction)*speed;	//calculating x speed
+		ySpeed = -Math.sin(this.direction)*speed;	//calculation y begin speed
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Projectile extends GameObject{
 	}
 	
 	public void step() {
-		 ySpeed+= g/60;
+		 ySpeed+= g/60; // calc new ySpeed from acceleration - 60 frames per second
 		 vectorPos.set(0,(int)(vectorPos.get(0) + xSpeed));
 		 vectorPos.set(1,(int)(vectorPos.get(1) + ySpeed));
 	}
