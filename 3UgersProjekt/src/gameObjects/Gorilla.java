@@ -16,12 +16,10 @@ public class Gorilla extends GameObject {
 
 	public Gorilla(int posX, int posY) {
 		super(posX, posY, 50, 50);
-
 	}
 
 	@Override
 	public Group drawShape(Group root) {
-		
 		root = new Group();
 		Circle circle = new Circle(50, 50, 20);  // Creates our circle
 		root.getChildren().add(circle);    // adding the circle to the group
@@ -29,12 +27,13 @@ public class Gorilla extends GameObject {
 	}
 
 	@Override
-	public void step() {
-
-	}
+	public void step() {} // This class is not used here 
 
 	private void throwBanana() {
-
+		Projectile banana = new Projectile(100, 100); // Create an instance of projectile with x and y set to 100
+	
+		// if the angle and the throw strength is grater than 0 / null and space is pressed then throw the banana
+		
 	}
 
 }
