@@ -1,13 +1,8 @@
 package gameObjects;
 
-import framework.Main;
-import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 /**
  * William har lavet denne class
  * The function of this class is:
