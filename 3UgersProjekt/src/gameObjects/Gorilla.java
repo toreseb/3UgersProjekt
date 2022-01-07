@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * William har lavet denne class
  * The function of this class is:
- * 		Create the gorilla 
+ * 		Create the gorilla
  * 		Draw the gorilla
  * 		Giv it the abilliti to throw a bananan
  *
@@ -16,6 +16,9 @@ import javafx.scene.shape.Rectangle;
 public class Gorilla extends GameObject {
 	public static int width = 50;
 	public static int height = 50;
+
+	public int point = 0;
+
 	// Constructor
 	public Gorilla(int posX, int posY) {
 		super(posX, posY, width, height);
@@ -29,18 +32,13 @@ public class Gorilla extends GameObject {
 	}
 
 	@Override
-	public void step() {
-		/*
-		vectorPos.set(0,vectorPos.get(0)+1);
-		vectorPos.set(1,vectorPos.get(1)-1);
-		*/
-	} // This class is not used here 
+	public void step() {} // This class is not used here
 
 	public void throwBanana(int angle, int throwStrangth) {
 		if(Main.cPlayer == 0) {
-			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 
+			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth);
 		}else {
-			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), 180-angle, throwStrangth); 
+			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), 180-angle, throwStrangth);
 		}
 	}
 
