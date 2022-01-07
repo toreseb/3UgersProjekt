@@ -12,12 +12,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
@@ -150,11 +147,11 @@ public class Main extends Application {
 	}
 
 	public static void initMain() {
-		initTimer();
-		Gorilla g = new Gorilla(40, 500);
+		initTimer();		
+		Gorilla p1 = new Gorilla(Gorilla.width*2,m-Gorilla.height/2);
+		Gorilla p2 = new Gorilla(n-(Gorilla.width*2),m-Gorilla.height/2);
 	}
-	
-	
+
 	static void initTimer() {
 		AnimationTimer timer = new AnimationTimer() {
 
