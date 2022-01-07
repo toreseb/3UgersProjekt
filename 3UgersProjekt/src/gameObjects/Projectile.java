@@ -6,6 +6,7 @@ import java.lang.Math.*;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 
@@ -29,7 +30,7 @@ public class Projectile extends GameObject {
 
 	@Override
 	public void drawShape(Group root) {
-		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1), 5);
+		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1), 5, Color.GOLD);
 		root.getChildren().add(circle);
 	}
 
