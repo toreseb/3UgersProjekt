@@ -1,5 +1,6 @@
 package gameObjects;
 
+import framework.Main;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -22,11 +23,9 @@ public class Gorilla extends GameObject {
 
 	@Override
 	public void drawShape(Group root) {
-		Rectangle rect1 = new Rectangle(vectorPos.get(0), vectorPos.get(1),2,2);
-		rect1.setFill(Color.BLUE);
 		Rectangle rect2 = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our circle
 		rect2.setFill(Color.BLACK);
-		root.getChildren().addAll(rect1,rect2);    // adding the circle to the group
+		root.getChildren().addAll(rect2);    // adding the circle to the group
 	}
 
 	@Override
@@ -38,8 +37,11 @@ public class Gorilla extends GameObject {
 	} // This class is not used here 
 
 	public void throwBanana(int angle, int throwStrangth) {
-		Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 
-		banana.step();
+		if(Main.cPlayer == 0) {
+			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 
+		}else {
+			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), 180-angle, throwStrangth); 
+		}
 	}
 
 }
