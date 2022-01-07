@@ -8,19 +8,20 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
-
+/**
+ * Embla har skrevet denne class
+ *
+ */
 public class Projectile extends GameObject{
-	double direction;
-	double speed;
-	double xSpeed;
-	double ySpeed;
-	double yConst;
+	private double xSpeed;
+	private double ySpeed;
+	private double yConst;
 	double g = 9.82;
 
-	public Projectile(int posX, int posY) {
+	public Projectile(int posX, int posY, int direction, int speed) {
 		super(posX, posY, 2, 2);
 		direction = 5; 
-		direction = Math.toRadians(direction);
+		direction = (int)Math.toRadians(direction);
 		speed = 5; 
 		xSpeed = Math.cos(direction)*speed;
 		ySpeed = Math.sin(direction)*speed;
@@ -31,6 +32,7 @@ public class Projectile extends GameObject{
 		Circle circle = new Circle(vectorPos.get(0),vectorPos.get(1),5);
 		root.getChildren().add(circle);
 	}
+	
 	public void step() {
 		 yConst += g;
 		 vectorPos.set(0,(int)(vectorPos.get(0) + xSpeed));

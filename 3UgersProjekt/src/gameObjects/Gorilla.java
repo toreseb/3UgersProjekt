@@ -35,10 +35,9 @@ public class Gorilla extends GameObject {
 		
 	} // This class is not used here 
 
-	private void throwBanana() {
-		Projectile banana = new Projectile(100, 100); // Create an instance of projectile with x and y set to 100
-
-		
+	private void throwBanana(int angle, int throwStrangth) {
+		Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 
+		banana.step();
 	}
 
 }
