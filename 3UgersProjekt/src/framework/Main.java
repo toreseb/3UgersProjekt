@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import gameObjects.*;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +22,7 @@ import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
+import javafx.util.Duration;
 
 public class Main extends Application {
 	public static int n, m;
@@ -34,9 +36,9 @@ public class Main extends Application {
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 
 	static Group root2 = new Group();    // @TEST
-	
-	
-	
+
+
+
 	/*
 	 * start()
 	 *
@@ -108,17 +110,9 @@ public class Main extends Application {
 					Gorilla g = new Gorilla(40, 500);
 					n = Integer.parseInt(setN.getText());
 					m = Integer.parseInt(setM.getText());
-					
-					Group finalRoot = new Group();
-					
-					finalRoot.getChildren().add(g.drawShape(root2)); 
-					
-					/**
-					 * @TODO: Write a function that returns a scene
-					 *  * And then use the scene her insted.
-					 */
-					Scene scene = new Scene(finalRoot, n, m);
-					mainStage.setScene(scene);
+					root2 = new Group();
+					Scene scene = new Scene(root2,Main.n,Main.m);
+					Main.mainStage.setScene(scene);
 					initMain();
 				} catch (Exception e) {
 					text.setText("Please enter integers only!");
@@ -130,7 +124,7 @@ public class Main extends Application {
 		GridPane.setConstraints(btn, 1, 6);
 
 		grid.getChildren().addAll(askN, setN, askM, setM, btn);
-		
+
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
@@ -150,12 +144,27 @@ public class Main extends Application {
 	}
 
 	public static void initMain() {
-		Main.mainT.scheduleAtFixedRate(new TimerTask() {
-			@Override
-			public void run() {
-				Main.run();
-			}
-		}, 0, 16);
+		AnimationTimer timer =
+		        new AnimationTimer() {
+
+		          private long lastToggle;
+
+		          @Override
+		          public void handle(long now) {
+		            if (lastToggle == 0L) {
+		              lastToggle = now;
+		            } else {
+		              long diff = now - lastToggle;
+		              if (diff >= 16_000_000L) { // 500,000,000ns == 500ms
+		                Main.run();
+		                lastToggle = now;
+		              }
+		            }
+		          }
+		        };
+		    timer.start();
 	}
+
+
 
 }
