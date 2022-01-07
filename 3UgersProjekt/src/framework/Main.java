@@ -24,6 +24,12 @@ import javafx.scene.text.*;
 import javafx.stage.*;
 import javafx.util.Duration;
 
+/**
+ * Tore og Helene har skrevet denne klasse
+ *
+ *
+ */
+
 public class Main extends Application {
 	public static int n, m;
 

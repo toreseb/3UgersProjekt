@@ -27,10 +27,9 @@ public class Projectile extends GameObject{
 	}
 
 	@Override
-	public Group drawShape(Group root) {
+	public void drawShape(Group root) {
 		Circle circle = new Circle(vectorPos.get(0),vectorPos.get(1),5);
 		root.getChildren().add(circle);
-		return root;
 	}
 	public void step() {
 		 yConst += g;
