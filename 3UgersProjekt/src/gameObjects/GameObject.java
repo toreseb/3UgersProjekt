@@ -48,14 +48,15 @@ public abstract class GameObject {
 	}
 	
 	public void collision() {
-		if (vectorPos.get(1) > Main.m)
-			vectorPos.set(1, Main.m);
-		if (vectorPos.get(1) < 0)
-			vectorPos.set(1, 0);
-		if (vectorPos.get(0)< 0)
-			vectorPos.set(0,0);
-		if (vectorPos.get(0)>Main.n)
-			vectorPos.set(0, Main.n);
+		if (vectorPos.get(0)-width/2< 0)
+			vectorPos.set(0,0+width/2);
+		if (vectorPos.get(0)+width/2>Main.n)
+			vectorPos.set(0, Main.n-width/2);
+		if (vectorPos.get(1)+height/2 > Main.m)
+			vectorPos.set(1, Main.m-height/2);
+		if (vectorPos.get(1)-height/2 < 0)
+			vectorPos.set(1, 0+height/2);
+		
 		
 	}
 	
