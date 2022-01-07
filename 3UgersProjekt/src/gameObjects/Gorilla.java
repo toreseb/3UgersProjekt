@@ -30,10 +30,10 @@ public class Gorilla extends GameObject {
 
 	@Override
 	public void step() {
-		
+		/*
 		vectorPos.set(0,vectorPos.get(0)+1);
 		vectorPos.set(1,vectorPos.get(1)-1);
-		
+		*/
 	} // This class is not used here 
 
 	public void throwBanana(int angle, int throwStrangth) {

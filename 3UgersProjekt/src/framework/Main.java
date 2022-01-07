@@ -38,6 +38,10 @@ public class Main extends Application {
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
+	
+	public static ArrayList<Gorilla> pList = new ArrayList<Gorilla>();
+	
+	public static int cPlayer = 0;
 
 	static Group root2 = new Group(); // @TEST
 
@@ -138,7 +142,7 @@ public class Main extends Application {
 	}
 
 	static void run() {
-		root2.getChildren().clear();
+		//root2.getChildren().clear();
 		for (GameObject gO : objList) {
 			gO.run(root2);
 		}
@@ -147,8 +151,10 @@ public class Main extends Application {
 
 	public static void initMain() {
 		initTimer();		
-		Gorilla p1 = new Gorilla(Gorilla.width*2,m-Gorilla.height/2);
-		Gorilla p2 = new Gorilla(n-(Gorilla.width*2),m-Gorilla.height/2);
+		Gorilla p0 = new Gorilla(Gorilla.width*2,m-Gorilla.height/2);
+		Gorilla p1 = new Gorilla(n-(Gorilla.width*2),m-Gorilla.height/2);
+		pList.add(p0);
+		pList.add(p1);
 		
 		System.out.println("Hey!");
 		//Kald tur
@@ -184,15 +190,13 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					Gorilla dummyPlayer = new Gorilla(23,436);
-					dummyPlayer.throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
 					
-					//Test
-					if (player == 1) {
-						promptPlayer(2);
-					}else {
-						promptPlayer(1);
+					pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
+					cPlayer++;
+					if(cPlayer > pList.size()) {
+						cPlayer = 0;
 					}
+					promptPlayer(cPlayer);
 				} catch (Exception e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
@@ -209,10 +213,10 @@ public class Main extends Application {
 		GridPane.setConstraints(angleText, 1, 1);
 		GridPane.setConstraints(submit, 0, 2);
 		
-		group.getChildren().addAll(speedLabel,angleLabel,speedText,angleText);
+		group.getChildren().addAll(speedLabel,angleLabel,speedText,angleText,submit);
 		
 		
-		if (player==1) {
+		if (cPlayer==2) {
 			placement.setLeft(group);
 		}else {
 			placement.setRight(group);
