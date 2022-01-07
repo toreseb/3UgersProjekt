@@ -15,7 +15,6 @@ import javafx.scene.shape.Circle;
 public class Projectile extends GameObject{
 	private double xSpeed;
 	private double ySpeed;
-	private double yConst;
 	double g = 9.82;
 
 	public Projectile(int posX, int posY, int direction, int speed) {
@@ -34,8 +33,8 @@ public class Projectile extends GameObject{
 	}
 	
 	public void step() {
-		 yConst += g;
+		 ySpeed-= g;
 		 vectorPos.set(0,(int)(vectorPos.get(0) + xSpeed));
-		 vectorPos.set(1,(int)(vectorPos.get(1) + ySpeed-yConst));
+		 vectorPos.set(1,(int)(vectorPos.get(1) + ySpeed));
 	}
 }

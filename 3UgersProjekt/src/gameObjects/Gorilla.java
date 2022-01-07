@@ -9,7 +9,9 @@ import javafx.scene.shape.Shape;
 /**
  * William har lavet denne class
  * The function of this class is:
- * 
+ * 		Create the gorilla 
+ * 		Draw the gorilla
+ * 		Giv it the abilliti to throw a bananan
  *
  */
 
