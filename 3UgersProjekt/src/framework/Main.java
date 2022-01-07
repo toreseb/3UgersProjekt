@@ -122,6 +122,7 @@ public class Main extends Application {
 
 		grid.getChildren().addAll(askN, setN, askM, setM, btn);
 
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
