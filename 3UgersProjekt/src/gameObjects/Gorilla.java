@@ -29,7 +29,7 @@ public class Gorilla extends GameObject {
 	@Override
 	public void step() {} // This class is not used here 
 
-	private void throwBanana(int angle, int throwStrangth) {
+	public void throwBanana(int angle, int throwStrangth) {
 		Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth); 
 		banana.step();
 	}
