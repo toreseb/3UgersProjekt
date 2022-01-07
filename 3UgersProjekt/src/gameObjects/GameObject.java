@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
 
 /**
  * @author williamholberg
@@ -30,14 +31,20 @@ public abstract class GameObject {
 	}
 	
 	
-	public abstract Group drawShape(Group root);
+	public abstract void drawShape(Group root);
 	
 	public abstract void step();
+	
+	void draw(Group root2) {		
+		Group root = new Group();
+		drawShape(root);
+		root2.getChildren().add(root); 
+	}
 	
 	public void run(Group root) {
 		step();
 		collision();
-		drawShape(root);
+		draw(root);
 	}
 	
 	public void collision() {

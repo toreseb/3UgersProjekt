@@ -20,16 +20,16 @@ public class Gorilla extends GameObject {
 	}
 
 	@Override
-	public Group drawShape(Group root) {
+	public void drawShape(Group root) {
 		
-		root = new Group();
-		Circle circle = new Circle(50, 50, 20);  // Creates our circle
+		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1),50);  // Creates our circle
 		root.getChildren().add(circle);    // adding the circle to the group
-		return root;
+		
 	}
 
 	@Override
 	public void step() {
+		vectorPos.set(0, vectorPos.get(0)+5);
 
 	}
 
