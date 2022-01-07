@@ -161,6 +161,7 @@ public class Main extends Application {
 		pList.add(p1);
 		
 		System.out.println("Hey!");
+		
 		//Kald tur
 		promptPlayer();
 	}
@@ -178,6 +179,7 @@ public class Main extends Application {
 	public static void promptPlayer() {
 		//Create components
 		Label player = new Label("Player "+(cPlayer+1) + ":");
+		Label score = new Label ((pList.get(cPlayer).point) + "> Points < " + pList.get(cPlayer).point);
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
 		TextField speedText = new TextField();
@@ -213,7 +215,6 @@ public class Main extends Application {
 		
 		//Place components
 		GridPane group = new GridPane();
-		
 		GridPane.setConstraints(player, 0, 0);
 		GridPane.setConstraints(speedLabel, 0, 1);
 		GridPane.setConstraints(angleLabel, 0, 2);
@@ -221,9 +222,11 @@ public class Main extends Application {
 		GridPane.setConstraints(angleText, 1, 2);
 		GridPane.setConstraints(submit, 0, 3);
 		group.getChildren().addAll(player,speedLabel,angleLabel,speedText,angleText,submit);
+	
 		
 		
 		placement.setRight(group);
+		placement.setTop(score);
 				
 		frameworkRoot.getChildren().add(placement);
 	}
