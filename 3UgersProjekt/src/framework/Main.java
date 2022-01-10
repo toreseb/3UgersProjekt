@@ -198,9 +198,6 @@ public class Main extends Application {
 				// TODO Auto-generated method stub
 				try {
 					pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
-					
-					
-					promptPlayer();
 					Main.frameworkRoot.getChildren().remove(placement);
 				} catch (Exception e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");

@@ -62,6 +62,7 @@ public class Projectile extends GameObject {
 			if(Main.cPlayer > Main.pList.size()-1) {
 				Main.cPlayer = 0;
 			}
+			Main.promptPlayer();
 			//Main.mainStage.getScene().getWindow().setWidth(Main.mainStage.getScene().getWidth() + 14);
 			this.deleteObject();
 		}
