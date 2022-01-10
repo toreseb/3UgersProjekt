@@ -57,13 +57,9 @@ public class Projectile extends GameObject {
 			Gorilla gorilla = Main.pList.get((Main.cPlayer+1) % 2);
 			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 50
 					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > - Main.n / 50) {
-				System.out.println("Hi");
 				Main.pList.get(Main.cPlayer).point ++;
-				for (Gorilla p : Main.pList) {
-					System.out.println(p.point);
-				}
 			}
-			Main.cPlayer++;
+			Main.cPlayer++;//The player changes when the projektile hits the ground
 			if(Main.cPlayer > Main.pList.size()-1) {
 				Main.cPlayer = 0;
 			}
