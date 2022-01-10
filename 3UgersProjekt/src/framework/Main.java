@@ -178,7 +178,7 @@ public class Main extends Application {
 	 */
 	public static void promptPlayer() {
 		//Create components
-		Label player = new Label("Player "+(((cPlayer+1)%2)) + ":");
+		Label player = new Label("Player "+(cPlayer+1) + ":");
 		Label score = new Label ((pList.get(0).point) + "> Points < " + pList.get(1).point);
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
