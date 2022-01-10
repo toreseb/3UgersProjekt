@@ -2,12 +2,8 @@ package gameObjects;
 
 import framework.*;
 
-import java.lang.Math.*;
-
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 
 /**
@@ -42,23 +38,18 @@ public class Projectile extends GameObject {
 
 	@Override
 	public void collision() {
-		if (vectorPos.get(0) - width / 2 < 0) {
+		if (vectorPos.get(0) - width / 2 < 0)
 			vectorPos.set(0, 0 + width / 2);
-			//xSpeed = -xSpeed;
-		}
-		if (vectorPos.get(0) + width / 2 > Main.n) {
+		if (vectorPos.get(0) + width / 2 > Main.n)
 			vectorPos.set(0, Main.n - width / 2);
-			//xSpeed = -xSpeed;
-		}
-			
 		if (vectorPos.get(1) + height / 2 > Main.m) {
 			vectorPos.set(1, Main.m - height / 2);
 			xSpeed = 0;
 			Gorilla gorilla = Main.pList.get((Main.cPlayer+1) % 2);
-			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 50
-					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > - Main.n / 50) {
+			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 30
+					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > - Main.n / 30) {
 				System.out.println("Hi");
-				Main.pList.get(Main.cPlayer).point ++;
+				Main.pList.get(Main.cPlayer).point++;
 				for (Gorilla p : Main.pList) {
 					System.out.println(p.point);
 				}
