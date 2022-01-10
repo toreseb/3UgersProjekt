@@ -14,21 +14,23 @@ import javafx.scene.shape.Rectangle;
  */
 
 public class Gorilla extends GameObject {
-	public static int width = 50;
-	public static int height = 50;
+	public static int width = Main.n/15;
+	public static int height = Main.n/15;
 
 	public int point = 0;
 
 	// Constructor
 	public Gorilla(int posX, int posY) {
 		super(posX, posY, width, height);
+		System.out.println(height + " " + width);
 	}
 
 	@Override
 	public void drawShape(Group root) {
-		Rectangle rect2 = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our circle
-		rect2.setFill(Color.BLACK);
-		root.getChildren().addAll(rect2);    // adding the circle to the group
+		Rectangle rect = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our gorilla
+		rect.setFill(Color.BROWN);
+		
+		root.getChildren().add(rect);    // adding the circle to the group
 	}
 
 	@Override
