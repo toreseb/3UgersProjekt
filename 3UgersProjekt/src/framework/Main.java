@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -187,6 +188,8 @@ public class Main extends Application {
 		Button submit = new Button("Submit");
 		
 		BorderPane placement = new BorderPane();
+		placement.setPrefWidth(n);
+		placement.setPrefHeight(m);
 		placement.setPadding(new Insets(10,10,10,10));
 		
 		//Set size and event of button
@@ -217,10 +220,21 @@ public class Main extends Application {
 		GridPane.setConstraints(submit, 0, 3);
 		group.getChildren().addAll(player,speedLabel,angleLabel,speedText,angleText,submit);
 	
+		switch (cPlayer) {
+		case 0: {
+			placement.setLeft(group);
+			break;
+		}
+		case 1: {
+			placement.setRight(group);
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + cPlayer);
+		}
 		
-		
-		placement.setRight(group);
 		placement.setTop(score);
+		placement.setAlignment(score,Pos.CENTER);
 				
 		frameworkRoot.getChildren().add(placement);
 	}
