@@ -1,11 +1,13 @@
 package gameObjects;
 
 import framework.*;
-
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
+import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 /**
  * Embla har skrevet denne class
  *
@@ -13,21 +15,55 @@ import javafx.scene.shape.Circle;
 public class Projectile extends GameObject {
 	private double xSpeed;
 	private double ySpeed;
-	private double direction;
 	double g = 9.82;
+	int count = 0;
+	public static int width = Main.n/30;
+	public static int height = Main.n/30;
+
+	Image banana = new Image("Banana.png");
+	ImageView imageView = new ImageView(banana);
+	
 
 	public Projectile(int posX, int posY, double direction, double speed) {
 
 		super(posX, posY, 2, 2);
-		this.direction = Math.toRadians(direction);
-		xSpeed = Math.cos(this.direction) * speed; // calculating x speed
-		ySpeed = -Math.sin(this.direction) * speed; // calculation y begin speed
+		
+        int angle = 360; 				// rotation
+        if (direction>90) angle *=-1;	//clockwise or counterclockwise rotation
+		
+		direction = Math.toRadians(direction);	// converts from degrees to radians
+		xSpeed = Math.cos(direction) * speed; 	// calculating x speed
+		ySpeed = -Math.sin(direction) * speed; 	// calculation y begin speed
+
+		// set size of banana image
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        
+        // translate banana origin to center
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(imageView);
+        translate.setDuration(Duration.millis(1));
+        translate.setByX(-width/2);
+        translate.play();
+        translate.setByY(-height/2);
+        
+        // rotate
+        RotateTransition rotate = new RotateTransition();
+        rotate.setNode(imageView);
+        rotate.setDuration(Duration.millis(1000));
+        rotate.setCycleCount(TranslateTransition.INDEFINITE);
+        rotate.setInterpolator(Interpolator.LINEAR);
+        rotate.setByAngle(angle);
+        rotate.play();
+        
 	}
 
 	@Override
 	public void drawShape(Group root) {
-		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1), 5, Color.GOLD);
-		root.getChildren().add(circle);
+		imageView.setX((int)vectorPos.get(0));
+        imageView.setY((int)vectorPos.get(1));
+        
+		root.getChildren().add(imageView);
 	}
 
 	public void step() {
