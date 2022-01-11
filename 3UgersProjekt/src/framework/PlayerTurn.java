@@ -19,13 +19,15 @@ public class PlayerTurn {
 	/*
 	 * startTurn()
 	 * 
+	 * Parses an integer as parameter.
+	 * 
 	 * Asks the player if they want to shoot or move.
 	 * 
 	 * By: Helene Moesgaard.
 	 */
 	public static void startTurn(int cPlayer) {
 		// Create components
-		Label ask = new Label("What do you want to do on your turn?");
+		Label ask = new Label("Player " + (cPlayer + 1) + " what do you want to do on your turn?");
 		Button btnShoot = new Button("Shoot");
 		Button btnMove = new Button("Move");
 		// Add to H- and VBox
@@ -38,6 +40,10 @@ public class PlayerTurn {
 		// Set event on Shoot button
 		btnShoot.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				// Remove prompt
+				Main.frameworkRoot.getChildren().remove(groupAll);
+
+				// Call shoot prompt
 				promptShoot(cPlayer);
 			}
 		});
@@ -45,6 +51,10 @@ public class PlayerTurn {
 		// Set event on Move button
 		btnMove.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				// Remove prompt
+				Main.frameworkRoot.getChildren().remove(groupAll);
+
+				// Call move prompt
 				promptMove(cPlayer);
 			}
 		});
@@ -74,7 +84,7 @@ public class PlayerTurn {
 		placement.setPrefHeight(Main.m);
 		placement.setPadding(new Insets(10, 10, 10, 10));
 
-		//Set button event
+		// Set button event
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -136,11 +146,12 @@ public class PlayerTurn {
 	public static void promptMove(int cPlayer) {
 		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
-		BorderPane placement = new BorderPane();
 
+		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
 		prompt.setLayoutY(Main.m / 2);
 
+		// Make root to add to scene and add prompt
 		Group root = new Group();
 		root.getChildren().add(prompt);
 
@@ -148,6 +159,7 @@ public class PlayerTurn {
 
 		// TODO Lav metode til drag and drop af spiller
 		// Skal måske ligge i Gorillas
+		// William er i gang
 	}
 
 }
