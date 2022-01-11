@@ -42,6 +42,8 @@ public class Main extends Application {
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
+	
+	public static Label score;
 
 	/*
 	 * start()
@@ -148,8 +150,12 @@ public class Main extends Application {
 		mainT.cancel();
 	}
 
-	static void run() {
+	static void run() {		
 		gameRoot.getChildren().clear();
+		
+		//Update score board
+		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
+		
 		for (GameObject gO : objList) {
 			gO.run(gameRoot);
 		}
@@ -166,7 +172,16 @@ public class Main extends Application {
 		
 		System.out.println("Hey!");
 		
-		//Kald tur
+		//Insert score board
+		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);
+		BorderPane placeScore = new BorderPane();
+		placeScore.setPrefWidth(Main.n);
+		placeScore.setPrefHeight(Main.m);
+		placeScore.setTop(score);
+		BorderPane.setAlignment(score, Pos.CENTER);
+		frameworkRoot.getChildren().add(placeScore);
+		
+		//Call turn
 		PlayerTurn.startTurn(0);
 	}
 	

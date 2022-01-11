@@ -33,7 +33,12 @@ public class PlayerTurn {
 		// Add to H- and VBox
 		HBox buttons = new HBox(btnShoot, btnMove);
 		VBox groupAll = new VBox(ask, buttons);
-
+		
+		// Create space
+		HBox.setMargin(btnShoot, new Insets(0,10,0,0));
+		VBox.setMargin(ask, new Insets(10,10,10,10));
+		VBox.setMargin(buttons, new Insets(0,0,10,10));
+		
 		// Add to scene
 		Main.frameworkRoot.getChildren().add(groupAll);
 
@@ -72,13 +77,13 @@ public class PlayerTurn {
 	public static void promptShoot(int cPlayer) {
 		// Create components
 		Label player = new Label("Player " + (cPlayer + 1) + ":");
-		Label score = new Label((Main.pList.get(0).point) + "> Points < " + Main.pList.get(1).point);
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
 		TextField speedText = new TextField();
 		TextField angleText = new TextField();
 		Button submit = new Button("Submit");
 
+		
 		BorderPane placement = new BorderPane();
 		placement.setPrefWidth(Main.n);
 		placement.setPrefHeight(Main.m);
@@ -92,6 +97,9 @@ public class PlayerTurn {
 					Main.pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),
 							Integer.parseInt(speedText.getText()));
 					Main.frameworkRoot.getChildren().remove(placement);
+					
+					//Update score board
+					Main.score.setText((Main.pList.get(0).point) + "> Points < " + Main.pList.get(1).point);
 				} catch (Exception e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
@@ -122,9 +130,6 @@ public class PlayerTurn {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + Main.cPlayer);
 		}
-
-		placement.setTop(score);
-		BorderPane.setAlignment(score, Pos.CENTER);
 
 		Main.frameworkRoot.getChildren().add(placement);
 	}
