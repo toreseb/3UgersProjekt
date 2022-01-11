@@ -2,25 +2,20 @@ package framework;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.*;
-import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
-import javafx.util.Duration;
 
 /**
  * Tore og Helene har skrevet denne klasse
@@ -39,9 +34,9 @@ public class Main extends Application {
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
-	
+
 	public static ArrayList<Gorilla> pList = new ArrayList<Gorilla>();
-	
+
 	public static int cPlayer = 0;
 
 	public static Group gameRoot = new Group(); // @TEST
@@ -74,7 +69,7 @@ public class Main extends Application {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		// Window icon
-		Image icon = new Image("Beutiful_Banana.png");
+		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
 
 		root.getChildren().add(grid);
@@ -84,12 +79,14 @@ public class Main extends Application {
 
 		Text text = new Text();
 		TextField setN = new TextField();
+		setN.setPromptText("300 to 2000");
 		TextField setM = new TextField();
+		setM.setPromptText("300 to 2000");
 		Label askN = new Label();
 		Label askM = new Label();
 		Button btn = new Button();
 
-		text.setText("Please define dimentions of game:");
+		text.setText("Please define the dimensions of the game:");
 
 		// Place text
 		border.setTop(text);
@@ -116,13 +113,20 @@ public class Main extends Application {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				try {
-					n = Integer.parseInt(setN.getText());
-					m = Integer.parseInt(setM.getText());
+					int newN = Integer.parseInt(setN.getText());
+					int newM = Integer.parseInt(setM.getText());
+					if ((newN < 300 || newN > 2000) || (newM < 300 || newM > 2000)) {
+						throw new IllegalCallerException();
+					}
+					n = newN;
+					m = newM;
 					mainRoot = new Group();
-					mainRoot.getChildren().addAll(frameworkRoot,gameRoot);
+					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
 					initMain();
+				} catch (IllegalCallerException e) {
+					text.setText("Only values between 300 and 2000");
 				} catch (Exception e) {
 					text.setText("Please enter integers only!");
 				}
@@ -142,7 +146,6 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 		mainT.cancel();
-		System.out.println("Hi3");
 	}
 
 	static void run() {
@@ -151,13 +154,13 @@ public class Main extends Application {
 			gO.run(gameRoot);
 		}
 		clearLists();
-		
+
 	}
 
 	public static void initMain() {
-		initTimer();		
-		Gorilla p0 = new Gorilla(Gorilla.width*2,m-Gorilla.height/2);
-		Gorilla p1 = new Gorilla(n-(Gorilla.width*2),m-Gorilla.height/2);
+		initTimer();
+		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height / 2);
+		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height / 2);
 		pList.add(p0);
 		pList.add(p1);
 		
@@ -189,7 +192,7 @@ public class Main extends Application {
 		};
 		timer.start();
 	}
-	
+
 	private static void clearLists() {
 		for (GameObject gameObject : delList) {
 			objList.remove(gameObject);

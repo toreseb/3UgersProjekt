@@ -22,7 +22,6 @@ public class Gorilla extends GameObject {
 	// Constructor
 	public Gorilla(int posX, int posY) {
 		super(posX, posY, width, height);
-		System.out.println(height + " " + width);
 	}
 
 	@Override
@@ -36,12 +35,18 @@ public class Gorilla extends GameObject {
 	@Override
 	public void step() {} // This class is not used here
 
-	public void throwBanana(int angle, int throwStrangth) {
+	public void throwBanana(double angle, double throwStrangth) {
 		if(Main.cPlayer == 0) {
 			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), angle, throwStrangth);
 		}else {
 			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), 180-angle, throwStrangth);
 		}
+	}
+
+	@Override
+	void initShape() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
