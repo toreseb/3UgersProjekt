@@ -29,6 +29,8 @@ public class Main extends Application {
 	public static Stage mainStage;
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
+	
+	public static Level cLevel;
 
 	public static Timer mainT = new Timer();
 
@@ -159,11 +161,12 @@ public class Main extends Application {
 
 	public static void initMain() {
 		initTimer();
-		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height / 2);
-		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height / 2);
+		
+		cLevel = new Level(m,n);
+		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height);
+		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height);
 		pList.add(p0);
 		pList.add(p1);
-		//new Level(m,n);
 		/*new LevelPart(0,100,100);
 		new LevelPart(100,100,100);
 		new LevelPart(200,100,100);

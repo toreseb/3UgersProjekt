@@ -1,6 +1,6 @@
 package gameObjects;
 
-import framework.Main;
+import framework.*;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -22,11 +22,12 @@ public class Gorilla extends GameObject {
 	// Constructor
 	public Gorilla(int posX, int posY) {
 		super(posX, posY, width, height);
+		this.vectorPos.set(1,  Main.m-(Main.cLevel.maxHeightAtLocation(this.vectorPos.get(0),width)+height));
 	}
 
 	@Override
 	public void drawShape(Group root) {
-		Rectangle rect = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our gorilla
+		Rectangle rect = new Rectangle(vectorPos.get(0), vectorPos.get(1),width,height);  // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		
 		root.getChildren().add(rect);    // adding the circle to the group

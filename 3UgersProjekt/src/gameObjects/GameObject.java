@@ -28,7 +28,7 @@ public abstract class GameObject {
 	
 	public int id;
 	static int idCounter = 0;
-	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the objects
+	public Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the objects
 	
 	public int width, height; 				// the width and height of the shapes
 	

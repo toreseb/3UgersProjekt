@@ -2,6 +2,7 @@ package framework;
 
 import java.util.ArrayList;
 
+import gameObjects.GameObject;
 import gameObjects.LevelPart;
 
 public class Level {
@@ -28,5 +29,24 @@ public class Level {
 		parts.add(lastPart);
 	}
 	
+	public int heightAtLocation(int posX) {
+		int totalLength = 0;
+		for (LevelPart levelPart : parts) {
+			totalLength += levelPart.width;
+			if(posX <= totalLength) {
+				return(levelPart.height);
+			}
+		}
+		return(0);
+	}
+	
+	public int maxHeightAtLocation(int xPos, int width) {
+		int highest = Main.cLevel.heightAtLocation(xPos);
+		System.out.println(Main.cLevel.heightAtLocation(xPos) + " " +Main.cLevel.heightAtLocation(xPos+width));
+		if(Main.cLevel.heightAtLocation(xPos+width)>highest) {
+			return Main.cLevel.heightAtLocation(xPos);
+		}
+		return highest;
+	}
 
 }
