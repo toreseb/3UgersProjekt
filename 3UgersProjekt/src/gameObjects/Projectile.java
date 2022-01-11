@@ -24,7 +24,7 @@ public class Projectile extends GameObject {
 	ImageView imageView = new ImageView(banana);
 	
 
-	public Projectile(int posX, int posY, double direction, double speed) {
+	public Projectile(double posX, double posY, double direction, double speed) {
 
 		super(posX, posY, 2, 2);
 		
@@ -60,30 +60,30 @@ public class Projectile extends GameObject {
 
 	@Override
 	public void drawShape(Group root) {
-		imageView.setX((int)vectorPos.get(0));
-        imageView.setY((int)vectorPos.get(1));
+		imageView.setX(vectorPos.get(0));
+        imageView.setY(vectorPos.get(1));
         
 		root.getChildren().add(imageView);
 	}
 
 	public void step() {
 		ySpeed += g / 60; // calc new ySpeed from acceleration - 60 frames per second
-		vectorPos.set(0, (int) (vectorPos.get(0) + xSpeed));
-		vectorPos.set(1, (int) (vectorPos.get(1) + ySpeed));
+		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
+		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
 	}
 
 	@Override
 	public void collision() {
 		if (vectorPos.get(0) - width / 2 < 0) {
-			vectorPos.set(0, 0 + width / 2);
+			vectorPos.set(0,(double) 0 + width / 2);
 			//xSpeed = -xSpeed;
 		}
 		if (vectorPos.get(0) + width / 2 > Main.n) {
-			vectorPos.set(0, Main.n - width / 2);
+			vectorPos.set(0, (double)Main.n - width / 2);
 			//xSpeed = -xSpeed;
 		}
 		if (vectorPos.get(1) + height / 2 > Main.m) {
-			vectorPos.set(1, Main.m - height / 2);
+			vectorPos.set(1, (double)Main.m - height / 2);
 			xSpeed = 0;
 			Gorilla gorilla = Main.pList.get((Main.cPlayer+1) % 2);
 			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 50
