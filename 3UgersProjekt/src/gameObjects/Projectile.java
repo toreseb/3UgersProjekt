@@ -94,7 +94,7 @@ public class Projectile extends GameObject {
 			if(Main.cPlayer > Main.pList.size()-1) {
 				Main.cPlayer = 0;
 			}
-			Main.promptPlayer();
+			PlayerTurn.startTurn(Main.cPlayer+1);//Måske forkert!!!
 			//Main.mainStage.getScene().getWindow().setWidth(Main.mainStage.getScene().getWidth() + 14);
 			this.deleteObject();
 		}
