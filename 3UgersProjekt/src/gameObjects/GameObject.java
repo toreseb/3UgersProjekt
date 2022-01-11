@@ -31,6 +31,8 @@ public abstract class GameObject {
 	
 	public int width, height; 				// the width and height of the shapes
 	
+	Group groupShape = new Group();
+	
 	
 	// Constructor
 	public GameObject(int posX, int posY, int width, int height) {
@@ -41,9 +43,11 @@ public abstract class GameObject {
 		
 		id = idCounter;
 		idCounter++;
+		initShape();
 		Main.objList.add(this);// Adds the player to a list.
 	}
 	
+	abstract void initShape();
 	
 	public abstract void drawShape(Group root);
 	

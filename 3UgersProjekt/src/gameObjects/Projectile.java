@@ -74,10 +74,14 @@ public class Projectile extends GameObject {
 
 	@Override
 	public void collision() {
-		if (vectorPos.get(0) - width / 2 < 0)
+		if (vectorPos.get(0) - width / 2 < 0) {
 			vectorPos.set(0, 0 + width / 2);
-		if (vectorPos.get(0) + width / 2 > Main.n)
+			//xSpeed = -xSpeed;
+		}
+		if (vectorPos.get(0) + width / 2 > Main.n) {
 			vectorPos.set(0, Main.n - width / 2);
+			//xSpeed = -xSpeed;
+		}
 		if (vectorPos.get(1) + height / 2 > Main.m) {
 			vectorPos.set(1, Main.m - height / 2);
 			xSpeed = 0;
@@ -94,5 +98,11 @@ public class Projectile extends GameObject {
 			//Main.mainStage.getScene().getWindow().setWidth(Main.mainStage.getScene().getWidth() + 14);
 			this.deleteObject();
 		}
+	}
+
+	@Override
+	void initShape() {
+		// TODO Auto-generated method stub
+		
 	}
 }

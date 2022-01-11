@@ -69,7 +69,7 @@ public class Main extends Application {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		// Window icon
-		Image icon = new Image("Beautiful_Banana.png");
+		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
 
 		root.getChildren().add(grid);
@@ -163,6 +163,8 @@ public class Main extends Application {
 		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height / 2);
 		pList.add(p0);
 		pList.add(p1);
+		//LevelPart part1 = new LevelPart(0,m,100,100);
+		//LevelPart part2 = new LevelPart(100,m,250,400);
 
 		// Kald tur
 		promptPlayer();

@@ -42,5 +42,11 @@ public class Gorilla extends GameObject {
 			Projectile banana = new Projectile(vectorPos.get(0), vectorPos.get(1), 180-angle, throwStrangth);
 		}
 	}
+
+	@Override
+	void initShape() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
