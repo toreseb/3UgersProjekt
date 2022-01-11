@@ -164,80 +164,10 @@ public class Main extends Application {
 		System.out.println("Hey!");
 		
 		//Kald tur
-		promptPlayer();
+		PlayerTurn.startTurn(0);
 	}
 	
 	
-	/*
-	 * promptPlayer()
-	 * 
-	 * Parses an integer as parameter.
-	 * 
-	 * Creates a prompt for a player to set values for throw.
-	 * 
-	 * By: Helene Moesgaard.
-	 */
-	public static void promptPlayer() {
-		//Create components
-		Label player = new Label("Player "+(cPlayer+1) + ":");
-		Label score = new Label ((pList.get(0).point) + "> Points < " + pList.get(1).point);
-		Label speedLabel = new Label("Set speed:");
-		Label angleLabel = new Label("Set angle:");
-		TextField speedText = new TextField();
-		TextField angleText = new TextField();
-		Button submit = new Button("Submit");
-		
-		BorderPane placement = new BorderPane();
-		placement.setPrefWidth(n);
-		placement.setPrefHeight(m);
-		placement.setPadding(new Insets(10,10,10,10));
-		
-		//Set size and event of button
-		//submit.setLayoutX(150);
-		//submit.setLayoutY(80);
-		submit.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				try {
-					pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),Integer.parseInt(speedText.getText()));
-					Main.frameworkRoot.getChildren().remove(placement);
-				} catch (Exception e) {
-					Text advarsel = new Text("Angiv venligst kun hele tal!");
-					placement.setTop(advarsel);
-				}
-				
-			}
-		});
-		
-		//Place components
-		GridPane group = new GridPane();
-		GridPane.setConstraints(player, 0, 0);
-		GridPane.setConstraints(speedLabel, 0, 1);
-		GridPane.setConstraints(angleLabel, 0, 2);
-		GridPane.setConstraints(speedText, 1, 1);
-		GridPane.setConstraints(angleText, 1, 2);
-		GridPane.setConstraints(submit, 0, 3);
-		group.getChildren().addAll(player,speedLabel,angleLabel,speedText,angleText,submit);
-	
-		switch (cPlayer) {
-		case 0: {
-			placement.setLeft(group);
-			break;
-		}
-		case 1: {
-			placement.setRight(group);
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + cPlayer);
-		}
-		
-		placement.setTop(score);
-		placement.setAlignment(score,Pos.CENTER);
-				
-		frameworkRoot.getChildren().add(placement);
-	}
 
 	static void initTimer() {
 		AnimationTimer timer = new AnimationTimer() {
