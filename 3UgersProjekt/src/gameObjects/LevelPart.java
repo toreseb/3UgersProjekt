@@ -12,8 +12,8 @@ public class LevelPart extends GameObject {
 	static int horizontalMargins = 5;
 	static int verticalMargins = 5;
 
-	public LevelPart(int posX, int posY, int width, int height) {
-		super(posX, posY, width, height);
+	public LevelPart(int posX, int width, int height) {
+		super(posX, Main.m, width, height);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,7 +31,26 @@ public class LevelPart extends GameObject {
 	@Override
 	void initShape() {
 		Rectangle mainShape = new Rectangle(vectorPos.get(0),vectorPos.get(1)-height,width,height);
-		mainShape.setFill(Color.BLUE);
+		hitBox = mainShape;
+		int random = (int)Math.floor(Math.random()*3);
+		switch (random) {
+		case 0: {
+			mainShape.setFill(Color.RED);
+			break;
+		}
+		case 1: {
+			mainShape.setFill(Color.BLUE);
+			break;
+		}
+		case 2: {
+			mainShape.setFill(Color.GREEN);
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + random);
+		}
+		
+		
 		groupShape.getChildren().add(mainShape);
 		int rows = (int)Math.floor(height/(windowHeight+verticalMargins));
 		int columns = (int)Math.floor(width/(windowWidth+horizontalMargins));

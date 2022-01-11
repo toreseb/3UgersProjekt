@@ -6,6 +6,7 @@ import java.util.Vector;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 /**
  * The function of this class is:
@@ -30,6 +31,8 @@ public abstract class GameObject {
 	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the objects
 	
 	public int width, height; 				// the width and height of the shapes
+	
+	protected Rectangle hitBox;
 	
 	Group groupShape = new Group();
 	

@@ -24,7 +24,7 @@ import javafx.stage.*;
  */
 
 public class Main extends Application {
-	public static int n, m;
+	public static int n, m;//Width and Height
 
 	public static Stage mainStage;
 	public static Scene mainScene;
@@ -163,8 +163,14 @@ public class Main extends Application {
 		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height / 2);
 		pList.add(p0);
 		pList.add(p1);
-		//LevelPart part1 = new LevelPart(0,m,100,100);
-		//LevelPart part2 = new LevelPart(100,m,250,400);
+		new Level(m,n);
+		/*new LevelPart(0,100,100);
+		new LevelPart(100,100,100);
+		new LevelPart(200,100,100);
+		new LevelPart(300,100,100);
+		new LevelPart(400,100,100);
+		new LevelPart(500,100,100);*/
+		
 
 		// Kald tur
 		promptPlayer();
