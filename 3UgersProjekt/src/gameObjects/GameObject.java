@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Translate;
 
 /**
  * The function of this class is:
@@ -48,21 +49,23 @@ public abstract class GameObject {
 		idCounter++;
 		initShape();
 		Main.objList.add(this);// Adds the player to a list.
-		//Main.gameRoot.getChildren().add(groupShape);
+		Main.gameRoot.getChildren().add(groupShape);
 	}
 	
 	abstract void initShape();
 	
-	public abstract void drawShape(Group root);
-	
-	protected abstract void step();
+	protected void step() {
+		groupShape.setTranslateX(vectorPos.get(0));
+		groupShape.setTranslateY(Main.m -vectorPos.get(1));
+		
+	}
 	
 	void draw(Group root2) {	
-		
+		/*
 		Group root = new Group();
 		drawShape(root);
 		root2.getChildren().add(root);
-		
+		*/
 	}
 	
 	/******************
@@ -76,10 +79,14 @@ public abstract class GameObject {
 	}
 	
 	public void collision() {
-		if (vectorPos.get(0)-width/2< 0)
+		if (vectorPos.get(0)-width/2< 0) {
 			vectorPos.set(0,(double)0+width/2);
-		if (vectorPos.get(0)+width/2>Main.n)
+		}
+		if (vectorPos.get(0)+width/2>Main.n) {
 			vectorPos.set(0, (double)Main.n-width/2);
+			System.out.println("HI");
+		}
+			
 		if (vectorPos.get(1)+height/2 > Main.m)
 			vectorPos.set(1, (double)Main.m-height/2);
 		if (vectorPos.get(1)-height/2 < 0)
@@ -111,6 +118,11 @@ public abstract class GameObject {
 	
 	public void deleteObject() {
 		Main.delList.add(this);
+		Main.gameRoot.getChildren().remove(groupShape);
+	}
+	
+	public void objectCollision(GameObject gO) {
+		
 	}
 	
  

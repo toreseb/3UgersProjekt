@@ -28,11 +28,14 @@ public class Gorilla extends GameObject {
 
 
 	// Constructor
-	public Gorilla(int posX, int posY) {
-		super(posX, posY, width, height);
+	public Gorilla(int posX) {
+		super(posX, 0, width, height);
 		point = 0;
 		moveable = false;
 		numLife = 3;
+		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
+		//this.vectorPos.set(1, (double) Main.m-(Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
+		step();
 	}
 
 
@@ -43,17 +46,16 @@ public class Gorilla extends GameObject {
 	 * step()
 	 */
 
-	@Override
-	public void drawShape(Group root) {
-		root.getChildren().add(groupShape);    // adding the circle to the group
-	}
 
 	@Override
-	public void step() {}
+	public void step() {
+		super.step();
+		
+	} // This class is not used here
 
 	@Override
 	void initShape() {
-		rect = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our gorilla
+		rect = new Rectangle(0, 0,width,height);  // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
 	}
@@ -65,9 +67,9 @@ public class Gorilla extends GameObject {
 	 */
 	public void throwBanana(double angle, double speed) {
 		if(Main.cPlayer == 0) {
-			Projectile banana = new Projectile(vectorPos.get(0)+width/2, vectorPos.get(1), angle, speed);
+			Projectile banana = new Projectile(vectorPos.get(0)+width/2, vectorPos.get(1), -angle, speed);
 		}else {
-			Projectile banana = new Projectile(vectorPos.get(0)+height/2, (double)vectorPos.get(1), 180-angle, speed);
+			Projectile banana = new Projectile(vectorPos.get(0)+height/2, (double)vectorPos.get(1), 180+angle, speed);
 		}
 	}
 
