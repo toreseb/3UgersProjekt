@@ -121,5 +121,9 @@ public abstract class GameObject {
 		Main.gameRoot.getChildren().remove(groupShape);
 	}
 	
+	public void objectCollision(GameObject gO) {
+		
+	}
+	
  
 }
