@@ -8,13 +8,19 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/*
+ * PowerUp
+ * 
+ * This class is an abstract class that extends GameObject.
+ * 
+ * It contains all the fields and methods a basic powerup needs.
+ * 
+ * By: Helene Moesgaard
+ */
+
 public abstract class PowerUp extends GameObject {
-	public String image1;
-	public String image2;
-	public String image3;
-	public Image icon1;
-	public Image icon2;
-	public Image icon3;
+	public String name;
+	public Image icon;
 	private ImageView imageView;
 	private int counter = 0;
 
@@ -25,12 +31,9 @@ public abstract class PowerUp extends GameObject {
 	@Override
 	void initShape() {
 		// TODO Auto-generated method stub
+		icon = new Image("2.png");
 
-		icon1 = new Image("1.png");
-		icon2 = new Image("2.png");
-		icon3 = new Image("3.png");
-
-		imageView = new ImageView(icon2);
+		imageView = new ImageView(icon);
 
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);
@@ -48,13 +51,16 @@ public abstract class PowerUp extends GameObject {
 		counter++;
 
 		if (counter < 30) {
-			imageView.setImage(icon2);
+			imageView.translateXProperty().add(100);
 		} else if (counter >= 30 && counter < 60) {
-			imageView.setImage(icon1);
+			imageView.translateXProperty().subtract(100);
 		} else if (counter >= 60 && counter < 90) {
-			imageView.setImage(icon2);
+			imageView.translateXProperty().subtract(100);
 		} else if (counter >= 90 && counter < 120) {
-			imageView.setImage(icon3);
+			imageView.translateXProperty().add(100);
+		}
+
+		if (counter == 120) {
 			counter = 0;
 		}
 	}

@@ -21,15 +21,16 @@ import javafx.scene.image.*;
 public class Gorilla extends GameObject {
 
 	// Fields
-	public static final int width = Main.n / 15;
-	public static final int height = Main.n / 15;
-	public int point, numLife;
+	public static final int width = 40;
+	public static final int height = 40;
+	public int point;
+	public static int numLife = 3;
 	public boolean moveable = true;
 
 	private Rectangle rect;
-	private ArrayList<ImageView> numLifeList = new ArrayList<ImageView>();
-	private Image heart;
-	private ImageView helth;
+	public ArrayList<Image> hearts;
+	private static Image heart = new Image("Heart.png");
+	// private ImageView helth = new ImageView(heart);
 
 	public Projectile banana;
 
@@ -38,17 +39,10 @@ public class Gorilla extends GameObject {
 		super(posX, 0, width, height);
 		point = 0;
 		moveable = false;
-		numLife = 3;
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		step();
 
-		// init the array list with the correct amount of life.
-		heart = new Image("Heart.png");
-		helth = new ImageView(heart);
-		for (int i = 0; i < numLife; i++) {
-			numLifeList.add(helth);
-		}
+		step();
 	}
 
 	/*
@@ -64,9 +58,11 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
+
 		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
+		drawHearts();
 	}
 
 	/*
@@ -137,6 +133,26 @@ public class Gorilla extends GameObject {
 				PlayerTurn.startTurn(Main.cPlayer);
 			}
 		});
+	}
+
+	public void drawHearts() {
+		this.hearts = new ArrayList<>();
+		for (int i = 0; i < numLife; i++) {
+			hearts.add(heart);
+		}
+
+		int i = 0;
+		for (Image image : hearts) {
+			ImageView health = new ImageView(image);
+			double size = height/numLife;
+			health.setLayoutY(-size);
+			health.setFitHeight(size);
+			health.setFitWidth(size);
+			health.setLayoutX((i * size));
+			groupShape.getChildren().add(health);
+			i++;
+		}
 
 	}
+
 }

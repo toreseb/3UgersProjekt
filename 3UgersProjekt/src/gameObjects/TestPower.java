@@ -1,12 +1,12 @@
 package gameObjects;
 
+import javafx.scene.image.Image;
+import framework.Main;
+
 public class TestPower extends PowerUp{
 
 	public TestPower(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
-		image1 = "1";
-		image2 = "2";
-		image3 = "3";
 	}
 
 	@Override
@@ -15,4 +15,11 @@ public class TestPower extends PowerUp{
 		
 	}
 
+	/*
+	 * Idéer til powerups:
+	 * - Freeze (tager et liv og stopper ramtes næste tur)
+	 * - Metal (tager to liv)
+	 * - Big (rammer et større område) - evt. spread
+	 * - Shield (du mister ikke et liv næste gang du bliver ramt)
+	 */
 }

@@ -81,14 +81,6 @@ public class PlayerTurn {
 	 *
 	 * By: Helene Moesgaard
 	 */
-	// Jeg t�nker at for at f� dette til at virke, kan der v�re en boolean for
-	// om en
-	// gorilla kan flyttes eller ej i Gorilla. Denne function g�r den true og
-	// beder
-	// spilleren om at flytte sin gorilla. Der skal s� v�re en function i
-	// Gorilla
-	// for at flytte en gorilla, men den lader kun en g�re det hvis ens boolean er
-	// true. I slutningen skal den g�re booleanen false.
 	public static void promptMove(int cPlayer) {
 		// Create componenten
 		Label prompt = new Label("Please drag and drop gorilla :)");
@@ -96,13 +88,14 @@ public class PlayerTurn {
 
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
-		prompt.setLayoutY(Main.m / 2);
+		prompt.setLayoutY(20);
 
 		// Make root to add to scene and add prompt
 		Group root = new Group();
 		root.getChildren().add(prompt);
 		Main.frameworkRoot.getChildren().add(root);
-
+		
+		
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
 		if (!Main.pList.get(cPlayer).moveable) {
 			Main.frameworkRoot.getChildren().remove(root); // Removes the prompt
