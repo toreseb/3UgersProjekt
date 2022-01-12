@@ -171,9 +171,12 @@ public class PlayerTurn {
 		Group root = new Group();
 		root.getChildren().add(prompt);
 		Main.frameworkRoot.getChildren().add(root);
+		
 
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-		if(!Main.pList.get(cPlayer).moveable) Main.frameworkRoot.getChildren().remove(prompt); // Removes the prompt	
+		if(!Main.pList.get(cPlayer).moveable) {
+			Main.frameworkRoot.getChildren().remove(root); // Removes the prompt	
+		}
 
 	}
 
