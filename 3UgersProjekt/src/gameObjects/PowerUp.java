@@ -25,28 +25,25 @@ public abstract class PowerUp extends GameObject {
 	@Override
 	void initShape() {
 		// TODO Auto-generated method stub
-		try {
-			icon1 = new Image(new FileInputStream(image1));
-			icon2 = new Image(new FileInputStream(image2));
-			icon3 = new Image(new FileInputStream(image3));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		icon1 = new Image("1.png");
+		icon2 = new Image("2.png");
+		icon3 = new Image("3.png");
 
 		imageView = new ImageView(icon2);
-
-		imageView.setX(vectorPos.get(0));
-		imageView.setY(vectorPos.get(1));
 
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);
 
 		imageView.setPreserveRatio(true);
+
+		groupShape.getChildren().add(imageView);
+
 	}
 
 	@Override
 	protected void step() {
+		super.step();
 		// TODO Auto-generated method stub
 		counter++;
 
@@ -60,8 +57,6 @@ public abstract class PowerUp extends GameObject {
 			imageView.setImage(icon3);
 			counter = 0;
 		}
-
-		Main.gameRoot.getChildren().add(imageView);
 	}
 
 	public abstract void usePower();
