@@ -46,10 +46,6 @@ public class Gorilla extends GameObject {
 	 * step()
 	 */
 
-	@Override
-	public void drawShape(Group root) {
-		
-	}
 
 	@Override
 	public void step() {
@@ -59,7 +55,7 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		rect = new Rectangle(vectorPos.get(0)-width/2, vectorPos.get(1)-height/2,width,height);  // Creates our gorilla
+		rect = new Rectangle(0, 0,width,height);  // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
 	}

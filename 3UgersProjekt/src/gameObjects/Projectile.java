@@ -37,11 +37,6 @@ public class Projectile extends GameObject {
 		initAnimation(angle);
 	}
 
-	@Override
-	public void drawShape(Group root) {
-		
-	}
-
 	public void step() {
 		super.step();
 		ySpeed -= g / 60; // calc new ySpeed from acceleration - 60 frames per second

@@ -17,9 +17,6 @@ public class LevelPart extends GameObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void drawShape(Group root) {
-	}
 
 	@Override
 	public void step() {

@@ -54,8 +54,6 @@ public abstract class GameObject {
 	
 	abstract void initShape();
 	
-	public abstract void drawShape(Group root);
-	
 	protected void step() {
 		groupShape.setTranslateX(vectorPos.get(0));
 		groupShape.setTranslateY(Main.m -vectorPos.get(1));
