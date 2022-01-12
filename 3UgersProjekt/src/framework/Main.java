@@ -45,7 +45,7 @@ public class Main extends Application {
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
 	
-	public static Label score;
+	public static Label score = new Label();
 
 	/*
 	 * start()
@@ -188,7 +188,7 @@ public class Main extends Application {
 		new LevelPart(400,100,100);
 		new LevelPart(500,100,100);*/
 		
-		//SpawnPowerup.spawnPower();
+		
 		
 		//Insert score board
 		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);
@@ -198,9 +198,12 @@ public class Main extends Application {
 		placeScore.setTop(score);
 		BorderPane.setAlignment(score, Pos.CENTER);
 		frameworkRoot.getChildren().add(placeScore);
+		SpawnPowerup.spawnPower();
+		
 		
 		//Call turn
 		PlayerTurn.startTurn(0);
+		
 	}
 	
 	
