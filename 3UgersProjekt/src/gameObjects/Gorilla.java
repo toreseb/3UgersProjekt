@@ -2,6 +2,7 @@ package gameObjects;
 
 import framework.Main;
 import java.util.ArrayList;
+import javafx.event.Event;
 
 import javafx.scene.Cursor;
 import javafx.scene.Group;
@@ -25,11 +26,11 @@ public class Gorilla extends GameObject {
 	public static final int height = Main.n/15;
 	public int point, numLife;
 	public boolean moveable;
-	
+
 	private Rectangle rect;
 	private ArrayList<ImageView> numLifeList = new ArrayList<ImageView>();
 	private Image heart;
-	private ImageView helth; 
+	private ImageView helth;
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -39,13 +40,13 @@ public class Gorilla extends GameObject {
 		numLife = 3;
 		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
 		step();
-	
+
 		// init the array list with the correct amount of life.
 		heart = new Image("Heart.png");
 		helth = new ImageView(heart);
 		for (int i = 0; i < numLife; i++) {
 			numLifeList.add(helth);
-		}	
+		}
 	}
 
 
@@ -57,10 +58,12 @@ public class Gorilla extends GameObject {
 	 */
 
 
+
+
 	@Override
 	public void step() {
 		super.step();
-		
+
 	} // This class is not used here
 
 	@Override
@@ -87,42 +90,32 @@ public class Gorilla extends GameObject {
 	private double startPosX, startPosY;
 	public void moveGorilla(Group shape) {
 		if(moveable) {
-
 			shape.setOnMouseEntered(event -> {
 				shape.setCursor(Cursor.HAND);
 			});
 
-			// checks if the mouse is pressed and calculates the offset
-			shape.setOnMousePressed(event -> {
-				startPosX = event.getSceneX() - vectorPos.get(0);
-				startPosY = event.getSceneY() - (Main.m - vectorPos.get(1));
-				event.consume();
-			});
-
 			// Sets the new position to the shape when the mouse is dragged
 			shape.setOnMouseDragged(event -> {
-				vectorPos.set(0, event.getSceneX() - startPosX);
-				vectorPos.set(1, event.getSceneY() - startPosY);
-				
-				event.consume();
+				vectorPos.set(0, event.getSceneX()-width/2);
+				vectorPos.set(1, Main.m - event.getSceneY()+height/2);
 			});
 
 
 			// sets the moveable back to false when released
 			shape.setOnMouseReleased(event -> {
 
-				/*
-				 * @TODO: Check for collisions
-				 */
-				
-				this.moveable  = false;
-				System.out.println(moveable);
-				
+				this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
+				moveable = false;
+				Main.cPlayer++;// The player changes when the projectile hits the ground
+				if (Main.cPlayer > Main.pList.size() - 1) {
+					Main.cPlayer = 0;
+				}
 				event.consume();
+				PlayerTurn.startTurn(Main.cPlayer);
 			});
-			
+
 		}
 	}
 
-	
+
 }
