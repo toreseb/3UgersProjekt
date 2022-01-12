@@ -20,37 +20,25 @@ import javafx.scene.image.*;
 public class Gorilla extends GameObject {
 
 	// Fields
-	public static final int width = Main.n / 15;
-	public static final int height = Main.n / 15;
-	public int point, numLife;
+	public static final int width = 40;
+	public static final int height = 40;
+	public int point;
+	public static int numLife = 3;
 	public boolean moveable = true;
 
 	private Rectangle rect;
-	private ArrayList<Image> hearts = new ArrayList<>();
-	private Image heart = new Image("Heart.png");
-	//private ImageView helth = new ImageView(heart);
+	public ArrayList<Image> hearts;
+	private static Image heart = new Image("Heart.png");
+	// private ImageView helth = new ImageView(heart);
 
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
 		point = 0;
 		moveable = false;
-		numLife = 3;
-		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		
-		for (int i = 0; i < numLife; i++) {
-			hearts.add(heart);
-		}
-		
-		for(int i = 0; i < hearts.size(); i++) {
-			ImageView health = new ImageView(hearts.get(i));
-			health.setLayoutY(-20);
-			health.setFitHeight(27);
-			health.setFitWidth(27);
-			health.setLayoutX((i*30));
-			groupShape.getChildren().add(health);
-		}
-		
+		this.vectorPos.set(1,
+				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+
 		step();
 	}
 
@@ -67,10 +55,11 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		drawHearts();
+
 		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
+		drawHearts();
 	}
 
 	/*
@@ -122,10 +111,25 @@ public class Gorilla extends GameObject {
 			}
 		});
 	}
-	
-	
+
 	public void drawHearts() {
-		
+		this.hearts = new ArrayList<>();
+		for (int i = 0; i < numLife; i++) {
+			hearts.add(heart);
+		}
+
+		int i = 0;
+		for (Image image : hearts) {
+			ImageView health = new ImageView(image);
+			double size = height/numLife;
+			health.setLayoutY(-size);
+			health.setFitHeight(size);
+			health.setFitWidth(size);
+			health.setLayoutX((i * size));
+			groupShape.getChildren().add(health);
+			i++;
+		}
+
 	}
-	
+
 }
