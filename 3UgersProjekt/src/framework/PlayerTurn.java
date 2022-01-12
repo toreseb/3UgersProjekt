@@ -156,10 +156,7 @@ public class PlayerTurn {
 	// for at flytte en gorilla, men den lader kun en g�re det hvis ens boolean er
 	// true. I slutningen skal den g�re booleanen false.
 	public static void promptMove(int cPlayer) {
-
-
 		// Create componenten
-
 		Label prompt = new Label("Please drag and drop gorilla :)");
 		Rectangle rect = new Rectangle(100,100, Color.RED);
 
@@ -173,7 +170,7 @@ public class PlayerTurn {
 		Main.frameworkRoot.getChildren().add(root);
 
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-		if(!Main.pList.get(cPlayer).moveable) Main.frameworkRoot.getChildren().remove(prompt); // Removes the prompt	
+		if(!Main.pList.get(cPlayer).moveable)Main.frameworkRoot.getChildren().remove(prompt); // Removes the prompt
 
 	}
 

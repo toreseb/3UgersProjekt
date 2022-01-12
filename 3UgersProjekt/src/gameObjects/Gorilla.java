@@ -1,12 +1,13 @@
 package gameObjects;
+
 import framework.Main;
-import javafx.event.Event;
+import java.util.ArrayList;
+
 import javafx.scene.Cursor;
-import framework.*;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import javafx.scene.image.*;
 
 /**
  * The function of this class is:
@@ -24,8 +25,11 @@ public class Gorilla extends GameObject {
 	public static final int height = Main.n/15;
 	public int point, numLife;
 	public boolean moveable;
+	
 	private Rectangle rect;
-
+	private ArrayList<ImageView> numLifeList = new ArrayList<ImageView>();
+	private Image heart;
+	private ImageView helth; 
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -34,8 +38,14 @@ public class Gorilla extends GameObject {
 		moveable = false;
 		numLife = 3;
 		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
-		//this.vectorPos.set(1, (double) Main.m-(Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
 		step();
+	
+		// init the array list with the correct amount of life.
+		heart = new Image("Heart.png");
+		helth = new ImageView(heart);
+		for (int i = 0; i < numLife; i++) {
+			numLifeList.add(helth);
+		}	
 	}
 
 
@@ -86,15 +96,15 @@ public class Gorilla extends GameObject {
 			shape.setOnMousePressed(event -> {
 				startPosX = event.getSceneX() - vectorPos.get(0);
 				startPosY = event.getSceneY() - (Main.m - vectorPos.get(1));
-				
-				System.out.println(event.getSceneX() + " " + event.getSceneY());
-				System.out.println(startPosX + " " + startPosY);
+				event.consume();
 			});
 
 			// Sets the new position to the shape when the mouse is dragged
 			shape.setOnMouseDragged(event -> {
 				vectorPos.set(0, event.getSceneX() - startPosX);
 				vectorPos.set(1, event.getSceneY() - startPosY);
+				
+				event.consume();
 			});
 
 
@@ -105,44 +115,14 @@ public class Gorilla extends GameObject {
 				 * @TODO: Check for collisions
 				 */
 				
+				this.moveable  = false;
+				System.out.println(moveable);
 				
-				System.out.println("Released");
-				moveable = false;
+				event.consume();
 			});
-
+			
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 }
