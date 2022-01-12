@@ -27,7 +27,7 @@ public class Projectile extends GameObject {
 	Image banana = new Image("BananaNew.png");
 	ImageView imageView = new ImageView(banana);
 
-	public Projectile(int i, double posX, double posY, double xSpeed, double ySpeed) {
+	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
 		this.xSpeed = xSpeed / 20;
 		this.ySpeed = -ySpeed / 20;
@@ -104,8 +104,8 @@ public class Projectile extends GameObject {
 		translate.setNode(groupShape);
 		translate.setDuration(Duration.millis(1));
 		translate.setByX(-width);
-		translate.play();
 		translate.setByY(-height);
+		translate.play();
 
 		// rotate
 		RotateTransition rotate = new RotateTransition();

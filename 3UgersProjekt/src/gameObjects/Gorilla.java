@@ -72,24 +72,25 @@ public class Gorilla extends GameObject {
 	 * by: Embla Peulicke
 	 */
 	public void throwBanana(int cPlayer) {
-		double xBegin = vectorPos.get(0) + width / 2;			// gorilla center coordinates
+		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
-		Line line = new Line(xBegin, yBegin, xBegin, yBegin);	// draw line: begins and ends in gorilla center
+		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
 		Main.frameworkRoot.getChildren().add(line);
 		Main.frameworkRoot.setOnMouseMoved(event -> {
-			line.setEndX(event.getSceneX());					// move line end to follow the mouse
+			line.setEndX(event.getSceneX()); // move line end to follow the mouse
 			line.setEndY(event.getSceneY());
 		});
 		Main.frameworkRoot.setOnMousePressed(event -> {
 
-			if (banana != null)	return;							// if there is already a banana, return
-			
-			Main.frameworkRoot.getChildren().remove(line);		// else remove the line and make a banana 
+			if (banana != null)
+				return; // if there is already a banana, return
+
+			Main.frameworkRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
 			double yEnd = event.getSceneY();
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
-			banana = new Projectile(0, vectorPos.get(0), vectorPos.get(1), xSpeed, ySpeed);
+			banana = new Projectile(vectorPos.get(0) + width/2, vectorPos.get(1), xSpeed, ySpeed);
 		});
 
 	}
@@ -124,7 +125,7 @@ public class Gorilla extends GameObject {
 								+ height));
 				moveable = false;
 				shape.setCursor(Cursor.DEFAULT);
-				
+
 				Main.cPlayer++;// The player changes when the projectile hits the ground
 				if (Main.cPlayer > Main.pList.size() - 1) {
 					Main.cPlayer = 0;
@@ -144,7 +145,7 @@ public class Gorilla extends GameObject {
 		int i = 0;
 		for (Image image : hearts) {
 			ImageView health = new ImageView(image);
-			double size = height/numLife;
+			double size = height / numLife;
 			health.setLayoutY(-size);
 			health.setFitHeight(size);
 			health.setFitWidth(size);
