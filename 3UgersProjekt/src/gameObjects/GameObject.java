@@ -34,7 +34,7 @@ public abstract class GameObject {
 	
 	protected Rectangle hitBox;
 	
-	Group groupShape = new Group();
+	public Group groupShape = new Group();
 	
 	
 	// Constructor

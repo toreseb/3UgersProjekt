@@ -1,5 +1,7 @@
 package framework;
 
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -12,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class PlayerTurn {
@@ -55,6 +58,7 @@ public class PlayerTurn {
 				Main.frameworkRoot.getChildren().remove(groupAll);
 
 				// Call move prompt
+				Main.pList.get(cPlayer).moveable = true;
 				promptMove(cPlayer);
 			}
 		});
@@ -138,15 +142,19 @@ public class PlayerTurn {
 	 * 
 	 * By: Helene Moesgaard
 	 */
-	// Jeg tænker at for at få dette til at virke, kan der være en boolean for om en
-	// gorilla kan flyttes eller ej i Gorilla. Denne function gør den true og beder
-	// spilleren om at flytte sin gorilla. Der skal så være en function i Gorilla
-	// for at flytte en gorilla, men den lader kun en gøre det hvis ens boolean er
-	// true. I slutningen skal den gøre booleanen false.
+	// Jeg tï¿½nker at for at fï¿½ dette til at virke, kan der vï¿½re en boolean for om en
+	// gorilla kan flyttes eller ej i Gorilla. Denne function gï¿½r den true og beder
+	// spilleren om at flytte sin gorilla. Der skal sï¿½ vï¿½re en function i Gorilla
+	// for at flytte en gorilla, men den lader kun en gï¿½re det hvis ens boolean er
+	// true. I slutningen skal den gï¿½re booleanen false.
 	public static void promptMove(int cPlayer) {
-		// Create components
+		
+		
+		// Create componenten
+		
 		Label prompt = new Label("Please drag and drop gorilla :)");
-
+		Rectangle rect = new Rectangle(100,100, Color.RED);
+		
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
 		prompt.setLayoutY(Main.m / 2);
@@ -154,12 +162,11 @@ public class PlayerTurn {
 		// Make root to add to scene and add prompt
 		Group root = new Group();
 		root.getChildren().add(prompt);
-
 		Main.frameworkRoot.getChildren().add(root);
-
-		// TODO Lav metode til drag and drop af spiller
-		// Skal måske ligge i Gorillas
-		// William er i gang
+		
+		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
+		if(!Main.pList.get(cPlayer).moveable) Main.frameworkRoot.getChildren().remove(prompt); // Removes the prompt	
+		
 	}
 
 }
