@@ -188,6 +188,7 @@ public class Main extends Application {
 		new LevelPart(400,100,100);
 		new LevelPart(500,100,100);*/
 		
+		//SpawnPowerup.spawnPower();
 		
 		//Insert score board
 		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);

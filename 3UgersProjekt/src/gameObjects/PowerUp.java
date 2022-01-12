@@ -18,11 +18,8 @@ public abstract class PowerUp extends GameObject {
 	private ImageView imageView;
 	private int counter = 0;
 
-	public PowerUp(double posX, double posY, int width, int height, String im1, String im2, String im3) {
+	public PowerUp(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
-		image1 = im1;
-		image2 = im2;
-		image3 = im3;
 	}
 
 	@Override
