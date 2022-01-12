@@ -21,7 +21,7 @@ public class Projectile extends GameObject {
 	public static int width = Main.n / 30;
 	public static int height = Main.n / 30;
 
-	Image banana = new Image("Banana.png");
+	Image banana = new Image("BananaNew.png");
 	ImageView imageView = new ImageView(banana);
 
 	public Projectile(double posX, double posY, double direction, double speed) {
@@ -90,7 +90,7 @@ public class Projectile extends GameObject {
 
 	@Override
 	void initShape() {
-		Image banana = new Image("Banana.png");
+		Image banana = new Image("BananaNew.png");
 		ImageView imageView = new ImageView(banana);
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);
