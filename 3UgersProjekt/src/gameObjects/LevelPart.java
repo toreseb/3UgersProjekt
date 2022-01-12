@@ -2,6 +2,7 @@ package gameObjects;
 
 import framework.Main;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -11,10 +12,14 @@ public class LevelPart extends GameObject {
 	static int windowHeight = 15;
 	static int horizontalMargins = 5;
 	static int verticalMargins = 5;
+	
+	int inLevelId;
+	static int inLevelIdCounter = 0;
 
 	public LevelPart(int posX, int width, int height) {
 		super(posX, 0, width, height);
-		// TODO Auto-generated constructor stub
+		inLevelId = inLevelIdCounter;
+		inLevelIdCounter++;
 	}
 
 
