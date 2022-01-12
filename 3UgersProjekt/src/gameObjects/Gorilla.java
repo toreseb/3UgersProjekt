@@ -1,6 +1,6 @@
 package gameObjects;
 
-import framework.Main;
+import framework.*;
 import java.util.ArrayList;
 import javafx.event.Event;
 
@@ -89,33 +89,37 @@ public class Gorilla extends GameObject {
 	// Enables for moving the gorilla
 	private double startPosX, startPosY;
 	public void moveGorilla(Group shape) {
-		if(moveable) {
 			shape.setOnMouseEntered(event -> {
-				shape.setCursor(Cursor.HAND);
+				if(moveable) {
+					shape.setCursor(Cursor.HAND);
+					System.out.println("hey1");
+				}
 			});
 
 			// Sets the new position to the shape when the mouse is dragged
 			shape.setOnMouseDragged(event -> {
-				vectorPos.set(0, event.getSceneX()-width/2);
-				vectorPos.set(1, Main.m - event.getSceneY()+height/2);
+				if(moveable) {
+					vectorPos.set(0, event.getSceneX()-width/2);
+					vectorPos.set(1, Main.m - event.getSceneY()+height/2);
+					System.out.println("hey2");
+				}
 			});
 
 
 			// sets the moveable back to false when released
 			shape.setOnMouseReleased(event -> {
-
+				if(moveable) {
 				this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
 				moveable = false;
+				System.out.println("hey3");
 				Main.cPlayer++;// The player changes when the projectile hits the ground
 				if (Main.cPlayer > Main.pList.size() - 1) {
 					Main.cPlayer = 0;
 				}
 				event.consume();
 				PlayerTurn.startTurn(Main.cPlayer);
+				}
 			});
 
 		}
 	}
-
-
-}
