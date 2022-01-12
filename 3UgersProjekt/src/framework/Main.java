@@ -161,7 +161,7 @@ public class Main extends Application {
 	}
 
 	static void run() {		
-		gameRoot.getChildren().clear();
+		//gameRoot.getChildren().clear();
 		
 		//Update score board
 		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
@@ -177,8 +177,8 @@ public class Main extends Application {
 		initTimer();
 		
 		cLevel = new Level(n,m);
-		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height);
-		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height);
+		Gorilla p0 = new Gorilla(Gorilla.width * 2);
+		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2));
 		pList.add(p0);
 		pList.add(p1);
 		/*new LevelPart(0,100,100);

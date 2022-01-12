@@ -25,7 +25,6 @@ public class Projectile extends GameObject {
 	
 
 	public Projectile(double posX, double posY, double direction, double speed) {
-
 		super(posX, posY, 2, 2);
 		
         int angle = 360; 				// rotation
@@ -35,54 +34,32 @@ public class Projectile extends GameObject {
 		xSpeed = Math.cos(direction) * speed; 	// calculating x speed
 		ySpeed = -Math.sin(direction) * speed; 	// calculation y begin speed
 
-		// set size of banana image
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        
-        // translate banana origin to center
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(imageView);
-        translate.setDuration(Duration.millis(1));
-        translate.setByX(-width/2);
-        translate.play();
-        translate.setByY(-height/2);
-        
-        // rotate
-        RotateTransition rotate = new RotateTransition();
-        rotate.setNode(imageView);
-        rotate.setDuration(Duration.millis(1000));
-        rotate.setCycleCount(TranslateTransition.INDEFINITE);
-        rotate.setInterpolator(Interpolator.LINEAR);
-        rotate.setByAngle(angle);
-        rotate.play();
-        
+		initAnimation(angle);
 	}
 
 	@Override
 	public void drawShape(Group root) {
-		imageView.setX(vectorPos.get(0));
-        imageView.setY(vectorPos.get(1));
-        
-		root.getChildren().add(imageView);
+		
 	}
 
 	public void step() {
-		ySpeed += g / 60; // calc new ySpeed from acceleration - 60 frames per second
+		super.step();
+		ySpeed -= g / 60; // calc new ySpeed from acceleration - 60 frames per second
 		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
 	}
 
 	@Override
 	public void collision() {
-		if (vectorPos.get(0) - width / 2 < 0) {
-			vectorPos.set(0,(double) 0 + width / 2);
+		if (vectorPos.get(0) < 0) {
+			vectorPos.set(0,(double) 0);
 			//xSpeed = -xSpeed;
 		}
-		if (vectorPos.get(0) + width / 2 > Main.n) {
-			vectorPos.set(0, (double)Main.n - width / 2);
+		if (vectorPos.get(0) + width > Main.n) {
+			vectorPos.set(0, (double)Main.n - width);
 			//xSpeed = -xSpeed;
 		}
-		if (vectorPos.get(1) + height / 2 > Main.m) {
+		if (vectorPos.get(1) + height / 2 < 0) {
 			vectorPos.set(1, (double)Main.m - height / 2);
 			xSpeed = 0;
 			Gorilla gorilla = Main.pList.get((Main.cPlayer+1) % 2);
@@ -102,7 +79,34 @@ public class Projectile extends GameObject {
 
 	@Override
 	void initShape() {
-		// TODO Auto-generated method stub
-		
+		Image banana = new Image("Banana.png");
+		ImageView imageView = new ImageView(banana);
+		imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setX(0);
+        imageView.setY(0);
+        
+     
+        groupShape.getChildren().add(imageView);
+	}
+	
+	void initAnimation(int angle) {
+        
+        // translate banana origin to center
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(groupShape);
+        translate.setDuration(Duration.millis(1));
+        translate.setByX(-width);
+        translate.play();
+        translate.setByY(-height);
+        
+        // rotate
+        RotateTransition rotate = new RotateTransition();
+        rotate.setNode(groupShape);
+        rotate.setDuration(Duration.millis(1000));
+        rotate.setCycleCount(TranslateTransition.INDEFINITE);
+        rotate.setInterpolator(Interpolator.LINEAR);
+        rotate.setByAngle(angle);
+        rotate.play();
 	}
 }

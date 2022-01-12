@@ -19,7 +19,6 @@ public class LevelPart extends GameObject {
 
 	@Override
 	public void drawShape(Group root) {
-		root.getChildren().add(groupShape);
 	}
 
 	@Override
