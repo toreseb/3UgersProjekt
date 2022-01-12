@@ -84,14 +84,17 @@ public class Gorilla extends GameObject {
 
 			// checks if the mouse is pressed and calculates the offset
 			shape.setOnMousePressed(event -> {
-				startPosX = event.getSceneX() - shape.getTranslateX();
-				startPosY = event.getSceneY() - shape.getTranslateY();
+				startPosX = event.getSceneX() - vectorPos.get(0);
+				startPosY = event.getSceneY() - (Main.m - vectorPos.get(1));
+				
+				System.out.println(event.getSceneX() + " " + event.getSceneY());
+				System.out.println(startPosX + " " + startPosY);
 			});
 
 			// Sets the new position to the shape when the mouse is dragged
 			shape.setOnMouseDragged(event -> {
-				shape.setTranslateX(event.getSceneX()- startPosX);
-				shape.setTranslateY(event.getSceneY() - startPosY);
+				vectorPos.set(0, event.getSceneX() - startPosX);
+				vectorPos.set(1, event.getSceneY() - startPosY);
 			});
 
 
@@ -101,8 +104,9 @@ public class Gorilla extends GameObject {
 				/*
 				 * @TODO: Check for collisions
 				 */
-
-
+				
+				
+				System.out.println("Released");
 				moveable = false;
 			});
 
