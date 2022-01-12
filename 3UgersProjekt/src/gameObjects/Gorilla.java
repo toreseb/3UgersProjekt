@@ -30,7 +30,8 @@ public class Gorilla extends GameObject {
 		Rectangle rect = new Rectangle(vectorPos.get(0), vectorPos.get(1),width,height);  // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		
-		root.getChildren().add(rect);    // adding the circle to the group
+		root.getChildren().add(rect);
+		//root.getChildren().add(groupShape);
 	}
 
 	@Override
@@ -46,7 +47,10 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		// TODO Auto-generated method stub
+		Rectangle rect = new Rectangle(vectorPos.get(0), vectorPos.get(1),width,height);  // Creates our gorilla
+		rect.setFill(Color.BROWN);
+		
+		groupShape.getChildren().add(rect);
 		
 	}
 	

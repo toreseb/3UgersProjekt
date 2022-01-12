@@ -93,6 +93,7 @@ public class PlayerTurn {
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				
 				try {
 					Main.pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),
 							Integer.parseInt(speedText.getText()));
@@ -100,9 +101,11 @@ public class PlayerTurn {
 					
 					//Update score board
 					Main.score.setText((Main.pList.get(0).point) + "> Points < " + Main.pList.get(1).point);
-				} catch (Exception e) {
+				} catch (IllegalArgumentException e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
+				}catch (Exception e) {
+					System.out.println(e);
 				}
 
 			}
@@ -143,11 +146,11 @@ public class PlayerTurn {
 	 * 
 	 * By: Helene Moesgaard
 	 */
-	// Jeg tænker at for at få dette til at virke, kan der være en boolean for om en
-	// gorilla kan flyttes eller ej i Gorilla. Denne function gør den true og beder
-	// spilleren om at flytte sin gorilla. Der skal så være en function i Gorilla
-	// for at flytte en gorilla, men den lader kun en gøre det hvis ens boolean er
-	// true. I slutningen skal den gøre booleanen false.
+	// Jeg tï¿½nker at for at fï¿½ dette til at virke, kan der vï¿½re en boolean for om en
+	// gorilla kan flyttes eller ej i Gorilla. Denne function gï¿½r den true og beder
+	// spilleren om at flytte sin gorilla. Der skal sï¿½ vï¿½re en function i Gorilla
+	// for at flytte en gorilla, men den lader kun en gï¿½re det hvis ens boolean er
+	// true. I slutningen skal den gï¿½re booleanen false.
 	public static void promptMove(int cPlayer) {
 		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
@@ -163,7 +166,7 @@ public class PlayerTurn {
 		Main.frameworkRoot.getChildren().add(root);
 
 		// TODO Lav metode til drag and drop af spiller
-		// Skal måske ligge i Gorillas
+		// Skal mï¿½ske ligge i Gorillas
 		// William er i gang
 	}
 

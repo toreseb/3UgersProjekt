@@ -168,7 +168,7 @@ public class Main extends Application {
 	public static void initMain() {
 		initTimer();
 		
-		cLevel = new Level(m,n);
+		cLevel = new Level(n,m);
 		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height);
 		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height);
 		pList.add(p0);

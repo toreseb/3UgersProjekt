@@ -48,18 +48,21 @@ public abstract class GameObject {
 		idCounter++;
 		initShape();
 		Main.objList.add(this);// Adds the player to a list.
+		//Main.gameRoot.getChildren().add(groupShape);
 	}
 	
 	abstract void initShape();
 	
 	public abstract void drawShape(Group root);
 	
-	public abstract void step();
+	protected abstract void step();
 	
 	void draw(Group root2) {	
+		
 		Group root = new Group();
 		drawShape(root);
 		root2.getChildren().add(root);
+		
 	}
 	
 	/******************
