@@ -8,7 +8,7 @@ import gameObjects.LevelPart;
 public class Level {
 	int width,height;
 	
-	ArrayList<LevelPart> parts = new ArrayList<LevelPart>();
+	public ArrayList<LevelPart> parts = new ArrayList<LevelPart>();
 
 	public Level(int width,int height) {
 		this.width = width;

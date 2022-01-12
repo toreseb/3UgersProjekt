@@ -121,8 +121,25 @@ public abstract class GameObject {
 		Main.gameRoot.getChildren().remove(groupShape);
 	}
 	
-	public void objectCollision(GameObject gO) {
-		
+	public boolean objectCollision(GameObject gO) {
+		boolean inLeftOf = false, inOver = false, inRightOf = false, inUnder = false;
+		if(this.vectorPos.get(0) > gO.vectorPos.get(0)) {
+			inLeftOf = true;
+		}
+		if(this.vectorPos.get(0)+this.width < gO.vectorPos.get(0)+gO.width) {
+			inRightOf = true;
+		}
+		if(this.vectorPos.get(1)>gO.vectorPos.get(1)) {
+			inOver = true;
+		}
+		if(this.vectorPos.get(1)-this.height < gO.vectorPos.get(1)+gO.height) {
+			inUnder = true;
+		}
+		if(inLeftOf && inOver && inRightOf && inUnder) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
  
