@@ -20,7 +20,7 @@ public class Level {
 		int widthLeft = width;
 		while(widthLeft >= 150) {
 			int partWidth = 50 + (int)((Math.random())*100);
-			int partHeight = (int)(100 +((Math.random()*3)*100)/600*Main.m);
+			int partHeight = (int)(50 +((Math.random()*Main.m*1/2)));
 			LevelPart part = new LevelPart(width-widthLeft,partWidth,partHeight);
 			parts.add(part);
 			widthLeft -= partWidth;
