@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.image.*;
 
@@ -30,6 +31,8 @@ public class Gorilla extends GameObject {
 	public ArrayList<Image> hearts;
 	private static Image heart = new Image("Heart.png");
 	// private ImageView helth = new ImageView(heart);
+
+	public Projectile banana;
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -63,25 +66,45 @@ public class Gorilla extends GameObject {
 	}
 
 	/*
-	 * Other functions that the gorilla have throwBanana() moveGorilla()
+	 * thowBanana connects gorilla and mouse until with a line and throws banana
+	 * when a mouse button is pressed
+	 * 
+	 * by: Embla Peulicke
 	 */
-	public void throwBanana(double angle, double speed) {
-		if (Main.cPlayer == 0) {
-			Projectile banana = new Projectile(vectorPos.get(0) + width / 2, vectorPos.get(1), -angle, speed);
-		} else {
-			Projectile banana = new Projectile(vectorPos.get(0) + height / 2, (double) vectorPos.get(1), 180 + angle,
-					speed);
-		}
+	public void throwBanana(int cPlayer) {
+		double xBegin = vectorPos.get(0) + width / 2;			// gorilla center coordinates
+		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
+		Line line = new Line(xBegin, yBegin, xBegin, yBegin);	// draw line: begins and ends in gorilla center
+		Main.frameworkRoot.getChildren().add(line);
+		Main.frameworkRoot.setOnMouseMoved(event -> {
+			line.setEndX(event.getSceneX());					// move line end to follow the mouse
+			line.setEndY(event.getSceneY());
+		});
+		Main.frameworkRoot.setOnMousePressed(event -> {
+
+			if (banana != null)	return;							// if there is already a banana, return
+			
+			Main.frameworkRoot.getChildren().remove(line);		// else remove the line and make a banana 
+			double xEnd = event.getSceneX();
+			double yEnd = event.getSceneY();
+			double xSpeed = xEnd - xBegin;
+			double ySpeed = yEnd - yBegin;
+			banana = new Projectile(0, vectorPos.get(0), vectorPos.get(1), xSpeed, ySpeed);
+		});
+
 	}
 
-	// Enables for moving the gorilla
+	/*
+	 * Enables for moving the gorilla
+	 * 
+	 * by: William Holberg
+	 */
 	private double startPosX, startPosY;
 
 	public void moveGorilla(Group shape) {
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {
 				shape.setCursor(Cursor.HAND);
-				System.out.println("hey1");
 			}
 		});
 
@@ -90,7 +113,6 @@ public class Gorilla extends GameObject {
 			if (moveable) {
 				vectorPos.set(0, event.getSceneX() - width / 2);
 				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
-				System.out.println("hey2");
 			}
 		});
 
@@ -101,7 +123,8 @@ public class Gorilla extends GameObject {
 						(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width)
 								+ height));
 				moveable = false;
-				System.out.println("hey3");
+				shape.setCursor(Cursor.DEFAULT);
+				
 				Main.cPlayer++;// The player changes when the projectile hits the ground
 				if (Main.cPlayer > Main.pList.size() - 1) {
 					Main.cPlayer = 0;

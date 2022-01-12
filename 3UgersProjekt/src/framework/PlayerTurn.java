@@ -38,9 +38,9 @@ public class PlayerTurn {
 		VBox groupAll = new VBox(ask, buttons);
 
 		// Create space
-		HBox.setMargin(btnShoot, new Insets(0,10,0,0));
-		VBox.setMargin(ask, new Insets(10,10,10,10));
-		VBox.setMargin(buttons, new Insets(0,0,10,10));
+		HBox.setMargin(btnShoot, new Insets(0, 10, 0, 0));
+		VBox.setMargin(ask, new Insets(10, 10, 10, 10));
+		VBox.setMargin(buttons, new Insets(0, 0, 10, 10));
 
 		// Add to scene
 		Main.frameworkRoot.getChildren().add(groupAll);
@@ -52,7 +52,9 @@ public class PlayerTurn {
 				Main.frameworkRoot.getChildren().remove(groupAll);
 
 				// Call shoot prompt
-				promptShoot(cPlayer);
+				//promptShoot(cPlayer);
+				Main.pList.get(cPlayer).banana = null;
+				Main.pList.get(cPlayer).throwBanana(cPlayer);
 			}
 		});
 
@@ -69,77 +71,6 @@ public class PlayerTurn {
 		});
 	}
 
-	/*
-	 * promptShoot()
-	 *
-	 * Parses an integer as parameter.
-	 *
-	 * Creates a prompt for a player to set values for shot.
-	 *
-	 * By: Helene Moesgaard.
-	 */
-	public static void promptShoot(int cPlayer) {
-		// Create components
-		Label player = new Label("Player " + (cPlayer + 1) + ":");
-		Label speedLabel = new Label("Set speed:");
-		Label angleLabel = new Label("Set angle:");
-		TextField speedText = new TextField();
-		TextField angleText = new TextField();
-		Button submit = new Button("Submit");
-
-
-		BorderPane placement = new BorderPane();
-		placement.setPrefWidth(Main.n);
-		placement.setPrefHeight(Main.m);
-		placement.setPadding(new Insets(10, 10, 10, 10));
-
-		// Set button event
-		submit.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-
-				try {
-					Main.pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),
-							Integer.parseInt(speedText.getText()));
-					Main.frameworkRoot.getChildren().remove(placement);
-
-					//Update score board
-					Main.score.setText((Main.pList.get(0).point) + "> Points < " + Main.pList.get(1).point);
-				} catch (IllegalArgumentException e) {
-					Text advarsel = new Text("Angiv venligst kun hele tal!");
-					placement.setTop(advarsel);
-				}catch (Exception e) {
-					System.out.println(e);
-				}
-
-			}
-		});
-
-		// Place components
-		GridPane group = new GridPane();
-		GridPane.setConstraints(player, 0, 0);
-		GridPane.setConstraints(speedLabel, 0, 1);
-		GridPane.setConstraints(angleLabel, 0, 2);
-		GridPane.setConstraints(speedText, 1, 1);
-		GridPane.setConstraints(angleText, 1, 2);
-		GridPane.setConstraints(submit, 0, 3);
-		group.getChildren().addAll(player, speedLabel, angleLabel, speedText, angleText, submit);
-
-		switch (Main.cPlayer) {
-		case 0: {
-			placement.setLeft(group);
-			break;
-		}
-		case 1: {
-			placement.setRight(group);
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + Main.cPlayer);
-		}
-
-		Main.frameworkRoot.getChildren().add(placement);
-	}
 
 	/*
 	 * promptMove()
@@ -153,7 +84,7 @@ public class PlayerTurn {
 	public static void promptMove(int cPlayer) {
 		// Create componenten
 		Label prompt = new Label("Please drag and drop gorilla :)");
-		Rectangle rect = new Rectangle(100,100, Color.RED);
+		Rectangle rect = new Rectangle(100, 100, Color.RED);
 
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
@@ -166,10 +97,11 @@ public class PlayerTurn {
 		
 		
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-		if(!Main.pList.get(cPlayer).moveable) {
-			Main.frameworkRoot.getChildren().remove(root); // Removes the prompt	
+		if (!Main.pList.get(cPlayer).moveable) {
+			Main.frameworkRoot.getChildren().remove(root); // Removes the prompt
 		}
 
 	}
+
 
 }
