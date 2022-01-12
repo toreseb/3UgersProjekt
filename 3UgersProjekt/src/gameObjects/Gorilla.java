@@ -26,9 +26,9 @@ public class Gorilla extends GameObject {
 	public boolean moveable = true;
 
 	private Rectangle rect;
-	private ArrayList<ImageView> numLifeList = new ArrayList<ImageView>();
-	private Image heart;
-	private ImageView helth;
+	private ArrayList<Image> hearts = new ArrayList<>();
+	private Image heart = new Image("Heart.png");
+	//private ImageView helth = new ImageView(heart);
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -36,16 +36,22 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		numLife = 3;
-		this.vectorPos.set(1,
-				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		step();
-
-		// init the array list with the correct amount of life.
-		heart = new Image("Heart.png");
-		helth = new ImageView(heart);
+		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+		
 		for (int i = 0; i < numLife; i++) {
-			numLifeList.add(helth);
+			hearts.add(heart);
 		}
+		
+		for(int i = 0; i < hearts.size(); i++) {
+			ImageView health = new ImageView(hearts.get(i));
+			health.setLayoutY(-20);
+			health.setFitHeight(27);
+			health.setFitWidth(27);
+			health.setLayoutX((i*30));
+			groupShape.getChildren().add(health);
+		}
+		
+		step();
 	}
 
 	/*
@@ -61,6 +67,7 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
+		drawHearts();
 		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
@@ -114,6 +121,11 @@ public class Gorilla extends GameObject {
 				PlayerTurn.startTurn(Main.cPlayer);
 			}
 		});
-
 	}
+	
+	
+	public void drawHearts() {
+		
+	}
+	
 }
