@@ -79,7 +79,9 @@ public class Main extends Application {
 		root.getChildren().add(grid);
 		root.getChildren().add(border);
 
-		mainStage.setScene(new Scene(root, 300, 200));
+		int startWidth = 300;
+		int startHeight = 200;
+		mainStage.setScene(new Scene(root, startWidth, startHeight));
 
 		Text text = new Text();
 		TextField setN = new TextField();
@@ -124,6 +126,12 @@ public class Main extends Application {
 					}
 					n = newN;
 					m = newM;
+					
+					//reposition Stage
+					Main.mainStage.setX((Main.mainStage.getX()+(startWidth-n)/2));
+					Main.mainStage.setY((Main.mainStage.getY()+(startHeight-m)/3));
+					if (Main.mainStage.getY()<5) Main.mainStage.setY(5);
+					
 					mainRoot = new Group();
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
