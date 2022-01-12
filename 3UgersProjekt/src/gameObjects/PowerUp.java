@@ -50,17 +50,17 @@ public abstract class PowerUp extends GameObject {
 		// TODO Auto-generated method stub
 		counter++;
 
-		if (counter < 30) {
-			imageView.translateXProperty().add(100);
-		} else if (counter >= 30 && counter < 60) {
-			imageView.translateXProperty().subtract(100);
-		} else if (counter >= 60 && counter < 90) {
-			imageView.translateXProperty().subtract(100);
-		} else if (counter >= 90 && counter < 120) {
-			imageView.translateXProperty().add(100);
+		if (counter ==20) {
+			vectorPos.set(1, vectorPos.get(1)+3);
+		} else if (counter == 40) {
+			vectorPos.set(1, vectorPos.get(1)-3);
+		} else if (counter == 60) {
+			vectorPos.set(1, vectorPos.get(1)-3);
+		} else if (counter == 80) {
+			vectorPos.set(1, vectorPos.get(1)+3);
 		}
 
-		if (counter == 120) {
+		if (counter == 80) {
 			counter = 0;
 		}
 	}
