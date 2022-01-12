@@ -11,10 +11,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.image.*;
 
 /**
- * The function of this class is:
- * 		Create the gorilla
- * 		Draw the gorilla
- *		Enables the gorilla to throw the banana
+ * The function of this class is: Create the gorilla Draw the gorilla Enables
+ * the gorilla to throw the banana
  *
  * by: William Holberg
  */
@@ -22,10 +20,10 @@ import javafx.scene.image.*;
 public class Gorilla extends GameObject {
 
 	// Fields
-	public static final int width = Main.n/15;
-	public static final int height = Main.n/15;
+	public static final int width = Main.n / 15;
+	public static final int height = Main.n / 15;
 	public int point, numLife;
-	public boolean moveable;
+	public boolean moveable = true;
 
 	private Rectangle rect;
 	private ArrayList<ImageView> numLifeList = new ArrayList<ImageView>();
@@ -38,7 +36,8 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		numLife = 3;
-		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
+		this.vectorPos.set(1,
+				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		step();
 
 		// init the array list with the correct amount of life.
@@ -49,16 +48,10 @@ public class Gorilla extends GameObject {
 		}
 	}
 
-
 	/*
-	 * Implementation of the must have functions from GameObject:
-	 * drawShape()
-	 * initShape()
-	 * step()
+	 * Implementation of the must have functions from GameObject: drawShape()
+	 * initShape() step()
 	 */
-
-
-
 
 	@Override
 	public void step() {
@@ -68,48 +61,49 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		rect = new Rectangle(0, 0,width,height);  // Creates our gorilla
+		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
 	}
 
 	/*
-	 * Other functions that the gorilla have
-	 *  throwBanana()
-	 *  moveGorilla()
+	 * Other functions that the gorilla have throwBanana() moveGorilla()
 	 */
 	public void throwBanana(double angle, double speed) {
-		if(Main.cPlayer == 0) {
-			Projectile banana = new Projectile(vectorPos.get(0)+width/2, vectorPos.get(1), -angle, speed);
-		}else {
-			Projectile banana = new Projectile(vectorPos.get(0)+height/2, (double)vectorPos.get(1), 180+angle, speed);
+		if (Main.cPlayer == 0) {
+			Projectile banana = new Projectile(vectorPos.get(0) + width / 2, vectorPos.get(1), -angle, speed);
+		} else {
+			Projectile banana = new Projectile(vectorPos.get(0) + height / 2, (double) vectorPos.get(1), 180 + angle,
+					speed);
 		}
 	}
 
 	// Enables for moving the gorilla
 	private double startPosX, startPosY;
+
 	public void moveGorilla(Group shape) {
-			shape.setOnMouseEntered(event -> {
-				if(moveable) {
-					shape.setCursor(Cursor.HAND);
-					System.out.println("hey1");
-				}
-			});
+		shape.setOnMouseEntered(event -> {
+			if (moveable) {
+				shape.setCursor(Cursor.HAND);
+				System.out.println("hey1");
+			}
+		});
 
-			// Sets the new position to the shape when the mouse is dragged
-			shape.setOnMouseDragged(event -> {
-				if(moveable) {
-					vectorPos.set(0, event.getSceneX()-width/2);
-					vectorPos.set(1, Main.m - event.getSceneY()+height/2);
-					System.out.println("hey2");
-				}
-			});
+		// Sets the new position to the shape when the mouse is dragged
+		shape.setOnMouseDragged(event -> {
+			if (moveable) {
+				vectorPos.set(0, event.getSceneX() - width / 2);
+				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
+				System.out.println("hey2");
+			}
+		});
 
-
-			// sets the moveable back to false when released
-			shape.setOnMouseReleased(event -> {
-				if(moveable) {
-				this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int)(double)this.vectorPos.get(0)),width)+height));
+		// sets the moveable back to false when released
+		shape.setOnMouseReleased(event -> {
+			if (moveable) {
+				this.vectorPos.set(1,
+						(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width)
+								+ height));
 				moveable = false;
 				System.out.println("hey3");
 				Main.cPlayer++;// The player changes when the projectile hits the ground
@@ -118,8 +112,8 @@ public class Gorilla extends GameObject {
 				}
 				event.consume();
 				PlayerTurn.startTurn(Main.cPlayer);
-				}
-			});
+			}
+		});
 
-		}
 	}
+}
