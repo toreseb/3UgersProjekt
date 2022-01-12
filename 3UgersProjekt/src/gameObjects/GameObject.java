@@ -80,11 +80,10 @@ public abstract class GameObject {
 	
 	public void collision() {
 		if (vectorPos.get(0)-width/2< 0) {
-			vectorPos.set(0,(double)0+width/2);
+			vectorPos.set(0,(double)0);
 		}
 		if (vectorPos.get(0)+width/2>Main.n) {
-			vectorPos.set(0, (double)Main.n-width/2);
-			System.out.println("HI");
+			vectorPos.set(0, (double)Main.n-width);
 		}
 			
 		if (vectorPos.get(1)+height/2 > Main.m)
