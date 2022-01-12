@@ -29,6 +29,8 @@ public class Main extends Application {
 	public static Stage mainStage;
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
+	
+	public static Level cLevel;
 
 	public static Timer mainT = new Timer();
 
@@ -42,6 +44,8 @@ public class Main extends Application {
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
+	
+	public static Label score;
 
 	/*
 	 * start()
@@ -75,7 +79,9 @@ public class Main extends Application {
 		root.getChildren().add(grid);
 		root.getChildren().add(border);
 
-		mainStage.setScene(new Scene(root, 300, 200));
+		int startWidth = 300;
+		int startHeight = 200;
+		mainStage.setScene(new Scene(root, startWidth, startHeight));
 
 		Text text = new Text();
 		TextField setN = new TextField();
@@ -120,6 +126,12 @@ public class Main extends Application {
 					}
 					n = newN;
 					m = newM;
+					
+					//reposition Stage
+					Main.mainStage.setX((Main.mainStage.getX()+(startWidth-n)/2));
+					Main.mainStage.setY((Main.mainStage.getY()+(startHeight-m)/3));
+					if (Main.mainStage.getY()<5) Main.mainStage.setY(5);
+					
 					mainRoot = new Group();
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
@@ -148,8 +160,12 @@ public class Main extends Application {
 		mainT.cancel();
 	}
 
-	static void run() {
+	static void run() {		
 		gameRoot.getChildren().clear();
+		
+		//Update score board
+		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
+		
 		for (GameObject gO : objList) {
 			gO.run(gameRoot);
 		}
@@ -159,11 +175,12 @@ public class Main extends Application {
 
 	public static void initMain() {
 		initTimer();
-		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height / 2);
-		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height / 2);
+		
+		cLevel = new Level(n,m);
+		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height);
+		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2), m - Gorilla.height);
 		pList.add(p0);
 		pList.add(p1);
-		//new Level(m,n);
 		/*new LevelPart(0,100,100);
 		new LevelPart(100,100,100);
 		new LevelPart(200,100,100);
@@ -172,7 +189,16 @@ public class Main extends Application {
 		new LevelPart(500,100,100);*/
 		
 		
-		//Kald tur
+		//Insert score board
+		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);
+		BorderPane placeScore = new BorderPane();
+		placeScore.setPrefWidth(Main.n);
+		placeScore.setPrefHeight(Main.m);
+		placeScore.setTop(score);
+		BorderPane.setAlignment(score, Pos.CENTER);
+		frameworkRoot.getChildren().add(placeScore);
+		
+		//Call turn
 		PlayerTurn.startTurn(0);
 	}
 	

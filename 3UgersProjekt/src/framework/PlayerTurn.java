@@ -21,11 +21,11 @@ public class PlayerTurn {
 
 	/*
 	 * startTurn()
-	 * 
+	 *
 	 * Parses an integer as parameter.
-	 * 
+	 *
 	 * Asks the player if they want to shoot or move.
-	 * 
+	 *
 	 * By: Helene Moesgaard.
 	 */
 	public static void startTurn(int cPlayer) {
@@ -36,6 +36,11 @@ public class PlayerTurn {
 		// Add to H- and VBox
 		HBox buttons = new HBox(btnShoot, btnMove);
 		VBox groupAll = new VBox(ask, buttons);
+
+		// Create space
+		HBox.setMargin(btnShoot, new Insets(0,10,0,0));
+		VBox.setMargin(ask, new Insets(10,10,10,10));
+		VBox.setMargin(buttons, new Insets(0,0,10,10));
 
 		// Add to scene
 		Main.frameworkRoot.getChildren().add(groupAll);
@@ -66,22 +71,22 @@ public class PlayerTurn {
 
 	/*
 	 * promptShoot()
-	 * 
+	 *
 	 * Parses an integer as parameter.
-	 * 
+	 *
 	 * Creates a prompt for a player to set values for shot.
-	 * 
+	 *
 	 * By: Helene Moesgaard.
 	 */
 	public static void promptShoot(int cPlayer) {
 		// Create components
 		Label player = new Label("Player " + (cPlayer + 1) + ":");
-		Label score = new Label((Main.pList.get(0).point) + "> Points < " + Main.pList.get(1).point);
 		Label speedLabel = new Label("Set speed:");
 		Label angleLabel = new Label("Set angle:");
 		TextField speedText = new TextField();
 		TextField angleText = new TextField();
 		Button submit = new Button("Submit");
+
 
 		BorderPane placement = new BorderPane();
 		placement.setPrefWidth(Main.n);
@@ -92,13 +97,19 @@ public class PlayerTurn {
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+
 				try {
 					Main.pList.get(cPlayer).throwBanana(Integer.parseInt(angleText.getText()),
 							Integer.parseInt(speedText.getText()));
 					Main.frameworkRoot.getChildren().remove(placement);
-				} catch (Exception e) {
+
+					//Update score board
+					Main.score.setText((Main.pList.get(0).point) + "> Points < " + Main.pList.get(1).point);
+				} catch (IllegalArgumentException e) {
 					Text advarsel = new Text("Angiv venligst kun hele tal!");
 					placement.setTop(advarsel);
+				}catch (Exception e) {
+					System.out.println(e);
 				}
 
 			}
@@ -127,19 +138,16 @@ public class PlayerTurn {
 			throw new IllegalArgumentException("Unexpected value: " + Main.cPlayer);
 		}
 
-		placement.setTop(score);
-		BorderPane.setAlignment(score, Pos.CENTER);
-
 		Main.frameworkRoot.getChildren().add(placement);
 	}
 
 	/*
 	 * promptMove()
-	 * 
+	 *
 	 * Parses an integer as parameter.
-	 * 
+	 *
 	 * Allows player to move gorilla.
-	 * 
+	 *
 	 * By: Helene Moesgaard
 	 */
 	// Jeg t�nker at for at f� dette til at virke, kan der v�re en boolean for om en
@@ -148,13 +156,13 @@ public class PlayerTurn {
 	// for at flytte en gorilla, men den lader kun en g�re det hvis ens boolean er
 	// true. I slutningen skal den g�re booleanen false.
 	public static void promptMove(int cPlayer) {
-		
-		
+
+
 		// Create componenten
-		
+
 		Label prompt = new Label("Please drag and drop gorilla :)");
 		Rectangle rect = new Rectangle(100,100, Color.RED);
-		
+
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
 		prompt.setLayoutY(Main.m / 2);
@@ -163,10 +171,10 @@ public class PlayerTurn {
 		Group root = new Group();
 		root.getChildren().add(prompt);
 		Main.frameworkRoot.getChildren().add(root);
-		
+
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
 		if(!Main.pList.get(cPlayer).moveable) Main.frameworkRoot.getChildren().remove(prompt); // Removes the prompt	
-		
+
 	}
 
 }
