@@ -156,10 +156,7 @@ public class PlayerTurn {
 	// for at flytte en gorilla, men den lader kun en g�re det hvis ens boolean er
 	// true. I slutningen skal den g�re booleanen false.
 	public static void promptMove(int cPlayer) {
-
-
 		// Create componenten
-
 		Label prompt = new Label("Please drag and drop gorilla :)");
 		Rectangle rect = new Rectangle(100,100, Color.RED);
 
