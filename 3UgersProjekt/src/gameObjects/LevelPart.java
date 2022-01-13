@@ -56,7 +56,13 @@ public class LevelPart extends GameObject {
 		
 		groupShape.getChildren().add(mainShape);
 		int rows = (int)Math.floor(height/(windowHeight+verticalMargins));
+		int extraHeight = (height-verticalMargins) % (windowHeight+verticalMargins);
 		int columns = (int)Math.floor(width/(windowWidth+horizontalMargins));
+		int extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
+		windowHeight += extraHeight/columns;
+		windowWidth += extraWidth/rows;
+		System.out.println(extraHeight + " " + extraWidth);
+		
 		for(int cRows = 0; cRows < rows; cRows++) {
 			for(int cColumns = 0; cColumns < columns; cColumns++) {
 				Rectangle window = new Rectangle(0 + (horizontalMargins + cColumns * (windowWidth+horizontalMargins)),(verticalMargins + cRows * (windowHeight+verticalMargins)),windowWidth,windowHeight);
