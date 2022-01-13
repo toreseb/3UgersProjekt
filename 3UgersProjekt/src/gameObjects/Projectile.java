@@ -42,28 +42,30 @@ public class Projectile extends GameObject {
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
 		collision();
 		for (LevelPart lp : Main.cLevel.parts) {
-
 			if (objectCollision(lp)) {
 				System.out.println("Hit Ground");
 				nextPlayer();
 			}
-
 		}
+		
 		for (Gorilla p : Main.pList) {
 			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
 					System.out.println("Damage Dealt");
+					p.curNumLife--;
+					p.hearts.remove(p.curNumLife);
+					p.lifeBar.getChildren().clear();
+					p.drawHearts();
 					nextPlayer();
 				}
 			}
 		}
+		
 		for (PowerUp pow : Main.cLevel.powerUps) {
 			if (objectCollision(pow)) {
-				System.out.println("Collected Powerup");
-				
+				System.out.println("Collected Powerup");		
 			}
 		}
-		
 	}
 
 	@Override
@@ -75,8 +77,7 @@ public class Projectile extends GameObject {
 		if (vectorPos.get(0) + width > Main.n) {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
-		}
-		
+		}	
 	}
 	
 	private void nextPlayer() {

@@ -24,29 +24,34 @@ public class Gorilla extends GameObject {
 	public static final int width = 40;
 	public static final int height = 40;
 	public int point;
-	public static int numLife = 3;
+	public int numLife = 3;
+	public int curNumLife = numLife;
 	public boolean moveable = true;
+	public Projectile banana;
 
-	private Rectangle rect;
+	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
 
-	public Projectile banana;
 
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
 		point = 0;
 		moveable = false;
+		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+		
 		numLife = 3;
-		this.vectorPos.set(1,
-				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-
+		curNumLife = numLife;
+		
+		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
 		}
-
-		drawHearts();
+		
+		
+		drawHearts(); // draws the init hearts
+		groupShape.getChildren().add(lifeBar);	
 		step();
 	}
 
@@ -63,7 +68,6 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		//rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		Image gorillaImg = new Image("Gorilla.png");
 		ImageView gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
@@ -96,8 +100,7 @@ public class Gorilla extends GameObject {
 		});
 		Main.mainRoot.setOnMousePressed(event -> {
 
-			if (banana != null)
-				return; // if there is already a banana, return
+			if (banana != null) return; // if there is already a banana, return
 
 			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
@@ -125,7 +128,6 @@ public class Gorilla extends GameObject {
 	 * by: William Holberg
 	 */
 	private double startPosX, startPosY;
-
 	public void moveGorilla(Group shape) {
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {
@@ -169,7 +171,7 @@ public class Gorilla extends GameObject {
 			health.setFitHeight(size);
 			health.setFitWidth(size);
 			health.setLayoutX((i * size));
-			groupShape.getChildren().add(health);
+			lifeBar.getChildren().add(health);
 			i++;
 		}
 	}
