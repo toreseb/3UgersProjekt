@@ -51,10 +51,15 @@ public class Projectile extends GameObject {
 		for (Gorilla p : Main.pList) {
 			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
-					System.out.println(Main.pList.get(Main.cPlayer).id + "!= " + p.id);
 					System.out.println("Damage Dealt");
 					nextPlayer();
 				}
+			}
+		}
+		for (PowerUp pow : Main.cLevel.powerUps) {
+			if (objectCollision(pow)) {
+				System.out.println("Collected Powerup");
+				
 			}
 		}
 		

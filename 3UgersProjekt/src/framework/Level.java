@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
+import gameObjects.PowerUp;
 
 public class Level {
 	int width,height;
 	
 	public ArrayList<LevelPart> parts = new ArrayList<LevelPart>();
+	public ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	public Level(int width,int height) {
 		this.width = width;
