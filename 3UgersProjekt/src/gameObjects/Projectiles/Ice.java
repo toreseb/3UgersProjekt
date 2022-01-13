@@ -4,20 +4,19 @@ import gameObjects.Projectile;
 import javafx.scene.image.Image;
 
 /*
- * By: Tore 
+ * By: Helene
  */
-public class Banana extends Projectile {
+public class Ice extends Projectile {
 
-	public Banana(double posX, double posY, double xSpeed, double ySpeed) {
+	public Ice(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, xSpeed, ySpeed);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	protected void initShape() {
-		banana = new Image("BananaNew.png");
+		banana = new Image("Iceball.png");
 		super.initShape();
 	}
 	
 	
-
 }

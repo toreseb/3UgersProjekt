@@ -45,7 +45,6 @@ public abstract class Projectile extends GameObject {
 
 		// Check if level part is hit
 		for (LevelPart lp : Main.cLevel.parts) {
-			
 			if (objectCollision(lp)) {
 				System.out.println("Hit Ground");
 				nextPlayer();
@@ -61,7 +60,6 @@ public abstract class Projectile extends GameObject {
 			}
 		}
 		// Check if power up is hit
-
 		for (PowerUp pow : Main.cLevel.powerUps) {
 			if (objectCollision(pow)) {
 				System.out.println("Collected Powerup");

@@ -30,6 +30,7 @@ public class Gorilla extends GameObject {
 	public boolean moveable = true; // Hvorfor får den en værdi?
 	public PowerUp pow;
 	public boolean hasPow;
+	public boolean frozen;
 
 	private Rectangle rect;
 	public ArrayList<Image> hearts = new ArrayList<>();
@@ -44,6 +45,7 @@ public class Gorilla extends GameObject {
 		moveable = false;
 		numLife = 3;
 		hasPow = false;
+		frozen = false;
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 
