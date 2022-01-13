@@ -42,15 +42,7 @@ public class Gorilla extends GameObject {
 			hearts.add(heart);
 		}
 		
-		for(int i = 0; i < hearts.size(); i++) {
-			ImageView health = new ImageView(hearts.get(i));
-			health.setLayoutY(-20);
-			health.setFitHeight(27);
-			health.setFitWidth(27);
-			health.setLayoutX((i*30));
-			groupShape.getChildren().add(health);
-		}
-		
+		drawHearts();
 		step();
 	}
 
@@ -67,7 +59,6 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		drawHearts();
 		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
@@ -125,7 +116,14 @@ public class Gorilla extends GameObject {
 	
 	
 	public void drawHearts() {
-		
+		for(int i = 0; i < hearts.size(); i++) {
+			ImageView health = new ImageView(hearts.get(i));
+			health.setLayoutY(-20);
+			health.setFitHeight(27);
+			health.setFitWidth(27);
+			health.setLayoutX((i*30));
+			groupShape.getChildren().add(health);
+		}
 	}
 	
 }
