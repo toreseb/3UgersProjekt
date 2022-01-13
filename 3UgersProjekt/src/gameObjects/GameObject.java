@@ -60,22 +60,16 @@ public abstract class GameObject {
 		
 	}
 	
-	void draw(Group root2) {	
-		/*
-		Group root = new Group();
-		drawShape(root);
-		root2.getChildren().add(root);
-		*/
-	}
+	void draw() {}	//Her tegnes de forskellige Shapes normalt, men da der bruges JavaFX gøres det automatisk, så den bruges ikke 
 	
 	/******************
 	 *      Tore      *
 	 ******************/
 	
-	public void run(Group root) {
+	public void run() {
 		step();
 		collision();
-		draw(root);
+		draw();
 	}
 	
 	public void collision() {
@@ -122,6 +116,7 @@ public abstract class GameObject {
 	
 	public boolean objectCollision(GameObject gO) {
 		boolean inLeftOf = false, inOver = false, inRightOf = false, inUnder = false;
+		
 		if(this.vectorPos.get(0)+this.width > gO.vectorPos.get(0)) {
 			inLeftOf = true;
 		}
@@ -129,7 +124,8 @@ public abstract class GameObject {
 			
 			inRightOf = true;
 		}
-		if(this.vectorPos.get(1)-this.height<gO.vectorPos.get(1)) {
+		
+		if(this.vectorPos.get(1)-(this.height*2)<gO.vectorPos.get(1)) {
 			inOver = true;
 		}
 		if(this.vectorPos.get(1) > gO.vectorPos.get(1)-gO.height) {

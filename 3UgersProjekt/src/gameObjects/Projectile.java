@@ -41,6 +41,8 @@ public class Projectile extends GameObject {
 		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
 
+		collision();
+
 		// Check if level part is hit
 		for (LevelPart lp : Main.cLevel.parts) {
 			if (objectCollision(lp)) {
@@ -76,16 +78,7 @@ public class Projectile extends GameObject {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
 		}
-		if (vectorPos.get(1) + height / 2 < 0) {
-			vectorPos.set(1, (double) Main.m - height / 2);
-			xSpeed = 0;
-			Gorilla gorilla = Main.pList.get((Main.cPlayer + 1) % 2);
-			if (gorilla.vectorPos.get(0) - vectorPos.get(0) < Main.n / 50
-					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > -Main.n / 50) {
-				Main.pList.get(Main.cPlayer).point++;
-			}
-			nextPlayer();
-		}
+		
 	}
 
 	private void nextPlayer() {

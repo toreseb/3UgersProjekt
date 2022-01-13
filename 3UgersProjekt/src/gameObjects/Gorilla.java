@@ -32,7 +32,6 @@ public class Gorilla extends GameObject {
 	private Rectangle rect;
 	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
-	// private ImageView helth = new ImageView(heart);
 
 	public Projectile banana;
 
@@ -48,7 +47,6 @@ public class Gorilla extends GameObject {
 
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
-			System.out.println(hearts.size());
 		}
 
 		drawHearts();
@@ -68,9 +66,12 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
-		rect.setFill(Color.BROWN);
-		groupShape.getChildren().add(rect);
+		//rect = new Rectangle(0, 0, width, height); // Creates our gorilla
+		Image gorillaImg = new Image("Gorilla.png");
+		ImageView gorilla = new ImageView(gorillaImg);
+		gorilla.setFitHeight(height);
+		gorilla.setFitWidth(width);
+		groupShape.getChildren().add(gorilla);
 	}
 
 	/*
