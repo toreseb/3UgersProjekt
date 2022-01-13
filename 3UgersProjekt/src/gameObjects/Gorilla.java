@@ -26,11 +26,12 @@ public class Gorilla extends GameObject {
 	public int point;
 	public static int numLife = 3;
 	public boolean moveable = true;
+	public PowerUp pow;
+	public boolean hasPow;
 
 	private Rectangle rect;
 	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
-	// private ImageView helth = new ImageView(heart);
 
 	public Projectile banana;
 
@@ -40,6 +41,7 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		numLife = 3;
+		hasPow = false;
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 
@@ -64,9 +66,12 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
-		rect.setFill(Color.BROWN);
-		groupShape.getChildren().add(rect);
+		//rect = new Rectangle(0, 0, width, height); // Creates our gorilla
+		Image gorillaImg = new Image("Gorilla.png");
+		ImageView gorilla = new ImageView(gorillaImg);
+		gorilla.setFitHeight(height);
+		gorilla.setFitWidth(width);
+		groupShape.getChildren().add(gorilla);
 	}
 
 	/*
@@ -76,6 +81,7 @@ public class Gorilla extends GameObject {
 	 * by: Embla Peulicke
 	 */
 	public void throwBanana(int cPlayer) {
+		System.out.println(hasPow);
 		int maxThrow = 200;
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
