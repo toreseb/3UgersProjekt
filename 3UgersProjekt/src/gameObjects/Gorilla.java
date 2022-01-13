@@ -1,6 +1,8 @@
 package gameObjects;
 
 import framework.*;
+import gameObjects.Projectiles.*;
+
 import java.util.ArrayList;
 import javafx.event.Event;
 
@@ -48,7 +50,7 @@ public class Gorilla extends GameObject {
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
 		}
-
+		Main.pList.add(this);
 		drawHearts();
 		step();
 	}
@@ -81,7 +83,7 @@ public class Gorilla extends GameObject {
 	 * by: Embla Peulicke
 	 */
 	public void throwBanana(int cPlayer) {
-		System.out.println(hasPow);
+		
 		int maxThrow = 200;
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
@@ -117,8 +119,11 @@ public class Gorilla extends GameObject {
 			}
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
-		
-			banana = new Projectile(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+			
+			
+			//@TODO Lav forskellige projektiles, og skriv ind her.
+			
+			banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 		});
 
 	}

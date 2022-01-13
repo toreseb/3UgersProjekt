@@ -23,6 +23,7 @@ public abstract class PowerUp extends GameObject {
 	protected ImageView imageView;
 	private int counter = 0;
 	private int nr;
+	private boolean collected = false;
 
 	public PowerUp(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
@@ -47,18 +48,17 @@ public abstract class PowerUp extends GameObject {
 		Main.gameRoot.getChildren().remove(groupShape);
 		Main.pList.get(Main.cPlayer).pow = this;
 		Main.pList.get(Main.cPlayer).hasPow = true;
+		collected = true;
 		
-//		try {
-//			Main.cLevel.powerUps.remove(this);
-//		}catch(Exception e) {
-//			System.out.println(e);
-//		}
 	}
 
 	@Override
 	protected void step() {
 		super.step();
 		// TODO Auto-generated method stub
+		if(collected) {
+			hideSelf();
+		}
 		counter++;
 
 		if (counter == 20) {
@@ -74,6 +74,10 @@ public abstract class PowerUp extends GameObject {
 		if (counter == 80) {
 			counter = 0;
 		}
+	}
+	
+	public void hideSelf() {
+		Main.cLevel.powerUps.remove(this);
 	}
 
 	public abstract void usePower();

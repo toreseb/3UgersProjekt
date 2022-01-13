@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
  * By: Embla Peulicke
  *
  */
-public class Projectile extends GameObject {
+public abstract class Projectile extends GameObject {
 	private double xSpeed;
 	private double ySpeed;
 	double g = 9.82;
@@ -24,7 +24,7 @@ public class Projectile extends GameObject {
 	public static int width = Main.n / 30;
 	public static int height = Main.n / 30;
 
-	Image banana = new Image("BananaNew.png");
+	protected Image banana = new Image("BananaNew.png");
 	ImageView imageView = new ImageView(banana);
 
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
@@ -45,6 +45,7 @@ public class Projectile extends GameObject {
 
 		// Check if level part is hit
 		for (LevelPart lp : Main.cLevel.parts) {
+			
 			if (objectCollision(lp)) {
 				System.out.println("Hit Ground");
 				nextPlayer();
@@ -60,12 +61,16 @@ public class Projectile extends GameObject {
 			}
 		}
 		// Check if power up is hit
+
 		for (PowerUp pow : Main.cLevel.powerUps) {
 			if (objectCollision(pow)) {
 				System.out.println("Collected Powerup");
 				pow.collected();
+				
 			}
+
 		}
+
 	}
 
 	@Override
@@ -78,7 +83,7 @@ public class Projectile extends GameObject {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
 		}
-		
+
 	}
 
 	private void nextPlayer() {
@@ -87,24 +92,14 @@ public class Projectile extends GameObject {
 			Main.cPlayer = 0;
 		}
 
-		// Power up or no
-		if (Main.pList.get(Main.cPlayer).pow == null) {
-			// Reduce life by 1
-		} else {
-			Main.pList.get(Main.cPlayer).pow.usePower();
-		}
-
 		PlayerTurn.startTurn(Main.cPlayer);
 		this.deleteObject();
 	}
 
 	@Override
-	void initShape() {
-		if (Main.pList.get(Main.cPlayer).hasPow) {
-			banana = Main.pList.get(Main.cPlayer).pow.image;
-		} else {
-			banana = new Image("BananaNew.png");
-		}
+	protected void initShape() {
+		
+		
 
 		ImageView imageView = new ImageView(banana);
 		imageView.setFitWidth(width);
