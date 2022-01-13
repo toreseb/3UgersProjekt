@@ -7,12 +7,12 @@ import framework.Main;
 public class TestPower extends PowerUp {
 	public TestPower(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
-		
+
 	}
-	
+
 	public void initShape() {
 		image = new Image("2.png");
-		
+
 		super.initShape();
 	}
 
@@ -20,14 +20,8 @@ public class TestPower extends PowerUp {
 	public void usePower() {
 		// TODO Auto-generated method stub
 
+		Main.pList.get(Main.cPlayer).hasPow = false;
+		this.deleteObject();
 	}
 
-	/*
-	 * Idéer til powerups: 
-	 * - Freeze (tager et liv og stopper ramtes næste tur) 
-	 * - Metal (tager to liv) 
-	 * - Big (rammer et større område) - evt. spread 
-	 * - Shield (du mister ikke et liv næste gang du bliver ramt)
-	 * - Slime (modstanderen kan ikke vælge "Move" på sin tur)
-	 */
 }

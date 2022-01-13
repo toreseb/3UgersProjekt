@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
  * By: Embla Peulicke
  *
  */
-public class Projectile extends GameObject {
+public abstract class Projectile extends GameObject {
 	private double xSpeed;
 	private double ySpeed;
 	double g = 9.82;
@@ -24,7 +24,7 @@ public class Projectile extends GameObject {
 	public static int width = Main.n / 30;
 	public static int height = Main.n / 30;
 
-	Image banana = new Image("BananaNew.png");
+	protected Image banana = new Image("BananaNew.png");
 	ImageView imageView = new ImageView(banana);
 
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
@@ -40,15 +40,18 @@ public class Projectile extends GameObject {
 		ySpeed -= g / 60; // calc new ySpeed from acceleration - 60 frames per second
 		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
-		collision();
-		for (LevelPart lp : Main.cLevel.parts) {
 
+		collision();
+
+		// Check if level part is hit
+		for (LevelPart lp : Main.cLevel.parts) {
+			
 			if (objectCollision(lp)) {
 				System.out.println("Hit Ground");
 				nextPlayer();
 			}
-
 		}
+		// Check if player is hit
 		for (Gorilla p : Main.pList) {
 			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
@@ -57,13 +60,17 @@ public class Projectile extends GameObject {
 				}
 			}
 		}
+		// Check if power up is hit
+
 		for (PowerUp pow : Main.cLevel.powerUps) {
 			if (objectCollision(pow)) {
 				System.out.println("Collected Powerup");
+				pow.collected();
 				
 			}
+
 		}
-		
+
 	}
 
 	@Override
@@ -76,22 +83,25 @@ public class Projectile extends GameObject {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
 		}
-		
+
 	}
-	
+
 	private void nextPlayer() {
 		Main.cPlayer++;
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
 		}
+
 		PlayerTurn.startTurn(Main.cPlayer);
 		this.deleteObject();
 		// vis bang.png her i lidt tid
 	}
 
 	@Override
-	void initShape() {
-		Image banana = new Image("BananaNew.png");
+	protected void initShape() {
+		
+		
+
 		ImageView imageView = new ImageView(banana);
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);

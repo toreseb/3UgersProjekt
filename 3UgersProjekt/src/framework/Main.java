@@ -177,10 +177,9 @@ public class Main extends Application {
 		initTimer();
 		
 		cLevel = new Level(n,m);
-		Gorilla p0 = new Gorilla(Gorilla.width * 2);
-		Gorilla p1 = new Gorilla(n - (Gorilla.width * 2));
-		pList.add(p0);
-		pList.add(p1);
+		new Gorilla(Gorilla.width * 2);
+		new Gorilla(n - (Gorilla.width * 2));
+		SpawnPowerup.spawnPower();
 		/*new LevelPart(0,100,100);
 		new LevelPart(100,100,100);
 		new LevelPart(200,100,100);
@@ -198,7 +197,7 @@ public class Main extends Application {
 		placeScore.setTop(score);
 		BorderPane.setAlignment(score, Pos.CENTER);
 		frameworkRoot.getChildren().add(placeScore);
-		SpawnPowerup.spawnPower();
+		
 		
 		
 		//Call turn
