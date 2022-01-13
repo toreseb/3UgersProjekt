@@ -122,16 +122,17 @@ public abstract class GameObject {
 	
 	public boolean objectCollision(GameObject gO) {
 		boolean inLeftOf = false, inOver = false, inRightOf = false, inUnder = false;
-		if(this.vectorPos.get(0) > gO.vectorPos.get(0)) {
+		if(this.vectorPos.get(0)+this.width > gO.vectorPos.get(0)) {
 			inLeftOf = true;
 		}
-		if(this.vectorPos.get(0)+this.width < gO.vectorPos.get(0)+gO.width) {
+		if(this.vectorPos.get(0) < gO.vectorPos.get(0)+gO.width) {
+			
 			inRightOf = true;
 		}
-		if(this.vectorPos.get(1)>gO.vectorPos.get(1)) {
+		if(this.vectorPos.get(1)-this.height<gO.vectorPos.get(1)) {
 			inOver = true;
 		}
-		if(this.vectorPos.get(1)-this.height < gO.vectorPos.get(1)+gO.height) {
+		if(this.vectorPos.get(1) > gO.vectorPos.get(1)-gO.height) {
 			inUnder = true;
 		}
 		if(inLeftOf && inOver && inRightOf && inUnder) {

@@ -43,17 +43,21 @@ public class Projectile extends GameObject {
 		for (LevelPart lp : Main.cLevel.parts) {
 
 			if (objectCollision(lp)) {
-				System.out.println(lp.inLevelId);
+				System.out.println("Hit Ground");
+				nextPlayer();
 			}
 
 		}
 		for (Gorilla p : Main.pList) {
-			if (this.id != p.id) {
+			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
-					System.out.println("g");
+					System.out.println(Main.pList.get(Main.cPlayer).id + "!= " + p.id);
+					System.out.println("Damage Dealt");
+					nextPlayer();
 				}
 			}
 		}
+		
 	}
 
 	@Override
@@ -74,15 +78,17 @@ public class Projectile extends GameObject {
 					&& gorilla.vectorPos.get(0) - vectorPos.get(0) > -Main.n / 50) {
 				Main.pList.get(Main.cPlayer).point++;
 			}
-			Main.cPlayer++;// The player changes when the projectile hits the ground
-			if (Main.cPlayer > Main.pList.size() - 1) {
-				Main.cPlayer = 0;
-			}
-			PlayerTurn.startTurn(Main.cPlayer);
-			// Main.mainStage.getScene().getWindow().setWidth(Main.mainStage.getScene().getWidth()
-			// + 14);
-			this.deleteObject();
+			nextPlayer();
 		}
+	}
+	
+	private void nextPlayer() {
+		Main.cPlayer++;
+		if (Main.cPlayer > Main.pList.size() - 1) {
+			Main.cPlayer = 0;
+		}
+		PlayerTurn.startTurn(Main.cPlayer);
+		this.deleteObject();
 	}
 
 	@Override
