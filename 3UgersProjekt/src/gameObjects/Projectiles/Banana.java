@@ -3,6 +3,9 @@ package gameObjects.Projectiles;
 import gameObjects.Projectile;
 import javafx.scene.image.Image;
 
+/*
+ * By: Tore 
+ */
 public class Banana extends Projectile {
 
 	public Banana(double posX, double posY, double xSpeed, double ySpeed) {

@@ -18,7 +18,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class PlayerTurn {
-
+	public static Group root = new Group();
+	
+	
 	/*
 	 * startTurn()
 	 *
@@ -82,24 +84,20 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard
 	 */
 	public static void promptMove(int cPlayer) {
-		// Create componenten
+		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
-		Rectangle rect = new Rectangle(100, 100, Color.RED);
+		Rectangle rect = new Rectangle(100, 100, Color.RED); //Hvad er det?
 
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
 		prompt.setLayoutY(20);
 
-		// Make root to add to scene and add prompt
-		Group root = new Group();
+		// Add prompt to root and add to scene
 		root.getChildren().add(prompt);
 		Main.frameworkRoot.getChildren().add(root);
 		
 		
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-		if (!Main.pList.get(cPlayer).moveable) {
-			Main.frameworkRoot.getChildren().remove(root); // Removes the prompt
-		}
 
 	}
 
