@@ -79,17 +79,17 @@ public class Gorilla extends GameObject {
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
 		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
-		Main.frameworkRoot.getChildren().add(line);
-		Main.frameworkRoot.setOnMouseMoved(event -> {
+		Main.mainRoot.getChildren().add(line); //Her bruges mainRoot, da den skal tegne oven på hele billedet
+		Main.mainRoot.setOnMouseMoved(event -> {
 			line.setEndX(event.getSceneX()); // move line end to follow the mouse
 			line.setEndY(event.getSceneY());
 		});
-		Main.frameworkRoot.setOnMousePressed(event -> {
+		Main.mainRoot.setOnMousePressed(event -> {
 
 			if (banana != null)
 				return; // if there is already a banana, return
 
-			Main.frameworkRoot.getChildren().remove(line); // else remove the line and make a banana
+			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
 			double yEnd = event.getSceneY();
 			double xSpeed = xEnd - xBegin;
