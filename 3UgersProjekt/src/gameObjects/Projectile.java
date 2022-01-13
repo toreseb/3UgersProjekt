@@ -94,6 +94,7 @@ public abstract class Projectile extends GameObject {
 
 		PlayerTurn.startTurn(Main.cPlayer);
 		this.deleteObject();
+		// vis bang.png her i lidt tid
 	}
 
 	@Override
