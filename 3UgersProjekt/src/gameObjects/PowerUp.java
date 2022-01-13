@@ -43,8 +43,16 @@ public abstract class PowerUp extends GameObject {
 
 	}
 	
-	void collected() {
+	public void collected() {
+		Main.gameRoot.getChildren().remove(groupShape);
+		Main.pList.get(Main.cPlayer).pow = this;
+		Main.pList.get(Main.cPlayer).hasPow = true;
 		
+//		try {
+//			Main.cLevel.powerUps.remove(this);
+//		}catch(Exception e) {
+//			System.out.println(e);
+//		}
 	}
 
 	@Override
