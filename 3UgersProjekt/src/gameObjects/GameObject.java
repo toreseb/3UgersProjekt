@@ -60,22 +60,16 @@ public abstract class GameObject {
 		
 	}
 	
-	void draw(Group root2) {	
-		/*
-		Group root = new Group();
-		drawShape(root);
-		root2.getChildren().add(root);
-		*/
-	}
+	void draw() {}	//Her tegnes de forskellige Shapes normalt, men da der bruges JavaFX gøres det automatisk, så den bruges ikke 
 	
 	/******************
 	 *      Tore      *
 	 ******************/
 	
-	public void run(Group root) {
+	public void run() {
 		step();
 		collision();
-		draw(root);
+		draw();
 	}
 	
 	public void collision() {
