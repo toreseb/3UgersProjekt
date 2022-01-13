@@ -19,19 +19,21 @@ import javafx.scene.image.ImageView;
  */
 
 public abstract class PowerUp extends GameObject {
-	public String name;
 	public Image image;
-	private ImageView imageView;
+	protected ImageView imageView;
 	private int counter = 0;
+	private int nr;
 
-	public PowerUp(double posX, double posY, int width, int height) {
+	public PowerUp(double posX, double posY, int width, int height,int nr) {
 		super(posX, posY, width, height);
+		this.nr = nr;
 	}
 
-	@Override
 	void initShape() {
 		// TODO Auto-generated method stub
-		image = new Image("2.png");
+		if (nr == 1) {
+			image = new Image("2.png");
+		} // Tilføj en for hvert power up
 
 		imageView = new ImageView(image);
 
@@ -50,14 +52,14 @@ public abstract class PowerUp extends GameObject {
 		// TODO Auto-generated method stub
 		counter++;
 
-		if (counter ==20) {
-			vectorPos.set(1, vectorPos.get(1)+3);
+		if (counter == 20) {
+			vectorPos.set(1, vectorPos.get(1) + 3);
 		} else if (counter == 40) {
-			vectorPos.set(1, vectorPos.get(1)-3);
+			vectorPos.set(1, vectorPos.get(1) - 3);
 		} else if (counter == 60) {
-			vectorPos.set(1, vectorPos.get(1)-3);
+			vectorPos.set(1, vectorPos.get(1) - 3);
 		} else if (counter == 80) {
-			vectorPos.set(1, vectorPos.get(1)+3);
+			vectorPos.set(1, vectorPos.get(1) + 3);
 		}
 
 		if (counter == 80) {
