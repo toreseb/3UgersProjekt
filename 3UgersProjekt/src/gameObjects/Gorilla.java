@@ -40,9 +40,10 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		numLife = 3;
-		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		
-		for(int i = 0; i < numLife; i++) {
+		this.vectorPos.set(1,
+				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+
+		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
 			System.out.println(hearts.size());
 		}
@@ -76,25 +77,43 @@ public class Gorilla extends GameObject {
 	 * by: Embla Peulicke
 	 */
 	public void throwBanana(int cPlayer) {
+		int maxThrow = 200;
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
 		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
-		Main.frameworkRoot.getChildren().add(line);
-		Main.frameworkRoot.setOnMouseMoved(event -> {
-			line.setEndX(event.getSceneX()); // move line end to follow the mouse
-			line.setEndY(event.getSceneY());
+		Main.mainRoot.getChildren().add(line); //Her bruges mainRoot, da den skal tegne oven på hele billedet
+		Main.mainRoot.setOnMouseMoved(event -> {
+			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
+					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
+			if (c < maxThrow) {
+				line.setEndX(event.getSceneX()); // move line end to follow the mouse
+				line.setEndY(event.getSceneY());
+			} else {
+				line.setEndX(xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow); // move line end to follow the mouse
+				line.setEndY(yBegin - ((yBegin - event.getSceneY()) / c) * maxThrow);
+			}
 		});
-		Main.frameworkRoot.setOnMousePressed(event -> {
+		Main.mainRoot.setOnMousePressed(event -> {
 
 			if (banana != null)
 				return; // if there is already a banana, return
 
-			Main.frameworkRoot.getChildren().remove(line); // else remove the line and make a banana
+			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
 			double yEnd = event.getSceneY();
+			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
+					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
+			if (c < maxThrow) {
+				xEnd = event.getSceneX(); // move line end to follow the mouse
+				yEnd = event.getSceneY();
+			} else {
+				xEnd = xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow; // move line end to follow the mouse
+				yEnd = yBegin - ((yBegin - event.getSceneY()) / c) * maxThrow;
+			}
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
-			banana = new Projectile(vectorPos.get(0) + width/2, vectorPos.get(1), xSpeed, ySpeed);
+		
+			banana = new Projectile(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 		});
 
 	}
