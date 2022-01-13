@@ -24,16 +24,13 @@ public abstract class PowerUp extends GameObject {
 	private int counter = 0;
 	private int nr;
 
-	public PowerUp(double posX, double posY, int width, int height,int nr) {
+	public PowerUp(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
-		this.nr = nr;
+		Main.cLevel.powerUps.add(this);
 	}
 
 	void initShape() {
 		// TODO Auto-generated method stub
-		if (nr == 1) {
-			image = new Image("2.png");
-		} // Tilføj en for hvert power up
 
 		imageView = new ImageView(image);
 
@@ -44,6 +41,10 @@ public abstract class PowerUp extends GameObject {
 
 		groupShape.getChildren().add(imageView);
 
+	}
+	
+	void collected() {
+		
 	}
 
 	@Override

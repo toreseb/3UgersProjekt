@@ -6,7 +6,14 @@ import framework.Main;
 
 public class TestPower extends PowerUp {
 	public TestPower(double posX, double posY, int width, int height) {
-		super(posX, posY, width, height, 1);
+		super(posX, posY, width, height);
+		
+	}
+	
+	public void initShape() {
+		image = new Image("2.png");
+		
+		super.initShape();
 	}
 
 	@Override
