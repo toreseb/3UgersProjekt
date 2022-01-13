@@ -16,8 +16,11 @@ public class TestPower extends PowerUp {
 	}
 
 	/*
-	 * Idéer til powerups: - Freeze (tager et liv og stopper ramtes næste tur) -
-	 * Metal (tager to liv) - Big (rammer et større område) - evt. spread - Shield
-	 * (du mister ikke et liv næste gang du bliver ramt)
+	 * Idéer til powerups: 
+	 * - Freeze (tager et liv og stopper ramtes næste tur) 
+	 * - Metal (tager to liv) 
+	 * - Big (rammer et større område) - evt. spread 
+	 * - Shield (du mister ikke et liv næste gang du bliver ramt)
+	 * - Slime (modstanderen kan ikke vælge "Move" på sin tur)
 	 */
 }
