@@ -10,7 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Embla har skrevet denne class
+ * Projectil: shows the banana when is is thrown and simulates projectile motion
+ * until the banana collides
+ * 
+ * By: Embla Peulicke
  *
  */
 public class Projectile extends GameObject {
@@ -24,17 +27,11 @@ public class Projectile extends GameObject {
 	Image banana = new Image("BananaNew.png");
 	ImageView imageView = new ImageView(banana);
 
-	public Projectile(double posX, double posY, double direction, double speed) {
+	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
-
+		this.xSpeed = xSpeed / 20;
+		this.ySpeed = -ySpeed / 20;
 		int angle = 360; // rotation
-		if (direction > 90)
-			angle *= -1; // clockwise or counterclockwise rotation
-
-		direction = Math.toRadians(direction); // converts from degrees to radians
-		xSpeed = Math.cos(direction) * speed; // calculating x speed
-		ySpeed = -Math.sin(direction) * speed; // calculation y begin speed
-
 		initAnimation(angle);
 	}
 
@@ -51,8 +48,8 @@ public class Projectile extends GameObject {
 
 		}
 		for (Gorilla p : Main.pList) {
-			if(this.id != p.id) {
-				if(objectCollision(p)) {
+			if (this.id != p.id) {
+				if (objectCollision(p)) {
 					System.out.println("g");
 				}
 			}
@@ -107,8 +104,8 @@ public class Projectile extends GameObject {
 		translate.setNode(groupShape);
 		translate.setDuration(Duration.millis(1));
 		translate.setByX(-width);
-		translate.play();
 		translate.setByY(-height);
+		translate.play();
 
 		// rotate
 		RotateTransition rotate = new RotateTransition();
