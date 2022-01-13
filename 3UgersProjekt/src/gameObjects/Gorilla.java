@@ -28,7 +28,7 @@ public class Gorilla extends GameObject {
 	public boolean moveable = true;
 
 	private Rectangle rect;
-	public ArrayList<Image> hearts;
+	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
 	// private ImageView helth = new ImageView(heart);
 
@@ -41,8 +41,10 @@ public class Gorilla extends GameObject {
 		moveable = false;
 		numLife = 3;
 		this.vectorPos.set(1, (double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		for (int i = 0; i < numLife; i++) {
+		
+		for(int i = 0; i < numLife; i++) {
 			hearts.add(heart);
+			System.out.println(hearts.size());
 		}
 
 		drawHearts();
@@ -65,7 +67,6 @@ public class Gorilla extends GameObject {
 		rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		rect.setFill(Color.BROWN);
 		groupShape.getChildren().add(rect);
-		drawHearts();
 	}
 
 	/*
