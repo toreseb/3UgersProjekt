@@ -20,7 +20,7 @@ import javafx.scene.image.ImageView;
 
 public abstract class PowerUp extends GameObject {
 	public String name;
-	public Image icon;
+	public Image image;
 	private ImageView imageView;
 	private int counter = 0;
 
@@ -31,9 +31,9 @@ public abstract class PowerUp extends GameObject {
 	@Override
 	void initShape() {
 		// TODO Auto-generated method stub
-		icon = new Image("2.png");
+		image = new Image("2.png");
 
-		imageView = new ImageView(icon);
+		imageView = new ImageView(image);
 
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);
