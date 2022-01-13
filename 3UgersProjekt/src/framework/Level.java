@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
+import gameObjects.PowerUp;
 
 public class Level {
 	int width,height;
 	
 	public ArrayList<LevelPart> parts = new ArrayList<LevelPart>();
+	public ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
 
 	public Level(int width,int height) {
 		this.width = width;
@@ -42,7 +44,6 @@ public class Level {
 	
 	public int maxHeightAtLocation(int xPos, int width) {
 		int highest = Main.cLevel.heightAtLocation(xPos);
-		System.out.println(Main.cLevel.heightAtLocation(xPos) + " " +Main.cLevel.heightAtLocation(xPos+width));
 		if(Main.cLevel.heightAtLocation(xPos+width)>highest) {
 			return Main.cLevel.heightAtLocation(xPos+width);
 		}

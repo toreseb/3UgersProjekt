@@ -167,7 +167,7 @@ public class Main extends Application {
 		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
 		
 		for (GameObject gO : objList) {
-			gO.run(gameRoot);
+			gO.run();
 		}
 		clearLists();
 

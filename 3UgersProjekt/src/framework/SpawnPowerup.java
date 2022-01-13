@@ -12,6 +12,7 @@ public class SpawnPowerup {
 	
 	public static void spawnPower() {
 		TestPower test = new TestPower(Main.n/2,Main.m/2,25,25);
+		
 	}
 	
 }

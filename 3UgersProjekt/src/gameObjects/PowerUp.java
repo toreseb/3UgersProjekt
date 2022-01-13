@@ -26,6 +26,7 @@ public abstract class PowerUp extends GameObject {
 
 	public PowerUp(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
+		Main.cLevel.powerUps.add(this);
 	}
 
 	void initShape() {
@@ -40,6 +41,10 @@ public abstract class PowerUp extends GameObject {
 
 		groupShape.getChildren().add(imageView);
 
+	}
+	
+	void collected() {
+		
 	}
 
 	@Override
