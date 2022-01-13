@@ -45,7 +45,6 @@ public class Gorilla extends GameObject {
 
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
-			System.out.println(hearts.size());
 		}
 
 		drawHearts();

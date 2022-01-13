@@ -44,7 +44,6 @@ public class Level {
 	
 	public int maxHeightAtLocation(int xPos, int width) {
 		int highest = Main.cLevel.heightAtLocation(xPos);
-		System.out.println(Main.cLevel.heightAtLocation(xPos) + " " +Main.cLevel.heightAtLocation(xPos+width));
 		if(Main.cLevel.heightAtLocation(xPos+width)>highest) {
 			return Main.cLevel.heightAtLocation(xPos+width);
 		}
