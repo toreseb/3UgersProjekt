@@ -73,7 +73,7 @@ public abstract class Projectile extends GameObject {
 
 
 					goToNextPlayer = true;
-				}else if(gO.getClass().getSimpleName().equals("LevelPart")) {
+				}else if(gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
 					System.out.println("Hit Ground");
 					goToNextPlayer = true;
 				}
