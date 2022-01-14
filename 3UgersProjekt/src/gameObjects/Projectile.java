@@ -21,15 +21,15 @@ public abstract class Projectile extends GameObject {
 	private double ySpeed;
 	double g = 9.82;
 	int count = 0;
-	public static int width = Main.n / 30;
-	public static int height = Main.n / 30;
+	public static int width = 20;
+	public static int height = 20;
 
 	protected Image banana = new Image("BananaNew.png"); //???
 
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
-		this.xSpeed = xSpeed / 20;
-		this.ySpeed = -ySpeed / 20;
+		this.xSpeed = xSpeed / 22;
+		this.ySpeed = -ySpeed / 22;
 		int angle = 360; // rotation
 		if (xSpeed<0) angle*= -1;
 		initAnimation(angle);
