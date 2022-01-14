@@ -63,6 +63,7 @@ public class Gorilla extends GameObject {
 		if (Main.pList.indexOf(this) == 1) rotate();
 		step();
 	}
+	
 
 	/*
 	 * Implementation of the must have functions from GameObject: drawShape()
