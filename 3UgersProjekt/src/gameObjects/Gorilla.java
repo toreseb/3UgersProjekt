@@ -4,6 +4,10 @@ import framework.*;
 import gameObjects.Projectiles.*;
 
 import java.util.ArrayList;
+
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.Event;
 
 import javafx.scene.Cursor;
@@ -11,6 +15,8 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 import javafx.scene.image.*;
 
 /**
@@ -29,22 +35,29 @@ public class Gorilla extends GameObject {
 	public boolean moveable, hasPow, frozen;
 	public Projectile banana;
 	public PowerUp pow;
+	public boolean hasPow;
+	public int frozen;
+	public int slimed;
+	public Image gorillaImg;
+
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
-	private Image heart = new Image("Heart.png");
-
+	private static Image heart = new Image("Heart.png");
+	private ImageView gorilla;
+	private boolean right = true;
 
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		point = 0;
+		moveable = false;
 		numLife = 3;
 		curNumLife = numLife;
 		moveable = false;
 		hasPow = false;
 		frozen = false;
-		
+
 		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
@@ -52,7 +65,11 @@ public class Gorilla extends GameObject {
 
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
+		hasPow = false;
+		frozen = 0;
+		slimed = 0;
 		Main.pList.add(this);
+		if (Main.pList.indexOf(this) == 1) rotate();
 		step();
 	}
 
@@ -68,11 +85,13 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		Image gorillaImg = new Image("Gorilla.png");
-		ImageView gorilla = new ImageView(gorillaImg);
+		// rect = new Rectangle(0, 0, width, height); // Creates our gorilla
+		gorillaImg = new Image("Gorilla.png");
+		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
 		groupShape.getChildren().add(gorilla);
+
 	}
 
 	/*
@@ -82,7 +101,6 @@ public class Gorilla extends GameObject {
 	 * by: Embla Peulicke
 	 */
 	public void throwBanana(int cPlayer) {
-
 		int maxThrow = 200;
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
@@ -99,10 +117,18 @@ public class Gorilla extends GameObject {
 																						// mouse
 				line.setEndY(yBegin - ((yBegin - event.getSceneY()) / c) * maxThrow);
 			}
+			if (xBegin > event.getSceneX() && right == true || xBegin < event.getSceneX() && right == false) {
+				if (banana == null) {
+					rotate();
+				}
+			}
 		});
-		Main.mainRoot.setOnMousePressed(event -> {
+		Main.mainRoot.setOnMousePressed(event ->
 
-			if (banana != null) return; // if there is already a banana, return
+		{
+
+			if (banana != null)
+				return; // if there is already a banana, return
 
 			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
@@ -125,12 +151,26 @@ public class Gorilla extends GameObject {
 
 	}
 
+	public void rotate() { //
+
+		RotateTransition rotate = new RotateTransition();
+		rotate.setNode(gorilla);
+		rotate.setDuration(Duration.millis(1));
+		rotate.setInterpolator(Interpolator.LINEAR);
+		rotate.setByAngle(180);
+		rotate.setAxis(Rotate.Y_AXIS);
+		rotate.play();
+		right = !right;
+
+	}
+
 	/*
 	 * Enables for moving the gorilla
 	 *
 	 * by: William Holberg
 	 */
 	private double startPosX, startPosY;
+
 	public void moveGorilla(Group shape) {
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {

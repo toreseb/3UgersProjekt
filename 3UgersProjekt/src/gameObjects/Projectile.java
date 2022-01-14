@@ -21,16 +21,16 @@ public abstract class Projectile extends GameObject {
 	private double ySpeed;
 	double g = 9.82;
 	int count = 0;
-	public static int width = Main.n / 30;
-	public static int height = Main.n / 30;
+	public static int width = 20;
+	public static int height = 20;
 
-	protected Image banana = new Image("BananaNew.png");
+	protected Image banana = new Image("BananaNew.png"); //???
 
 	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
-		this.xSpeed = xSpeed / 20;
-		this.ySpeed = -ySpeed / 20;
+		this.xSpeed = xSpeed / 22;
+		this.ySpeed = -ySpeed / 22;
 		int angle = 360; // rotation
 		if (xSpeed<0) angle*= -1;
 		initAnimation(angle);
@@ -44,24 +44,18 @@ public abstract class Projectile extends GameObject {
 
 		collision();
 		// Check if level part is hit
-		for (LevelPart lp : Main.cLevel.parts) {
-			if (objectCollision(lp)) {
-				System.out.println("Hit Ground");
-				nextPlayer();
-			}
-		}
-		
-		// By: William Holberg
-		for (Gorilla p : Main.pList) {
-			if (Main.pList.get(Main.cPlayer).id != p.id) {
-				if (objectCollision(p)) {
-					System.out.println("Damage Dealt");
-					p.curNumLife--;
-					p.hearts.remove(p.curNumLife);
-					p.lifeBar.getChildren().clear();
-					p.drawHearts();
-					
-					// Checks if one of the gorillas dies 
+		boolean goToNextPlayer = false;
+
+		for (GameObject gO : Main.objList) {
+			if(objectCollision(gO) && this.id != gO.id) {
+				if(gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
+					System.out.println("Collected Powerup");
+					((PowerUp)gO).collected();
+				}
+
+				if(gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
+					Gorilla p = (Gorilla) gO;
+					// Checks if one of the gorillas dies
 					if (p.curNumLife == 0) {
 						System.out.println("Dead");
 						Main.timer.stop();
@@ -69,19 +63,21 @@ public abstract class Projectile extends GameObject {
 						Main.objList.clear();
 						Main.mainRoot.getChildren().add(GameOver.endGame());
 					}
-					
-					nextPlayer();
+
+
+					playerHit(p);
+					goToNextPlayer = true;
+				}else if(gO.getClass().getSimpleName().equals("LevelPart")) {
+					System.out.println("Hit Ground");
+					goToNextPlayer = true;
 				}
 			}
+
 		}
-		
-		// Check if power up is hit
-		for (PowerUp pow : Main.cLevel.powerUps) {
-			if (objectCollision(pow)) {
-				System.out.println("Collected Powerup");
-				pow.collected();
-			}
-		}
+
+		if(goToNextPlayer) {
+			nextPlayer();
+		} 
 	}
 
 	@Override
@@ -96,13 +92,13 @@ public abstract class Projectile extends GameObject {
 		}
 	}
 
-	private void nextPlayer() {
+	protected void nextPlayer() {
 		Main.cPlayer++;
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
 		}
 		PlayerTurn.startTurn(Main.cPlayer);
-		//PlayerTurn.explosion(vectorPos.get(0), vectorPos.get(1));
+		PlayerTurn.explosion(vectorPos.get(0), vectorPos.get(1));
 		this.deleteObject();
 	}
 
@@ -136,4 +132,7 @@ public abstract class Projectile extends GameObject {
 		rotate.setByAngle(angle);
 		rotate.play();
 	}
+
+	public abstract void playerHit(Gorilla p);
+
 }

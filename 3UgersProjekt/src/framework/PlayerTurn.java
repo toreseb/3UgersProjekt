@@ -27,8 +27,7 @@ import javafx.util.Duration;
 
 public class PlayerTurn {
 	public static Group root = new Group();
-	
-	
+
 	/*
 	 * startTurn()
 	 *
@@ -47,6 +46,11 @@ public class PlayerTurn {
 		HBox buttons = new HBox(btnShoot, btnMove);
 		VBox groupAll = new VBox(ask, buttons);
 
+		// Debuff warning
+		Label debuffWarning = new Label();
+		debuffWarning.setLayoutX(Main.n / 2 - 70);
+		debuffWarning.setLayoutY(20);
+
 		// Create space
 		HBox.setMargin(btnShoot, new Insets(0, 10, 0, 0));
 		VBox.setMargin(ask, new Insets(10, 10, 10, 10));
@@ -54,33 +58,53 @@ public class PlayerTurn {
 
 		// Add to scene
 		Main.frameworkRoot.getChildren().add(groupAll);
+		Main.frameworkRoot.getChildren().add(debuffWarning);
 
 		// Set event on Shoot button
 		btnShoot.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				// Remove prompt
-				Main.frameworkRoot.getChildren().remove(groupAll);
+				if (Main.pList.get(cPlayer).frozen == 0) {
+					// Remove prompt
+					Main.frameworkRoot.getChildren().remove(groupAll);
+					Main.frameworkRoot.getChildren().remove(debuffWarning);
 
-				// Call shoot prompt
-				//promptShoot(cPlayer);
-				Main.pList.get(cPlayer).banana = null;
-				Main.pList.get(cPlayer).throwBanana(cPlayer);
+					// Call shoot prompt
+					// promptShoot(cPlayer);
+					Main.pList.get(cPlayer).banana = null;
+					Main.pList.get(cPlayer).throwBanana(cPlayer);
+
+					// Count down slime debuff if active
+					if (Main.pList.get(cPlayer).slimed != 0) {
+						Main.pList.get(cPlayer).slimed--;
+					}
+				} else {
+					debuffWarning.setText("You can't move your arm!");
+				}
 			}
 		});
 
 		// Set event on Move button
 		btnMove.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				// Remove prompt
-				Main.frameworkRoot.getChildren().remove(groupAll);
+				if (Main.pList.get(cPlayer).slimed == 0) {
+					// Remove prompt
+					Main.frameworkRoot.getChildren().remove(groupAll);
+					Main.frameworkRoot.getChildren().remove(debuffWarning);
 
-				// Call move prompt
-				Main.pList.get(cPlayer).moveable = true;
-				promptMove(cPlayer);
+					// Call move prompt
+					Main.pList.get(cPlayer).moveable = true;
+					promptMove(cPlayer);
+
+					// Count down frozen debuff if active
+					if (Main.pList.get(cPlayer).frozen != 0) {
+						Main.pList.get(cPlayer).frozen--;
+					}
+				} else {
+					debuffWarning.setText("You're stuck to the ground!");
+				}
 			}
 		});
 	}
-
 
 	/*
 	 * promptMove()
@@ -94,7 +118,6 @@ public class PlayerTurn {
 	public static void promptMove(int cPlayer) {
 		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
-		Rectangle rect = new Rectangle(100, 100, Color.RED); //Hvad er det?
 
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
@@ -103,30 +126,26 @@ public class PlayerTurn {
 		// Add prompt to root and add to scene
 		root.getChildren().add(prompt);
 		Main.frameworkRoot.getChildren().add(root);
-		
-		
+
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
 
 	}
-	
+
 	public static void explosion(double x, double y) {
 		int size = 100;
 		Image bang = new Image("Bang.png");
 		ImageView imageView = new ImageView(bang);
 		imageView.setFitWidth(size);
 		imageView.setFitHeight(size);
-		imageView.setX(x-size/2);
-		imageView.setY(Main.m-y-size/2);
+		imageView.setX(x - size / 2);
+		imageView.setY(Main.m - y - size / 2);
 		Main.mainRoot.getChildren().add(imageView);
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 		scheduler.schedule(new Runnable() { public void run() { 
-			  System.out.println("sec");
 			  imageView.setImage(null);
 			  //Main.mainRoot.getChildren().remove(imageView);
-			  System.out.println("sec");
 			}}, 1, TimeUnit.SECONDS);
 
 	}
-
 
 }
