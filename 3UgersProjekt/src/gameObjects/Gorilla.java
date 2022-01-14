@@ -38,7 +38,9 @@ public class Gorilla extends GameObject {
 	public Projectile banana;
 	public PowerUp pow;
 	public boolean hasPow;
-	public boolean frozen;
+	public int frozen;
+	public int slimed;
+	public Image gorillaImg;
 
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
@@ -66,8 +68,10 @@ public class Gorilla extends GameObject {
 		groupShape.getChildren().add(lifeBar);
 
 		hasPow = false;
-		frozen = false;
-
+		frozen = 0;
+		slimed = 0;
+		
+		
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		Main.pList.add(this);
@@ -90,7 +94,7 @@ public class Gorilla extends GameObject {
 	@Override
 	void initShape() {
 		// rect = new Rectangle(0, 0, width, height); // Creates our gorilla
-		Image gorillaImg = new Image("Gorilla.png");
+		gorillaImg = new Image("Gorilla.png");
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
