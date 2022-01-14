@@ -24,12 +24,12 @@ import javafx.stage.*;
  */
 
 public class Main extends Application {
-	public static int n, m;//Width and Height
+	public static int n, m;// Width and Height
 
 	public static Stage mainStage;
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
-	
+
 	public static Level cLevel;
 
 	public static Timer mainT = new Timer();
@@ -44,7 +44,7 @@ public class Main extends Application {
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
-	
+
 	public static Label score = new Label();
 
 	/*
@@ -126,12 +126,13 @@ public class Main extends Application {
 					}
 					n = newN;
 					m = newM;
-					
-					//reposition Stage
-					Main.mainStage.setX((Main.mainStage.getX()+(startWidth-n)/2));
-					Main.mainStage.setY((Main.mainStage.getY()+(startHeight-m)/3));
-					if (Main.mainStage.getY()<5) Main.mainStage.setY(5);
-					
+
+					// reposition Stage
+					Main.mainStage.setX((Main.mainStage.getX() + (startWidth - n) / 2));
+					Main.mainStage.setY((Main.mainStage.getY() + (startHeight - m) / 3));
+					if (Main.mainStage.getY() < 5)
+						Main.mainStage.setY(5);
+
 					mainRoot = new Group();
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
@@ -160,12 +161,12 @@ public class Main extends Application {
 		mainT.cancel();
 	}
 
-	static void run() {		
-		//gameRoot.getChildren().clear();
-		
-		//Update score board
+	static void run() {
+		// gameRoot.getChildren().clear();
+
+		// Update score board
 		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
-		
+
 		for (GameObject gO : objList) {
 			gO.run();
 		}
@@ -175,21 +176,18 @@ public class Main extends Application {
 
 	public static void initMain() {
 		initTimer();
-		
-		cLevel = new Level(n,m);
+
+		cLevel = new Level(n, m);
 		new Gorilla(Gorilla.width * 2);
 		new Gorilla(n - (Gorilla.width * 2));
 		SpawnPowerup.spawnPower();
-		/*new LevelPart(0,100,100);
-		new LevelPart(100,100,100);
-		new LevelPart(200,100,100);
-		new LevelPart(300,100,100);
-		new LevelPart(400,100,100);
-		new LevelPart(500,100,100);*/
-		
-		
-		
-		//Insert score board
+		/*
+		 * new LevelPart(0,100,100); new LevelPart(100,100,100); new
+		 * LevelPart(200,100,100); new LevelPart(300,100,100); new
+		 * LevelPart(400,100,100); new LevelPart(500,100,100);
+		 */
+
+		// Insert score board
 		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);
 		BorderPane placeScore = new BorderPane();
 		placeScore.setPrefWidth(Main.n);
@@ -197,15 +195,11 @@ public class Main extends Application {
 		placeScore.setTop(score);
 		BorderPane.setAlignment(score, Pos.CENTER);
 		frameworkRoot.getChildren().add(placeScore);
-		
-		
-		
-		//Call turn
+
+		// Call turn
 		PlayerTurn.startTurn(0);
-		
+
 	}
-	
-	
 
 	static void initTimer() {
 		AnimationTimer timer = new AnimationTimer() {
