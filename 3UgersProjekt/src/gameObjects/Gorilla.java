@@ -38,14 +38,14 @@ public class Gorilla extends GameObject {
 	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
 
-
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
 		point = 0;
 		moveable = false;
-		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		
+		this.vectorPos.set(1,
+				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+
 		numLife = 3;
 		curNumLife = numLife;
 
@@ -54,15 +54,12 @@ public class Gorilla extends GameObject {
 			hearts.add(heart);
 		}
 
-
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
-		
-	
+
 		hasPow = false;
 		frozen = false;
-		
-		
+
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		Main.pList.add(this);
@@ -117,7 +114,8 @@ public class Gorilla extends GameObject {
 		});
 		Main.mainRoot.setOnMousePressed(event -> {
 
-			if (banana != null) return; // if there is already a banana, return
+			if (banana != null)
+				return; // if there is already a banana, return
 
 			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
@@ -146,6 +144,7 @@ public class Gorilla extends GameObject {
 	 * by: William Holberg
 	 */
 	private double startPosX, startPosY;
+
 	public void moveGorilla(Group shape) {
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {

@@ -120,10 +120,8 @@ public class PlayerTurn {
 		Main.mainRoot.getChildren().add(imageView);
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 		scheduler.schedule(new Runnable() { public void run() { 
-			  System.out.println("sec");
 			  imageView.setImage(null);
 			  //Main.mainRoot.getChildren().remove(imageView);
-			  System.out.println("sec");
 			}}, 1, TimeUnit.SECONDS);
 
 	}
