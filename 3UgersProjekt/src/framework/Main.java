@@ -49,8 +49,8 @@ public class Main extends Application {
 	public static Group mainRoot; // @TEST
 	public static Label score = new Label();
 	
-	public static Image background = new Image("Sky.png");
-	public static ImageView imageView = new ImageView(background);
+	//public static Image background = new Image("Sky.png");
+	//public static ImageView imageView = new ImageView(background);
 	
 
 	/*
@@ -139,6 +139,7 @@ public class Main extends Application {
 					if (Main.mainStage.getY() < 5)
 						Main.mainStage.setY(5);
 
+					/*
 					imageView.setPreserveRatio(true);
 					imageView.setFitWidth(n*2);
 					imageView.setX(-n/2);
@@ -152,11 +153,11 @@ public class Main extends Application {
 					rotate.setInterpolator(Interpolator.LINEAR);
 					rotate.setByAngle(360);
 					rotate.play();
-					
+					*/
 					
 					mainRoot = new Group();
 
-					mainRoot.getChildren().add(imageView);
+					//mainRoot.getChildren().add(imageView);
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
