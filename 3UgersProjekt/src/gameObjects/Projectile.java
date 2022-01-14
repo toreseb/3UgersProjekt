@@ -60,6 +60,7 @@ public abstract class Projectile extends GameObject {
 					
 					// william
 					if (p.curNumLife == 0) {
+						
 						System.out.println("Dead");
 						Main.timer.stop();
 						Main.mainRoot.getChildren().clear();
@@ -67,6 +68,7 @@ public abstract class Projectile extends GameObject {
 							gob.deleteObject();
 						}
 						GameOver.endGame();
+						
 					}
 
 
