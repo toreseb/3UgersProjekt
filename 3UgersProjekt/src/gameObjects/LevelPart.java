@@ -59,8 +59,8 @@ public class LevelPart extends GameObject {
 		double extraHeight = (height-verticalMargins) % (windowHeight+verticalMargins);
 		int columns = (int)Math.floor(width/(windowWidth+horizontalMargins));
 		double extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
-		windowHeight += extraHeight/columns;
-		windowWidth += extraWidth/rows;
+		//windowHeight += extraHeight/columns;
+		//windowWidth += extraWidth/rows;
 		System.out.println(rows * (windowWidth+horizontalMargins)+horizontalMargins);
 		
 		for(int cRows = 0; cRows < rows; cRows++) {
