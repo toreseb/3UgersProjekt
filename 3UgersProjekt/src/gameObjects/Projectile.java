@@ -56,16 +56,20 @@ public abstract class Projectile extends GameObject {
 				if(gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
 					Gorilla p = (Gorilla) gO;
 					// Checks if one of the gorillas dies
+					playerHit(p);
+					
+					// william
 					if (p.curNumLife == 0) {
 						System.out.println("Dead");
 						Main.timer.stop();
 						Main.mainRoot.getChildren().clear();
-						Main.objList.clear();
-						Main.mainRoot.getChildren().add(GameOver.endGame());
+						for (GameObject gob : Main.objList) {
+							gob.deleteObject();
+						}
+						GameOver.endGame();
 					}
 
 
-					playerHit(p);
 					goToNextPlayer = true;
 				}else if(gO.getClass().getSimpleName().equals("LevelPart")) {
 					System.out.println("Hit Ground");

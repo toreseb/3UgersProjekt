@@ -19,9 +19,10 @@ public class Banana extends Projectile {
 		super.initShape();
 	}
 
+	
+	// William
 	@Override
 	public void playerHit(Gorilla p) {
-		// TODO Auto-generated method stub
 		System.out.println("Damage Dealt");
 		p.curNumLife--;
 		p.hearts.remove(p.curNumLife);

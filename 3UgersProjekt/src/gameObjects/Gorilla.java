@@ -7,14 +7,10 @@ import java.util.ArrayList;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.event.Event;
 
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.image.*;
@@ -31,13 +27,10 @@ public class Gorilla extends GameObject {
 	// Fields
 	public static final int width = 40;
 	public static final int height = 40;
-	public int point, numLife, curNumLife;
-	public boolean moveable, hasPow, frozen;
+	public int point, numLife, curNumLife, frozen, slimed;
+	public boolean moveable, hasPow;
 	public Projectile banana;
 	public PowerUp pow;
-	public boolean hasPow;
-	public int frozen;
-	public int slimed;
 	public Image gorillaImg;
 
 	public Group lifeBar = new Group();
@@ -50,13 +43,14 @@ public class Gorilla extends GameObject {
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		point = 0;
-		moveable = false;
-		numLife = 3;
+		numLife = 1;
 		curNumLife = numLife;
+		point = 0;
+		frozen = 0;
+		slimed = 0;
+		moveable = false;
 		moveable = false;
 		hasPow = false;
-		frozen = false;
 
 		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
@@ -65,9 +59,6 @@ public class Gorilla extends GameObject {
 
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
-		hasPow = false;
-		frozen = 0;
-		slimed = 0;
 		Main.pList.add(this);
 		if (Main.pList.indexOf(this) == 1) rotate();
 		step();
@@ -85,7 +76,6 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
-		// rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		gorillaImg = new Image("Gorilla.png");
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
@@ -189,9 +179,8 @@ public class Gorilla extends GameObject {
 		// sets the moveable back to false and removes prompt when released
 		shape.setOnMouseReleased(event -> {
 			if (moveable) {
-				this.vectorPos.set(1,
-						(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width)
-								+ height));
+				this.vectorPos.set(1, 
+						(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 
 				moveable = false;
 				if (!Main.pList.get(Main.cPlayer).moveable) {

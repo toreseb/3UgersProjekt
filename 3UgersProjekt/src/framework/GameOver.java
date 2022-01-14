@@ -18,19 +18,21 @@ import javafx.scene.Group;
 public class GameOver {
 	
 	// The scene for the game over screen
-	private static Scene endGame(int cPlayer) {
-		return new Scene(createContent(cPlayer));
+	public static void endGame() {
+		Main.mainStage.setScene(new Scene(createContent()));
+		Main.mainStage.setWidth(500);
+		Main.mainStage.setHeight(500);
 	}
 	
 	// Creates all the content for the GameOver screen.
-	private static Parent createContent(int cPlayer) {
+	private static Parent createContent() {
 		Group root = new Group();
 		GridPane pane = new GridPane();
 		Label winner = new Label();
 		Label loser = new Label();
-		winner.setText("Victory: " + Main.pList.get(cPlayer));
+		winner.setText("Victory: " + Main.pList.get(0));
 		for (Gorilla p : Main.pList) {
-			if (p.id != Main.pList.get(cPlayer).id) loser.setText("Loser: " + p);
+			if (p.id != Main.pList.get(1).id) loser.setText("Loser: " + p);
 		}
 		pane.getChildren().add(winner);
 		pane.getChildren().add(loser);
