@@ -2,6 +2,11 @@ package framework;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,15 +15,20 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class PlayerTurn {
-
+	public static Group root = new Group();
+	
+	
 	/*
 	 * startTurn()
 	 *
@@ -82,24 +92,39 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard
 	 */
 	public static void promptMove(int cPlayer) {
-		// Create componenten
+		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
-		Rectangle rect = new Rectangle(100, 100, Color.RED);
+		Rectangle rect = new Rectangle(100, 100, Color.RED); //Hvad er det?
 
 		// Placement
 		prompt.setLayoutX(Main.n / 2 - 80);
 		prompt.setLayoutY(20);
 
-		// Make root to add to scene and add prompt
-		Group root = new Group();
+		// Add prompt to root and add to scene
 		root.getChildren().add(prompt);
 		Main.frameworkRoot.getChildren().add(root);
 		
 		
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-		if (!Main.pList.get(cPlayer).moveable) {
-			Main.frameworkRoot.getChildren().remove(root); // Removes the prompt
-		}
+
+	}
+	
+	public static void explosion(double x, double y) {
+		int size = 100;
+		Image bang = new Image("Bang.png");
+		ImageView imageView = new ImageView(bang);
+		imageView.setFitWidth(size);
+		imageView.setFitHeight(size);
+		imageView.setX(x-size/2);
+		imageView.setY(Main.m-y-size/2);
+		Main.mainRoot.getChildren().add(imageView);
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+		scheduler.schedule(new Runnable() { public void run() { 
+			  System.out.println("sec");
+			  imageView.setImage(null);
+			  //Main.mainRoot.getChildren().remove(imageView);
+			  System.out.println("sec");
+			}}, 1, TimeUnit.SECONDS);
 
 	}
 
