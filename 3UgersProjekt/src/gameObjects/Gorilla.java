@@ -45,6 +45,7 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+		
 		numLife = 3;
 		curNumLife = numLife;
 
@@ -56,14 +57,14 @@ public class Gorilla extends GameObject {
 
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
+		
+	
 		hasPow = false;
 		frozen = false;
+		
+		
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-
-		for (int i = 0; i < numLife; i++) {
-			hearts.add(heart);
-		}
 		Main.pList.add(this);
 		step();
 	}
