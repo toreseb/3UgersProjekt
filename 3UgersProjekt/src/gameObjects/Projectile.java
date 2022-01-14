@@ -24,7 +24,7 @@ public abstract class Projectile extends GameObject {
 	public static int width = Main.n / 30;
 	public static int height = Main.n / 30;
 
-	protected Image banana = new Image("BananaNew.png");
+	protected Image banana = new Image("BananaNew.png"); //???
 
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
@@ -53,12 +53,7 @@ public abstract class Projectile extends GameObject {
 		for (Gorilla p : Main.pList) {
 			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
-					System.out.println("Damage Dealt");
-					p.curNumLife--;
-					p.hearts.remove(p.curNumLife);
-					p.lifeBar.getChildren().clear();
-					p.drawHearts();
-					nextPlayer();
+					playerHit(p);
 				}
 			}
 		}
@@ -83,7 +78,7 @@ public abstract class Projectile extends GameObject {
 		}
 	}
 
-	private void nextPlayer() {
+	protected void nextPlayer() {
 		Main.cPlayer++;
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
@@ -123,4 +118,7 @@ public abstract class Projectile extends GameObject {
 		rotate.setByAngle(angle);
 		rotate.play();
 	}
+	
+	public abstract void playerHit(Gorilla p);
+
 }
