@@ -48,10 +48,9 @@ public class Main extends Application {
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot; // @TEST
 	public static Label score = new Label();
-	
-	//public static Image background = new Image("Sky.png");
-	//public static ImageView imageView = new ImageView(background);
-	
+
+	public static Image background = new Image("pixel-city-chill.gif");
+	public static ImageView imageView = new ImageView(background);
 
 	/*
 	 * start()
@@ -79,7 +78,7 @@ public class Main extends Application {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		// Window icon
-		Image icon = new Image("BananaNew.png");
+		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
 
 		root.getChildren().add(grid);
@@ -139,26 +138,19 @@ public class Main extends Application {
 					if (Main.mainStage.getY() < 5)
 						Main.mainStage.setY(5);
 
-					/*
+					// set background image
+					double w= background.getWidth();
+					double h= background.getHeight();
 					imageView.setPreserveRatio(true);
-					imageView.setFitWidth(n*2);
-					imageView.setX(-n/2);
-					imageView.setY(-m/4);
-					
-
-					RotateTransition rotate = new RotateTransition();
-					rotate.setNode(imageView);
-					rotate.setDuration(Duration.millis(100000));
-					rotate.setCycleCount(TranslateTransition.INDEFINITE);
-					rotate.setInterpolator(Interpolator.LINEAR);
-					rotate.setByAngle(360);
-					rotate.play();
-					*/
+					if ((n/w) > (m/h)) {
+						imageView.setFitWidth(n);
+					}
+					else imageView.setFitHeight(m);
 					
 					mainRoot = new Group();
-
-					//mainRoot.getChildren().add(imageView);
+					mainRoot.getChildren().add(imageView);
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
+					
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
 					initMain();
@@ -224,9 +216,9 @@ public class Main extends Application {
 		PlayerTurn.startTurn(0);
 
 	}
-	
+
 	static void initTimer() {
-		 timer = new AnimationTimer() {
+		timer = new AnimationTimer() {
 
 			private long lastToggle;
 
