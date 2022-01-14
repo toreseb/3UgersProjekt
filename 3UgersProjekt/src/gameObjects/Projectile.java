@@ -25,13 +25,13 @@ public abstract class Projectile extends GameObject {
 	public static int height = Main.n / 30;
 
 	protected Image banana = new Image("BananaNew.png");
-	ImageView imageView = new ImageView(banana);
 
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
 		this.xSpeed = xSpeed / 20;
 		this.ySpeed = -ySpeed / 20;
 		int angle = 360; // rotation
+		if (xSpeed<0) angle*= -1;
 		initAnimation(angle);
 	}
 
@@ -68,7 +68,6 @@ public abstract class Projectile extends GameObject {
 				System.out.println("Collected Powerup");
 				pow.collected();
 			}
-
 		}
 	}
 
@@ -81,7 +80,6 @@ public abstract class Projectile extends GameObject {
 		if (vectorPos.get(0) + width > Main.n) {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
-
 		}
 	}
 
@@ -90,16 +88,13 @@ public abstract class Projectile extends GameObject {
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
 		}
-
 		PlayerTurn.startTurn(Main.cPlayer);
+		PlayerTurn.explosion(vectorPos.get(0), vectorPos.get(1));
 		this.deleteObject();
 	}
 
 	@Override
 	protected void initShape() {
-
-
-
 		ImageView imageView = new ImageView(banana);
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);

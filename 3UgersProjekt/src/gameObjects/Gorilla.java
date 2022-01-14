@@ -26,12 +26,13 @@ public class Gorilla extends GameObject {
 	public static final int width = 40;
 	public static final int height = 40;
 	public int point;
-	public int numLife = 3;
-	public int curNumLife = numLife;
-	public boolean moveable = true;
+	public int numLife;
+	public int curNumLife;
+	public boolean moveable;
 	public Projectile banana;
 	public PowerUp pow;
 	public boolean hasPow;
+	public boolean frozen;
 
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
@@ -44,7 +45,6 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-
 		numLife = 3;
 		curNumLife = numLife;
 
@@ -57,6 +57,7 @@ public class Gorilla extends GameObject {
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
 		hasPow = false;
+		frozen = false;
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 
@@ -80,6 +81,7 @@ public class Gorilla extends GameObject {
 
 	@Override
 	void initShape() {
+		// rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		Image gorillaImg = new Image("Gorilla.png");
 		ImageView gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
@@ -99,7 +101,7 @@ public class Gorilla extends GameObject {
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
 		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
-		Main.mainRoot.getChildren().add(line); //Her bruges mainRoot, da den skal tegne oven på hele billedet
+		Main.mainRoot.getChildren().add(line); // Her bruges mainRoot, da den skal tegne oven på hele billedet
 		Main.mainRoot.setOnMouseMoved(event -> {
 			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
 					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
@@ -107,7 +109,8 @@ public class Gorilla extends GameObject {
 				line.setEndX(event.getSceneX()); // move line end to follow the mouse
 				line.setEndY(event.getSceneY());
 			} else {
-				line.setEndX(xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow); // move line end to follow the mouse
+				line.setEndX(xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow); // move line end to follow the
+																						// mouse
 				line.setEndY(yBegin - ((yBegin - event.getSceneY()) / c) * maxThrow);
 			}
 		});
@@ -130,9 +133,7 @@ public class Gorilla extends GameObject {
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
 
-
-			//@TODO Lav forskellige projektiles, og skriv ind her.
-
+			// @TODO Lav forskellige projektiles, og skriv ind her.
 			banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 		});
 
@@ -159,13 +160,18 @@ public class Gorilla extends GameObject {
 			}
 		});
 
-		// sets the moveable back to false when released
+		// sets the moveable back to false and removes prompt when released
 		shape.setOnMouseReleased(event -> {
 			if (moveable) {
 				this.vectorPos.set(1,
 						(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width)
 								+ height));
+
 				moveable = false;
+				if (!Main.pList.get(Main.cPlayer).moveable) {
+					Main.frameworkRoot.getChildren().remove(PlayerTurn.root); // Removes the prompt
+				}
+
 				shape.setCursor(Cursor.DEFAULT);
 
 				Main.cPlayer++;// The player changes when the projectile hits the ground
