@@ -49,8 +49,7 @@ public class Gorilla extends GameObject {
 		frozen = 0;
 		slimed = 0;
 		moveable = false;
-		moveable = false;
-		hasPow = false;
+		hasPow = "no";
 
 		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
