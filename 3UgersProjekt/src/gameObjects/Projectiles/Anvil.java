@@ -1,5 +1,6 @@
 package gameObjects.Projectiles;
 
+import framework.Main;
 import gameObjects.Gorilla;
 import gameObjects.Projectile;
 import javafx.scene.image.Image;
@@ -25,5 +26,6 @@ public class Anvil extends Projectile {
 		p.curNumLife--;
 		p.hearts.remove(p.curNumLife);
 		p.drawHearts();
+		Main.pList.get(Main.cPlayer).hasPow = "no";
 	}
 }
