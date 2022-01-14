@@ -16,12 +16,4 @@ public class TestPower extends PowerUp {
 		super.initShape();
 	}
 
-	@Override
-	public void usePower() {
-		// TODO Auto-generated method stub
-
-		Main.pList.get(Main.cPlayer).hasPow = false;
-		this.deleteObject();
-	}
-
 }
