@@ -26,6 +26,7 @@ public abstract class Projectile extends GameObject {
 
 	protected Image banana = new Image("BananaNew.png");
 
+	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
 		this.xSpeed = xSpeed / 20;
@@ -49,7 +50,8 @@ public abstract class Projectile extends GameObject {
 				nextPlayer();
 			}
 		}
-		// Check if player is hit
+		
+		// By: William Holberg
 		for (Gorilla p : Main.pList) {
 			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
@@ -58,10 +60,21 @@ public abstract class Projectile extends GameObject {
 					p.hearts.remove(p.curNumLife);
 					p.lifeBar.getChildren().clear();
 					p.drawHearts();
+					
+					// Checks if one of the gorillas dies 
+					if (p.curNumLife == 0) {
+						System.out.println("Dead");
+						Main.timer.stop();
+						Main.mainRoot.getChildren().clear();
+						Main.objList.clear();
+						Main.mainRoot.getChildren().add(GameOver.endGame());
+					}
+					
 					nextPlayer();
 				}
 			}
 		}
+		
 		// Check if power up is hit
 		for (PowerUp pow : Main.cLevel.powerUps) {
 			if (objectCollision(pow)) {

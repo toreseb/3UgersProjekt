@@ -25,46 +25,33 @@ public class Gorilla extends GameObject {
 	// Fields
 	public static final int width = 40;
 	public static final int height = 40;
-	public int point;
-	public int numLife;
-	public int curNumLife;
-	public boolean moveable;
+	public int point, numLife, curNumLife;
+	public boolean moveable, hasPow, frozen;
 	public Projectile banana;
 	public PowerUp pow;
-	public boolean hasPow;
-	public boolean frozen;
-
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
-	private static Image heart = new Image("Heart.png");
+	private Image heart = new Image("Heart.png");
 
 
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
-		point = 0;
-		moveable = false;
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		
+		point = 0;
 		numLife = 3;
 		curNumLife = numLife;
-
+		moveable = false;
+		hasPow = false;
+		frozen = false;
+		
 		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
 		}
 
-
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
-		
-	
-		hasPow = false;
-		frozen = false;
-		
-		
-		this.vectorPos.set(1,
-				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		Main.pList.add(this);
 		step();
 	}
@@ -73,16 +60,14 @@ public class Gorilla extends GameObject {
 	 * Implementation of the must have functions from GameObject: drawShape()
 	 * initShape() step()
 	 */
-
 	@Override
 	public void step() {
 		super.step();
 
-	} // This class is not used here
+	}
 
 	@Override
 	void initShape() {
-		// rect = new Rectangle(0, 0, width, height); // Creates our gorilla
 		Image gorillaImg = new Image("Gorilla.png");
 		ImageView gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
@@ -193,7 +178,7 @@ public class Gorilla extends GameObject {
 			health.setLayoutY(-size);
 			health.setFitHeight(size);
 			health.setFitWidth(size);
-			health.setLayoutX((i * size));
+			health.setLayoutX((i * size) + 2);
 			lifeBar.getChildren().add(health);
 			i++;
 		}
