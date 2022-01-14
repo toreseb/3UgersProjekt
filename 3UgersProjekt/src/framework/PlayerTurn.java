@@ -151,12 +151,11 @@ public class PlayerTurn {
 		imageView.setY(Main.m - y - size / 2);
 		Main.mainRoot.getChildren().add(imageView);
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.schedule(new Runnable() {
-			public void run() {
-				imageView.setImage(null);
-				// Main.mainRoot.getChildren().remove(imageView);
-			}
-		}, 1, TimeUnit.SECONDS);
+		scheduler.schedule(new Runnable() { public void run() { 
+			  imageView.setImage(null);
+			  //Main.mainRoot.getChildren().remove(imageView);
+			  
+			}}, 1, TimeUnit.SECONDS);
 
 	}
 

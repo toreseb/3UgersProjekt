@@ -6,6 +6,7 @@ import java.util.Timer;
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -32,7 +33,7 @@ public class Main extends Application {
 
 	public static Level cLevel;
 
-	public static Timer mainT = new Timer();
+	public static AnimationTimer timer;
 
 	public static ArrayList<GameObject> objList = new ArrayList<GameObject>();
 	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
@@ -43,8 +44,7 @@ public class Main extends Application {
 
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
-	public static Group mainRoot = new Group(); // @TEST
-
+	public static Group mainRoot; // @TEST
 	public static Label score = new Label();
 
 	/*
@@ -158,7 +158,7 @@ public class Main extends Application {
 	// Main method
 	public static void main(String[] args) {
 		launch(args);
-		mainT.cancel();
+		System.exit(0);
 	}
 
 	static void run() {
@@ -200,9 +200,9 @@ public class Main extends Application {
 		PlayerTurn.startTurn(0);
 
 	}
-
+	
 	static void initTimer() {
-		AnimationTimer timer = new AnimationTimer() {
+		 timer = new AnimationTimer() {
 
 			private long lastToggle;
 

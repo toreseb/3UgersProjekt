@@ -8,8 +8,8 @@ import javafx.scene.shape.Rectangle;
 
 public class LevelPart extends GameObject {
 	
-	static int windowWidth = 8;
-	static int windowHeight = 15;
+	static double windowWidth = 8;
+	static double windowHeight = 15;
 	static int horizontalMargins = 5;
 	static int verticalMargins = 5;
 	
@@ -56,12 +56,12 @@ public class LevelPart extends GameObject {
 		
 		groupShape.getChildren().add(mainShape);
 		int rows = (int)Math.floor(height/(windowHeight+verticalMargins));
-		int extraHeight = (height-verticalMargins) % (windowHeight+verticalMargins);
+		double extraHeight = (height-verticalMargins) % (windowHeight+verticalMargins);
 		int columns = (int)Math.floor(width/(windowWidth+horizontalMargins));
-		int extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
-		//windowHeight += extraHeight/columns;
-		//windowWidth += extraWidth/rows;
-		System.out.println(extraHeight + " " + extraWidth);
+		double extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
+		windowHeight += extraHeight/columns;
+		windowWidth += extraWidth/rows;
+		System.out.println(rows * (windowWidth+horizontalMargins)+horizontalMargins);
 		
 		for(int cRows = 0; cRows < rows; cRows++) {
 			for(int cColumns = 0; cColumns < columns; cColumns++) {
