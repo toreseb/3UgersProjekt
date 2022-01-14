@@ -86,7 +86,7 @@ public abstract class Projectile extends GameObject {
 			Main.cPlayer = 0;
 		}
 		PlayerTurn.startTurn(Main.cPlayer);
-		PlayerTurn.explosion(vectorPos.get(0), vectorPos.get(1));
+		//PlayerTurn.explosion(vectorPos.get(0), vectorPos.get(1));
 		this.deleteObject();
 	}
 
