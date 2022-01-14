@@ -1,5 +1,6 @@
 package gameObjects.Projectiles;
 
+import framework.Main;
 import gameObjects.Gorilla;
 import gameObjects.Projectile;
 import javafx.scene.image.Image;
@@ -11,7 +12,6 @@ public class Ice extends Projectile {
 
 	public Ice(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, xSpeed, ySpeed);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void initShape() {
@@ -20,9 +20,10 @@ public class Ice extends Projectile {
 	}
 
 	public void playerHit(Gorilla p) {
-		// TODO Auto-generated method stub
 		System.out.println("Damage Dealt");
 		p.gorillaImg = new Image("FrozenGorilla.png");
+		p.normalImage = false;
 		p.frozen = 2;
+		Main.pList.get(Main.cPlayer).hasPow = "no";
 	}
 }

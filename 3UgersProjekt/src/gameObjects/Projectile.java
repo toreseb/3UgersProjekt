@@ -26,6 +26,7 @@ public abstract class Projectile extends GameObject {
 
 	protected Image banana = new Image("BananaNew.png"); //???
 
+	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
 		this.xSpeed = xSpeed / 22;
@@ -44,26 +45,42 @@ public abstract class Projectile extends GameObject {
 		collision();
 		// Check if level part is hit
 		boolean goToNextPlayer = false;
-		
+
 		for (GameObject gO : Main.objList) {
 			if(objectCollision(gO) && this.id != gO.id) {
 				if(gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
 					System.out.println("Collected Powerup");
 					((PowerUp)gO).collected();
 				}
-				
+
 				if(gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
-					Gorilla p = (Gorilla) gO; 
+					Gorilla p = (Gorilla) gO;
+					// Checks if one of the gorillas dies
 					playerHit(p);
+					
+					// william
+					if (p.curNumLife == 0) {
+						
+						System.out.println("Dead");
+						Main.timer.stop();
+						Main.mainRoot.getChildren().clear();
+						for (GameObject gob : Main.objList) {
+							gob.deleteObject();
+						}
+						GameOver.endGame();
+						
+					}
+
+
 					goToNextPlayer = true;
-				}else if(gO.getClass().getSimpleName().equals("LevelPart")) {
+				}else if(gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
 					System.out.println("Hit Ground");
 					goToNextPlayer = true;
-					
 				}
 			}
-			
+
 		}
+
 		if(goToNextPlayer) {
 			nextPlayer();
 		} 
@@ -121,7 +138,7 @@ public abstract class Projectile extends GameObject {
 		rotate.setByAngle(angle);
 		rotate.play();
 	}
-	
+
 	public abstract void playerHit(Gorilla p);
 
 }

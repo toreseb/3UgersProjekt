@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
 import gameObjects.PowerUp;
+import gameObjects.LevelParts.*;
 
 public class Level {
 	int width,height;
@@ -23,11 +24,11 @@ public class Level {
 		while(widthLeft >= 150) {
 			int partWidth = 50 + (int)((Math.random())*100);
 			int partHeight = (int)(50 +((Math.random()*Main.m/2)));
-			LevelPart part = new LevelPart(width-widthLeft,partWidth,partHeight);
+			LevelPart part = new Building(width-widthLeft,partWidth,partHeight);
 			parts.add(part);
 			widthLeft -= partWidth;
 		}
-		LevelPart lastPart = new LevelPart(width-widthLeft,widthLeft,(int)(50 +(Math.random()*Main.m/2)));
+		LevelPart lastPart = new Stone(width-widthLeft,widthLeft,(int)(50 +(Math.random()*Main.m/2)));
 		parts.add(lastPart);
 	}
 	

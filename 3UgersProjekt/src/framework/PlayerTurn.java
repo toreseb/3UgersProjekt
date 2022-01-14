@@ -68,14 +68,17 @@ public class PlayerTurn {
 					Main.frameworkRoot.getChildren().remove(groupAll);
 					Main.frameworkRoot.getChildren().remove(debuffWarning);
 
-					// Call shoot prompt
-					// promptShoot(cPlayer);
+					// Call throw banana
 					Main.pList.get(cPlayer).banana = null;
 					Main.pList.get(cPlayer).throwBanana(cPlayer);
 
 					// Count down slime debuff if active
 					if (Main.pList.get(cPlayer).slimed != 0) {
 						Main.pList.get(cPlayer).slimed--;
+						if ((Main.pList.get(cPlayer).slimed == 0) && (Main.pList.get(cPlayer).normalImage == false)) {
+							Main.pList.get(cPlayer).gorillaImg = new Image("Gorilla.png");
+							Main.pList.get(cPlayer).normalImage = true;
+						}
 					}
 				} else {
 					debuffWarning.setText("You can't move your arm!");
@@ -98,6 +101,10 @@ public class PlayerTurn {
 					// Count down frozen debuff if active
 					if (Main.pList.get(cPlayer).frozen != 0) {
 						Main.pList.get(cPlayer).frozen--;
+						if ((Main.pList.get(cPlayer).frozen == 0) && (Main.pList.get(cPlayer).normalImage == false)) {
+							Main.pList.get(cPlayer).gorillaImg = new Image("Gorilla.png");
+							Main.pList.get(cPlayer).normalImage = true;
+						}
 					}
 				} else {
 					debuffWarning.setText("You're stuck to the ground!");
@@ -131,6 +138,9 @@ public class PlayerTurn {
 
 	}
 
+	/*
+	 * By: Embla
+	 */
 	public static void explosion(double x, double y) {
 		int size = 100;
 		Image bang = new Image("Bang.png");
@@ -144,6 +154,7 @@ public class PlayerTurn {
 		scheduler.schedule(new Runnable() { public void run() { 
 			  imageView.setImage(null);
 			  //Main.mainRoot.getChildren().remove(imageView);
+			  
 			}}, 1, TimeUnit.SECONDS);
 
 	}
