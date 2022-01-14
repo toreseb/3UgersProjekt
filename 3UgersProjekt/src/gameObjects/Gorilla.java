@@ -43,7 +43,7 @@ public class Gorilla extends GameObject {
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		numLife = 1;
+		numLife = 3;
 		curNumLife = numLife;
 		point = 0;
 		frozen = 0;
@@ -141,7 +141,7 @@ public class Gorilla extends GameObject {
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
 
-			//
+			// Find the right type of projectile
 			if (hasPow.equals("ice")) {
 				banana = new Ice(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 			} else if (hasPow.equals("slime")) {
@@ -214,6 +214,7 @@ public class Gorilla extends GameObject {
 	}
 
 	public void drawHearts() {
+		this.lifeBar.getChildren().clear();
 		int i = 0;
 		for (Image image : hearts) {
 			ImageView health = new ImageView(image);

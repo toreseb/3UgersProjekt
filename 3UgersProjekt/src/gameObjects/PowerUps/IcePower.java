@@ -8,7 +8,6 @@ public class IcePower extends PowerUp {
 
 	public IcePower(double posX, double posY, int width, int height) {
 		super(posX, posY, width, height);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void initShape() {

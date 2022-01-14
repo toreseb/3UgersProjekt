@@ -26,7 +26,6 @@ public class Banana extends Projectile {
 		System.out.println("Damage Dealt");
 		p.curNumLife--;
 		p.hearts.remove(p.curNumLife);
-		p.lifeBar.getChildren().clear();
 		p.drawHearts();
 	}
 

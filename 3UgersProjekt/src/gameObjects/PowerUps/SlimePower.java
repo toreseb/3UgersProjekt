@@ -17,7 +17,7 @@ public class SlimePower extends PowerUp {
 	}
 
 	public void collected() {
-		Main.pList.get(Main.cPlayer).hasPow = "ice";
+		Main.pList.get(Main.cPlayer).hasPow = "slime";
 
 		super.collected();
 	}
