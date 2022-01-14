@@ -22,10 +22,11 @@ public class GameOver {
 		Main.mainStage.setScene(new Scene(createContent()));
 		Main.mainStage.setWidth(500);
 		Main.mainStage.setHeight(500);
+		
 	}
 	
 	// Creates all the content for the GameOver screen.
-	private static Parent createContent() {
+	private static Group createContent() {
 		Group root = new Group();
 		GridPane pane = new GridPane();
 		Label winner = new Label();

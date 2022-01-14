@@ -6,6 +6,7 @@ import java.util.Timer;
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -157,7 +158,7 @@ public class Main extends Application {
 	// Main method
 	public static void main(String[] args) {
 		launch(args);
-		//timer.stop();
+		System.exit(0);
 	}
 
 	static void run() {

@@ -144,6 +144,7 @@ public class PlayerTurn {
 		scheduler.schedule(new Runnable() { public void run() { 
 			  imageView.setImage(null);
 			  //Main.mainRoot.getChildren().remove(imageView);
+			  
 			}}, 1, TimeUnit.SECONDS);
 
 	}
