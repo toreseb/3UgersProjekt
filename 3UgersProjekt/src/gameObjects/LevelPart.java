@@ -8,10 +8,7 @@ import javafx.scene.shape.Rectangle;
 
 public class LevelPart extends GameObject {
 	
-	static double windowWidth = 8;
-	static double windowHeight = 15;
-	static int horizontalMargins = 5;
-	static int verticalMargins = 5;
+	
 	
 	int inLevelId;
 	static int inLevelIdCounter = 0;
@@ -33,8 +30,11 @@ public class LevelPart extends GameObject {
 
 	@Override
 	void initShape() {
+		double windowWidth = 8;
+		double windowHeight = 15;
+		int horizontalMargins = 5;
+		int verticalMargins = 5;
 		Rectangle mainShape = new Rectangle(0,0,width,height);
-		hitBox = mainShape;
 		int random = (int)Math.floor(Math.random()*3);
 		switch (random) {
 		case 0: {
@@ -55,9 +55,9 @@ public class LevelPart extends GameObject {
 		
 		
 		groupShape.getChildren().add(mainShape);
-		int rows = (int)Math.floor(height/(windowHeight+verticalMargins));
+		int rows = (int)Math.floor((height-verticalMargins)/(windowHeight+verticalMargins));
 		double extraHeight = (height-verticalMargins) % (windowHeight+verticalMargins);
-		int columns = (int)Math.floor(width/(windowWidth+horizontalMargins));
+		int columns = (int)Math.floor((width-horizontalMargins)/(windowWidth+horizontalMargins));
 		double extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
 		windowHeight += extraHeight/columns;
 		windowWidth += extraWidth/rows;
