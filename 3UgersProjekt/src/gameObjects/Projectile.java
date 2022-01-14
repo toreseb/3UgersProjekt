@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 /**
  * Projectil: shows the banana when is is thrown and simulates projectile motion
  * until the banana collides
- * 
+ *
  * By: Embla Peulicke
  *
  */
@@ -42,7 +42,6 @@ public abstract class Projectile extends GameObject {
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
 
 		collision();
-
 		// Check if level part is hit
 		for (LevelPart lp : Main.cLevel.parts) {
 			if (objectCollision(lp)) {
@@ -55,6 +54,10 @@ public abstract class Projectile extends GameObject {
 			if (Main.pList.get(Main.cPlayer).id != p.id) {
 				if (objectCollision(p)) {
 					System.out.println("Damage Dealt");
+					p.curNumLife--;
+					p.hearts.remove(p.curNumLife);
+					p.lifeBar.getChildren().clear();
+					p.drawHearts();
 					nextPlayer();
 				}
 			}
@@ -92,7 +95,6 @@ public abstract class Projectile extends GameObject {
 
 	@Override
 	protected void initShape() {
-
 		ImageView imageView = new ImageView(banana);
 		imageView.setFitWidth(width);
 		imageView.setFitHeight(height);
