@@ -14,9 +14,11 @@ import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
+import javafx.util.Duration;
 
 /**
  * Tore og Helene har skrevet denne klasse
@@ -46,6 +48,10 @@ public class Main extends Application {
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot; // @TEST
 	public static Label score = new Label();
+	
+	//public static Image background = new Image("Sky.png");
+	//public static ImageView imageView = new ImageView(background);
+	
 
 	/*
 	 * start()
@@ -133,7 +139,25 @@ public class Main extends Application {
 					if (Main.mainStage.getY() < 5)
 						Main.mainStage.setY(5);
 
+					/*
+					imageView.setPreserveRatio(true);
+					imageView.setFitWidth(n*2);
+					imageView.setX(-n/2);
+					imageView.setY(-m/4);
+					
+
+					RotateTransition rotate = new RotateTransition();
+					rotate.setNode(imageView);
+					rotate.setDuration(Duration.millis(100000));
+					rotate.setCycleCount(TranslateTransition.INDEFINITE);
+					rotate.setInterpolator(Interpolator.LINEAR);
+					rotate.setByAngle(360);
+					rotate.play();
+					*/
+					
 					mainRoot = new Group();
+
+					//mainRoot.getChildren().add(imageView);
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
