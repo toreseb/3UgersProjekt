@@ -27,7 +27,6 @@ public class Banana extends Projectile {
 		p.hearts.remove(p.curNumLife);
 		p.lifeBar.getChildren().clear();
 		p.drawHearts();
-		nextPlayer();
 	}
 
 }

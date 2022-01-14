@@ -24,6 +24,5 @@ public class Slime extends Projectile {
 		System.out.println("Damage Dealt");
 		p.gorillaImg = new Image("SlimedGorilla.png");
 		p.slimed = 2;
-		nextPlayer();
 	}
 }
