@@ -62,13 +62,13 @@ public class Gorilla extends GameObject {
 		hasPow = false;
 		frozen = 0;
 		slimed = 0;
-		
-		
+
 		this.vectorPos.set(1,
 				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		Main.pList.add(this);
 		step();
 	}
+	
 
 	/*
 	 * Implementation of the must have functions from GameObject: drawShape()
