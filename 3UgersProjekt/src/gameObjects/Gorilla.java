@@ -1,6 +1,8 @@
 package gameObjects;
 
 import framework.*;
+import gameObjects.Projectiles.*;
+
 import java.util.ArrayList;
 import javafx.event.Event;
 
@@ -28,6 +30,8 @@ public class Gorilla extends GameObject {
 	public int curNumLife = numLife;
 	public boolean moveable = true;
 	public Projectile banana;
+	public PowerUp pow;
+	public boolean hasPow;
 
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
@@ -40,18 +44,26 @@ public class Gorilla extends GameObject {
 		point = 0;
 		moveable = false;
 		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
-		
+
 		numLife = 3;
 		curNumLife = numLife;
-		
+
 		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
 			hearts.add(heart);
 		}
-		
-		
+
+
 		drawHearts(); // draws the init hearts
-		groupShape.getChildren().add(lifeBar);	
+		groupShape.getChildren().add(lifeBar);
+		hasPow = false;
+		this.vectorPos.set(1,
+				(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+
+		for (int i = 0; i < numLife; i++) {
+			hearts.add(heart);
+		}
+		Main.pList.add(this);
 		step();
 	}
 
@@ -82,6 +94,7 @@ public class Gorilla extends GameObject {
 	 * by: Embla Peulicke
 	 */
 	public void throwBanana(int cPlayer) {
+
 		int maxThrow = 200;
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
@@ -116,8 +129,11 @@ public class Gorilla extends GameObject {
 			}
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
-		
-			banana = new Projectile(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+
+
+			//@TODO Lav forskellige projektiles, og skriv ind her.
+
+			banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 		});
 
 	}
