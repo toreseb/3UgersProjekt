@@ -1,5 +1,6 @@
 package gameObjects.Projectiles;
 
+import framework.Main;
 import gameObjects.Gorilla;
 import gameObjects.Projectile;
 import javafx.scene.image.Image;
@@ -23,6 +24,8 @@ public class Slime extends Projectile {
 		// TODO Auto-generated method stub
 		System.out.println("Damage Dealt");
 		p.gorillaImg = new Image("SlimedGorilla.png");
+		p.normalImage = false;
 		p.slimed = 2;
+		Main.pList.get(Main.cPlayer).hasPow = "no";
 	}
 }

@@ -11,7 +11,6 @@ public class Anvil extends Projectile {
 
 	public Anvil(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, xSpeed, ySpeed);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void initShape() {
@@ -20,7 +19,6 @@ public class Anvil extends Projectile {
 	}
 
 	public void playerHit(Gorilla p) {
-		// TODO Auto-generated method stub
 		System.out.println("Damage Dealt");
 		p.curNumLife -= 2;
 		p.hearts.remove(p.curNumLife);

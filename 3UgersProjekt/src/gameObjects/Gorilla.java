@@ -28,9 +28,9 @@ public class Gorilla extends GameObject {
 	public static final int width = 40;
 	public static final int height = 40;
 	public int point, numLife, curNumLife, frozen, slimed;
-	public boolean moveable, hasPow;
+	public boolean moveable, normalImage;
 	public Projectile banana;
-	public PowerUp pow;
+	public String hasPow;
 	public Image gorillaImg;
 
 	public Group lifeBar = new Group();
@@ -49,8 +49,7 @@ public class Gorilla extends GameObject {
 		frozen = 0;
 		slimed = 0;
 		moveable = false;
-		moveable = false;
-		hasPow = false;
+		hasPow = "no";
 
 		// Adds the right amount of life to the list.
 		for (int i = 0; i < numLife; i++) {
@@ -59,6 +58,12 @@ public class Gorilla extends GameObject {
 
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
+
+		hasPow = "no";
+		frozen = 0;
+		slimed = 0;
+		normalImage = true;
+		
 		Main.pList.add(this);
 		if (Main.pList.indexOf(this) == 1) rotate();
 		step();
@@ -136,8 +141,16 @@ public class Gorilla extends GameObject {
 			double xSpeed = xEnd - xBegin;
 			double ySpeed = yEnd - yBegin;
 
-			// @TODO Lav forskellige projektiles, og skriv ind her.
-			banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+			//
+			if (hasPow.equals("ice")) {
+				banana = new Ice(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+			} else if (hasPow.equals("slime")) {
+				banana = new Slime(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+			} else if (hasPow.equals("anvil")) {
+				banana = new Anvil(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+			} else {
+				banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+			}
 		});
 
 	}
