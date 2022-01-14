@@ -43,27 +43,30 @@ public abstract class Projectile extends GameObject {
 
 		collision();
 		// Check if level part is hit
-		for (LevelPart lp : Main.cLevel.parts) {
-			if (objectCollision(lp)) {
-				System.out.println("Hit Ground");
-				nextPlayer();
-			}
-		}
-		// Check if player is hit
-		for (Gorilla p : Main.pList) {
-			if (Main.pList.get(Main.cPlayer).id != p.id) {
-				if (objectCollision(p)) {
+		boolean goToNextPlayer = false;
+		
+		for (GameObject gO : Main.objList) {
+			if(objectCollision(gO) && this.id != gO.id) {
+				if(gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
+					System.out.println("Collected Powerup");
+					((PowerUp)gO).collected();
+				}
+				
+				if(gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
+					Gorilla p = (Gorilla) gO; 
 					playerHit(p);
+					goToNextPlayer = true;
+				}else if(gO.getClass().getSimpleName().equals("LevelPart")) {
+					System.out.println("Hit Ground");
+					goToNextPlayer = true;
+					
 				}
 			}
+			
 		}
-		// Check if power up is hit
-		for (PowerUp pow : Main.cLevel.powerUps) {
-			if (objectCollision(pow)) {
-				System.out.println("Collected Powerup");
-				pow.collected();
-			}
-		}
+		if(goToNextPlayer) {
+			nextPlayer();
+		} 
 	}
 
 	@Override

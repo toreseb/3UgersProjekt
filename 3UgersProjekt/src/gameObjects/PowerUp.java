@@ -43,21 +43,22 @@ public abstract class PowerUp extends GameObject {
 		groupShape.getChildren().add(imageView);
 
 	}
-	
+
 	public void collected() {
 		Main.gameRoot.getChildren().remove(groupShape);
 		Main.pList.get(Main.cPlayer).pow = this;
 		Main.pList.get(Main.cPlayer).hasPow = true;
 		collected = true;
-		
+
 	}
 
 	@Override
 	protected void step() {
 		super.step();
 		// TODO Auto-generated method stub
-		if(collected) {
+		if (collected) {
 			hideSelf();
+			this.deleteObject();
 		}
 		counter++;
 
@@ -75,7 +76,7 @@ public abstract class PowerUp extends GameObject {
 			counter = 0;
 		}
 	}
-	
+
 	public void hideSelf() {
 		Main.cLevel.powerUps.remove(this);
 	}
