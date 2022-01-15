@@ -5,8 +5,10 @@ import java.util.Vector;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.transform.Translate;
 
 /**
@@ -31,7 +33,7 @@ public abstract class GameObject {
 
 	public int width, height; // the width and height of the shapes
 
-	protected Rectangle hitBox;
+	public Shape hitBox;
 
 	public Group groupShape = new Group();
 
@@ -49,12 +51,13 @@ public abstract class GameObject {
 		Main.gameRoot.getChildren().add(groupShape);
 	}
 
-	abstract void initShape();
+	protected void initShape() {
+		initHitbox();
+	}
 
 	protected void step() {
 		groupShape.setTranslateX(vectorPos.get(0));
 		groupShape.setTranslateY(Main.m - vectorPos.get(1));
-
 	}
 
 	void draw() {
@@ -82,7 +85,7 @@ public abstract class GameObject {
 		if (vectorPos.get(1) + height / 2 > Main.m)
 			vectorPos.set(1, (double) Main.m - height / 2);
 		if (vectorPos.get(1) - height / 2 < 0)
-			vectorPos.set(1, (double) 0 + height / 2);
+			vectorPos.set(1, (double) 0);
 
 	}
 
@@ -110,11 +113,29 @@ public abstract class GameObject {
 	}
 
 	public boolean objectCollision(GameObject gO) {
-		if(this.groupShape.getBoundsInParent().intersects(gO.groupShape.getBoundsInParent())) {
+		
+		Shape inter = Shape.intersect(hitBox, gO.hitBox);
+		
+		
+		
+		
+		if(inter.getBoundsInParent().getWidth() != -1) {
 			return true;
 		}
+		
 		return false;
 		
+	}
+	
+	protected void initHitbox() {
+		hitBox = new Rectangle(0,0,groupShape.getBoundsInParent().getWidth(),groupShape.getBoundsInParent().getHeight());
+		if(Main.showHitbox) {
+			hitBox.setFill(new Color(0,0,0,1));
+		}else {
+			hitBox.setFill(new Color(0,0,0,0));
+		}
+		
+		groupShape.getChildren().add(hitBox);
 	}
 
 }

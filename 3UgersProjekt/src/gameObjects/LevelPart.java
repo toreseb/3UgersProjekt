@@ -12,6 +12,8 @@ public abstract class LevelPart extends GameObject {
 	
 	int inLevelId;
 	static int inLevelIdCounter = 0;
+	protected double dwidth;
+	protected double dheight;
 
 	public LevelPart(int posX, int width, int height) {
 		super(posX, height, width, height);
@@ -28,10 +30,5 @@ public abstract class LevelPart extends GameObject {
 	@Override
 	public void collision() {} //collision() kæmper mod initShape();
 
-	@Override
-	protected
-	void initShape() {
-		
-	}
-
+	
 }

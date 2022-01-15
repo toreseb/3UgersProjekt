@@ -11,6 +11,7 @@ import javafx.animation.RotateTransition;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.image.*;
@@ -42,7 +43,7 @@ public class Gorilla extends GameObject {
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
-		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+		
 		numLife = 3;
 		curNumLife = numLife;
 		point = 0;
@@ -66,6 +67,7 @@ public class Gorilla extends GameObject {
 		
 		Main.pList.add(this);
 		if (Main.pList.indexOf(this) == 1) rotate();
+		
 		step();
 	}
 	
@@ -76,18 +78,19 @@ public class Gorilla extends GameObject {
 	 */
 	@Override
 	public void step() {
+		toTop();
 		super.step();
 
 	}
 
 	@Override
-	void initShape() {
+	protected void initShape() {
 		gorillaImg = new Image("Gorilla.png");
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
 		groupShape.getChildren().add(gorilla);
-
+		super.initShape();
 	}
 
 	/*
@@ -187,14 +190,15 @@ public class Gorilla extends GameObject {
 			if (moveable) {
 				vectorPos.set(0, event.getSceneX() - width / 2);
 				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
+				toTop();
 			}
 		});
 
 		// sets the moveable back to false and removes prompt when released
 		shape.setOnMouseReleased(event -> {
 			if (moveable) {
-				this.vectorPos.set(1, 
-						(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
+				vectorPos.set(1,0d + height);
+				toTop();
 
 				moveable = false;
 				if (!Main.pList.get(Main.cPlayer).moveable) {
@@ -225,6 +229,21 @@ public class Gorilla extends GameObject {
 			health.setLayoutX((i * size) + 2);
 			lifeBar.getChildren().add(health);
 			i++;
+		}
+	}
+	
+	void toTop() {
+		for (GameObject gO : Main.objList) {
+			if(LevelPart.class.isAssignableFrom(gO.getClass())) {
+				
+				while(objectCollision(gO)) {
+					System.out.println(gO.getClass());
+					vectorPos.set(1,vectorPos.get(1)+1);
+					groupShape.setTranslateX(vectorPos.get(0));
+					groupShape.setTranslateY(Main.m - vectorPos.get(1));
+					System.out.println(hitBox.getLayoutY());
+				}
+			}
 		}
 	}
 

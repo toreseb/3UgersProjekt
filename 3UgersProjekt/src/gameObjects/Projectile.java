@@ -41,19 +41,18 @@ public abstract class Projectile extends GameObject {
 		ySpeed -= g / 60; // calc new ySpeed from acceleration - 60 frames per second
 		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
-
-		collision();
+		
 		// Check if level part is hit
 		boolean goToNextPlayer = false;
 
 		for (GameObject gO : Main.objList) {
-			if(objectCollision(gO) && this.id != gO.id) {
-				if(gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
+			if(this != gO) {
+				if(objectCollision(gO) && gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
 					System.out.println("Collected Powerup");
 					((PowerUp)gO).collected();
 				}
 
-				if(gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
+				if(objectCollision(gO) && gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
 					Gorilla p = (Gorilla) gO;
 					// Checks if one of the gorillas dies
 					playerHit(p);
@@ -73,7 +72,7 @@ public abstract class Projectile extends GameObject {
 
 
 					goToNextPlayer = true;
-				}else if(gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
+				}else if(objectCollision(gO) && gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
 					System.out.println("Hit Ground");
 					goToNextPlayer = true;
 				}
@@ -88,6 +87,9 @@ public abstract class Projectile extends GameObject {
 
 	@Override
 	public void collision() {
+		if(vectorPos.get(1) <= 0) {
+			nextPlayer();
+		}
 		if (vectorPos.get(0) < 0) {
 			vectorPos.set(0, (double) 0);
 			// xSpeed = -xSpeed;
@@ -96,9 +98,11 @@ public abstract class Projectile extends GameObject {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
 		}
+		
 	}
 
 	protected void nextPlayer() {
+		System.out.println("next Player");
 		Main.cPlayer++;
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
@@ -117,6 +121,7 @@ public abstract class Projectile extends GameObject {
 		imageView.setY(0);
 
 		groupShape.getChildren().add(imageView);
+		super.initShape();
 	}
 
 	void initAnimation(int angle) {
