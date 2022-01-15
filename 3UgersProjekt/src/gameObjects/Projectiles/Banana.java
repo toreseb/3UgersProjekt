@@ -15,7 +15,7 @@ public class Banana extends Projectile {
 	}
 
 	protected void initShape() {
-		banana = new Image("BananaNew.png");
+		banana = new Image("Banana.png");
 		super.initShape();
 	}
 

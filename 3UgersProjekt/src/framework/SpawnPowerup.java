@@ -9,8 +9,8 @@ import javafx.geometry.Point2D;
 
 public class SpawnPowerup {
 	private static int antal = 4;
-	private static int x;
-	private static int y;
+	private  static int x;
+	private  static int y;
 
 	public static int rnd(int num) {
 		return (int) (Math.random() * num);
