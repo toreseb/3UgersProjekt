@@ -1,5 +1,6 @@
 package gameObjects.Projectiles;
 
+import framework.Main;
 import gameObjects.Gorilla;
 import gameObjects.Projectile;
 import javafx.scene.image.Image;
@@ -20,9 +21,11 @@ public class Anvil extends Projectile {
 
 	public void playerHit(Gorilla p) {
 		System.out.println("Damage Dealt");
-		p.curNumLife -= 2;
+		p.curNumLife--;
 		p.hearts.remove(p.curNumLife);
-		p.lifeBar.getChildren().clear();
+		p.curNumLife--;
+		p.hearts.remove(p.curNumLife);
 		p.drawHearts();
+		Main.pList.get(Main.cPlayer).hasPow = "no";
 	}
 }

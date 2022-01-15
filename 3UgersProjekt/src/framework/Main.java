@@ -14,9 +14,11 @@ import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
+import javafx.util.Duration;
 
 /**
  * Tore og Helene har skrevet denne klasse
@@ -47,6 +49,9 @@ public class Main extends Application {
 	public static Group mainRoot; // @TEST
 	public static Label score = new Label();
 
+	public static Image background = new Image("pixel-city-chill.gif");
+	public static ImageView imageView = new ImageView(background);
+
 	/*
 	 * start()
 	 *
@@ -73,7 +78,7 @@ public class Main extends Application {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		// Window icon
-		Image icon = new Image("BananaNew.png");
+		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
 
 		root.getChildren().add(grid);
@@ -133,8 +138,19 @@ public class Main extends Application {
 					if (Main.mainStage.getY() < 5)
 						Main.mainStage.setY(5);
 
+					// set background image
+					double w= background.getWidth();
+					double h= background.getHeight();
+					imageView.setPreserveRatio(true);
+					if ((n/w) > (m/h)) {
+						imageView.setFitWidth(n);
+					}
+					else imageView.setFitHeight(m);
+					
 					mainRoot = new Group();
+					mainRoot.getChildren().add(imageView);
 					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
+					
 					Scene scene = new Scene(mainRoot, Main.n, Main.m);
 					Main.mainStage.setScene(scene);
 					initMain();
@@ -200,9 +216,9 @@ public class Main extends Application {
 		PlayerTurn.startTurn(0);
 
 	}
-	
+
 	static void initTimer() {
-		 timer = new AnimationTimer() {
+		timer = new AnimationTimer() {
 
 			private long lastToggle;
 

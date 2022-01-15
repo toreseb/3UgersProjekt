@@ -15,7 +15,7 @@ public class Banana extends Projectile {
 	}
 
 	protected void initShape() {
-		banana = new Image("BananaNew.png");
+		banana = new Image("Banana.png");
 		super.initShape();
 	}
 
@@ -26,7 +26,6 @@ public class Banana extends Projectile {
 		System.out.println("Damage Dealt");
 		p.curNumLife--;
 		p.hearts.remove(p.curNumLife);
-		p.lifeBar.getChildren().clear();
 		p.drawHearts();
 	}
 

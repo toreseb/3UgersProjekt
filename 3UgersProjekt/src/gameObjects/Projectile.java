@@ -24,7 +24,7 @@ public abstract class Projectile extends GameObject {
 	public static int width = 20;
 	public static int height = 20;
 
-	protected Image banana = new Image("BananaNew.png"); //???
+	protected Image banana = new Image("Banana.png"); //???
 
 	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
@@ -73,7 +73,7 @@ public abstract class Projectile extends GameObject {
 
 
 					goToNextPlayer = true;
-				}else if(gO.getClass().getSimpleName().equals("LevelPart")) {
+				}else if(gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
 					System.out.println("Hit Ground");
 					goToNextPlayer = true;
 				}
