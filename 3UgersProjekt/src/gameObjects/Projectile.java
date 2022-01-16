@@ -10,8 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Projectil: shows the banana when is is thrown and simulates projectile motion
- * until the banana collides
+ * Projectile: shows the banana when is is thrown and simulates projectile
+ * motion until the banana collides
  *
  * By: Embla Peulicke
  *
@@ -24,15 +24,18 @@ public abstract class Projectile extends GameObject {
 	public static int width = 20;
 	public static int height = 20;
 
-	protected Image banana = new Image("Banana.png"); //???
+	protected Image banana = new Image("Banana.png"); // ???
+	protected Image hand = new Image("GorillaHand.png");
+	protected ImageView viewHand;
 
 	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
 		super(posX, posY, 2, 2);
-		this.xSpeed = xSpeed / 22;
-		this.ySpeed = -ySpeed / 22;
+		this.xSpeed = xSpeed / 20;
+		this.ySpeed = -ySpeed / 20;
 		int angle = 360; // rotation
-		if (xSpeed<0) angle*= -1;
+		if (xSpeed < 0)
+			angle *= -1;
 		initAnimation(angle);
 	}
 
@@ -42,25 +45,27 @@ public abstract class Projectile extends GameObject {
 		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
 
+		outOfSight(); // calls function that check if banana is out of sight and then shows a pointing GorillaHand
+
 		collision();
 		// Check if level part is hit
 		boolean goToNextPlayer = false;
 
 		for (GameObject gO : Main.objList) {
-			if(objectCollision(gO) && this.id != gO.id) {
-				if(gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
+			if (objectCollision(gO) && this.id != gO.id) {
+				if (gO.getClass().getSuperclass().getSimpleName().equals("PowerUp")) {
 					System.out.println("Collected Powerup");
-					((PowerUp)gO).collected();
+					((PowerUp) gO).collected();
 				}
 
-				if(gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
+				if (gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
 					Gorilla p = (Gorilla) gO;
 					// Checks if one of the gorillas dies
 					playerHit(p);
-					
+
 					// william
 					if (p.curNumLife == 0) {
-						
+
 						System.out.println("Dead");
 						Main.timer.stop();
 						Main.mainRoot.getChildren().clear();
@@ -68,12 +73,11 @@ public abstract class Projectile extends GameObject {
 							gob.deleteObject();
 						}
 						GameOver.endGame();
-						
+
 					}
 
-
 					goToNextPlayer = true;
-				}else if(gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
+				} else if (gO.getClass().getSuperclass().getSimpleName().equals("LevelPart")) {
 					System.out.println("Hit Ground");
 					goToNextPlayer = true;
 				}
@@ -81,9 +85,9 @@ public abstract class Projectile extends GameObject {
 
 		}
 
-		if(goToNextPlayer) {
+		if (goToNextPlayer) {
 			nextPlayer();
-		} 
+		}
 	}
 
 	@Override
@@ -95,6 +99,24 @@ public abstract class Projectile extends GameObject {
 		if (vectorPos.get(0) + width > Main.n) {
 			vectorPos.set(0, (double) Main.n - width);
 			// xSpeed = -xSpeed;
+		}
+	}
+	public void outOfSight(){
+		if (vectorPos.get(1) > Main.m) {
+			if (viewHand == null) {
+				viewHand = new ImageView(hand);
+				viewHand.setX(vectorPos.get(0));
+				viewHand.setY(0);
+				Main.mainRoot.getChildren().add(viewHand);
+			}
+			else {
+				viewHand.setX(vectorPos.get(0));
+				viewHand.setY(0);
+			}
+		}
+		else if (vectorPos.get(1) < Main.m && viewHand != null) {
+			Main.mainRoot.getChildren().remove(viewHand);
+			viewHand = null;
 		}
 	}
 
