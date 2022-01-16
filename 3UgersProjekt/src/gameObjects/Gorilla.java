@@ -40,6 +40,7 @@ public class Gorilla extends GameObject {
 	private static Image heart = new Image("Heart.png");
 	private ImageView gorilla;
 	private boolean right = true;
+	private Image gorillaThrowImg = new Image("GorillaThrow.png");	
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -92,12 +93,13 @@ public class Gorilla extends GameObject {
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
 		groupShape.getChildren().add(gorilla);
-
 	}
 
 	/*
 	 * thowBanana connects gorilla and mouse until with a line and throws banana
 	 * when a mouse button is pressed
+	 * 
+	 * rotate() turns the gorilla towards the mouse
 	 *
 	 * by: Embla Peulicke
 	 */
@@ -107,6 +109,8 @@ public class Gorilla extends GameObject {
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
 		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
 		Main.mainRoot.getChildren().add(line); // Her bruges mainRoot, da den skal tegne oven på hele billedet
+		
+		gorilla.setImage(gorillaThrowImg);	
 		Main.mainRoot.setOnMouseMoved(event -> {
 			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
 					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
@@ -131,6 +135,8 @@ public class Gorilla extends GameObject {
 			if (banana != null)
 				return; // if there is already a banana, return
 
+			gorilla.setImage(gorillaImg);	
+			
 			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
 			double yEnd = event.getSceneY();
@@ -160,7 +166,7 @@ public class Gorilla extends GameObject {
 
 	}
 
-	public void rotate() { //
+	public void rotate() { 
 
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(gorilla);

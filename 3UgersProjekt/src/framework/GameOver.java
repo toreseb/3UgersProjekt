@@ -5,11 +5,14 @@ package framework;
 
 import gameObjects.Gorilla;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.Parent;
+import javafx.scene.layout.*;
 import javafx.scene.Scene;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 /*
  * The function of this class is:
@@ -20,7 +23,12 @@ import javafx.scene.text.Font;
 
 public class GameOver {
 	
-	// The scene for the game over screen
+	/*
+	 * @TODO
+	 * 	* Add a play again button
+	 */
+	
+	 // This function display the game over scene in the window when the main game is done 
 	public static void endGame() {
 		Main.mainStage.setScene(new Scene(createContent()));
 		Main.mainStage.setWidth(500);
@@ -28,36 +36,50 @@ public class GameOver {
 		
 	}
 	
-	// Creates all the content for the GameOver screen.
+	/* 
+	 * This function creates all the content that's displayed on the scene
+	 * and returns Group named root, that holds all the content
+	 */
 	private static Group createContent() {
 		Group root = new Group();
 		GridPane pane = new GridPane();
 		Label winner = new Label();
 		Label loser = new Label();
 		Label gameOver = new Label();
-		pane.setHgap(2);
-		pane.setVgap(2);
 		
-		// positions the Nodes on the pane
-		GridPane.setConstraints(gameOver, 5, 2);
-		GridPane.setConstraints(winner, 5, 6);
-		GridPane.setConstraints(loser, 5, 8);
-
-		// Sets the fonts and the size of the text
-		gameOver.setFont(new Font("Times New Roman", 40.0));
-		winner.setFont(new Font("Times New Roman", 25.0));
-		loser.setFont(new Font("Times New Roman", 25.0));
+		// Sets the layout of the grid pane
+		pane.setGridLinesVisible(true);
+		pane.setAlignment(Pos.TOP_CENTER);
+		pane.setMinSize(500, 500);
+		pane.setPadding(new Insets(15,10,10,10));
+		pane.setVgap(15);
 		
-		// Adds the text 
+		// Positioning the elements inside the gridpane.
+		GridPane.setHalignment(gameOver, HPos.CENTER);
+		GridPane.setHalignment(winner, HPos.CENTER);
+		GridPane.setHalignment(loser, HPos.CENTER);
+		GridPane.setConstraints(gameOver, 0, 0);
+		GridPane.setConstraints(winner, 0, 5);
+		GridPane.setConstraints(loser, 0, 11);
+		
+		/*
+		 * Adds the text to the labels
+		 * @TODO: 
+		 * Do so that the right player is displayed in the winner filed and the other(s)
+		 * in the losers field.
+		 */
 		gameOver.setText("Game Over");
-		winner.setText("Winner: " + Main.pList.get(0));
-		for (Gorilla p : Main.pList) {
-			if (p.id != Main.pList.get(1).id) loser.setText("Loser: " + p);
-		}
+		winner.setText("Winner: Player 1");
+		loser.setText("Loser: Player 2");
+		
+		// Sets the fonts and the size of the text
+		gameOver.setFont(new Font("Times New Roman", 50.0));
+		winner.setFont(new Font("Times New Roman", 35.0));
+		loser.setFont(new Font("Times New Roman", 35.0));
 		
 		// Adds the Nodes to the pane and the pane to the group
 		pane.getChildren().add(winner);
-		pane.getChildren().add(loser);
+		pane.getChildren().add(loser); 
 		pane.getChildren().add(gameOver);
 		root.getChildren().add(pane);
 		return root;
