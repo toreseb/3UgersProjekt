@@ -32,6 +32,8 @@ public class Gorilla extends GameObject {
 	public Projectile banana;
 	public String hasPow;
 	public Image gorillaImg;
+	
+	public String name;
 
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
@@ -65,6 +67,9 @@ public class Gorilla extends GameObject {
 		normalImage = true;
 		
 		Main.pList.add(this);
+		
+		name = Main.nList.get(Main.pList.indexOf(this));
+		
 		if (Main.pList.indexOf(this) == 1) rotate();
 		step();
 	}

@@ -19,6 +19,8 @@ public class SpawnPowerup {
 		y = rnd(Main.m);
 
 		//Find ud af at få den til at kun placere den hvis punktet er udenfor bygninger (og gorillaer).
+		
+		
 
 	}
 
