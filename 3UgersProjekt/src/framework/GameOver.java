@@ -70,7 +70,7 @@ public class GameOver {
 		 */
 		gameOver.setText("Game Over");
 		winner.setText("Winner: Player 1");
-		loser.setText("Loser: Plyaer 2");
+		loser.setText("Loser: Player 2");
 		
 		// Sets the fonts and the size of the text
 		gameOver.setFont(new Font("Times New Roman", 50.0));
