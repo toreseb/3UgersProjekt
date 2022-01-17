@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class SetupScenes {
 	public static int pCount = 1;
 
-	// Denne er ligegyldig, men er her så vi kan gå tilbage hvis det er.
+	// Denne er ligegyldig, men er her sï¿½ vi kan gï¿½ tilbage hvis det er.
 	public static void windowSize1(Stage mainStage) {
 		Group root = new Group();
 
@@ -337,7 +337,7 @@ public class SetupScenes {
 					prompt.setText("Please enter a name, player" + pCount);
 				}
 
-				// @TODO Lav endnu en exception så man ikke kan lave for lange navne
+				// @TODO Lav endnu en exception sï¿½ man ikke kan lave for lange navne
 			}
 		});
 
@@ -433,10 +433,10 @@ public class SetupScenes {
 	 * Sets a new scene for the game on the stage with the user-given dimensions,
 	 * repositions the stage and calls Main.initMain().
 	 * 
-	 * Skal måske omskrives, men nu har vi noget der virker.
+	 * Skal mï¿½ske omskrives, men nu har vi noget der virker.
 	 */
 	public static void startGame() {
-		// reposition Stage - Skal måske laves om
+		// reposition Stage - Skal mï¿½ske laves om
 		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-Main.n) / 2);
 		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- Main.m) / 2);
 
