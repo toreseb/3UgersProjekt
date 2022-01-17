@@ -40,9 +40,8 @@ public class PlayerTurn {
 	public static void startTurn(int cPlayer) {
 		
 		
-		int rnd = (int)(Math.random()*1);
-		System.out.println(rnd);
-		if (rnd == 5) {
+		int rnd = (int)(Math.random()*5);
+		if (rnd == 1) {
 			SpawnPowerup.newPowerUp = true;
 		}
 		
