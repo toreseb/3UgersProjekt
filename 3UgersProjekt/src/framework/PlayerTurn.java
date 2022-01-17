@@ -38,6 +38,14 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard.
 	 */
 	public static void startTurn(int cPlayer) {
+		
+		
+		int rnd = (int)(Math.random()*1);
+		System.out.println(rnd);
+		if (rnd == 5) {
+			SpawnPowerup.newPowerUp = true;
+		}
+		
 		// Create components
 		Label ask = new Label("Player " + (cPlayer + 1) + " what do you want to do on your turn?");
 		Button btnShoot = new Button("Shoot");
@@ -123,6 +131,8 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard
 	 */
 	public static void promptMove(int cPlayer) {
+		
+		
 		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
 
