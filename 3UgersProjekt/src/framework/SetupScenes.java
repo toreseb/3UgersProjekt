@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -26,7 +28,7 @@ import javafx.stage.Stage;
 public class SetupScenes {
 	public static int pCount = 1;
 
-	// Denne er ligegyldig, men er her så vi kan gå tilbage hvis det er.
+	// Denne er ligegyldig, men er her sï¿½ vi kan gï¿½ tilbage hvis det er.
 	public static void windowSize1(Stage mainStage) {
 		Group root = new Group();
 
@@ -79,9 +81,7 @@ public class SetupScenes {
 		btn.setLayoutX(150);
 		btn.setLayoutY(80);
 		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
 				try {
 					int newN = Integer.parseInt(setN.getText());
 					int newM = Integer.parseInt(setM.getText());
@@ -135,17 +135,24 @@ public class SetupScenes {
 	 * Changes the frameworkRoot from Main to show two sliders and prompts the user
 	 * to set the size of the game-window.
 	 */
-	public static void windowSize() {
+	public static void windowSize() {	
 		// GridPane setup
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		//Create scene and add grid
+		Scene sceneSize = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
-		Text prompt = new Text("Please set width and height:");
-		Slider sliderX = new Slider(200, Screen.getPrimary().getVisualBounds().getWidth(), 800);
-		Slider sliderY = new Slider(200, Screen.getPrimary().getVisualBounds().getHeight(), 400);
+		Text promptSize = new Text("Please set width and height:");
+		Slider sliderX = new Slider(300, Screen.getPrimary().getVisualBounds().getWidth(), 800);
+		Slider sliderY = new Slider(300, Screen.getPrimary().getVisualBounds().getHeight(), 400);
+		Text promptAmount = new Text("Please enter amount of players:");
+		TextField amount = new TextField();
+		amount.setPromptText("2 to 6");
+		amount.setMaxWidth(100);
 		Button btn = new Button("Submit");
 
 		// Define sliders - Ew - I don't like these - Maybe go back to text fields
@@ -163,13 +170,15 @@ public class SetupScenes {
 		sliderY.setPrefWidth(Main.startSizeY - 20);
 
 		// Set placement of components
-		GridPane.setConstraints(prompt, 0, 0);
+		GridPane.setConstraints(promptSize, 0, 0);
 		GridPane.setConstraints(sliderX, 0, 1);
 		GridPane.setConstraints(sliderY, 0, 2);
-		GridPane.setConstraints(btn, 0, 3);
+		GridPane.setConstraints(promptAmount, 0, 3);
+		GridPane.setConstraints(amount, 0, 4);
+		GridPane.setConstraints(btn, 0, 5);
 
 		//Add components to grid
-		grid.getChildren().addAll(prompt, sliderX, sliderY, btn);
+		grid.getChildren().addAll(promptSize, sliderX, sliderY,promptAmount,amount, btn);
 
 		//Set button press event
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -178,14 +187,35 @@ public class SetupScenes {
 				//Get values from sliders
 				Main.n = (int) sliderX.getValue();
 				Main.m = (int) sliderY.getValue();
+				
+				try {
+					int count = Integer.parseInt(amount.getText());
+					
+					//Check if input from text field is within bounds
+					if ((count < 2 || count > 6)) {
+						throw new IllegalCallerException();
+					}
+					// set pAmount in Main
+					Main.pAmount = count;
+					
+					//Call next imput prompt
+					playerNames();
+				} catch (IllegalCallerException e) {
+					promptAmount.setText("Only values between 2 and 6");
+				} catch (Exception e) {
+					promptAmount.setText("Please enter integers only!");
+				}
 
 				//Call next input prompt
-				playerAmount();
+				//playerAmount();
 			}
 		});
 
 		//Add grid to frameworkRoot in Main
-		Main.frameworkRoot.getChildren().add(grid);
+		//Main.frameworkRoot.getChildren().add(grid);
+		
+		//Set scene on stage
+		Main.mainStage.setScene(sceneSize);
 	}
 
 	/*
@@ -200,6 +230,9 @@ public class SetupScenes {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		//Create scene and add grid
+		Scene sceneAmount = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
 		Text prompt = new Text("Please enter amount of players:");
@@ -240,9 +273,11 @@ public class SetupScenes {
 		});
 
 		//Clear frameworkRoot in Main and add grid
-		Main.frameworkRoot.getChildren().clear();
-		Main.frameworkRoot.getChildren().add(grid);
+		//Main.frameworkRoot.getChildren().clear();
+		//Main.frameworkRoot.getChildren().add(grid);
 
+		//Set scene on stage
+		Main.mainStage.setScene(sceneAmount);
 	}
 
 	/*
@@ -257,6 +292,9 @@ public class SetupScenes {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		//Create scene and add grid
+		Scene sceneNames = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
 		Text prompt = new Text("Player" + (pCount) + ", please enter a name");
@@ -299,13 +337,94 @@ public class SetupScenes {
 					prompt.setText("Please enter a name, player" + pCount);
 				}
 
-				// @TODO Lav endnu en exception så man ikke kan lave for lange navne
+				// @TODO Lav endnu en exception sï¿½ man ikke kan lave for lange navne
 			}
 		});
 
-		Main.frameworkRoot.getChildren().clear();
-		Main.frameworkRoot.getChildren().add(grid);
+		//Main.frameworkRoot.getChildren().clear();
+		//Main.frameworkRoot.getChildren().add(grid);
 
+		//Set scene on stage
+		Main.mainStage.setScene(sceneNames);
+	}
+	
+	public static void levelSelect() {
+		//Setup panes
+		GridPane buttons = new GridPane();
+		buttons.setHgap(10);
+		buttons.setVgap(10);
+		buttons.setPadding(new Insets(10, 10, 10, 10));
+		VBox main = new VBox();
+		
+		//Create scene and add "main"
+		Scene sceneLevel = new Scene(main,Main.startSizeX,Main.startSizeY);		
+		
+		//Create components
+		Text prompt = new Text("Please select a level");
+		Button cityLevel = new Button("City");
+		Button forestLevel = new Button("Forest");
+		Button mountainLevel = new Button("Mountain");
+		Button villageLevel = new Button("Village");
+		Button hillLevel = new Button("Hills");
+		Button rockyHillLevel = new Button("Rocky hills");
+		
+		//Set placement of components
+		GridPane.setConstraints(cityLevel, 0, 0);
+		GridPane.setConstraints(forestLevel, 0, 1);
+		GridPane.setConstraints(mountainLevel, 1, 0);
+		GridPane.setConstraints(villageLevel, 1, 1);
+		GridPane.setConstraints(hillLevel, 2, 0);
+		GridPane.setConstraints(rockyHillLevel, 2, 1);
+		
+		//Add components to panes
+		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel);
+		main.getChildren().addAll(prompt,buttons);
+		
+		//Set button press event for cityLevel
+		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		
+		//Set button press event for forestLevel
+		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set button press event for mountainLevel
+		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set button press event for villageLevel
+		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set button press event for hillLevel
+		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set button press event for rockyHillLevel
+		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set scene on stage
+		Main.mainStage.setScene(sceneLevel);
 	}
 
 	/*
@@ -314,14 +433,13 @@ public class SetupScenes {
 	 * Sets a new scene for the game on the stage with the user-given dimensions,
 	 * repositions the stage and calls Main.initMain().
 	 * 
-	 * Skal måske omskrives, men nu har vi noget der virker.
+	 * Skal mï¿½ske omskrives, men nu har vi noget der virker.
 	 */
 	public static void startGame() {
-		// reposition Stage - Skal måske laves om
-		Main.mainStage.setX((Main.mainStage.getX() + (Main.startSizeX - Main.n) / 2));
-		Main.mainStage.setY((Main.mainStage.getY() + (Main.startSizeY - Main.m) / 3));
-		if (Main.mainStage.getY() < 5)
-			Main.mainStage.setY(5);
+		// reposition Stage - Skal mï¿½ske laves om
+		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-Main.n) / 2);
+		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- Main.m) / 2);
+
 
 		// set background image
 		double w = Main.background.getWidth();

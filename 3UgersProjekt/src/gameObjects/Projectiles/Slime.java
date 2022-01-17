@@ -16,7 +16,7 @@ public class Slime extends Projectile {
 	}
 
 	protected void initShape() {
-		banana = new Image("Slime.png");
+		banana = new Image("SlimeBallTransparent.png");
 		super.initShape();
 	}
 	
@@ -24,6 +24,7 @@ public class Slime extends Projectile {
 		// TODO Auto-generated method stub
 		System.out.println("Damage Dealt");
 		p.gorillaImg = new Image("SlimedGorilla.png");
+		p.gorillaThrowImg = new Image("SlimedGorillaThrow.png");
 		p.normalImage = false;
 		p.slimed = 2;
 		Main.pList.get(Main.cPlayer).hasPow = "no";

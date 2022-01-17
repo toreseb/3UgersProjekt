@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class Pie extends PowerUp {
 
-	public Pie(double posX, double posY, int width, int height) {
-		super(posX, posY, width, height);
+	public Pie(double posX, double posY) {
+		super(posX, posY);
 	}
 	
 	protected void initShape() {

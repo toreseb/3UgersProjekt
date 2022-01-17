@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class IcePower extends PowerUp {
 
-	public IcePower(double posX, double posY, int width, int height) {
-		super(posX, posY, width, height);
+	public IcePower(double posX, double posY) {
+		super(posX, posY);
 	}
 
 	protected void initShape() {
