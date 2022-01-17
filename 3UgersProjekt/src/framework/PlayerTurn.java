@@ -85,6 +85,7 @@ public class PlayerTurn {
 						Main.pList.get(cPlayer).slimed--;
 						if ((Main.pList.get(cPlayer).slimed == 0) && (Main.pList.get(cPlayer).normalImage == false)) {
 							Main.pList.get(cPlayer).gorillaImg = new Image("Gorilla.png");
+							Main.pList.get(cPlayer).gorillaThrowImg = new Image("GorillaThrow.png");
 							Main.pList.get(cPlayer).normalImage = true;
 						}
 					}

@@ -28,9 +28,9 @@ public abstract class Projectile extends GameObject {
 
 	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
-		super(posX, posY, 2, 2);
-		this.xSpeed = xSpeed / 22;
-		this.ySpeed = -ySpeed / 22;
+		super(posX-width/2, posY, 2, 2);
+		this.xSpeed = xSpeed / 20;
+		this.ySpeed = -ySpeed / 20;
 		int angle = 360; // rotation
 		if (xSpeed<0) angle*= -1;
 		initAnimation(angle);
@@ -108,7 +108,7 @@ public abstract class Projectile extends GameObject {
 			Main.cPlayer = 0;
 		}
 		PlayerTurn.startTurn(Main.cPlayer);
-		PlayerTurn.explosion(vectorPos.get(0), vectorPos.get(1));
+		PlayerTurn.explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
 		this.deleteObject();
 	}
 
@@ -125,15 +125,6 @@ public abstract class Projectile extends GameObject {
 	}
 
 	void initAnimation(int angle) {
-
-		// translate banana origin to center
-		TranslateTransition translate = new TranslateTransition();
-		translate.setNode(groupShape);
-		translate.setDuration(Duration.millis(1));
-		translate.setByX(-width);
-		translate.setByY(-height);
-		translate.play();
-
 		// rotate
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(groupShape);

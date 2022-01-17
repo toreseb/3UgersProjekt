@@ -33,7 +33,7 @@ public class Gorilla extends GameObject {
 	public Projectile banana;
 	public String hasPow;
 	public Image gorillaImg;
-	
+
 	public String name;
 
 	public Group lifeBar = new Group();
@@ -41,7 +41,7 @@ public class Gorilla extends GameObject {
 	private static Image heart = new Image("Heart.png");
 	private ImageView gorilla;
 	private boolean right = true;
-	private Image gorillaThrowImg = new Image("GorillaThrow.png");	
+	public Image gorillaThrowImg = new Image("GorillaThrow.png");	
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -53,6 +53,7 @@ public class Gorilla extends GameObject {
 		frozen = 0;
 		slimed = 0;
 		moveable = false;
+		normalImage = true;
 		hasPow = "no";
 
 		// Adds the right amount of life to the list.
@@ -63,20 +64,16 @@ public class Gorilla extends GameObject {
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
 
-		hasPow = "no";
-		frozen = 0;
-		slimed = 0;
-		normalImage = true;
-		
+
 		Main.pList.add(this);
-		
+
 		name = Main.nList.get(Main.pList.indexOf(this));
-		
+
 		if (Main.pList.indexOf(this) == 1) rotate();
-		
+
 		step();
 	}
-	
+
 
 	/*
 	 * Implementation of the must have functions from GameObject: drawShape()
@@ -102,7 +99,7 @@ public class Gorilla extends GameObject {
 	/*
 	 * thowBanana connects gorilla and mouse until with a line and throws banana
 	 * when a mouse button is pressed
-	 * 
+	 *
 	 * rotate() turns the gorilla towards the mouse
 	 *
 	 * by: Embla Peulicke
@@ -113,8 +110,8 @@ public class Gorilla extends GameObject {
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
 		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
 		Main.mainRoot.getChildren().add(line); // Her bruges mainRoot, da den skal tegne oven på hele billedet
-		
-		gorilla.setImage(gorillaThrowImg);	
+
+		gorilla.setImage(gorillaThrowImg);
 		Main.mainRoot.setOnMouseMoved(event -> {
 			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
 					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
@@ -139,8 +136,8 @@ public class Gorilla extends GameObject {
 			if (banana != null)
 				return; // if there is already a banana, return
 
-			gorilla.setImage(gorillaImg);	
-			
+			gorilla.setImage(gorillaImg);
+
 			Main.mainRoot.getChildren().remove(line); // else remove the line and make a banana
 			double xEnd = event.getSceneX();
 			double yEnd = event.getSceneY();
@@ -170,7 +167,7 @@ public class Gorilla extends GameObject {
 
 	}
 
-	public void rotate() { 
+	public void rotate() {
 
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(gorilla);
@@ -243,7 +240,7 @@ public class Gorilla extends GameObject {
 			i++;
 		}
 	}
-	
+
 	void toTop() {
 		for (GameObject gO : Main.objList) {
 			if(LevelPart.class.isAssignableFrom(gO.getClass())) {
