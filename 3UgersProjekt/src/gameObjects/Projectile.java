@@ -30,7 +30,7 @@ public abstract class Projectile extends GameObject {
 
 	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
-		super(posX, posY, 2, 2);
+		super(posX-width/2, posY, 2, 2);
 		this.xSpeed = xSpeed / 20;
 		this.ySpeed = -ySpeed / 20;
 		int angle = 360; // rotation
@@ -147,15 +147,6 @@ public abstract class Projectile extends GameObject {
 	}
 
 	void initAnimation(int angle) {
-
-		// translate banana origin to center
-		TranslateTransition translate = new TranslateTransition();
-		translate.setNode(groupShape);
-		translate.setDuration(Duration.millis(1));
-		translate.setByX(-width);
-		translate.setByY(-height);
-		translate.play();
-
 		// rotate
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(groupShape);
