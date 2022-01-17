@@ -55,7 +55,6 @@ public class Main extends Application {
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
-	public static Label score = new Label();
 
 	public static Image background = new Image("pixel-city-chill.gif");
 	public static ImageView imageView = new ImageView(background);
@@ -69,7 +68,7 @@ public class Main extends Application {
 	 */
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
-		mainStage.setTitle("SimpGorillas");
+		mainStage.setTitle("Gorillas");
 		mainStage.setResizable(false);
 		
 		//Center on screen
@@ -101,10 +100,7 @@ public class Main extends Application {
 
 	static void run() {
 		// gameRoot.getChildren().clear();
-
-		// Update score board
-		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
-
+		
 		for (GameObject gO : objList) {
 			gO.run();
 		}
@@ -123,24 +119,8 @@ public class Main extends Application {
 		new Gorilla(Gorilla.width * 2);
 		new Gorilla(n - (Gorilla.width * 2));
 		
-		/*
-		 * new LevelPart(0,100,100); new LevelPart(100,100,100); new
-		 * LevelPart(200,100,100); new LevelPart(300,100,100); new
-		 * LevelPart(400,100,100); new LevelPart(500,100,100);
-		 */
-
-		// Insert score board
-		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);
-		BorderPane placeScore = new BorderPane();
-		placeScore.setPrefWidth(Main.n);
-		placeScore.setPrefHeight(Main.m);
-		placeScore.setTop(score);
-		BorderPane.setAlignment(score, Pos.CENTER);
-		frameworkRoot.getChildren().add(placeScore);
-
 		// Call turn
 		PlayerTurn.startTurn(0);
-
 	}
 
 	static void initTimer() {
