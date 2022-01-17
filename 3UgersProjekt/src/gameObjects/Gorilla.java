@@ -242,7 +242,7 @@ public class Gorilla extends GameObject {
 			i++;
 		}
 	}
-	
+
 	public void displayName() {
 		Text nameText = new Text(name);
 		nameText.setX(width/2-nameText.getLayoutBounds().getWidth() / 2);

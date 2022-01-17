@@ -57,7 +57,6 @@ public class GameOver {
 		ImageView background = new ImageView(city);
 		ImageView btnImg = new ImageView(banana);
 		Label winner = new Label();
-		Label loser = new Label();
 		Label gameOver = new Label();		
 		
 		
@@ -82,15 +81,12 @@ public class GameOver {
 		// Positioning the elements inside the gridpane.
 		GridPane.setHalignment(gameOver, HPos.CENTER);
 		GridPane.setHalignment(winner, HPos.CENTER);
-		GridPane.setHalignment(loser, HPos.CENTER);
 		GridPane.setConstraints(gameOver, 1, 0);
 		GridPane.setConstraints(winner, 1, 5);
-		GridPane.setConstraints(loser, 1, 11);
 		GridPane.setConstraints(playAgain, 0, 13);
 		GridPane.setConstraints(exit, 2 ,13);
 		GridPane.setColumnSpan(gameOver, 2);
 		GridPane.setColumnSpan(winner, 2);
-		GridPane.setColumnSpan(loser, 2);
 		GridPane.setColumnSpan(playAgain, 2);
 		
 		
@@ -100,17 +96,21 @@ public class GameOver {
 		 * Do so that the right player is displayed in the winner filed and the other(s)
 		 * in the losers field.
 		 */
+		
+		
 		gameOver.setText("Game Over");
-		winner.setText("Winner: Player 1");
-		loser.setText("Loser: Player 2");
+		int winnerNum=0;
+		for (int i = 0; i<Main.pList.size(); i++) {
+			if (Main.pList.get(i).curNumLife != 0) winnerNum = i;
+		}
+		winner.setText("Winner: " + Main.nList.get(winnerNum));
+		
 		
 		// Sets the fonts and the size of the text
 		gameOver.setFont(new Font("Times New Roman", 50.0));
 		gameOver.setTextFill(Color.WHITE);
 		winner.setFont(new Font("Times New Roman", 35.0));
 		winner.setTextFill(Color.WHITE);
-		loser.setFont(new Font("Times New Roman", 35.0));
-		loser.setTextFill(Color.WHITE);
 		
 		// Adding a play again button
 		playAgain.setText("Play Again");
@@ -161,7 +161,6 @@ public class GameOver {
 		
 		// Adds the Nodes to the pane and the pane to the group
 		pane.getChildren().add(winner);
-		pane.getChildren().add(loser); 
 		pane.getChildren().add(gameOver);
 		pane.getChildren().add(playAgain);
 		pane.getChildren().add(exit);
