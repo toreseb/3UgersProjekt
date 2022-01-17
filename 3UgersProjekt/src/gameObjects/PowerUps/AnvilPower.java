@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class AnvilPower extends PowerUp {
 
-	public AnvilPower(double posX, double posY, int width, int height) {
-		super(posX, posY, width, height);
+	public AnvilPower(double posX, double posY) {
+		super(posX, posY);
 	}
 	
 	protected void initShape() {

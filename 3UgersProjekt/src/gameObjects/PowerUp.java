@@ -22,8 +22,10 @@ public abstract class PowerUp extends GameObject {
 	public Image image;
 	protected ImageView imageView;
 	private int counter = 0;
+	public static int width = 25;
+	public static int height = 25;
 
-	public PowerUp(double posX, double posY, int width, int height) {
+	public PowerUp(double posX, double posY) {
 		super(posX, posY, width, height);
 		Main.cLevel.powerUps.add(this);
 	}
@@ -66,5 +68,10 @@ public abstract class PowerUp extends GameObject {
 		if (counter == 80) {
 			counter = 0;
 		}
+	}
+	public void newCoords() {
+		vectorPos.set(0,Math.random()*(Main.n));
+		vectorPos.set(1,Math.random()*(Main.m));
+		super.step();
 	}
 }

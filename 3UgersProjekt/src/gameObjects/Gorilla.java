@@ -43,11 +43,11 @@ public class Gorilla extends GameObject {
 	private static Image heart = new Image("Heart.png");
 	private ImageView gorilla;
 	private boolean right = true;
-	private Image gorillaThrowImg = new Image("GorillaThrow.png");
+	public Image gorillaThrowImg = new Image("GorillaThrow.png");
 
 	// Constructor
 	public Gorilla(int posX) {
-		super(posX, 0, width, height);
+		super(posX, height, width, height);
 		numLife = 3;
 		curNumLife = numLife;
 		point = 0;
@@ -253,13 +253,10 @@ public class Gorilla extends GameObject {
 	void toTop() {
 		for (GameObject gO : Main.objList) {
 			if(LevelPart.class.isAssignableFrom(gO.getClass())) {
-
 				while(objectCollision(gO)) {
-					System.out.println(gO.getClass());
 					vectorPos.set(1,vectorPos.get(1)+1);
 					groupShape.setTranslateX(vectorPos.get(0));
 					groupShape.setTranslateY(Main.m - vectorPos.get(1));
-					System.out.println(hitBox.getLayoutY());
 				}
 			}
 		}

@@ -35,8 +35,8 @@ public class Main extends Application {
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
 	
-	public static int startSizeX=300;
-	public static int startSizeY=200;
+	public static int startSizeX= 650;
+	public static int startSizeY= 390;
 
 	public static Level cLevel;
 
@@ -108,6 +108,10 @@ public class Main extends Application {
 		for (GameObject gO : objList) {
 			gO.run();
 		}
+		if(SpawnPowerup.newPowerUp) {
+			SpawnPowerup.spawnPower();
+			SpawnPowerup.newPowerUp = false;
+		}
 		clearLists();
 
 	}
@@ -118,7 +122,7 @@ public class Main extends Application {
 		cLevel = new Level(n, m);
 		new Gorilla(Gorilla.width * 2);
 		new Gorilla(n - (Gorilla.width * 2));
-		SpawnPowerup.spawnPower();
+		
 		/*
 		 * new LevelPart(0,100,100); new LevelPart(100,100,100); new
 		 * LevelPart(200,100,100); new LevelPart(300,100,100); new

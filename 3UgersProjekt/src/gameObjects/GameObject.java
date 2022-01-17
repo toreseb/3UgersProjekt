@@ -46,6 +46,7 @@ public abstract class GameObject {
 
 		id = idCounter;
 		idCounter++;
+		
 		initShape();
 		Main.objList.add(this);// Adds the player to a list.
 		Main.gameRoot.getChildren().add(groupShape);
@@ -113,18 +114,18 @@ public abstract class GameObject {
 	}
 
 	public boolean objectCollision(GameObject gO) {
-		
 		Shape inter = Shape.intersect(hitBox, gO.hitBox);
-		
-		
-		
-		
 		if(inter.getBoundsInParent().getWidth() != -1) {
 			return true;
 		}
-		
 		return false;
-		
+	}
+	public boolean shapeCollision(Shape sh) {
+		Shape inter = Shape.intersect(hitBox, sh);
+		if(inter.getBoundsInParent().getWidth() != -1) {
+			return true;
+		}
+		return false;
 	}
 	
 	protected void initHitbox() {
