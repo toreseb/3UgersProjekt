@@ -22,11 +22,11 @@ public class Slime extends Projectile {
 	
 	public void playerHit(Gorilla p) {
 		// TODO Auto-generated method stub
-		System.out.println("Damage Dealt");
+		System.out.println("Slime Dealt");
 		p.gorillaImg = new Image("SlimedGorilla.png");
 		p.gorillaThrowImg = new Image("SlimedGorillaThrow.png");
 		p.normalImage = false;
-		p.slimed = 2;
-		Main.pList.get(Main.cPlayer).hasPow = "no";
+		p.slimed = 1;
+		p.gorilla.setImage(p.gorillaImg);
 	}
 }

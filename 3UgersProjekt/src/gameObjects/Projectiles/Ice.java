@@ -23,7 +23,8 @@ public class Ice extends Projectile {
 		System.out.println("Damage Dealt");
 		p.gorillaImg = new Image("FrozenGorilla.png");
 		p.normalImage = false;
-		p.frozen = 2;
+		p.frozen = 1;
 		Main.pList.get(Main.cPlayer).hasPow = "no";
+		p.gorilla.setImage(p.gorillaImg);
 	}
 }

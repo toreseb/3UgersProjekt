@@ -39,9 +39,9 @@ public class Gorilla extends GameObject {
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
-	private ImageView gorilla;
+	public ImageView gorilla;
 	private boolean right = true;
-	public Image gorillaThrowImg = new Image("GorillaThrow.png");
+	public Image gorillaThrowImg; 
 
 	// Constructor
 	public Gorilla(int posX) {
@@ -88,6 +88,7 @@ public class Gorilla extends GameObject {
 	@Override
 	protected void initShape() {
 		gorillaImg = new Image("Gorilla.png");
+		gorillaThrowImg = new Image("GorillaThrow.png");
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
@@ -155,10 +156,13 @@ public class Gorilla extends GameObject {
 			// Find the right type of projectile
 			if (hasPow.equals("ice")) {
 				banana = new Ice(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+				hasPow = "no";
 			} else if (hasPow.equals("slime")) {
 				banana = new Slime(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+				hasPow = "no";
 			} else if (hasPow.equals("anvil")) {
 				banana = new Anvil(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+				hasPow = "no";
 			} else {
 				banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 			}
