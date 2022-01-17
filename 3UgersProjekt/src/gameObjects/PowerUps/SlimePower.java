@@ -13,7 +13,7 @@ public class SlimePower extends PowerUp {
 
 	protected void initShape() {
 		image = new Image("StaticSlimeTransparent.png");
-
+		
 		super.initShape();
 	}
 

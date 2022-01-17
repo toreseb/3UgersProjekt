@@ -12,11 +12,12 @@ public class IcePower extends PowerUp {
 
 	protected void initShape() {
 		image = new Image("Iceball.png");
+		
 		super.initShape();
 	}
 
-	@Override
 	public void collected() {
+		// The first powerup hit on a throw is the one that is collected
 		if (Main.pList.get(Main.cPlayer).hasPow.equals("no")) {
 			Main.pList.get(Main.cPlayer).hasPow = "ice";
 		}

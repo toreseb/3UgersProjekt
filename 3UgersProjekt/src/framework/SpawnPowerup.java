@@ -3,7 +3,6 @@ package framework;
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
 import gameObjects.PowerUp;
-import gameObjects.TestPower;
 import gameObjects.PowerUps.*;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
