@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -79,9 +81,7 @@ public class SetupScenes {
 		btn.setLayoutX(150);
 		btn.setLayoutY(80);
 		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
 				try {
 					int newN = Integer.parseInt(setN.getText());
 					int newM = Integer.parseInt(setM.getText());
@@ -135,17 +135,20 @@ public class SetupScenes {
 	 * Changes the frameworkRoot from Main to show two sliders and prompts the user
 	 * to set the size of the game-window.
 	 */
-	public static void windowSize() {
+	public static void windowSize() {	
 		// GridPane setup
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		//Create scene and add grid
+		Scene sceneSize = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
 		Text prompt = new Text("Please set width and height:");
-		Slider sliderX = new Slider(200, Screen.getPrimary().getVisualBounds().getWidth(), 800);
-		Slider sliderY = new Slider(200, Screen.getPrimary().getVisualBounds().getHeight(), 400);
+		Slider sliderX = new Slider(300, Screen.getPrimary().getVisualBounds().getWidth(), 800);
+		Slider sliderY = new Slider(300, Screen.getPrimary().getVisualBounds().getHeight(), 400);
 		Button btn = new Button("Submit");
 
 		// Define sliders - Ew - I don't like these - Maybe go back to text fields
@@ -185,7 +188,10 @@ public class SetupScenes {
 		});
 
 		//Add grid to frameworkRoot in Main
-		Main.frameworkRoot.getChildren().add(grid);
+		//Main.frameworkRoot.getChildren().add(grid);
+		
+		//Set scene on stage
+		Main.mainStage.setScene(sceneSize);
 	}
 
 	/*
@@ -200,6 +206,9 @@ public class SetupScenes {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		//Create scene and add grid
+		Scene sceneAmount = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
 		Text prompt = new Text("Please enter amount of players:");
@@ -240,9 +249,11 @@ public class SetupScenes {
 		});
 
 		//Clear frameworkRoot in Main and add grid
-		Main.frameworkRoot.getChildren().clear();
-		Main.frameworkRoot.getChildren().add(grid);
+		//Main.frameworkRoot.getChildren().clear();
+		//Main.frameworkRoot.getChildren().add(grid);
 
+		//Set scene on stage
+		Main.mainStage.setScene(sceneAmount);
 	}
 
 	/*
@@ -257,6 +268,9 @@ public class SetupScenes {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		//Create scene and add grid
+		Scene sceneNames = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
 		Text prompt = new Text("Player" + (pCount) + ", please enter a name");
@@ -303,9 +317,49 @@ public class SetupScenes {
 			}
 		});
 
-		Main.frameworkRoot.getChildren().clear();
-		Main.frameworkRoot.getChildren().add(grid);
+		//Main.frameworkRoot.getChildren().clear();
+		//Main.frameworkRoot.getChildren().add(grid);
 
+		//Set scene on stage
+		Main.mainStage.setScene(sceneNames);
+	}
+	
+	public static void levelSelect() {
+		//Setup panes
+		HBox buttons = new HBox();
+		VBox main = new VBox();
+		
+		//Create scene and add "main"
+		Scene sceneLevel = new Scene(main,Main.startSizeX,Main.startSizeY);		
+		
+		//Create components
+		Text prompt = new Text("Please select a level");
+		Button cityLevel = new Button("City");
+		Button forestLevel = new Button("Forest");
+		
+		//Add components to panes
+		buttons.getChildren().addAll(cityLevel,forestLevel);
+		main.getChildren().addAll(prompt,buttons);
+		
+		//Set button press event for cityLevel
+		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		
+		//Set button press event for forestLevel
+		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		
+		
+		//Set scene on stage
+		Main.mainStage.setScene(sceneLevel);
 	}
 
 	/*
@@ -318,10 +372,9 @@ public class SetupScenes {
 	 */
 	public static void startGame() {
 		// reposition Stage - Skal måske laves om
-		Main.mainStage.setX((Main.mainStage.getX() + (Main.startSizeX - Main.n) / 2));
-		Main.mainStage.setY((Main.mainStage.getY() + (Main.startSizeY - Main.m) / 3));
-		if (Main.mainStage.getY() < 5)
-			Main.mainStage.setY(5);
+		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-Main.n) / 2);
+		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- Main.m) / 2);
+
 
 		// set background image
 		double w = Main.background.getWidth();

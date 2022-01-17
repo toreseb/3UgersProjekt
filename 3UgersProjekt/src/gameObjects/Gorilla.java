@@ -40,7 +40,7 @@ public class Gorilla extends GameObject {
 	private static Image heart = new Image("Heart.png");
 	private ImageView gorilla;
 	private boolean right = true;
-	private Image gorillaThrowImg = new Image("GorillaThrow.png");	
+	public Image gorillaThrowImg = new Image("GorillaThrow.png");	
 
 	// Constructor
 	public Gorilla(int posX) {
