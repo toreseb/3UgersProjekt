@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Projectil: shows the banana when is is thrown and simulates projectile motion
+ * Projectile: shows the banana when is is thrown and simulates projectile motion
  * until the banana collides
  *
  * By: Embla Peulicke
@@ -25,6 +25,8 @@ public abstract class Projectile extends GameObject {
 	public static int height = 20;
 
 	protected Image banana = new Image("Banana.png"); //???
+	protected Image hand = new Image("GorillaHand.png");
+	protected ImageView viewHand;
 
 	// Constructor
 	public Projectile(double posX, double posY, double xSpeed, double ySpeed) {
@@ -41,6 +43,8 @@ public abstract class Projectile extends GameObject {
 		ySpeed -= g / 60; // calc new ySpeed from acceleration - 60 frames per second
 		vectorPos.set(0, (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (vectorPos.get(1) + ySpeed));
+		
+		outOfSight(); // calls function that check if banana is out of sight and then shows a pointing GorillaHand
 		
 		// Check if level part is hit
 		boolean goToNextPlayer = false;
@@ -101,6 +105,25 @@ public abstract class Projectile extends GameObject {
 		
 	}
 
+	public void outOfSight(){
+		if (vectorPos.get(1) > Main.m) {
+			if (viewHand == null) {
+				viewHand = new ImageView(hand);
+				viewHand.setX(vectorPos.get(0));
+				viewHand.setY(0);
+				Main.mainRoot.getChildren().add(viewHand);
+			}
+			else {
+				viewHand.setX(vectorPos.get(0));
+				viewHand.setY(0);
+			}
+		}
+		else if (vectorPos.get(1) < Main.m && viewHand != null) {
+			Main.mainRoot.getChildren().remove(viewHand);
+			viewHand = null;
+		}
+	}
+	
 	protected void nextPlayer() {
 		System.out.println("next Player");
 		Main.cPlayer++;
