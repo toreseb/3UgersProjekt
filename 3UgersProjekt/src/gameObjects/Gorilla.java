@@ -12,6 +12,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.image.*;
@@ -67,9 +69,10 @@ public class Gorilla extends GameObject {
 		Main.pList.add(this);
 
 		name = Main.nList.get(Main.pList.indexOf(this));
-
+		displayName();
+		
 		if (Main.pList.indexOf(this) == 1) rotate();
-
+		
 		step();
 	}
 
@@ -242,6 +245,13 @@ public class Gorilla extends GameObject {
 			lifeBar.getChildren().add(health);
 			i++;
 		}
+	}
+
+	public void displayName() {
+		Text nameText = new Text(name);
+		nameText.setX(width/2-nameText.getLayoutBounds().getWidth() / 2);
+		nameText.setY(-20);
+		groupShape.getChildren().add(nameText);
 	}
 
 	void toTop() {
