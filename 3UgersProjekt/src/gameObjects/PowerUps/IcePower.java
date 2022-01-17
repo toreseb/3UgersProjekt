@@ -17,7 +17,9 @@ public class IcePower extends PowerUp {
 
 	@Override
 	public void collected() {
-		Main.pList.get(Main.cPlayer).hasPow = "ice";
+		if (Main.pList.get(Main.cPlayer).hasPow.equals("no")) {
+			Main.pList.get(Main.cPlayer).hasPow = "ice";
+		}
 
 		super.collected();
 	}

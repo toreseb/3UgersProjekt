@@ -17,7 +17,9 @@ public class AnvilPower extends PowerUp {
 	}
 	
 	public void collected() {
-		Main.pList.get(Main.cPlayer).hasPow = "anvil";
+		if (Main.pList.get(Main.cPlayer).hasPow.equals("no")) {
+			Main.pList.get(Main.cPlayer).hasPow = "anvil";
+		}
 
 		super.collected();
 	}
