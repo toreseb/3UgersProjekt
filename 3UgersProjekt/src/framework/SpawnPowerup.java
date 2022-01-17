@@ -23,20 +23,9 @@ public class SpawnPowerup {
 		PowerUp powerUp = null;
 		//Make spawning powerups work
 
-		if (rnd(antal) < 1) {
-			powerUp = new Pie(x, y, 25, 25);
-		} else if (rnd(antal) < 2) {
-			powerUp = new SlimePower(x, y, 25, 25);
-		} else if (rnd(antal) < 3) {
-			powerUp = new IcePower(x, y, 25, 25);
-		} else if (rnd(antal) <= 4) {
-			powerUp = new AnvilPower(x, y, 25, 25);
-		}
+		//Find ud af at f� den til at kun placere den hvis punktet er udenfor bygninger (og gorillaer).
 		
 		
-		
-		TestPower test = new TestPower(Main.n / 2, Main.m / 2, 25, 25);
-		System.out.println("bub");
 
 	}
 

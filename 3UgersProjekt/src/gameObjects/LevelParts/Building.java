@@ -21,15 +21,15 @@ public class Building extends LevelPart {
 		int random = (int)Math.floor(Math.random()*3);
 		switch (random) {
 		case 0: {
-			mainShape.setFill(Color.RED);
+			mainShape.setFill(Color.DARKSALMON);
 			break;
 		}
 		case 1: {
-			mainShape.setFill(Color.BLUE);
+			mainShape.setFill(Color.DARKSLATEBLUE);
 			break;
 		}
 		case 2: {
-			mainShape.setFill(Color.GREEN);
+			mainShape.setFill(Color.DARKMAGENTA);
 			break;
 		}
 		default:
