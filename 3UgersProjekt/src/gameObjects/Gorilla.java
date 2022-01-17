@@ -46,7 +46,6 @@ public class Gorilla extends GameObject {
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, 0, width, height);
-		this.vectorPos.set(1,(double) (Main.cLevel.maxHeightAtLocation(((int) (double) this.vectorPos.get(0)), width) + height));
 		numLife = 3;
 		curNumLife = numLife;
 		point = 0;
