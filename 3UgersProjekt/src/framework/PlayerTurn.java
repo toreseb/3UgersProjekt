@@ -46,7 +46,7 @@ public class PlayerTurn {
 		}
 		
 		// Create components
-		Label ask = new Label("Player " + (cPlayer + 1) + " what do you want to do on your turn?");
+		Label ask = new Label(Main.nList.get(cPlayer) + " what do you want to do on your turn?");
 		Button btnShoot = new Button("Shoot");
 		Button btnMove = new Button("Move");
 		// Add to H- and VBox
