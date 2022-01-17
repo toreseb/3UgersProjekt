@@ -35,8 +35,8 @@ public class Main extends Application {
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
 	
-	public static int startSizeX=300;
-	public static int startSizeY=200;
+	public static int startSizeX= 650;
+	public static int startSizeY= 390;
 
 	public static Level cLevel;
 
