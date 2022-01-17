@@ -146,9 +146,13 @@ public class SetupScenes {
 		Scene sceneSize = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
-		Text prompt = new Text("Please set width and height:");
+		Text promptSize = new Text("Please set width and height:");
 		Slider sliderX = new Slider(300, Screen.getPrimary().getVisualBounds().getWidth(), 800);
 		Slider sliderY = new Slider(300, Screen.getPrimary().getVisualBounds().getHeight(), 400);
+		Text promptAmount = new Text("Please enter amount of players:");
+		TextField amount = new TextField();
+		amount.setPromptText("2 to 6");
+		amount.setMaxWidth(100);
 		Button btn = new Button("Submit");
 
 		// Define sliders - Ew - I don't like these - Maybe go back to text fields
@@ -166,13 +170,15 @@ public class SetupScenes {
 		sliderY.setPrefWidth(Main.startSizeY - 20);
 
 		// Set placement of components
-		GridPane.setConstraints(prompt, 0, 0);
+		GridPane.setConstraints(promptSize, 0, 0);
 		GridPane.setConstraints(sliderX, 0, 1);
 		GridPane.setConstraints(sliderY, 0, 2);
-		GridPane.setConstraints(btn, 0, 3);
+		GridPane.setConstraints(promptAmount, 0, 3);
+		GridPane.setConstraints(amount, 0, 4);
+		GridPane.setConstraints(btn, 0, 5);
 
 		//Add components to grid
-		grid.getChildren().addAll(prompt, sliderX, sliderY, btn);
+		grid.getChildren().addAll(promptSize, sliderX, sliderY,promptAmount,amount, btn);
 
 		//Set button press event
 		btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -181,9 +187,27 @@ public class SetupScenes {
 				//Get values from sliders
 				Main.n = (int) sliderX.getValue();
 				Main.m = (int) sliderY.getValue();
+				
+				try {
+					int count = Integer.parseInt(amount.getText());
+					
+					//Check if input from text field is within bounds
+					if ((count < 2 || count > 6)) {
+						throw new IllegalCallerException();
+					}
+					// set pAmount in Main
+					Main.pAmount = count;
+					
+					//Call next imput prompt
+					playerNames();
+				} catch (IllegalCallerException e) {
+					promptAmount.setText("Only values between 2 and 6");
+				} catch (Exception e) {
+					promptAmount.setText("Please enter integers only!");
+				}
 
 				//Call next input prompt
-				playerAmount();
+				//playerAmount();
 			}
 		});
 
@@ -326,7 +350,10 @@ public class SetupScenes {
 	
 	public static void levelSelect() {
 		//Setup panes
-		HBox buttons = new HBox();
+		GridPane buttons = new GridPane();
+		buttons.setHgap(10);
+		buttons.setVgap(10);
+		buttons.setPadding(new Insets(10, 10, 10, 10));
 		VBox main = new VBox();
 		
 		//Create scene and add "main"
@@ -336,9 +363,21 @@ public class SetupScenes {
 		Text prompt = new Text("Please select a level");
 		Button cityLevel = new Button("City");
 		Button forestLevel = new Button("Forest");
+		Button mountainLevel = new Button("Mountain");
+		Button villageLevel = new Button("Village");
+		Button hillLevel = new Button("Hills");
+		Button rockyHillLevel = new Button("Rocky hills");
+		
+		//Set placement of components
+		GridPane.setConstraints(cityLevel, 0, 0);
+		GridPane.setConstraints(forestLevel, 0, 1);
+		GridPane.setConstraints(mountainLevel, 1, 0);
+		GridPane.setConstraints(villageLevel, 1, 1);
+		GridPane.setConstraints(hillLevel, 2, 0);
+		GridPane.setConstraints(rockyHillLevel, 2, 1);
 		
 		//Add components to panes
-		buttons.getChildren().addAll(cityLevel,forestLevel);
+		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel);
 		main.getChildren().addAll(prompt,buttons);
 		
 		//Set button press event for cityLevel
@@ -356,7 +395,33 @@ public class SetupScenes {
 			}
 		});
 		
+		//Set button press event for mountainLevel
+		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
 		
+		//Set button press event for villageLevel
+		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set button press event for hillLevel
+		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
+		
+		//Set button press event for rockyHillLevel
+		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				
+			}
+		});
 		
 		//Set scene on stage
 		Main.mainStage.setScene(sceneLevel);
