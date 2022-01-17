@@ -39,6 +39,7 @@ public abstract class PowerUp extends GameObject {
 		imageView.setPreserveRatio(true);
 
 		groupShape.getChildren().add(imageView);
+		super.initShape();
 	}
 
 	public void collected() {

@@ -28,6 +28,8 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	public static int n, m;// Width and Height
+	
+	public static boolean showHitbox = false;
 
 	public static Stage mainStage;
 	public static Scene mainScene;

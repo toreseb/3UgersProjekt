@@ -36,14 +36,14 @@ public class Building extends LevelPart {
 			throw new IllegalArgumentException("Unexpected value: " + random);
 		}
 		
-		
+		hitBox = mainShape;
 		groupShape.getChildren().add(mainShape);
 		int rows = (int)Math.floor((height-verticalMargins)/(windowHeight+verticalMargins));
 		double extraHeight = (height-verticalMargins) % (windowHeight+verticalMargins);
 		int columns = (int)Math.floor((width-horizontalMargins)/(windowWidth+horizontalMargins));
 		double extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
-		windowHeight += extraHeight/columns;
-		windowWidth += extraWidth/rows;
+		windowHeight += extraHeight/rows;
+		windowWidth += extraWidth/columns;
 		System.out.println(rows * (windowWidth+horizontalMargins)+horizontalMargins);
 		
 		for(int cRows = 0; cRows < rows; cRows++) {

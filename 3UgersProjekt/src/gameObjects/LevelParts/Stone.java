@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class Stone extends LevelPart {
-	double dwidth;
-	double dheight;
 	Label type;
 	public Stone(int posX, int width, int height) {
 		super(posX, width, height);
@@ -17,18 +15,18 @@ public class Stone extends LevelPart {
 	
 	@Override
 	protected void initShape() {
-		dwidth = (double) width;
-		dheight = (double) height;
+		dwidth = (double)width;
+		dheight = (double)height;
 		Polygon p = new Polygon();
 		type = new Label();
 		type.setLayoutX(dwidth);
 		type.setLayoutY(dheight);
-		
 		if(height <= 150) {
 			initSmallStone(p);
 		}else {
 			initBigStone(p);
 		}
+		hitBox = p;
 		groupShape.getChildren().addAll(p,type);
 	}
 	
@@ -57,7 +55,7 @@ public class Stone extends LevelPart {
 		dwidth*5/6,dheight,
 		dwidth*1/6,dheight,
 		dwidth*1/7,dheight*18/20,
-		dwidth*1/8,dheight*10/20
+		dwidth*1/8,dheight/30
 		});
 		p.setFill(Color.GRAY);
 	}
