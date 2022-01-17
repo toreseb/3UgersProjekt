@@ -28,10 +28,15 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	public static int n, m;// Width and Height
+	
+	public static boolean showHitbox = false;
 
 	public static Stage mainStage;
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
+	
+	public static int startSizeX=300;
+	public static int startSizeY=200;
 
 	public static Level cLevel;
 
@@ -41,12 +46,15 @@ public class Main extends Application {
 	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
 
 	public static ArrayList<Gorilla> pList = new ArrayList<Gorilla>();
-
+	
 	public static int cPlayer = 0;
+	
+	public static int pAmount;
+	public static ArrayList<String> nList = new ArrayList<String>();
 
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
-	public static Group mainRoot; // @TEST
+	public static Group mainRoot = new Group(); // @TEST
 	public static Label score = new Label();
 
 	public static Image background = new Image("pixel-city-chill.gif");
@@ -55,120 +63,34 @@ public class Main extends Application {
 	/*
 	 * start()
 	 *
-	 * Creates the first scene/stage. xxx hvilken en?
-	 *
-	 * Asks for two integer values as the dimensions of the game.
+	 * Creates the stage and calls the different, variable-defining scenes.
 	 *
 	 * By: Helene Moesgaard.
 	 */
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
 		mainStage.setTitle("SimpGorillas");
-
-		Group root = new Group();
-
-		// BorderPane setup
-		BorderPane border = new BorderPane();
-		border.setPadding(new Insets(10, 10, 10, 10));
-
-		// GridPane setup
-		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(10, 10, 10, 10));
-
+		mainStage.setResizable(false);
+		
+		//Center on screen
+		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeX)/2);
+		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeY)/2);
+		
+		mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
+		
 		// Window icon
 		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
-
-		root.getChildren().add(grid);
-		root.getChildren().add(border);
-
-		int startWidth = 300;
-		int startHeight = 200;
-		mainStage.setScene(new Scene(root, startWidth, startHeight));
-
-		Text text = new Text();
-		TextField setN = new TextField();
-		setN.setPromptText("300 to 2000");
-		TextField setM = new TextField();
-		setM.setPromptText("300 to 2000");
-		Label askN = new Label();
-		Label askM = new Label();
-		Button btn = new Button();
-
-		text.setText("Please define the dimensions of the game:");
-
-		// Place text
-		border.setTop(text);
-
-		// Place setN
-		GridPane.setConstraints(setN, 1, 4);
-
-		// Place setM
-		GridPane.setConstraints(setM, 1, 5);
-
-		askN.setText("Width:");
-		// Place askN
-		GridPane.setConstraints(askN, 0, 4);
-
-		askM.setText("Height:");
-		// Place askM
-		GridPane.setConstraints(askM, 0, 5);
-
-		btn.setText("Submit");
-		btn.setLayoutX(150);
-		btn.setLayoutY(80);
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				try {
-					int newN = Integer.parseInt(setN.getText());
-					int newM = Integer.parseInt(setM.getText());
-					if ((newN < 300 || newN > 2000) || (newM < 300 || newM > 2000)) {
-						throw new IllegalCallerException();
-					}
-					n = newN;
-					m = newM;
-
-					// reposition Stage
-					Main.mainStage.setX((Main.mainStage.getX() + (startWidth - n) / 2));
-					Main.mainStage.setY((Main.mainStage.getY() + (startHeight - m) / 3));
-					if (Main.mainStage.getY() < 5)
-						Main.mainStage.setY(5);
-
-					// set background image
-					double w= background.getWidth();
-					double h= background.getHeight();
-					imageView.setPreserveRatio(true);
-					if ((n/w) > (m/h)) {
-						imageView.setFitWidth(n);
-					}
-					else imageView.setFitHeight(m);
-					
-					mainRoot = new Group();
-					mainRoot.getChildren().add(imageView);
-					mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
-					
-					Scene scene = new Scene(mainRoot, Main.n, Main.m);
-					Main.mainStage.setScene(scene);
-					initMain();
-				} catch (IllegalCallerException e) {
-					text.setText("Only values between 300 and 2000");
-				} catch (Exception e) {
-					text.setText("Please enter integers only!");
-				}
-			}
-		});
-
-		// Place btn
-		GridPane.setConstraints(btn, 1, 6);
-
-		grid.getChildren().addAll(askN, setN, askM, setM, btn);
-
-		primaryStage.setResizable(false);
-		primaryStage.show();
+		
+		//SetupScenes.windowSize1(mainStage);
+		
+		mainScene = new Scene(mainRoot,startSizeX,startSizeY);
+		
+		mainStage.setScene(mainScene);
+		
+		SetupScenes.windowSize();
+		
+		mainStage.show();
 	}
 
 	// Main method

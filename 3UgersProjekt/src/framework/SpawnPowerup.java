@@ -1,6 +1,8 @@
 package framework;
 
 import gameObjects.GameObject;
+import gameObjects.LevelPart;
+import gameObjects.PowerUp;
 import gameObjects.TestPower;
 import gameObjects.PowerUps.*;
 import javafx.geometry.Point2D;
@@ -17,8 +19,13 @@ public class SpawnPowerup {
 	public static void spawnPower() {
 		x = rnd(Main.n);
 		y = rnd(Main.m);
+		
+		PowerUp powerUp = null;
+		//Make spawning powerups work
 
-		//Find ud af at få den til at kun placere den hvis punktet er udenfor bygninger (og gorillaer).
+		//Find ud af at fï¿½ den til at kun placere den hvis punktet er udenfor bygninger (og gorillaer).
+		
+		
 
 	}
 

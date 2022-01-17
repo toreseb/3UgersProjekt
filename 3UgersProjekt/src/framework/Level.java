@@ -1,6 +1,7 @@
 package framework;
 
 import java.util.ArrayList;
+import java.lang.reflect.*;
 
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
@@ -12,43 +13,50 @@ public class Level {
 	
 	public ArrayList<LevelPart> parts = new ArrayList<LevelPart>();
 	public ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
+	public ArrayList<Class<? extends LevelPart>> partTypes = new ArrayList<Class<? extends LevelPart>>();
 
 	public Level(int width,int height) {
 		this.width = width;
 		this.height = height;
+		partTypes.add(Stone.class);
+		partTypes.add(Building.class);
+		partTypes.add(Tree.class);
 		initLevelParts();
 	}
 	
 	void initLevelParts(){
+		
 		int widthLeft = width;
-		while(widthLeft >= 150) {
+		while(widthLeft > 0) {
+			LevelPart part = null;
+			Class<? extends LevelPart> c = null;
+			
+			
+			int random = (int)Math.floor( Math.random()*(partTypes.size()));
+			c = partTypes.get(random);
+			
+			
 			int partWidth = 50 + (int)((Math.random())*100);
 			int partHeight = (int)(50 +((Math.random()*Main.m/2)));
-			LevelPart part = new Building(width-widthLeft,partWidth,partHeight);
+			try {
+				if(widthLeft <= 150){
+					partWidth = widthLeft;
+				}
+				part = c.getDeclaredConstructor(int.class,int.class,int.class).newInstance(width-widthLeft,partWidth,partHeight);
+				
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e);
+			}
+			
 			parts.add(part);
 			widthLeft -= partWidth;
+			
+			
 		}
-		LevelPart lastPart = new Stone(width-widthLeft,widthLeft,(int)(50 +(Math.random()*Main.m/2)));
-		parts.add(lastPart);
+		
 	}
 	
-	public int heightAtLocation(int posX) {
-		int totalLength = 0;
-		for (LevelPart levelPart : parts) {
-			totalLength += levelPart.width;
-			if(posX <= totalLength) {
-				return(levelPart.height);
-			}
-		}
-		return(0);
-	}
-	
-	public int maxHeightAtLocation(int xPos, int width) {
-		int highest = Main.cLevel.heightAtLocation(xPos);
-		if(Main.cLevel.heightAtLocation(xPos+width)>highest) {
-			return Main.cLevel.heightAtLocation(xPos+width);
-		}
-		return highest;
-	}
 
 }
