@@ -40,6 +40,8 @@ public class Gorilla extends GameObject {
 	private static Image heart = new Image("Heart.png");
 	public ImageView gorilla;
 	private boolean right = true;
+	boolean firstFrame = true;
+	boolean secondFrame = false;
 	public Image gorillaThrowImg; 
 
 	// Constructor
@@ -80,7 +82,9 @@ public class Gorilla extends GameObject {
 	 */
 	@Override
 	public void step() {
-		toTop();
+		if(vectorPos.get(1) <= height+10) {
+			toTop();
+		}
 		if(isDead) {
 			Main.gameRoot.getChildren().remove(groupShape);
 			Main.cLevel.parts.remove(this);
@@ -210,13 +214,15 @@ public class Gorilla extends GameObject {
 					vectorPos.set(0, event.getSceneX() - width / 2);
 				}
 				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
+				
 			}
 		});
 
 		// sets the moveable back to false and removes prompt when released
 		shape.setOnMouseReleased(event -> {
 			if (moveable) {
-				vectorPos.set(1,0d + height);
+				vectorPos.set(1,1d);
+				super.step();
 				toTop();
 
 				moveable = false;

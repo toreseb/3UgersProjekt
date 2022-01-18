@@ -231,7 +231,7 @@ public class SetupScenes {
 							levelSelect();
 						} else {
 							//If not, clear text field and prompt next player
-							prompt.setText("Player" + (pCount) + ", please enter a name");
+							prompt.setText("Player " + (pCount) + ", please enter a name");
 							name.clear();
 						}
 					}
