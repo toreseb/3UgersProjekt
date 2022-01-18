@@ -1,5 +1,6 @@
 package framework;
 
+import gameObjects.LevelParts.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -326,7 +327,7 @@ public class SetupScenes {
 						//If all names have been set, clear frameworkRoot and call startGame()
 						if (pCount > Main.pAmount) {
 							Main.frameworkRoot.getChildren().clear();
-							startGame();
+							levelSelect();
 						} else {
 							//If not, clear text field and prompt next player
 							prompt.setText("Player" + (pCount) + ", please enter a name");
@@ -377,13 +378,14 @@ public class SetupScenes {
 		GridPane.setConstraints(rockyHillLevel, 2, 1);
 		
 		//Add components to panes
-		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel);
+		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel,rockyHillLevel);
 		main.getChildren().addAll(prompt,buttons);
 		
 		//Set button press event for cityLevel
 		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				Main.levelName = "CITY";
+				startGame();
 			}
 		});
 		
@@ -391,35 +393,40 @@ public class SetupScenes {
 		//Set button press event for forestLevel
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				Main.levelName = "FOREST";
+				startGame();
 			}
 		});
 		
 		//Set button press event for mountainLevel
 		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				Main.levelName = "MOUNTAINS";
+				startGame();
 			}
 		});
 		
 		//Set button press event for villageLevel
 		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				Main.levelName = "VILLAGE";
+				startGame();
 			}
 		});
 		
 		//Set button press event for hillLevel
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				Main.levelName = "HILL";
+				startGame();
 			}
 		});
 		
 		//Set button press event for rockyHillLevel
 		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				Main.levelName = "ROCKYHILLS";
+				startGame();
 			}
 		});
 		

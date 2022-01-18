@@ -37,6 +37,7 @@ public class Main extends Application {
 	public static int startSizeX= 650;
 	public static int startSizeY= 390;
 
+	public static String levelName;
 	public static Level cLevel;
 
 	public static AnimationTimer timer;

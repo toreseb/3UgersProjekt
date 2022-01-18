@@ -8,6 +8,10 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class LevelPart extends GameObject {
 	
+	
+	protected static int maxWidth = 150;
+	protected static int divHeight = 2;
+	
 	int inLevelId;
 	static int inLevelIdCounter = 0;
 	protected double dwidth;
