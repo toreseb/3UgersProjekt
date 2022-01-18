@@ -1,6 +1,8 @@
 package framework;
 
+import gameObjects.GameObject;
 import gameObjects.Gorilla;
+import framework.SetupScenes;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -33,9 +35,17 @@ public class GameOver {
 	
 	 // This function display the game over scene in the window when the main game is done 
 	public static void endGame() {
-		Main.mainStage.setScene(new Scene(createContent()));
-		Main.mainStage.setWidth(WIDTH);
-		Main.mainStage.setHeight(HEIGHT);
+		
+		Main.frameworkRoot.getChildren().clear();
+		Main.gameRoot.getChildren().clear();
+		for (GameObject gO : Main.objList) {
+			gO.deleteObject();
+		}
+		Main.pList.clear();
+		Main.cPlayer = 0;
+		Main.timer.stop();
+		
+		Main.mainStage.setScene(new Scene(createContent(),WIDTH, HEIGHT));
 		
 		//Centering the window on the screen
 		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();	
@@ -129,9 +139,8 @@ public class GameOver {
 				/**
 				 * @TODO: Place the code for the action the button needs to execute when pressed
 				 */
-				Main.mainStage.setScene(Main.mainScene);
-				Main.initMain();
-				Main.timer.start();
+				SetupScenes.pCount = 1;
+				SetupScenes.windowSize();
 			}
 		});
 		

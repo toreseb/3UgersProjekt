@@ -31,7 +31,6 @@ public class Main extends Application {
 	public static boolean showHitbox = false;
 
 	public static Stage mainStage;
-	public static Scene mainScene;
 	// public static Group root2 = new Group();
 	
 	public static int startSizeX= 650;
@@ -82,10 +81,6 @@ public class Main extends Application {
 		mainStage.getIcons().add(icon);
 		
 		//SetupScenes.windowSize1(mainStage);
-		
-		mainScene = new Scene(mainRoot,startSizeX,startSizeY);
-		
-		mainStage.setScene(mainScene);
 		
 		SetupScenes.windowSize();
 		
@@ -147,5 +142,10 @@ public class Main extends Application {
 		for (GameObject gameObject : delList) {
 			objList.remove(gameObject);
 		}
+	}
+	
+	public static void fullClearLists() {
+		objList.clear();
+		cLevel = null;
 	}
 }

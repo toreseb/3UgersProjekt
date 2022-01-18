@@ -29,107 +29,6 @@ import javafx.stage.Stage;
 public class SetupScenes {
 	public static int pCount = 1;
 
-	// Denne er ligegyldig, men er her s� vi kan g� tilbage hvis det er.
-	public static void windowSize1(Stage mainStage) {
-		Group root = new Group();
-
-		// BorderPane setup
-		BorderPane border = new BorderPane();
-		border.setPadding(new Insets(10, 10, 10, 10));
-
-		// GridPane setup
-		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(10, 10, 10, 10));
-
-		root.getChildren().add(grid);
-		root.getChildren().add(border);
-
-//		int startWidth = 300;
-//		int startHeight = 200;
-		mainStage.setScene(new Scene(root, Main.startSizeX, Main.startSizeY));
-
-		Text text = new Text();
-		TextField setN = new TextField();
-		setN.setPromptText("300 to 2000");
-		TextField setM = new TextField();
-		setM.setPromptText("300 to 2000");
-		Label askN = new Label();
-		Label askM = new Label();
-		Button btn = new Button();
-
-		text.setText("Please define the dimensions of the game:");
-
-		// Place text
-		border.setTop(text);
-
-		// Place setN
-		GridPane.setConstraints(setN, 1, 4);
-
-		// Place setM
-		GridPane.setConstraints(setM, 1, 5);
-
-		askN.setText("Width:");
-		// Place askN
-		GridPane.setConstraints(askN, 0, 4);
-
-		askM.setText("Height:");
-		// Place askM
-		GridPane.setConstraints(askM, 0, 5);
-
-		btn.setText("Submit");
-		btn.setLayoutX(150);
-		btn.setLayoutY(80);
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					int newN = Integer.parseInt(setN.getText());
-					int newM = Integer.parseInt(setM.getText());
-					if ((newN < 300 || newN > 2000) || (newM < 300 || newM > 2000)) {
-						throw new IllegalCallerException();
-					}
-					Main.n = newN;
-					Main.m = newM;
-
-					// reposition Stage
-					Main.mainStage.setX((Main.mainStage.getX() + (Main.startSizeX - Main.n) / 2));
-					Main.mainStage.setY((Main.mainStage.getY() + (Main.startSizeY - Main.m) / 2));
-
-//					if (Main.mainStage.getY() < 5)
-//						Main.mainStage.setY(5);
-
-					// set background image
-					double w = Main.background.getWidth();
-					double h = Main.background.getHeight();
-					Main.imageView.setPreserveRatio(true);
-					if ((Main.n / w) > (Main.m / h)) {
-						Main.imageView.setFitWidth(Main.n);
-					} else
-						Main.imageView.setFitHeight(Main.m);
-
-					Main.mainRoot = new Group();
-					Main.mainRoot.getChildren().add(Main.imageView);
-					Main.mainRoot.getChildren().addAll(Main.frameworkRoot, Main.gameRoot);
-
-					Scene scene = new Scene(Main.mainRoot, Main.n, Main.m);
-					Main.mainStage.setScene(scene);
-					Main.initMain();
-				} catch (IllegalCallerException e) {
-					text.setText("Only values between 300 and 2000");
-				} catch (Exception e) {
-					text.setText("Please enter integers only!");
-				}
-			}
-		});
-
-		// Place btn
-		GridPane.setConstraints(btn, 1, 6);
-
-		grid.getChildren().addAll(askN, setN, askM, setM, btn);
-
-	}
-
 	/*
 	 * windowSize()
 	 * 
@@ -188,6 +87,7 @@ public class SetupScenes {
 				//Get values from sliders
 				Main.n = (int) sliderX.getValue();
 				Main.m = (int) sliderY.getValue();
+				
 				
 				try {
 					int count = Integer.parseInt(amount.getText());
