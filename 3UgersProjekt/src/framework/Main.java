@@ -35,8 +35,8 @@ public class Main extends Application {
 	public static Scene mainScene;
 	// public static Group root2 = new Group();
 	
-	public static int startSizeX= 650;
-	public static int startSizeY= 390;
+	public static int startSizeW= 650;
+	public static int startSizeH= 390;
 
 	public static Level cLevel;
 
@@ -73,8 +73,8 @@ public class Main extends Application {
 		mainStage.setResizable(false);
 		
 		//Center on screen
-		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeX)/2);
-		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeY)/2);
+		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeW)/2);
+		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeH)/2);
 		
 		mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
 		
@@ -84,7 +84,7 @@ public class Main extends Application {
 		
 		//SetupScenes.windowSize1(mainStage);
 		
-		mainScene = new Scene(mainRoot,startSizeX,startSizeY);
+		mainScene = new Scene(mainRoot,startSizeW,startSizeH);
 		
 		mainStage.setScene(mainScene);
 		
