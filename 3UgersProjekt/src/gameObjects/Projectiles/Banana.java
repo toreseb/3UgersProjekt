@@ -24,7 +24,6 @@ public class Banana extends Projectile {
 	@Override
 	public void playerHit(Gorilla p) {
 		p.curNumLife--;
-		p.hearts.remove(p.curNumLife);
 		p.drawHearts();
 	}
 

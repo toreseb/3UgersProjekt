@@ -36,8 +36,7 @@ public class Gorilla extends GameObject {
 	public String name;
 
 	public Group lifeBar = new Group();
-	public ArrayList<Image> hearts = new ArrayList<>();
-	private static Image heart = new Image("Heart.png");
+	public static Image heart = new Image("Heart.png");
 	public ImageView gorilla;
 	private boolean right = true;
 	boolean firstFrame = true;
@@ -47,7 +46,7 @@ public class Gorilla extends GameObject {
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, height, width, height);
-		numLife = 1;
+		numLife = 3;
 		curNumLife = numLife;
 		point = 0;
 		frozen = 0;
@@ -56,14 +55,8 @@ public class Gorilla extends GameObject {
 		normalImage = true;
 		hasPow = "no";
 
-		// Adds the right amount of life to the list.
-		for (int i = 0; i < numLife; i++) {
-			hearts.add(heart);
-		}
-
 		drawHearts(); // draws the init hearts
 		groupShape.getChildren().add(lifeBar);
-
 
 		Main.pList.add(this);
 
@@ -204,7 +197,6 @@ public class Gorilla extends GameObject {
 		shape.setOnMousePressed(event -> {
 			startPosX = event.getSceneX();
 			startPosY = event.getSceneY();
-			//System.out.println(event.getSceneX() + " " + startPosX);
 		});
 
 		// Sets the new position to the shape when the mouse is dragged
@@ -249,16 +241,14 @@ public class Gorilla extends GameObject {
 
 	public void drawHearts() {
 		this.lifeBar.getChildren().clear();
-		int i = 0;
-		for (Image image : hearts) {
-			ImageView health = new ImageView(image);
+		for (int i=0; i<curNumLife; i++) {
+			ImageView health = new ImageView(heart);
 			double size = height / numLife;
 			health.setLayoutY(-size);
 			health.setFitHeight(size);
 			health.setFitWidth(size);
 			health.setLayoutX((i * size) + 2);
 			lifeBar.getChildren().add(health);
-			i++;
 		}
 	}
 
