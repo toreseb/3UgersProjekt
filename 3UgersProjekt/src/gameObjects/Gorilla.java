@@ -45,7 +45,7 @@ public class Gorilla extends GameObject {
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, height, width, height);
-		numLife = 3;
+		numLife = 1;
 		curNumLife = numLife;
 		point = 0;
 		frozen = 0;

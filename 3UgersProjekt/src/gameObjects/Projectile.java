@@ -67,11 +67,7 @@ public abstract class Projectile extends GameObject {
 					// william
 					if (p.curNumLife == 0) {
 						
-						Main.timer.stop();
-						Main.mainRoot.getChildren().clear();
-						for (GameObject gob : Main.objList) {
-							gob.deleteObject();
-						}
+						
 						GameOver.endGame();
 					}
 					goToNextPlayer = true;
