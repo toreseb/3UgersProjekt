@@ -23,7 +23,6 @@ public abstract class LevelPart extends GameObject {
 		inLevelIdCounter++;
 	}
 
-
 	@Override
 	public void step() {
 		super.step();
@@ -31,6 +30,4 @@ public abstract class LevelPart extends GameObject {
 	}
 	@Override
 	public void collision() {} //collision() kæmper mod initShape();
-
-	
 }

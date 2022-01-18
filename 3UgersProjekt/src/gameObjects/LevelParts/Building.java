@@ -47,7 +47,6 @@ public class Building extends LevelPart {
 		double extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
 		windowHeight += extraHeight/rows;
 		windowWidth += extraWidth/columns;
-		System.out.println(rows * (windowWidth+horizontalMargins)+horizontalMargins);
 		
 		for(int cRows = 0; cRows < rows; cRows++) {
 			for(int cColumns = 0; cColumns < columns; cColumns++) {

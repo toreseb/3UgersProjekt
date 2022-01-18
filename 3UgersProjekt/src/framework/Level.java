@@ -2,7 +2,6 @@ package framework;
 
 import java.util.ArrayList;
 import java.lang.reflect.*;
-
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
 import gameObjects.PowerUp;
@@ -47,7 +46,6 @@ public class Level {
 			LevelPart part = null;
 			Class<? extends LevelPart> c = null;
 			
-			
 			int random = (int)Math.floor( Math.random()*(partTypes.size()));
 			c = partTypes.get(random);
 			
@@ -67,15 +65,7 @@ public class Level {
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException e) {
 				// TODO Auto-generated catch block
-				System.out.println(e);
 			}
-			
-			
-			
-			
 		}
-		
 	}
-	
-
 }

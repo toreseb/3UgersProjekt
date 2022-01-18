@@ -52,7 +52,6 @@ public abstract class Projectile extends GameObject {
 		for (GameObject gO : Main.objList) {
 			if(this != gO) {
 				if(objectCollision(gO) && PowerUp.class.isAssignableFrom(gO.getClass())) {
-					System.out.println("Collected Powerup");
 					((PowerUp)gO).collected();
 				}
 
@@ -64,24 +63,18 @@ public abstract class Projectile extends GameObject {
 					// william
 					if (p.curNumLife == 0) {
 						
-						System.out.println("Dead");
 						Main.timer.stop();
 						Main.mainRoot.getChildren().clear();
 						for (GameObject gob : Main.objList) {
 							gob.deleteObject();
 						}
 						GameOver.endGame();
-						
 					}
-
-
 					goToNextPlayer = true;
 				}else if(objectCollision(gO) && LevelPart.class.isAssignableFrom(gO.getClass())) {
-					System.out.println("Hit Ground");
 					goToNextPlayer = true;
 				}
 			}
-
 		}
 
 		if(goToNextPlayer) {
@@ -125,7 +118,6 @@ public abstract class Projectile extends GameObject {
 	}
 	
 	protected void nextPlayer() {
-		System.out.println("next Player");
 		Main.cPlayer++;
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
