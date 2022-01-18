@@ -97,11 +97,6 @@ public abstract class GameObject {
 		return vectorPos;
 	}
 
-	// to string method
-	public String toString() {
-		return "Objects position: " + "[" + vectorPos.get(0) + ";" + vectorPos.get(1) + "]";
-	}
-
 	/**********
 	 * Tore *
 	 *********/
