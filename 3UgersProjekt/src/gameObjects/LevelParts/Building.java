@@ -5,6 +5,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Building extends LevelPart {
+	
+	public static int maxWidth = LevelPart.maxWidth;
+	public static int divHeight = LevelPart.divHeight;
 
 	public Building(int posX, int width, int height) {
 		super(posX, width, height);

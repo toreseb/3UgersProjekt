@@ -12,6 +12,9 @@ public class Tree extends LevelPart {
 	public Rectangle base;
 	public Group leaves;
 	
+	public static int maxWidth = LevelPart.maxWidth;
+	public static int divHeight = LevelPart.divHeight;
+	
 	public Shape specialHitbox;
 
 	public Tree(int posX, int width, int height) {
@@ -52,8 +55,8 @@ public class Tree extends LevelPart {
 	}
 	
 	@Override
-	protected void initHitbox() {
-		
+	protected void initHitbox() {//Skal overrides, da det er anderledes med træer.
+		// TODO Auto-generated method stub
 	}
 
 }
