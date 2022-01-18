@@ -192,13 +192,22 @@ public class Gorilla extends GameObject {
 				shape.setCursor(Cursor.HAND);
 			}
 		});
+		
+		shape.setOnMousePressed(event -> {
+			startPosX = event.getSceneX();
+			startPosY = event.getSceneY();
+			//System.out.println(event.getSceneX() + " " + startPosX);
+		});
 
 		// Sets the new position to the shape when the mouse is dragged
 		shape.setOnMouseDragged(event -> {
 			if (moveable) {
-				vectorPos.set(0, event.getSceneX() - width / 2);
+				if(Math.abs((event.getSceneX()-startPosX))<(1/4d)*Main.n) {
+					vectorPos.set(0, event.getSceneX() - width / 2);
+				}
 				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
-				toTop();
+				
+				
 			}
 		});
 
