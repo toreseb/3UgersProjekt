@@ -41,7 +41,7 @@ public class GameOver {
 		for (GameObject gO : Main.objList) {
 			gO.deleteObject();
 		}
-		Main.pList.clear();
+		
 		Main.cPlayer = 0;
 		Main.timer.stop();
 		
@@ -108,10 +108,13 @@ public class GameOver {
 		
 		gameOver.setText("Game Over");
 		int winnerNum=0;
-		for (int i = 0; i<Main.pList.size(); i++) {
-			if (Main.pList.get(i).curNumLife != 0) winnerNum = i;
+		for (Gorilla g : Main.pList) {
+			if(!g.isDead) {
+				winnerNum = Main.pList.indexOf(g);
+			}
 		}
 		winner.setText("Winner: " + Main.nList.get(winnerNum));
+		Main.pList.clear();
 		
 		
 		// Sets the fonts and the size of the text

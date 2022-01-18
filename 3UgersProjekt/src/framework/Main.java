@@ -110,8 +110,9 @@ public class Main extends Application {
 		initTimer();
 
 		cLevel = new Level(n, m);
-		new Gorilla(Gorilla.width * 2);
-		new Gorilla(n - (Gorilla.width * 2));
+		for(int i = 0; i< pAmount; i++) {
+			new Gorilla((int)(((double)Main.n/pAmount)*(i+0.5)));
+		}
 		
 		// Call turn
 		PlayerTurn.startTurn(0);

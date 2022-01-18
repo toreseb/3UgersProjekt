@@ -58,24 +58,40 @@ public abstract class Projectile extends GameObject {
 				if(objectCollision(gO) && PowerUp.class.isAssignableFrom(gO.getClass())) {
 					((PowerUp)gO).collected();
 				}
-
-				if(objectCollision(gO) && gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
+				if(objectCollision(gO) && gO.getClass().getSimpleName().equals("Gorilla") && !((Gorilla)gO).isDead && Main.pList.get(Main.cPlayer).id != gO.id) {
 					Gorilla p = (Gorilla) gO;
 					// calls the playerHit function which is different to each of the different projectiles
 					playerHit(p);
-					
+					explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
 					// william
 					if (p.curNumLife == 0) {
-						
-						
-						GameOver.endGame();
+						p.isDead = true;
 					}
-					goToNextPlayer = true;
+					boolean anyAlive = false;
+					
+					
+					for(Gorilla g : Main.pList) {
+						if(!g.isDead && Main.pList.get(Main.cPlayer) != g) {
+							anyAlive = true;
+						}
+					}
+					if(!anyAlive) {
+						GameOver.endGame();
+						this.deleteObject();
+					}else {
+						goToNextPlayer = true;
+					}
+					
+					
+					
 				}else if(objectCollision(gO) && LevelPart.class.isAssignableFrom(gO.getClass())) {
+					explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
 					goToNextPlayer = true;
 				}
 			}
 		}
+		
+		
 
 		if(goToNextPlayer) {
 			nextPlayer();
@@ -122,8 +138,14 @@ public abstract class Projectile extends GameObject {
 		if (Main.cPlayer > Main.pList.size() - 1) {
 			Main.cPlayer = 0;
 		}
+		while(Main.pList.get(Main.cPlayer).isDead) {
+			Main.cPlayer++;
+			if (Main.cPlayer > Main.pList.size() - 1) {
+				Main.cPlayer = 0;
+			}
+		}
 		PlayerTurn.startTurn(Main.cPlayer);
-		explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
+		
 		this.deleteObject();
 	}
 

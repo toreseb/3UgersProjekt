@@ -28,7 +28,7 @@ public class Gorilla extends GameObject {
 	public static final int width = 40;
 	public static final int height = 40;
 	public int point, numLife, curNumLife, frozen, slimed;
-	public boolean moveable, normalImage;
+	public boolean moveable, normalImage, isDead = false;;
 	public Projectile banana;
 	public String hasPow;
 	public Image gorillaImg;
@@ -81,6 +81,11 @@ public class Gorilla extends GameObject {
 	@Override
 	public void step() {
 		toTop();
+		if(isDead) {
+			Main.gameRoot.getChildren().remove(groupShape);
+			Main.cLevel.parts.remove(this);
+		}
+		
 		super.step();
 	}
 
@@ -220,10 +225,15 @@ public class Gorilla extends GameObject {
 				}
 
 				shape.setCursor(Cursor.DEFAULT);
-
-				Main.cPlayer++;// The player changes when the projectile hits the ground
+				Main.cPlayer++;
 				if (Main.cPlayer > Main.pList.size() - 1) {
 					Main.cPlayer = 0;
+				}
+				while(Main.pList.get(Main.cPlayer).isDead) {
+					Main.cPlayer++;
+					if (Main.cPlayer > Main.pList.size() - 1) {
+						Main.cPlayer = 0;
+					}
 				}
 				event.consume();
 				PlayerTurn.startTurn(Main.cPlayer);

@@ -140,4 +140,6 @@ public class PlayerTurn {
 
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
 	}
+	
+	
 }

@@ -89,6 +89,7 @@ public class SetupScenes {
 				Main.m = (int) sliderY.getValue();
 				
 				
+				
 				try {
 					int count = Integer.parseInt(amount.getText());
 					
@@ -198,7 +199,7 @@ public class SetupScenes {
 		Scene sceneNames = new Scene(grid,Main.startSizeX,Main.startSizeY);
 
 		// Create components
-		Text prompt = new Text("Player" + (pCount) + ", please enter a name");
+		Text prompt = new Text("Player " + (pCount) + ", please enter a name");
 		TextField name = new TextField();
 		name.setPromptText("Enter name");
 		name.setMaxWidth(100);
