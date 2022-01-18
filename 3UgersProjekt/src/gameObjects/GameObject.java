@@ -2,7 +2,6 @@ package gameObjects;
 
 import framework.Main;
 import java.util.Vector;
-
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -87,7 +86,6 @@ public abstract class GameObject {
 			vectorPos.set(1, (double) Main.m - height / 2);
 		if (vectorPos.get(1) - height / 2 < 0)
 			vectorPos.set(1, (double) 0);
-
 	}
 
 	/***************
@@ -97,11 +95,6 @@ public abstract class GameObject {
 	// Getters
 	public Vector<Double> getVectorPos() {
 		return vectorPos;
-	}
-
-	// to string method
-	public String toString() {
-		return "Objects position: " + "[" + vectorPos.get(0) + ";" + vectorPos.get(1) + "]";
 	}
 
 	/**********
@@ -138,5 +131,4 @@ public abstract class GameObject {
 		
 		groupShape.getChildren().add(hitBox);
 	}
-
 }

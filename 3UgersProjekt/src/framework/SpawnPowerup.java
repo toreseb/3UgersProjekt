@@ -3,7 +3,6 @@ package framework;
 import gameObjects.GameObject;
 import gameObjects.LevelPart;
 import gameObjects.PowerUp;
-import gameObjects.TestPower;
 import gameObjects.PowerUps.*;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
@@ -35,15 +34,12 @@ public class SpawnPowerup {
 				if (sh.getBoundsInParent().getWidth() != -1) {
 
 					isBad = true;
-					System.out.println("Bad Coords");
 				}
-
 			}
 		}
 
 		PowerUp powerUp;
 		int rnd = rnd(4);
-		System.out.println("powerSpawn");
 		if (rnd < 1) {
 			powerUp = new SlimePower(x, y);
 		} else if (rnd < 2) {
@@ -55,7 +51,5 @@ public class SpawnPowerup {
 		}
 
 		Main.cLevel.powerUps.add(powerUp);
-
 	}
-
 }

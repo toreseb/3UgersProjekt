@@ -1,6 +1,8 @@
 package framework;
 
+import gameObjects.GameObject;
 import gameObjects.Gorilla;
+import framework.SetupScenes;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -33,9 +35,17 @@ public class GameOver {
 	
 	 // This function display the game over scene in the window when the main game is done 
 	public static void endGame() {
-		Main.mainStage.setScene(new Scene(createContent()));
-		Main.mainStage.setWidth(WIDTH);
-		Main.mainStage.setHeight(HEIGHT);
+		
+		Main.frameworkRoot.getChildren().clear();
+		Main.gameRoot.getChildren().clear();
+		for (GameObject gO : Main.objList) {
+			gO.deleteObject();
+		}
+		
+		Main.cPlayer = 0;
+		Main.timer.stop();
+		
+		Main.mainStage.setScene(new Scene(createContent(),WIDTH, HEIGHT));
 		
 		//Centering the window on the screen
 		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();	
@@ -57,10 +67,7 @@ public class GameOver {
 		ImageView background = new ImageView(city);
 		ImageView btnImg = new ImageView(banana);
 		Label winner = new Label();
-		Label loser = new Label();
 		Label gameOver = new Label();		
-		
-		
 		
 		// Sets the background image
 		double w= city.getWidth();
@@ -82,15 +89,12 @@ public class GameOver {
 		// Positioning the elements inside the gridpane.
 		GridPane.setHalignment(gameOver, HPos.CENTER);
 		GridPane.setHalignment(winner, HPos.CENTER);
-		GridPane.setHalignment(loser, HPos.CENTER);
 		GridPane.setConstraints(gameOver, 1, 0);
 		GridPane.setConstraints(winner, 1, 5);
-		GridPane.setConstraints(loser, 1, 11);
 		GridPane.setConstraints(playAgain, 0, 13);
 		GridPane.setConstraints(exit, 2 ,13);
 		GridPane.setColumnSpan(gameOver, 2);
 		GridPane.setColumnSpan(winner, 2);
-		GridPane.setColumnSpan(loser, 2);
 		GridPane.setColumnSpan(playAgain, 2);
 		
 		
@@ -100,17 +104,25 @@ public class GameOver {
 		 * Do so that the right player is displayed in the winner filed and the other(s)
 		 * in the losers field.
 		 */
+		
+		
 		gameOver.setText("Game Over");
-		winner.setText("Winner: Player 1");
-		loser.setText("Loser: Player 2");
+		int winnerNum=0;
+		for (Gorilla g : Main.pList) {
+			System.out.println(Main.nList.get(Main.pList.indexOf(g)) + ": " + g.isDead);
+			if(!g.isDead) {
+				winnerNum = Main.pList.indexOf(g);
+			}
+		}
+		winner.setText("Winner: " + Main.nList.get(winnerNum));
+		Main.pList.clear();
+		
 		
 		// Sets the fonts and the size of the text
 		gameOver.setFont(new Font("Times New Roman", 50.0));
 		gameOver.setTextFill(Color.WHITE);
 		winner.setFont(new Font("Times New Roman", 35.0));
 		winner.setTextFill(Color.WHITE);
-		loser.setFont(new Font("Times New Roman", 35.0));
-		loser.setTextFill(Color.WHITE);
 		
 		// Adding a play again button
 		playAgain.setText("Play Again");
@@ -131,13 +143,9 @@ public class GameOver {
 				/**
 				 * @TODO: Place the code for the action the button needs to execute when pressed
 				 */
-				Main.mainStage.setScene(Main.mainScene);
-				Main.initMain();
-				Main.timer.start();
-				System.out.println("Chilked Play again");
-				
+				SetupScenes.pCount = 1;
+				SetupScenes.windowSize();
 			}
-			
 		});
 		
 		// adding a Exit button
@@ -154,14 +162,12 @@ public class GameOver {
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent evnet) {
-				System.out.println("Chilcked exit");
 				Main.mainStage.close();
 			}
 		});
 		
 		// Adds the Nodes to the pane and the pane to the group
 		pane.getChildren().add(winner);
-		pane.getChildren().add(loser); 
 		pane.getChildren().add(gameOver);
 		pane.getChildren().add(playAgain);
 		pane.getChildren().add(exit);

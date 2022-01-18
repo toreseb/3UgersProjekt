@@ -2,16 +2,15 @@ package gameObjects;
 
 import framework.*;
 import gameObjects.Projectiles.*;
-
 import java.util.ArrayList;
-
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.image.*;
@@ -29,7 +28,7 @@ public class Gorilla extends GameObject {
 	public static final int width = 40;
 	public static final int height = 40;
 	public int point, numLife, curNumLife, frozen, slimed;
-	public boolean moveable, normalImage;
+	public boolean moveable, normalImage, isDead = false;;
 	public Projectile banana;
 	public String hasPow;
 	public Image gorillaImg;
@@ -39,14 +38,16 @@ public class Gorilla extends GameObject {
 	public Group lifeBar = new Group();
 	public ArrayList<Image> hearts = new ArrayList<>();
 	private static Image heart = new Image("Heart.png");
-	private ImageView gorilla;
+	public ImageView gorilla;
 	private boolean right = true;
-	public Image gorillaThrowImg = new Image("GorillaThrow.png");
+	boolean firstFrame = true;
+	boolean secondFrame = false;
+	public Image gorillaThrowImg; 
 
 	// Constructor
 	public Gorilla(int posX) {
 		super(posX, height, width, height);
-		numLife = 3;
+		numLife = 1;
 		curNumLife = numLife;
 		point = 0;
 		frozen = 0;
@@ -67,9 +68,10 @@ public class Gorilla extends GameObject {
 		Main.pList.add(this);
 
 		name = Main.nList.get(Main.pList.indexOf(this));
-
+		displayName();
+		
 		if (Main.pList.indexOf(this) == 1) rotate();
-
+		
 		step();
 	}
 
@@ -80,14 +82,21 @@ public class Gorilla extends GameObject {
 	 */
 	@Override
 	public void step() {
-		toTop();
+		if(vectorPos.get(1) <= height+10) {
+			toTop();
+		}
+		if(isDead) {
+			Main.gameRoot.getChildren().remove(groupShape);
+			Main.cLevel.parts.remove(this);
+		}
+		
 		super.step();
-
 	}
 
 	@Override
 	protected void initShape() {
 		gorillaImg = new Image("Gorilla.png");
+		gorillaThrowImg = new Image("GorillaThrow.png");
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
@@ -131,7 +140,6 @@ public class Gorilla extends GameObject {
 		Main.mainRoot.setOnMousePressed(event ->
 
 		{
-
 			if (banana != null)
 				return; // if there is already a banana, return
 
@@ -155,19 +163,20 @@ public class Gorilla extends GameObject {
 			// Find the right type of projectile
 			if (hasPow.equals("ice")) {
 				banana = new Ice(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+				hasPow = "no";
 			} else if (hasPow.equals("slime")) {
 				banana = new Slime(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+				hasPow = "no";
 			} else if (hasPow.equals("anvil")) {
 				banana = new Anvil(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
+				hasPow = "no";
 			} else {
 				banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 			}
 		});
-
 	}
 
 	public void rotate() {
-
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(gorilla);
 		rotate.setDuration(Duration.millis(1));
@@ -176,7 +185,6 @@ public class Gorilla extends GameObject {
 		rotate.setAxis(Rotate.Y_AXIS);
 		rotate.play();
 		right = !right;
-
 	}
 
 	/*
@@ -192,20 +200,29 @@ public class Gorilla extends GameObject {
 				shape.setCursor(Cursor.HAND);
 			}
 		});
+		
+		shape.setOnMousePressed(event -> {
+			startPosX = event.getSceneX();
+			startPosY = event.getSceneY();
+			//System.out.println(event.getSceneX() + " " + startPosX);
+		});
 
 		// Sets the new position to the shape when the mouse is dragged
 		shape.setOnMouseDragged(event -> {
 			if (moveable) {
-				vectorPos.set(0, event.getSceneX() - width / 2);
+				if(Math.abs((event.getSceneX()-startPosX))<(1/4d)*Main.n) {
+					vectorPos.set(0, event.getSceneX() - width / 2);
+				}
 				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
-				toTop();
+				
 			}
 		});
 
 		// sets the moveable back to false and removes prompt when released
 		shape.setOnMouseReleased(event -> {
 			if (moveable) {
-				vectorPos.set(1,0d + height);
+				vectorPos.set(1,1d);
+				super.step();
 				toTop();
 
 				moveable = false;
@@ -214,10 +231,15 @@ public class Gorilla extends GameObject {
 				}
 
 				shape.setCursor(Cursor.DEFAULT);
-
-				Main.cPlayer++;// The player changes when the projectile hits the ground
+				Main.cPlayer++;
 				if (Main.cPlayer > Main.pList.size() - 1) {
 					Main.cPlayer = 0;
+				}
+				while(Main.pList.get(Main.cPlayer).isDead) {
+					Main.cPlayer++;
+					if (Main.cPlayer > Main.pList.size() - 1) {
+						Main.cPlayer = 0;
+					}
 				}
 				event.consume();
 				PlayerTurn.startTurn(Main.cPlayer);
@@ -240,6 +262,13 @@ public class Gorilla extends GameObject {
 		}
 	}
 
+	public void displayName() {
+		Text nameText = new Text(name);
+		nameText.setX(width/2-nameText.getLayoutBounds().getWidth() / 2);
+		nameText.setY(-20);
+		groupShape.getChildren().add(nameText);
+	}
+
 	void toTop() {
 		for (GameObject gO : Main.objList) {
 			if(LevelPart.class.isAssignableFrom(gO.getClass())) {
@@ -251,5 +280,4 @@ public class Gorilla extends GameObject {
 			}
 		}
 	}
-
 }

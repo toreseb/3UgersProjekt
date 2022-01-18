@@ -2,7 +2,6 @@ package framework;
 
 import java.util.ArrayList;
 import java.util.Timer;
-
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -28,16 +27,16 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	public static int n, m;// Width and Height
-	
+
 	public static boolean showHitbox = false;
 
 	public static Stage mainStage;
-	public static Scene mainScene;
 	// public static Group root2 = new Group();
-	
+
 	public static int startSizeW= 650;
 	public static int startSizeH= 390;
 
+	public static String levelName;
 	public static Level cLevel;
 
 	public static AnimationTimer timer;
@@ -46,16 +45,15 @@ public class Main extends Application {
 	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
 
 	public static ArrayList<Gorilla> pList = new ArrayList<Gorilla>();
-	
+
 	public static int cPlayer = 0;
-	
+
 	public static int pAmount;
 	public static ArrayList<String> nList = new ArrayList<String>();
 
 	public static Group gameRoot = new Group(); // @TEST
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
-	public static Label score = new Label();
 
 	public static Image background = new Image("pixel-city-chill.gif");
 	public static ImageView imageView = new ImageView(background);
@@ -69,27 +67,22 @@ public class Main extends Application {
 	 */
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
-		mainStage.setTitle("SimpGorillas");
+		mainStage.setTitle("Gorillas");
 		mainStage.setResizable(false);
-		
+
 		//Center on screen
 		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeW)/2);
 		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeH)/2);
-		
+
 		mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
-		
+
 		// Window icon
 		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
-		
+
 		//SetupScenes.windowSize1(mainStage);
-		
-		mainScene = new Scene(mainRoot,startSizeW,startSizeH);
-		
-		mainStage.setScene(mainScene);
-		
 		SetupScenes.windowSize();
-		
+
 		mainStage.show();
 	}
 
@@ -102,9 +95,6 @@ public class Main extends Application {
 	static void run() {
 		// gameRoot.getChildren().clear();
 
-		// Update score board
-		score.setText((pList.get(0).point) + "> Points < " + pList.get(1).point);
-
 		for (GameObject gO : objList) {
 			gO.run();
 		}
@@ -113,34 +103,18 @@ public class Main extends Application {
 			SpawnPowerup.newPowerUp = false;
 		}
 		clearLists();
-
 	}
 
 	public static void initMain() {
 		initTimer();
 
 		cLevel = new Level(n, m);
-		new Gorilla(Gorilla.width * 2);
-		new Gorilla(n - (Gorilla.width * 2));
-		
-		/*
-		 * new LevelPart(0,100,100); new LevelPart(100,100,100); new
-		 * LevelPart(200,100,100); new LevelPart(300,100,100); new
-		 * LevelPart(400,100,100); new LevelPart(500,100,100);
-		 */
-
-		// Insert score board
-		score = new Label((pList.get(0).point) + "> Points < " + pList.get(1).point);
-		BorderPane placeScore = new BorderPane();
-		placeScore.setPrefWidth(Main.n);
-		placeScore.setPrefHeight(Main.m);
-		placeScore.setTop(score);
-		BorderPane.setAlignment(score, Pos.CENTER);
-		frameworkRoot.getChildren().add(placeScore);
+		for(int i = 0; i< pAmount; i++) {
+			new Gorilla((int)(((double)Main.n/pAmount)*(i+0.5)));
+		}
 
 		// Call turn
 		PlayerTurn.startTurn(0);
-
 	}
 
 	static void initTimer() {
@@ -170,4 +144,8 @@ public class Main extends Application {
 		}
 	}
 
+	public static void fullClearLists() {
+		objList.clear();
+		cLevel = null;
+	}
 }

@@ -5,6 +5,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Building extends LevelPart {
+	
+	public static int maxWidth = LevelPart.maxWidth;
+	public static int divHeight = LevelPart.divHeight;
 
 	public Building(int posX, int width, int height) {
 		super(posX, width, height);
@@ -44,7 +47,6 @@ public class Building extends LevelPart {
 		double extraWidth = (width-horizontalMargins) % (windowWidth+horizontalMargins);
 		windowHeight += extraHeight/rows;
 		windowWidth += extraWidth/columns;
-		System.out.println(rows * (windowWidth+horizontalMargins)+horizontalMargins);
 		
 		for(int cRows = 0; cRows < rows; cRows++) {
 			for(int cColumns = 0; cColumns < columns; cColumns++) {
