@@ -2,7 +2,6 @@ package framework;
 
 import java.util.ArrayList;
 import java.util.Timer;
-
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -109,7 +108,6 @@ public class Main extends Application {
 			SpawnPowerup.newPowerUp = false;
 		}
 		clearLists();
-
 	}
 
 	public static void initMain() {
@@ -149,5 +147,4 @@ public class Main extends Application {
 			objList.remove(gameObject);
 		}
 	}
-
 }

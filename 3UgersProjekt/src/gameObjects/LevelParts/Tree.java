@@ -44,8 +44,6 @@ public class Tree extends LevelPart {
 			}else {
 				Shape.union(specialHitbox, p);
 			}
-			
-			
 		}
 		groupShape.getChildren().addAll(base,leaves);
 		super.initShape();

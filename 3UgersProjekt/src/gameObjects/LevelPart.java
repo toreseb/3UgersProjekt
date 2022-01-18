@@ -8,8 +8,6 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class LevelPart extends GameObject {
 	
-	
-	
 	int inLevelId;
 	static int inLevelIdCounter = 0;
 	protected double dwidth;
@@ -21,7 +19,6 @@ public abstract class LevelPart extends GameObject {
 		inLevelIdCounter++;
 	}
 
-
 	@Override
 	public void step() {
 		super.step();
@@ -29,6 +26,4 @@ public abstract class LevelPart extends GameObject {
 	}
 	@Override
 	public void collision() {} //collision() kæmper mod initShape();
-
-	
 }

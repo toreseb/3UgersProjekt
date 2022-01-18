@@ -2,11 +2,9 @@ package framework;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,8 +36,6 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard.
 	 */
 	public static void startTurn(int cPlayer) {
-		
-		
 		int rnd = (int)(Math.random()*5);
 		if (rnd == 1) {
 			SpawnPowerup.newPowerUp = true;
@@ -131,8 +127,6 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard
 	 */
 	public static void promptMove(int cPlayer) {
-		
-		
 		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
 
@@ -145,7 +139,6 @@ public class PlayerTurn {
 		Main.frameworkRoot.getChildren().add(root);
 
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-
 	}
 
 	/*
@@ -165,7 +158,6 @@ public class PlayerTurn {
 			  imageView.setImage(null);
 			  Main.mainRoot.getChildren().remove(imageView);
 			}}, 1, TimeUnit.SECONDS);
-
 	}
 
 }

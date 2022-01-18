@@ -59,8 +59,6 @@ public class GameOver {
 		Label winner = new Label();
 		Label gameOver = new Label();		
 		
-		
-		
 		// Sets the background image
 		double w= city.getWidth();
 		double h= city.getHeight();
@@ -134,10 +132,7 @@ public class GameOver {
 				Main.mainStage.setScene(Main.mainScene);
 				Main.initMain();
 				Main.timer.start();
-				System.out.println("Chilked Play again");
-				
 			}
-			
 		});
 		
 		// adding a Exit button
@@ -154,7 +149,6 @@ public class GameOver {
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent evnet) {
-				System.out.println("Chilcked exit");
 				Main.mainStage.close();
 			}
 		});

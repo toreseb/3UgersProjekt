@@ -20,7 +20,6 @@ public class Ice extends Projectile {
 	}
 
 	public void playerHit(Gorilla p) {
-		System.out.println("Damage Dealt");
 		p.gorillaImg = new Image("FrozenGorilla.png");
 		p.normalImage = false;
 		p.frozen = 1;

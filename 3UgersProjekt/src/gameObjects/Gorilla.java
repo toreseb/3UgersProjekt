@@ -2,12 +2,9 @@ package gameObjects;
 
 import framework.*;
 import gameObjects.Projectiles.*;
-
 import java.util.ArrayList;
-
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
@@ -85,7 +82,6 @@ public class Gorilla extends GameObject {
 	public void step() {
 		toTop();
 		super.step();
-
 	}
 
 	@Override
@@ -135,7 +131,6 @@ public class Gorilla extends GameObject {
 		Main.mainRoot.setOnMousePressed(event ->
 
 		{
-
 			if (banana != null)
 				return; // if there is already a banana, return
 
@@ -174,7 +169,6 @@ public class Gorilla extends GameObject {
 	}
 
 	public void rotate() {
-
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(gorilla);
 		rotate.setDuration(Duration.millis(1));
@@ -183,7 +177,6 @@ public class Gorilla extends GameObject {
 		rotate.setAxis(Rotate.Y_AXIS);
 		rotate.play();
 		right = !right;
-
 	}
 
 	/*

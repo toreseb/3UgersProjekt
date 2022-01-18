@@ -2,7 +2,6 @@ package gameObjects;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
 import framework.Main;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
