@@ -165,7 +165,6 @@ public class Gorilla extends GameObject {
 				banana = new Banana(vectorPos.get(0) + width / 2, vectorPos.get(1), xSpeed, ySpeed);
 			}
 		});
-
 	}
 
 	public void rotate() {
@@ -206,8 +205,6 @@ public class Gorilla extends GameObject {
 					vectorPos.set(0, event.getSceneX() - width / 2);
 				}
 				vectorPos.set(1, Main.m - event.getSceneY() + height / 2);
-				
-				
 			}
 		});
 
@@ -267,5 +264,4 @@ public class Gorilla extends GameObject {
 			}
 		}
 	}
-
 }

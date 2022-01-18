@@ -1,5 +1,9 @@
 package gameObjects;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import framework.*;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -57,7 +61,7 @@ public abstract class Projectile extends GameObject {
 
 				if(objectCollision(gO) && gO.getClass().getSimpleName().equals("Gorilla") && Main.pList.get(Main.cPlayer).id != gO.id) {
 					Gorilla p = (Gorilla) gO;
-					// Checks if one of the gorillas dies
+					// calls the playerHit function which is different to each of the different projectiles
 					playerHit(p);
 					
 					// william
@@ -119,7 +123,7 @@ public abstract class Projectile extends GameObject {
 			Main.cPlayer = 0;
 		}
 		PlayerTurn.startTurn(Main.cPlayer);
-		PlayerTurn.explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
+		explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
 		this.deleteObject();
 	}
 
@@ -146,6 +150,23 @@ public abstract class Projectile extends GameObject {
 		rotate.play();
 	}
 
+	public static void explosion(double x, double y) {
+		int size = 100;
+		Image bang = new Image("Bang.png");
+		ImageView imageView = new ImageView(bang);
+		imageView.setFitWidth(size);
+		imageView.setFitHeight(size);
+		imageView.setX(x - size / 2);
+		imageView.setY(Main.m - y - size / 2);
+		Main.mainRoot.getChildren().add(imageView);
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+		scheduler.schedule(new Runnable() { public void run() { 
+			  imageView.setImage(null);
+			  Main.mainRoot.getChildren().remove(imageView);
+			}}, 1, TimeUnit.SECONDS);
+	}
+	
 	public abstract void playerHit(Gorilla p);
+
 
 }

@@ -140,24 +140,4 @@ public class PlayerTurn {
 
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
 	}
-
-	/*
-	 * By: Embla
-	 */
-	public static void explosion(double x, double y) {
-		int size = 100;
-		Image bang = new Image("Bang.png");
-		ImageView imageView = new ImageView(bang);
-		imageView.setFitWidth(size);
-		imageView.setFitHeight(size);
-		imageView.setX(x - size / 2);
-		imageView.setY(Main.m - y - size / 2);
-		Main.mainRoot.getChildren().add(imageView);
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.schedule(new Runnable() { public void run() { 
-			  imageView.setImage(null);
-			  Main.mainRoot.getChildren().remove(imageView);
-			}}, 1, TimeUnit.SECONDS);
-	}
-
 }
