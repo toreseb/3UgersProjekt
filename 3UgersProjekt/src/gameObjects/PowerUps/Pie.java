@@ -16,9 +16,10 @@ public class Pie extends PowerUp {
 	}
 
 	public void collected() {
-		Main.pList.get(Main.cPlayer).curNumLife++;
-		Main.pList.get(Main.cPlayer).hearts.remove(Main.pList.get(Main.cPlayer).curNumLife);
-		Main.pList.get(Main.cPlayer).drawHearts();
+		if (Main.pList.get(Main.cPlayer).curNumLife < Main.pList.get(Main.cPlayer).numLife) {
+			Main.pList.get(Main.cPlayer).curNumLife++;
+			Main.pList.get(Main.cPlayer).drawHearts();
+		}
 		super.collected();
 	}
 }
