@@ -422,6 +422,7 @@ public class SetupScenes {
 		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "CITY";
+				Main.background = new Image("City.gif");
 				startGame();
 			}
 		});
@@ -431,7 +432,7 @@ public class SetupScenes {
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
-				Main.background = new Image("Forrest.gif");
+				Main.background = new Image("Forest.gif");
 				startGame();
 			}
 		});
