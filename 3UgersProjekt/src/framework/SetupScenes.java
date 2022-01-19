@@ -11,6 +11,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -339,12 +340,49 @@ public class SetupScenes {
 
 		//Create components
 		Text prompt = new Text("Please select a level");
-		Button cityLevel = new Button("City");
-		Button forestLevel = new Button("Forest");
-		Button mountainLevel = new Button("Mountain");
-		Button villageLevel = new Button("Village");
-		Button hillLevel = new Button("Hills");
-		Button rockyHillLevel = new Button("Rocky hills");
+		Button cityLevel = new Button();
+		Button forestLevel = new Button();
+		Button mountainLevel = new Button();
+		Button villageLevel = new Button();
+		Button hillLevel = new Button();
+		Button rockyHillLevel = new Button();
+		Text city = new Text("City");
+		Text forest = new Text("Forest");
+		Text mountain = new Text("Mountain");
+		Text village = new Text("village");
+		Text hill = new Text("Hill");
+		Text rocky = new Text("Rocky Hill");
+		
+		// Style of the text
+		city.setFont(new Font("Times New Roman", 30.0));
+		city.setStyle("    -fx-fill: white;\n"
+				+ "    -fx-stroke: black;\n"
+				+ "    -fx-stroke-width: 1;");
+		
+		forest.setFont(new Font("Times New Roman", 30.0));
+		forest.setStyle("-fx-fill: white;\n"
+				+ "    -fx-stroke: black;\n"
+				+ "    -fx-stroke-width: 1;");
+		
+		mountain.setFont(new Font("Times New Roman", 30.0));
+		mountain.setStyle("-fx-fill: white;\n"
+				+ "    -fx-stroke: black;\n"
+				+ "    -fx-stroke-width: 1;");
+		
+		village.setFont(new Font("Times New Roman", 30.0));
+		village.setStyle("-fx-fill: white;\n"
+				+ "    -fx-stroke: black;\n"
+				+ "    -fx-stroke-width: 1;");
+		
+		hill.setFont(new Font("Times New Roman", 30.0));
+		hill.setStyle("-fx-fill: white;\n"
+				+ "    -fx-stroke: black;\n"
+				+ "    -fx-stroke-width: 1;");
+		
+		rocky.setFont(new Font("Times New Roman", 30.0));
+		rocky.setStyle("-fx-fill: white;\n"
+				+ "    -fx-stroke: black;\n"
+				+ "    -fx-stroke-width: 1;");
 		
 		// Init the prompt
 		prompt.setFont(new Font("Times New Roman", 25.0));
@@ -352,55 +390,62 @@ public class SetupScenes {
 		
 		// Style of the buttons
 		cityLevel.setBorder(null);
-		cityLevel.setPrefSize(175, 55);
-		cityLevel.setStyle("-fx-background-image: url(\"\");");
+		cityLevel.setGraphic(city);
+		cityLevel.setPrefSize(200, 75);
+		cityLevel.setStyle("-fx-background-image: url(\"City.gif\"); -fx-background-position: center;");
 		cityLevel.setFont(new Font("Times New Roman", 19.0));
-		cityLevel.setTextFill(Color.WHITE);
+		cityLevel.setTextFill(Color.BLACK);
 		cityLevel.setOnMouseEntered(event -> {
 			cityLevel.setCursor(Cursor.HAND);
 		});
 
 		forestLevel.setBorder(null);
-		forestLevel.setPrefSize(175, 55);
-		forestLevel.setStyle("-fx-background-image: url(\"\");");
+		forestLevel.setGraphic(forest);
+		forestLevel.setPrefSize(200, 75);
+		forestLevel.setStyle("-fx-background-image: url(\"Forest.gif\"); -fx-background-position: center; -fx-stroke: white");
 		forestLevel.setFont(new Font("Times New Roman", 19.0));
-		forestLevel.setTextFill(Color.WHITE);
+		forestLevel.setTextFill(Color.BLACK);
 		forestLevel.setOnMouseEntered(event -> {
 			forestLevel.setCursor(Cursor.HAND);
 		});
 		
 		mountainLevel.setBorder(null);
-		mountainLevel.setPrefSize(175, 55);
-		mountainLevel.setStyle("-fx-background-image: url(\"\");");
+		mountainLevel.setGraphic(mountain);
+		mountainLevel.setPrefSize(200, 75);
+		mountainLevel.setStyle("-fx-background-image: url(\"Mountain.gif\"); -fx-background-position: center;");
 		mountainLevel.setFont(new Font("Times New Roman", 19.0));
-		mountainLevel.setTextFill(Color.WHITE);
+		mountainLevel.setTextFill(Color.BLACK);
 		mountainLevel.setOnMouseEntered(event -> {
 			mountainLevel.setCursor(Cursor.HAND);
 		});
 		
 		villageLevel.setBorder(null);
-		villageLevel.setPrefSize(175, 55);
-		villageLevel.setStyle("-fx-background-image: url(\"\");");
+		villageLevel.setGraphic(village);
+		villageLevel.setPrefSize(200, 75);
+		villageLevel.setStyle("-fx-background-image: url(\"Village.gif\"); -fx-background-position: center");
 		villageLevel.setFont(new Font("Times New Roman", 19.0));
-		villageLevel.setTextFill(Color.WHITE);
+		villageLevel.setTextFill(Color.BLACK);
 		villageLevel.setOnMouseEntered(event -> {
 			villageLevel.setCursor(Cursor.HAND);
 		});
 		
 		hillLevel.setBorder(null);
-		hillLevel.setPrefSize(175, 55);
-		hillLevel.setStyle("-fx-background-image: url(\"\");");
+		hillLevel.setGraphic(hill);
+		hillLevel.setPrefSize(200, 75);
+		hillLevel.setStyle("-fx-background-image: url(\"Hills.gif\"); -fx-background-position: center");
 		hillLevel.setFont(new Font("Times New Roman", 19.0));
-		hillLevel.setTextFill(Color.WHITE);
+		hillLevel.setTextFill(Color.BLACK);
 		hillLevel.setOnMouseEntered(event -> {
 			hillLevel.setCursor(Cursor.HAND);
 		});
 		
 		rockyHillLevel.setBorder(null);
-		rockyHillLevel.setPrefSize(175, 55);
-		rockyHillLevel.setStyle("-fx-background-image: url(\"\");");
+		rockyHillLevel.setGraphic(rocky);
+		rockyHillLevel.setPrefSize(200, 75);
+		rockyHillLevel.setStyle("-fx-background-image: url(\"RockyHills.gif\"); -fx-background-position: center;");
 		rockyHillLevel.setFont(new Font("Times New Roman", 19.0));
-		rockyHillLevel.setTextFill(Color.WHITE);
+		rockyHillLevel.setTextFill(Color.BLACK);
+		
 		rockyHillLevel.setOnMouseEntered(event -> {
 			rockyHillLevel.setCursor(Cursor.HAND);
 		});
@@ -415,7 +460,8 @@ public class SetupScenes {
 		GridPane.setConstraints(rockyHillLevel, 2, 1);
 
 		//Add components to panes
-		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel,rockyHillLevel);
+		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel,rockyHillLevel, city, hill, mountain, 
+				rocky, village, forest);
 		main.getChildren().addAll(prompt,buttons);
 
 		//Set button press event for cityLevel
@@ -431,7 +477,7 @@ public class SetupScenes {
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
-				Main.background = new Image("Forrest.gif");
+				Main.background = new Image("Forest.gif");
 				Main.imageView = new ImageView(Main.background);
 				startGame();
 			}
