@@ -11,9 +11,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -42,11 +43,9 @@ public class SetupScenes {
 		GridPane pane = new GridPane();
 		Scene sceneSize = new Scene(pane, Main.startSizeW, Main.startSizeH);
 		Text headingWHP = new Text("Set the width and height of the game window, and the number of players");
-		Text widthPrompt = new Text("Widh: ");
-		Text heightPrompt = new Text("Height: ");
+		Text widthPrompt = new Text();
+		Text heightPrompt = new Text();
 		Text numPlayer = new Text("Number of Player");
-		Label widthValueDisplay = new Label();
-		Label heightValueDisplay = new Label();
 		TextField numPlayerTextField = new TextField();
 		Slider widthSlider = new Slider(300, Screen.getPrimary().getBounds().getWidth(), 800);
 		Slider heightSlider = new Slider(300, Screen.getPrimary().getBounds().getHeight(), 400);
@@ -76,21 +75,19 @@ public class SetupScenes {
 
 
 		// the code for the width and height value labels
-		widthValueDisplay.setText(Integer.toString((int)widthSlider.getValue()));
-		widthValueDisplay.setFont(new Font("Times New Roman", 19.0));
+		widthPrompt.setText("Width: " + Integer.toString((int)widthSlider.getValue()));
 		widthSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-				widthValueDisplay.setText(Integer.toString((int)widthSlider.getValue()));
+				widthPrompt.setText("Width: " + Integer.toString((int)widthSlider.getValue()));
 			}
 		});
 
-		heightValueDisplay.setText(Integer.toString((int)heightSlider.getValue()));
-		heightValueDisplay.setFont(new Font("Times New Roman", 19.0));
+		heightPrompt.setText("Height: " + Integer.toString((int)heightSlider.getValue()));
 		heightSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-				heightValueDisplay.setText(Integer.toString((int)heightSlider.getValue()));
+				heightPrompt.setText("Height: " + Integer.toString((int)heightSlider.getValue()));
 			}
 		});
 
@@ -149,14 +146,10 @@ public class SetupScenes {
 		GridPane.setColumnSpan(headingWHP, 2);
 
 		GridPane.setConstraints(widthPrompt, 0, 2);
-		GridPane.setConstraints(widthValueDisplay, 0, 2);
-		GridPane.setHalignment(widthValueDisplay, HPos.RIGHT);
 		GridPane.setConstraints(widthSlider, 0, 4);
 		GridPane.setColumnSpan(widthSlider, 2);
 
 		GridPane.setConstraints(heightPrompt, 0, 6);
-		GridPane.setConstraints(heightValueDisplay, 0, 6);
-		GridPane.setHalignment(heightValueDisplay, HPos.RIGHT);
 		GridPane.setConstraints(heightSlider, 0,8);
 		GridPane.setColumnSpan(heightSlider, 2);
 
@@ -169,7 +162,7 @@ public class SetupScenes {
 
 		// Adding the elements to the GridPane
 		pane.getChildren().addAll(headingWHP, widthPrompt, widthSlider, heightPrompt, heightSlider, numPlayer,
-				numPlayerTextField, submitBtn, widthValueDisplay, heightValueDisplay);
+				numPlayerTextField, submitBtn);
 
 		// Set scene on mainStage
 		Main.mainStage.setScene(sceneSize);
@@ -232,8 +225,9 @@ public class SetupScenes {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
+					System.out.println(name.getText());
 					//Check if text field is left blank and throw exception if yes.
-					if (name.getText().equalsIgnoreCase("") && name.getText().equalsIgnoreCase(" ")) {
+					if (name.getText().equalsIgnoreCase("") || name.getText().equalsIgnoreCase(" ")) {
 						throw new IllegalCallerException();
 					} else {
 						//Add name to nList in Main and add 1 to pCount
@@ -251,7 +245,7 @@ public class SetupScenes {
 						}
 					}
 				} catch (IllegalCallerException e) {
-					prompt.setText("Please enter a name, player" + pCount);
+					prompt.setText("Please enter only letters and numbers");
 				}
 
 				// @TODO Lav endnu en exception s� man ikke kan lave for lange navne
@@ -270,10 +264,16 @@ public class SetupScenes {
 	public static void levelSelect() {
 		//Setup panes
 		GridPane buttons = new GridPane();
-		buttons.setHgap(10);
-		buttons.setVgap(10);
+		//buttons.setGridLinesVisible(true);
+		buttons.setMinSize(650, 390);
+		buttons.setAlignment(Pos.TOP_CENTER);
+		buttons.setVgap(25);
+		buttons.setHgap(25);
 		buttons.setPadding(new Insets(10, 10, 10, 10));
+		buttons.setAlignment(Pos.CENTER);
+		
 		VBox main = new VBox();
+		main.setAlignment(Pos.CENTER);
 
 		//Create scene and add "main"
 		Scene sceneLevel = new Scene(main,Main.startSizeW,Main.startSizeH);
@@ -286,12 +286,72 @@ public class SetupScenes {
 		Button villageLevel = new Button("Village");
 		Button hillLevel = new Button("Hills");
 		Button rockyHillLevel = new Button("Rocky hills");
+		
+		// Init the prompt
+		prompt.setFont(new Font("Times New Roman", 25.0));
+		prompt.setStyle("-fx-translate-y: 75;");
+		
+		// Style of the buttons
+		cityLevel.setBorder(null);
+		cityLevel.setPrefSize(175, 55);
+		cityLevel.setStyle("-fx-background-image: url(\"\");");
+		cityLevel.setFont(new Font("Times New Roman", 19.0));
+		cityLevel.setTextFill(Color.WHITE);
+		cityLevel.setOnMouseEntered(event -> {
+			cityLevel.setCursor(Cursor.HAND);
+		});
 
+		forestLevel.setBorder(null);
+		forestLevel.setPrefSize(175, 55);
+		forestLevel.setStyle("-fx-background-image: url(\"\");");
+		forestLevel.setFont(new Font("Times New Roman", 19.0));
+		forestLevel.setTextFill(Color.WHITE);
+		forestLevel.setOnMouseEntered(event -> {
+			forestLevel.setCursor(Cursor.HAND);
+		});
+		
+		mountainLevel.setBorder(null);
+		mountainLevel.setPrefSize(175, 55);
+		mountainLevel.setStyle("-fx-background-image: url(\"\");");
+		mountainLevel.setFont(new Font("Times New Roman", 19.0));
+		mountainLevel.setTextFill(Color.WHITE);
+		mountainLevel.setOnMouseEntered(event -> {
+			mountainLevel.setCursor(Cursor.HAND);
+		});
+		
+		villageLevel.setBorder(null);
+		villageLevel.setPrefSize(175, 55);
+		villageLevel.setStyle("-fx-background-image: url(\"\");");
+		villageLevel.setFont(new Font("Times New Roman", 19.0));
+		villageLevel.setTextFill(Color.WHITE);
+		villageLevel.setOnMouseEntered(event -> {
+			villageLevel.setCursor(Cursor.HAND);
+		});
+		
+		hillLevel.setBorder(null);
+		hillLevel.setPrefSize(175, 55);
+		hillLevel.setStyle("-fx-background-image: url(\"\");");
+		hillLevel.setFont(new Font("Times New Roman", 19.0));
+		hillLevel.setTextFill(Color.WHITE);
+		hillLevel.setOnMouseEntered(event -> {
+			hillLevel.setCursor(Cursor.HAND);
+		});
+		
+		rockyHillLevel.setBorder(null);
+		rockyHillLevel.setPrefSize(175, 55);
+		rockyHillLevel.setStyle("-fx-background-image: url(\"\");");
+		rockyHillLevel.setFont(new Font("Times New Roman", 19.0));
+		rockyHillLevel.setTextFill(Color.WHITE);
+		rockyHillLevel.setOnMouseEntered(event -> {
+			rockyHillLevel.setCursor(Cursor.HAND);
+		});
+		
+		
 		//Set placement of components
 		GridPane.setConstraints(cityLevel, 0, 0);
 		GridPane.setConstraints(forestLevel, 0, 1);
 		GridPane.setConstraints(mountainLevel, 1, 0);
-		GridPane.setConstraints(villageLevel, 1, 1);
+		GridPane.setConstraints(villageLevel, 1, 1); 
 		GridPane.setConstraints(hillLevel, 2, 0);
 		GridPane.setConstraints(rockyHillLevel, 2, 1);
 
@@ -303,6 +363,7 @@ public class SetupScenes {
 		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "CITY";
+				Main.background = new Image("City.gif");
 				startGame();
 			}
 		});
@@ -312,6 +373,7 @@ public class SetupScenes {
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
+				Main.background = new Image("Forest.gif");
 				startGame();
 			}
 		});
@@ -320,6 +382,7 @@ public class SetupScenes {
 		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "MOUNTAINS";
+				Main.background = new Image("Mountain.gif");
 				startGame();
 			}
 		});
@@ -328,6 +391,7 @@ public class SetupScenes {
 		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "VILLAGE";
+				Main.background = new Image("Village.gif");
 				startGame();
 			}
 		});
@@ -335,7 +399,8 @@ public class SetupScenes {
 		//Set button press event for hillLevel
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Main.levelName = "HILL";
+				Main.levelName = "HILLS";
+				Main.background = new Image("Hill.gif");
 				startGame();
 			}
 		});
@@ -344,6 +409,7 @@ public class SetupScenes {
 		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "ROCKYHILLS";
+				Main.background = new Image("RockyHills.gif");
 				startGame();
 			}
 		});
@@ -361,6 +427,8 @@ public class SetupScenes {
 	 * Skal m�ske omskrives, men nu har vi noget der virker.
 	 */
 	public static void startGame() {
+
+		Main.imageView = new ImageView(Main.background);
 		// reposition Stage - Skal m�ske laves om
 		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-Main.n) / 2);
 		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- Main.m) / 2);

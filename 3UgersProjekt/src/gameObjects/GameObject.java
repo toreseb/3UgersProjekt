@@ -61,8 +61,7 @@ public abstract class GameObject {
 	}
 
 	void draw() {
-	} // Her tegnes de forskellige Shapes normalt, men da der bruges JavaFX gøres det
-		// automatisk, så den bruges ikke
+	} //This normalle visually creates and runs the different objects, but because we use javaFX, it is done internally, so it isn't needed.
 
 	/******************
 	 * Tore *
