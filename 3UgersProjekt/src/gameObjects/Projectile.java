@@ -64,7 +64,7 @@ public abstract class Projectile extends GameObject {
 					playerHit(p);
 					explosion(vectorPos.get(0)+width/2, vectorPos.get(1));
 					// william
-					if (p.curNumLife == 0) {
+					if (p.curNumLife <= 0) {
 						p.isDead = true;
 					}
 					boolean anyAlive = false;
