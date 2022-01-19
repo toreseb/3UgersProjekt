@@ -3,12 +3,9 @@ package gameObjects;
 import framework.Main;
 import java.util.Vector;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.scene.transform.Translate;
 
 /**
  * The function of this class is: function as a super class for all the other
@@ -36,7 +33,17 @@ public abstract class GameObject {
 
 	public Group groupShape = new Group();
 
-	// Constructor
+	/*
+	 * GameObject()
+	 * 
+	 * Class constructor.
+	 * 
+	 * Creates and sets position of the object, sets id and adds to array lists.
+	 * 
+	 * Calls initShape().
+	 * 
+	 * By: Tore
+	 */
 	public GameObject(double posX, double posY, int width, int height) {
 		vectorPos.add((double) posX);
 		vectorPos.add((double) posY);
@@ -51,28 +58,56 @@ public abstract class GameObject {
 		Main.gameRoot.getChildren().add(groupShape);
 	}
 
+	/*
+	 * initShape()
+	 * 
+	 * Calls initHitbox().
+	 * 
+	 * Meant to be expanded in sub classes.
+	 * 
+	 * By: Tore
+	 */
 	protected void initShape() {
 		initHitbox();
 	}
 
+	/*
+	 * step()
+	 * 
+	 * Translates location.
+	 * 
+	 * By: Tore
+	 */
 	protected void step() {
 		groupShape.setTranslateX(vectorPos.get(0));
 		groupShape.setTranslateY(Main.m - vectorPos.get(1));
 	}
 
 	void draw() {
-	} //This normalle visually creates and runs the different objects, but because we use javaFX, it is done internally, so it isn't needed.
+	} //This normally visually creates and runs the different objects, but because we use javaFX, it is done internally, so it isn't needed.
 
-	/******************
-	 * Tore *
-	 ******************/
-
+	/*
+	 * run()
+	 * 
+	 * Calls step(), collision() and draw().
+	 * 
+	 * Gets called for each object each frame.
+	 * 
+	 * By: Tore
+	 */
 	public void run() {
 		step();
 		collision();
 		draw();
 	}
 
+	/*
+	 * collision()
+	 * 
+	 * General check for collision with edges.
+	 * 
+	 * By: Tore
+	 */
 	public void collision() {
 		if (vectorPos.get(0) - width / 2 < 0) {
 			vectorPos.set(0, (double) 0);
@@ -87,24 +122,36 @@ public abstract class GameObject {
 			vectorPos.set(1, (double) 0);
 	}
 
-	/***************
-	 * William *
-	 ***************/
-
-	// Getters
+	/*
+	 * Getter
+	 * 
+	 * By: William
+	 */
 	public Vector<Double> getVectorPos() {
 		return vectorPos;
 	}
 
-	/**********
-	 * Tore *
-	 *********/
-
+	/*
+	 * deleteObject()
+	 * 
+	 * Adds object to delList (to be deleted) and removes it from scene.
+	 * 
+	 * By: Tore
+	 */
 	public void deleteObject() {
 		Main.delList.add(this);
 		Main.gameRoot.getChildren().remove(groupShape);
 	}
 
+	/*
+	 * objectCollision()
+	 * 
+	 * Finds intersection between two objects and their shapes.
+	 * 
+	 * Returns true if yes.
+	 * 
+	 * By: Tore
+	 */
 	public boolean objectCollision(GameObject gO) {
 		Shape inter = Shape.intersect(hitBox, gO.hitBox);
 		if(inter.getBoundsInParent().getWidth() != -1) {
@@ -112,6 +159,13 @@ public abstract class GameObject {
 		}
 		return false;
 	}
+	/*
+	 * shapeCollision()
+	 * 
+	 * Function like objectCollision(), just with their shapes
+	 * 
+	 * By: Tore
+	 */
 	public boolean shapeCollision(Shape sh) {
 		Shape inter = Shape.intersect(hitBox, sh);
 		if(inter.getBoundsInParent().getWidth() != -1) {
@@ -120,6 +174,13 @@ public abstract class GameObject {
 		return false;
 	}
 	
+	/*
+	 * initHitbox()
+	 * 
+	 * Standard hitbox for an object.
+	 * 
+	 * By: Tore
+	 */
 	protected void initHitbox() {
 		hitBox = new Rectangle(0,0,groupShape.getBoundsInParent().getWidth(),groupShape.getBoundsInParent().getHeight());
 		if(Main.showHitbox) {

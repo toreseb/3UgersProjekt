@@ -70,7 +70,7 @@ public class Main extends Application {
 	/*
 	 * start()
 	 *
-	 * Creates the stage and calls the first variable-defining function.
+	 * Creates the stage and calls the first function to create scenes from SetupScenes.
 	 *
 	 * By: Helene Moesgaard.
 	 */
@@ -87,7 +87,7 @@ public class Main extends Application {
 		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
 
-		SetupScenes.windowSize();
+		SetupScenes.disclaimer();
 
 		mainStage.show();
 	}

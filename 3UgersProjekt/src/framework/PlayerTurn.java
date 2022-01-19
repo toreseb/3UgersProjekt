@@ -94,19 +94,20 @@ public class PlayerTurn {
 					// Remove prompt
 					Main.frameworkRoot.getChildren().remove(groupAll);
 					Main.frameworkRoot.getChildren().remove(debuffWarning);
-
+					
 					// Call move prompt
 					Main.pList.get(cPlayer).moveable = true;
 					promptMove(cPlayer);
 
 					// Count down frozen debuff if active
-					if (Main.pList.get(cPlayer).frozen != 0) {
-						Main.pList.get(cPlayer).frozen--;
-						if ((Main.pList.get(cPlayer).frozen == 0) && (Main.pList.get(cPlayer).normalImage == false)) {
-							Main.pList.get(cPlayer).gorillaImg = new Image("Gorilla.png");
-							Main.pList.get(cPlayer).normalImage = true;
+					if (Main.pList.get(Main.cPlayer).frozen != 0) {
+						Main.pList.get(Main.cPlayer).frozen--;
+						if ((Main.pList.get(Main.cPlayer).frozen == 0) && (Main.pList.get(Main.cPlayer).normalImage == false)) {
+							Main.pList.get(Main.cPlayer).gorillaImg = new Image("Gorilla.png");
+							Main.pList.get(Main.cPlayer).normalImage = true;
 						}
 					}
+
 				} else {
 					debuffWarning.setText("You're stuck to the ground!");
 				}
