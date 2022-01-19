@@ -29,5 +29,5 @@ public abstract class LevelPart extends GameObject {
 
 	}
 	@Override
-	public void collision() {} //collision() kæmper mod initShape();
+	public void collision() {} //collision() fights against the initial construction of the level, because multithreading
 }

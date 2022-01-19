@@ -392,7 +392,7 @@ public class SetupScenes {
 		//Set button press event for hillLevel
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Main.levelName = "HILL";
+				Main.levelName = "HILLS";
 				startGame();
 			}
 		});

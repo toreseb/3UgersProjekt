@@ -29,7 +29,7 @@ public class Level {
 		if(name.equals("FOREST") || name.equals("MOUNTAINS") || name.equals("ROCKYHILLS")) {
 			partTypes.add(Stone.class);
 		}
-		if(name.equals("HILL") || name.equals("ROCKYHILLS")) {
+		if(name.equals("HILLS") || name.equals("ROCKYHILLS")) {
 			partTypes.add(Hill.class);
 		}
 		
