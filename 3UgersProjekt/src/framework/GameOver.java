@@ -62,7 +62,7 @@ public class GameOver {
 		Button playAgain = new Button();
 		Group root = new Group();
 		GridPane pane = new GridPane();
-		Image city = new Image("pixel-city-chill.gif");
+		Image city = new Image("City.gif");
 		Image banana = new Image("Banana.png");
 		ImageView background = new ImageView(city);
 		ImageView btnImg = new ImageView(banana);

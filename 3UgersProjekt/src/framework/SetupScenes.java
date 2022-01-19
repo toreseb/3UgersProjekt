@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -374,6 +376,8 @@ public class SetupScenes {
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
+				Main.background = new Image("Forrest.gif");
+				Main.imageView = new ImageView(Main.background);
 				startGame();
 			}
 		});

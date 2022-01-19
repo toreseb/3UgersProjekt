@@ -55,7 +55,7 @@ public class Main extends Application {
 	public static Group frameworkRoot = new Group(); // @TEST
 	public static Group mainRoot = new Group(); // @TEST
 
-	public static Image background = new Image("pixel-city-chill.gif");
+	public static Image background = new Image("City.gif");
 	public static ImageView imageView = new ImageView(background);
 
 	/*
