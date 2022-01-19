@@ -2,7 +2,6 @@ package framework;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import gameObjects.LevelParts.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -15,14 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 /*
  * SetupScenes
@@ -36,10 +33,9 @@ public class SetupScenes {
 	/*
 	 * windowSize()
 	 *
-	 * Changes the frameworkRoot from Main to show two sliders and prompts the user
-	 * to set the size of the game-window.
+	 * Sets the scene of mainStage to one with two sliders and a text field for the user to set the size of the window and the amount of players.
 	 *
-	 * by: William Holberg
+	 * by: Helene & William
 	 */
 	public static void windowSize() {
 		// Fields
@@ -175,74 +171,16 @@ public class SetupScenes {
 		pane.getChildren().addAll(headingWHP, widthPrompt, widthSlider, heightPrompt, heightSlider, numPlayer,
 				numPlayerTextField, submitBtn, widthValueDisplay, heightValueDisplay);
 
+		// Set scene on mainStage
 		Main.mainStage.setScene(sceneSize);
-	}
-
-
-
-	/*
-	 * playerAmount()
-	 *
-	 * Changes the frameworkRoot from Main to show a text field and prompts the user
-	 * to set the number of players.
-	 */
-	public static void playerAmount() {
-		// GridPane setup
-		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(10, 10, 10, 10));
-
-		//Create scene and add grid
-		Scene sceneAmount = new Scene(grid,Main.startSizeW,Main.startSizeH);
-
-		// Create components
-		Text prompt = new Text("Please enter amount of players:");
-		TextField amount = new TextField();
-		amount.setPromptText("2 to 6");
-		amount.setMaxWidth(100);
-		Button btn = new Button("Submit");
-
-		// Set placement of components
-		GridPane.setConstraints(prompt, 0, 0);
-		GridPane.setConstraints(amount, 0, 1);
-		GridPane.setConstraints(btn, 0, 2);
-
-		//Add components to grid
-		grid.getChildren().addAll(prompt, amount, btn);
-
-		//Set button press event
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				try {
-					int count = Integer.parseInt(amount.getText());
-
-					//Check if input from text field is within bounds
-					if ((count < 2 || count > 6)) {
-						throw new IllegalCallerException();
-					}
-					// set pAmount in Main
-					Main.pAmount = count;
-
-					//Call next imput prompt
-					playerNames();
-				} catch (IllegalCallerException e) {
-					prompt.setText("Only values between 2 and 6");
-				} catch (Exception e) {
-					prompt.setText("Please enter integers only!");
-				}
-			}
-		});
-
-		//Set scene on stage
-		Main.mainStage.setScene(sceneAmount);
 	}
 
 	/*
 	 * playerNames()
 	 *
-	 * Changes the frameworkRoot from Main to show a text field and cycles through
-	 * all the players and prompts them to put in their names.
+	 * Sets the scene of mainStage to one with a text field and a button and asks all players, one after the other, to set their name.
+	 * 
+	 * Helene & William
 	 */
 	public static void playerNames() {
 		// GridPane setup

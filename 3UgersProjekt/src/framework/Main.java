@@ -1,28 +1,27 @@
 package framework;
 
 import java.util.ArrayList;
-import java.util.Timer;
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
 import javafx.stage.*;
-import javafx.util.Duration;
 
 /**
- * Tore og Helene har skrevet denne klasse
+ * This class contains the functions: 
+ * - main() 
+ * - start() 
+ * - run() 
+ * - initMain() 
+ * - initTimer 
+ * - clearLists 
+ * - fullClear lists
+ * 
+ * This class starts and runs the game.
  *
- *
+ * By: Tore & Helene
  */
 
 public class Main extends Application {
@@ -31,10 +30,9 @@ public class Main extends Application {
 	public static boolean showHitbox = false;
 
 	public static Stage mainStage;
-	// public static Group root2 = new Group();
 
-	public static int startSizeW= 650;
-	public static int startSizeH= 390;
+	public static int startSizeW = 650;
+	public static int startSizeH = 390;
 
 	public static String levelName;
 	public static Level cLevel;
@@ -59,9 +57,20 @@ public class Main extends Application {
 	public static ImageView imageView = new ImageView(background);
 
 	/*
+	 * main()
+	 * 
+	 * This function calls launch() which opens the JavaFX window and keeps it
+	 * running. It also closes the program.
+	 */
+	public static void main(String[] args) {
+		launch(args);
+		System.exit(0);
+	}
+
+	/*
 	 * start()
 	 *
-	 * Creates the stage and calls the different, variable-defining scenes.
+	 * Creates the stage and calls the first variable-defining function.
 	 *
 	 * By: Helene Moesgaard.
 	 */
@@ -70,59 +79,81 @@ public class Main extends Application {
 		mainStage.setTitle("Gorillas");
 		mainStage.setResizable(false);
 
-		//Center on screen
-		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeW)/2);
-		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeH)/2);
-
-		mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
+		// Center on screen
+		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth() - startSizeW) / 2);
+		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight() - startSizeH) / 2);
 
 		// Window icon
 		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
 
-		//SetupScenes.windowSize1(mainStage);
 		SetupScenes.windowSize();
 
 		mainStage.show();
 	}
 
-	// Main method
-	public static void main(String[] args) {
-		launch(args);
-		System.exit(0);
-	}
-
+	/*
+	 * run()
+	 * 
+	 * This function is called by the timer (every frame) and handles everything
+	 * that needs to happen this often.
+	 * 
+	 * By: Tore
+	 */
 	static void run() {
-		// gameRoot.getChildren().clear();
 
+		// Every object in objLists run() function is called
 		for (GameObject gO : objList) {
 			gO.run();
 		}
-		if(SpawnPowerup.newPowerUp) {
+
+		// If it is time to spawn a new power up, it is done
+		if (SpawnPowerup.newPowerUp) {
 			SpawnPowerup.spawnPower();
 			SpawnPowerup.newPowerUp = false;
 		}
+
+		// Deletes anything that needs deleting
 		clearLists();
 	}
 
+	/*
+	 * initMain()
+	 * 
+	 * This function starts the timer, creates the level, creates the gorillas, and
+	 * starts the game by calling the first players turn.
+	 * 
+	 * By: Tore
+	 */
 	public static void initMain() {
+		// Start timer
 		initTimer();
 
+		// Create level
 		cLevel = new Level(n, m);
-		for(int i = 0; i< pAmount; i++) {
-			new Gorilla((int)(((double)Main.n/pAmount)*(i+0.5)));
+
+		// Create all gorillas
+		for (int i = 0; i < pAmount; i++) {
+			new Gorilla((int) (((double) Main.n / pAmount) * (i + 0.5)));
 		}
 
-		// Call turn
+		// Call first turn
 		PlayerTurn.startTurn(0);
 	}
 
+	/*
+	 * initTimer()
+	 * 
+	 * Starts timer for animations and handles timer events
+	 * 
+	 * By: Tore
+	 */
 	static void initTimer() {
 		timer = new AnimationTimer() {
 
 			private long lastToggle;
 
-			@Override
+			// Thread that calls Main.run() ~60 times per second
 			public void handle(long now) {
 				if (lastToggle == 0L) {
 					lastToggle = now;
@@ -138,12 +169,26 @@ public class Main extends Application {
 		timer.start();
 	}
 
+	/*
+	 * clearLists()
+	 * 
+	 * Deletes all objects in the array list delList.
+	 * 
+	 * By: Tore
+	 */
 	private static void clearLists() {
 		for (GameObject gameObject : delList) {
 			objList.remove(gameObject);
 		}
 	}
 
+	/*
+	 * fullClearLists()
+	 * 
+	 * Essentially restarts everything. Clears cLevel and objList.
+	 * 
+	 * By: Tore
+	 */
 	public static void fullClearLists() {
 		objList.clear();
 		cLevel = null;
