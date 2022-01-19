@@ -41,7 +41,6 @@ public class GameOver {
 		for (GameObject gO : Main.objList) {
 			gO.deleteObject();
 		}
-
 		Main.cPlayer = 0;
 		Main.timer.stop();
 
@@ -107,6 +106,7 @@ public class GameOver {
 		}
 		winner.setText("Winner: " + Main.nList.get(winnerNum));
 		Main.pList.clear();
+		Main.nList.clear();
 
 		// Sets the fonts and the size of the text
 		gameOver.setFont(new Font("Times New Roman", 50.0));
