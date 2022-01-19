@@ -12,7 +12,7 @@
     -fx-translate-y: -30;
     -fx-pref-width: 45;
     -fx-pref-height: 63;
-    -fx-background-image: url("newSliderThumb.png");
+    -fx-background-image: url("SliderThumb.png");
     -fx-background-repeat: no-repeat;
     -fx-background-color: transparent;
     -fx-border: none;

@@ -4,7 +4,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+
 import framework.*;
+import javafx.application.Platform;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
@@ -181,11 +183,21 @@ public abstract class Projectile extends GameObject {
 		imageView.setX(x - size / 2);
 		imageView.setY(Main.m - y - size / 2);
 		Main.mainRoot.getChildren().add(imageView);
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.schedule(new Runnable() { public void run() { 
-			  imageView.setImage(null);
-			  Main.mainRoot.getChildren().remove(imageView);
-			}}, 1, TimeUnit.SECONDS);
+		
+		new Thread(()->{
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Platform.runLater(()->{
+				imageView.setImage(null);
+				Main.mainRoot.getChildren().remove(imageView);
+			});
+			
+			
+		}).start();
+		
 	}
 	
 	public abstract void playerHit(Gorilla p);

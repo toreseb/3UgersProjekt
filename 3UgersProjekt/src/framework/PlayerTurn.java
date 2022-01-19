@@ -1,28 +1,24 @@
 package framework;
 
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 
+/*
+ * This class handles the players turns - contains the functions:
+ * - startTurn
+ * - promptMove
+ * 
+ * Handles a players turn and any effects of debuffs.
+ * 
+ * By: Helene
+ */
 public class PlayerTurn {
 	public static Group root = new Group();
 
@@ -36,6 +32,7 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard.
 	 */
 	public static void startTurn(int cPlayer) {
+		// Checks if a power up should be spawned this round - 20% chance
 		int rnd = (int)(Math.random()*5);
 		if (rnd == 1) {
 			SpawnPowerup.newPowerUp = true;
