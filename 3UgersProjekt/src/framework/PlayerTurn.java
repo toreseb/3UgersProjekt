@@ -2,11 +2,9 @@ package framework;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,8 +36,6 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard.
 	 */
 	public static void startTurn(int cPlayer) {
-		
-		
 		int rnd = (int)(Math.random()*5);
 		if (rnd == 1) {
 			SpawnPowerup.newPowerUp = true;
@@ -131,8 +127,6 @@ public class PlayerTurn {
 	 * By: Helene Moesgaard
 	 */
 	public static void promptMove(int cPlayer) {
-		
-		
 		// Create components
 		Label prompt = new Label("Please drag and drop gorilla :)");
 
@@ -145,27 +139,7 @@ public class PlayerTurn {
 		Main.frameworkRoot.getChildren().add(root);
 
 		Main.pList.get(cPlayer).moveGorilla(Main.pList.get(cPlayer).groupShape); // Moves the gorilla to new location
-
 	}
-
-	/*
-	 * By: Embla
-	 */
-	public static void explosion(double x, double y) {
-		int size = 100;
-		Image bang = new Image("Bang.png");
-		ImageView imageView = new ImageView(bang);
-		imageView.setFitWidth(size);
-		imageView.setFitHeight(size);
-		imageView.setX(x - size / 2);
-		imageView.setY(Main.m - y - size / 2);
-		Main.mainRoot.getChildren().add(imageView);
-		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-		scheduler.schedule(new Runnable() { public void run() { 
-			  imageView.setImage(null);
-			  Main.mainRoot.getChildren().remove(imageView);
-			}}, 1, TimeUnit.SECONDS);
-
-	}
-
+	
+	
 }

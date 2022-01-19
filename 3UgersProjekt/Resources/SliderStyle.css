@@ -1,0 +1,23 @@
+
+.slider {
+    -fx-translate-y: 18;
+}
+
+.slider .track {
+    -fx-pref-height: 8.35;
+    -fx-translate-y: 5;
+}
+
+.slider .thumb {
+    -fx-translate-y: -30;
+    -fx-pref-width: 45;
+    -fx-pref-height: 63;
+    -fx-background-image: url("newSliderThumb.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: transparent;
+    -fx-border: none;
+} 
+
+.slider .axis .axis-tick-mark {
+    -fx-translate-y: 4;
+}

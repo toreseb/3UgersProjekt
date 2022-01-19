@@ -22,7 +22,6 @@ public class Slime extends Projectile {
 	
 	public void playerHit(Gorilla p) {
 		// TODO Auto-generated method stub
-		System.out.println("Slime Dealt");
 		p.gorillaImg = new Image("SlimedGorilla.png");
 		p.gorillaThrowImg = new Image("SlimedGorillaThrow.png");
 		p.normalImage = false;

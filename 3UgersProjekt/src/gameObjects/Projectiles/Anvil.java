@@ -20,11 +20,8 @@ public class Anvil extends Projectile {
 	}
 
 	public void playerHit(Gorilla p) {
-		System.out.println("Damage Dealt");
 		p.curNumLife--;
-		p.hearts.remove(p.curNumLife);
 		p.curNumLife--;
-		p.hearts.remove(p.curNumLife);
 		p.drawHearts();
 		Main.pList.get(Main.cPlayer).hasPow = "no";
 	}

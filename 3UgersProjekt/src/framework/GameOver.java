@@ -1,6 +1,8 @@
 package framework;
 
+import gameObjects.GameObject;
 import gameObjects.Gorilla;
+import framework.SetupScenes;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -33,9 +35,17 @@ public class GameOver {
 	
 	 // This function display the game over scene in the window when the main game is done 
 	public static void endGame() {
-		Main.mainStage.setScene(new Scene(createContent()));
-		Main.mainStage.setWidth(WIDTH);
-		Main.mainStage.setHeight(HEIGHT);
+		
+		Main.frameworkRoot.getChildren().clear();
+		Main.gameRoot.getChildren().clear();
+		for (GameObject gO : Main.objList) {
+			gO.deleteObject();
+		}
+		
+		Main.cPlayer = 0;
+		Main.timer.stop();
+		
+		Main.mainStage.setScene(new Scene(createContent(),WIDTH, HEIGHT));
 		
 		//Centering the window on the screen
 		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();	
@@ -58,8 +68,6 @@ public class GameOver {
 		ImageView btnImg = new ImageView(banana);
 		Label winner = new Label();
 		Label gameOver = new Label();		
-		
-		
 		
 		// Sets the background image
 		double w= city.getWidth();
@@ -100,10 +108,14 @@ public class GameOver {
 		
 		gameOver.setText("Game Over");
 		int winnerNum=0;
-		for (int i = 0; i<Main.pList.size(); i++) {
-			if (Main.pList.get(i).curNumLife != 0) winnerNum = i;
+		for (Gorilla g : Main.pList) {
+			System.out.println(Main.nList.get(Main.pList.indexOf(g)) + ": " + g.isDead);
+			if(!g.isDead) {
+				winnerNum = Main.pList.indexOf(g);
+			}
 		}
 		winner.setText("Winner: " + Main.nList.get(winnerNum));
+		Main.pList.clear();
 		
 		
 		// Sets the fonts and the size of the text
@@ -131,13 +143,9 @@ public class GameOver {
 				/**
 				 * @TODO: Place the code for the action the button needs to execute when pressed
 				 */
-				Main.mainStage.setScene(Main.mainScene);
-				Main.initMain();
-				Main.timer.start();
-				System.out.println("Chilked Play again");
-				
+				SetupScenes.pCount = 1;
+				SetupScenes.windowSize();
 			}
-			
 		});
 		
 		// adding a Exit button
@@ -154,7 +162,6 @@ public class GameOver {
 		exit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent evnet) {
-				System.out.println("Chilcked exit");
 				Main.mainStage.close();
 			}
 		});

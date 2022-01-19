@@ -2,7 +2,6 @@ package framework;
 
 import java.util.ArrayList;
 import java.util.Timer;
-
 import gameObjects.*;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -28,16 +27,16 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	public static int n, m;// Width and Height
-	
+
 	public static boolean showHitbox = false;
 
 	public static Stage mainStage;
-	public static Scene mainScene;
 	// public static Group root2 = new Group();
-	
-	public static int startSizeX= 650;
-	public static int startSizeY= 390;
 
+	public static int startSizeW= 650;
+	public static int startSizeH= 390;
+
+	public static String levelName;
 	public static Level cLevel;
 
 	public static AnimationTimer timer;
@@ -46,9 +45,9 @@ public class Main extends Application {
 	public static ArrayList<GameObject> delList = new ArrayList<GameObject>();
 
 	public static ArrayList<Gorilla> pList = new ArrayList<Gorilla>();
-	
+
 	public static int cPlayer = 0;
-	
+
 	public static int pAmount;
 	public static ArrayList<String> nList = new ArrayList<String>();
 
@@ -70,25 +69,20 @@ public class Main extends Application {
 		mainStage = primaryStage;
 		mainStage.setTitle("Gorillas");
 		mainStage.setResizable(false);
-		
+
 		//Center on screen
-		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeX)/2);
-		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeY)/2);
-		
+		mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()- startSizeW)/2);
+		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- startSizeH)/2);
+
 		mainRoot.getChildren().addAll(frameworkRoot, gameRoot);
-		
+
 		// Window icon
 		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
-		
+
 		//SetupScenes.windowSize1(mainStage);
-		
-		mainScene = new Scene(mainRoot,startSizeX,startSizeY);
-		
-		mainStage.setScene(mainScene);
-		
 		SetupScenes.windowSize();
-		
+
 		mainStage.show();
 	}
 
@@ -100,7 +94,7 @@ public class Main extends Application {
 
 	static void run() {
 		// gameRoot.getChildren().clear();
-		
+
 		for (GameObject gO : objList) {
 			gO.run();
 		}
@@ -109,16 +103,16 @@ public class Main extends Application {
 			SpawnPowerup.newPowerUp = false;
 		}
 		clearLists();
-
 	}
 
 	public static void initMain() {
 		initTimer();
 
 		cLevel = new Level(n, m);
-		new Gorilla(Gorilla.width * 2);
-		new Gorilla(n - (Gorilla.width * 2));
-		
+		for(int i = 0; i< pAmount; i++) {
+			new Gorilla((int)(((double)Main.n/pAmount)*(i+0.5)));
+		}
+
 		// Call turn
 		PlayerTurn.startTurn(0);
 	}
@@ -150,4 +144,8 @@ public class Main extends Application {
 		}
 	}
 
+	public static void fullClearLists() {
+		objList.clear();
+		cLevel = null;
+	}
 }
