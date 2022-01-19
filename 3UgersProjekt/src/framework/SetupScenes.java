@@ -311,7 +311,12 @@ public class SetupScenes {
 		//Set scene on stage
 		Main.mainStage.setScene(sceneNames);
 	}
-
+	
+	/*
+	 * levelSelect()
+	 * 
+	 * Creates the scene that allows the players to select which level they want to play.
+	 */
 	public static void levelSelect() {
 		//Setup panes
 		GridPane buttons = new GridPane();
