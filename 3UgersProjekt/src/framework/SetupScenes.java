@@ -432,7 +432,6 @@ public class SetupScenes {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
 				Main.background = new Image("Forrest.gif");
-				Main.imageView = new ImageView(Main.background);
 				startGame();
 			}
 		});
@@ -441,6 +440,7 @@ public class SetupScenes {
 		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "MOUNTAINS";
+				Main.background = new Image("Mountain.gif");
 				startGame();
 			}
 		});
@@ -449,6 +449,7 @@ public class SetupScenes {
 		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "VILLAGE";
+				Main.background = new Image("Village.gif");
 				startGame();
 			}
 		});
@@ -457,6 +458,7 @@ public class SetupScenes {
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "HILL";
+				Main.background = new Image("Hill.gif");
 				startGame();
 			}
 		});
@@ -465,6 +467,7 @@ public class SetupScenes {
 		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "ROCKYHILLS";
+				Main.background = new Image("RockyHills.gif");
 				startGame();
 			}
 		});
@@ -482,6 +485,8 @@ public class SetupScenes {
 	 * Skal m�ske omskrives, men nu har vi noget der virker.
 	 */
 	public static void startGame() {
+
+		Main.imageView = new ImageView(Main.background);
 		// reposition Stage - Skal m�ske laves om
 		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-Main.n) / 2);
 		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- Main.m) / 2);
