@@ -89,7 +89,6 @@ public class Main extends Application {
 	// Main method
 	public static void main(String[] args) {
 		launch(args);
-		System.exit(0);
 	}
 
 	static void run() {
