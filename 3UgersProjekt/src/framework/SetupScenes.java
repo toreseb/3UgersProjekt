@@ -282,8 +282,9 @@ public class SetupScenes {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
+					System.out.println(name.getText());
 					//Check if text field is left blank and throw exception if yes.
-					if (name.getText().equalsIgnoreCase("") && name.getText().equalsIgnoreCase(" ")) {
+					if (name.getText().equalsIgnoreCase("") || name.getText().equalsIgnoreCase(" ")) {
 						throw new IllegalCallerException();
 					} else {
 						//Add name to nList in Main and add 1 to pCount
@@ -301,7 +302,7 @@ public class SetupScenes {
 						}
 					}
 				} catch (IllegalCallerException e) {
-					prompt.setText("Please enter a name, player" + pCount);
+					prompt.setText("Please enter only letters and numbers");
 				}
 
 				// @TODO Lav endnu en exception s� man ikke kan lave for lange navne
