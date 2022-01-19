@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
  * This class is the framework for a projectile.
  *
  * By: Embla
- *
  */
 public abstract class Projectile extends GameObject {
 	private double xSpeed;

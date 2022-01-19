@@ -45,14 +45,14 @@ public class SetupScenes {
 		Text disclaimer = new Text("The background of each level is from Tenor.com:");
 		Text city = new Text("City: https://tenor.com/view/anime-lofi-city-night-chill-gif-16619449");
 		Text mountain = new Text("Mountain: https://tenor.com/view/waterfall-nature-pixel-art-gif-11326194");
-		Text hill = new Text("Hill: https://tenor.com/view/forest-rendering-graphics-arts-nature-gif-10984145");
+		Text hills = new Text("Hills: https://tenor.com/view/forest-rendering-graphics-arts-nature-gif-10984145");
 		Text forest = new Text("Forest: https://tenor.com/view/pixel-art-gif-11326229");
 		Text village = new Text("Village: https://tenor.com/view/game-pixel-pixel-art-city-buildings-gif-16026910");
-		Text rockyHill = new Text("Rocky Hill: https://tenor.com/view/aesthetic-gif-18036231");
+		Text rockyHills = new Text("Rocky Hills: https://tenor.com/view/aesthetic-gif-18036231");
 		Button btn = new Button("Continue");
 		
 		// Add components to root
-		root.getChildren().addAll(disclaimer,city,mountain,hill,forest,village,rockyHill,btn);
+		root.getChildren().addAll(disclaimer,city,mountain,hills,forest,village,rockyHills,btn);
 		
 		// Create scene with root
 		Scene scene = new Scene(root,Main.startSizeW,Main.startSizeH);
@@ -255,10 +255,6 @@ public class SetupScenes {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
-					System.out.println(name.getText());
-
-					// Limit length of name
-
 					// Check if text field is left blank or is a single space and throw exception if yes.
 					if (name.getText().equalsIgnoreCase("") || name.getText().equalsIgnoreCase(" ")) {
 						throw new IllegalCallerException();
