@@ -353,7 +353,7 @@ public class SetupScenes {
 		// Style of the buttons
 		cityLevel.setBorder(null);
 		cityLevel.setPrefSize(175, 55);
-		cityLevel.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		cityLevel.setStyle("-fx-background-image: url(\"\");");
 		cityLevel.setFont(new Font("Times New Roman", 19.0));
 		cityLevel.setTextFill(Color.WHITE);
 		cityLevel.setOnMouseEntered(event -> {
@@ -362,7 +362,7 @@ public class SetupScenes {
 
 		forestLevel.setBorder(null);
 		forestLevel.setPrefSize(175, 55);
-		forestLevel.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		forestLevel.setStyle("-fx-background-image: url(\"\");");
 		forestLevel.setFont(new Font("Times New Roman", 19.0));
 		forestLevel.setTextFill(Color.WHITE);
 		forestLevel.setOnMouseEntered(event -> {
@@ -371,7 +371,7 @@ public class SetupScenes {
 		
 		mountainLevel.setBorder(null);
 		mountainLevel.setPrefSize(175, 55);
-		mountainLevel.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		mountainLevel.setStyle("-fx-background-image: url(\"\");");
 		mountainLevel.setFont(new Font("Times New Roman", 19.0));
 		mountainLevel.setTextFill(Color.WHITE);
 		mountainLevel.setOnMouseEntered(event -> {
@@ -380,7 +380,7 @@ public class SetupScenes {
 		
 		villageLevel.setBorder(null);
 		villageLevel.setPrefSize(175, 55);
-		villageLevel.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		villageLevel.setStyle("-fx-background-image: url(\"\");");
 		villageLevel.setFont(new Font("Times New Roman", 19.0));
 		villageLevel.setTextFill(Color.WHITE);
 		villageLevel.setOnMouseEntered(event -> {
@@ -389,7 +389,7 @@ public class SetupScenes {
 		
 		hillLevel.setBorder(null);
 		hillLevel.setPrefSize(175, 55);
-		hillLevel.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		hillLevel.setStyle("-fx-background-image: url(\"\");");
 		hillLevel.setFont(new Font("Times New Roman", 19.0));
 		hillLevel.setTextFill(Color.WHITE);
 		hillLevel.setOnMouseEntered(event -> {
@@ -398,7 +398,7 @@ public class SetupScenes {
 		
 		rockyHillLevel.setBorder(null);
 		rockyHillLevel.setPrefSize(175, 55);
-		rockyHillLevel.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		rockyHillLevel.setStyle("-fx-background-image: url(\"\");");
 		rockyHillLevel.setFont(new Font("Times New Roman", 19.0));
 		rockyHillLevel.setTextFill(Color.WHITE);
 		rockyHillLevel.setOnMouseEntered(event -> {
