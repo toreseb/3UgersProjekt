@@ -19,5 +19,5 @@
 } 
 
 .slider .axis .axis-tick-mark {
-    -fx-translate-y: 4;
+    -fx-translate-y: 4; 
 }
