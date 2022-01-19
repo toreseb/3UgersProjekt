@@ -43,6 +43,7 @@ public class GameOver {
 		}
 		Main.cPlayer = 0;
 		Main.timer.stop();
+		PlayerTurn.root.getChildren().clear();
 
 		Main.mainStage.setScene(new Scene(createContent(), WIDTH, HEIGHT));
 
