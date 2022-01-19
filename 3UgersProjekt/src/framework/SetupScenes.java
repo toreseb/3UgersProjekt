@@ -31,10 +31,12 @@ import javafx.stage.Screen;
  */
 public class SetupScenes {
 	public static int pCount = 1;
+
 	/*
 	 * windowSize()
 	 *
-	 * Sets the scene of mainStage to one with two sliders and a text field for the user to set the size of the window and the amount of players.
+	 * Sets the scene of mainStage to one with two sliders and a text field for the
+	 * user to set the size of the window and the amount of players.
 	 *
 	 * by: Helene & William
 	 */
@@ -62,32 +64,30 @@ public class SetupScenes {
 
 		// width slider
 		widthSlider.setShowTickMarks(true);
-		widthSlider.setMajorTickUnit((widthSlider.getMax() - widthSlider.getMin())/10);
+		widthSlider.setMajorTickUnit((widthSlider.getMax() - widthSlider.getMin()) / 10);
 		widthSlider.setMinorTickCount(0);
 		widthSlider.getStylesheets().add("SliderStyle.css");
 
-
 		// height slider
 		heightSlider.setShowTickMarks(true);
-		heightSlider.setMajorTickUnit((heightSlider.getMax() - heightSlider.getMin())/10);
+		heightSlider.setMajorTickUnit((heightSlider.getMax() - heightSlider.getMin()) / 10);
 		heightSlider.setMinorTickCount(0);
 		heightSlider.getStylesheets().add("SliderStyle.css");
 
-
 		// the code for the width and height value labels
-		widthPrompt.setText("Width: " + Integer.toString((int)widthSlider.getValue()));
+		widthPrompt.setText("Width: " + Integer.toString((int) widthSlider.getValue()));
 		widthSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-				widthPrompt.setText("Width: " + Integer.toString((int)widthSlider.getValue()));
+				widthPrompt.setText("Width: " + Integer.toString((int) widthSlider.getValue()));
 			}
 		});
 
-		heightPrompt.setText("Height: " + Integer.toString((int)heightSlider.getValue()));
+		heightPrompt.setText("Height: " + Integer.toString((int) heightSlider.getValue()));
 		heightSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-				heightPrompt.setText("Height: " + Integer.toString((int)heightSlider.getValue()));
+				heightPrompt.setText("Height: " + Integer.toString((int) heightSlider.getValue()));
 			}
 		});
 
@@ -95,7 +95,8 @@ public class SetupScenes {
 		submitBtn.setText("Submit");
 		submitBtn.setBorder(null);
 		submitBtn.setPrefSize(215, 55);
-		submitBtn.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		submitBtn.setStyle(
+				"-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
 		submitBtn.setFont(new Font("Times New Roman", 25.0));
 		submitBtn.setTextFill(Color.WHITE);
 		submitBtn.setOnMouseEntered(event -> {
@@ -106,23 +107,20 @@ public class SetupScenes {
 		submitBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				//Get values from sliders
+				// Get values from sliders
 				Main.n = (int) widthSlider.getValue();
 				Main.m = (int) heightSlider.getValue();
-
-
-
 				try {
 					int count = Integer.parseInt(numPlayerTextField.getText());
 
-					//Check if input from text field is within bounds
+					// Check if input from text field is within bounds
 					if ((count < 2 || count > 6)) {
 						throw new IllegalCallerException();
 					}
 					// set pAmount in Main
 					Main.pAmount = count;
 
-					//Call next input prompt
+					// Call next input prompt
 					playerNames();
 				} catch (IllegalCallerException e) {
 					numPlayer.setText("Only values between 2 and 6");
@@ -133,7 +131,7 @@ public class SetupScenes {
 		});
 
 		// Setting up the grid pane
-		//pane.setGridLinesVisible(true);
+		// pane.setGridLinesVisible(true);
 		pane.setMinSize(650, 390);
 		pane.setAlignment(Pos.TOP_CENTER);
 		pane.setVgap(7);
@@ -150,7 +148,7 @@ public class SetupScenes {
 		GridPane.setColumnSpan(widthSlider, 2);
 
 		GridPane.setConstraints(heightPrompt, 0, 6);
-		GridPane.setConstraints(heightSlider, 0,8);
+		GridPane.setConstraints(heightSlider, 0, 8);
 		GridPane.setColumnSpan(heightSlider, 2);
 
 		GridPane.setConstraints(numPlayer, 0, 10);
@@ -171,14 +169,15 @@ public class SetupScenes {
 	/*
 	 * playerNames()
 	 *
-	 * Sets the scene of mainStage to one with a text field and a button and asks all players, one after the other, to set their name.
+	 * Sets the scene of mainStage to one with a text field and a button and asks
+	 * all players, one after the other, to set their name.
 	 * 
 	 * Helene & William
 	 */
 	public static void playerNames() {
 		// GridPane setup
 		GridPane grid = new GridPane();
-		//grid.setGridLinesVisible(true);
+		// grid.setGridLinesVisible(true);
 		grid.setMinSize(650, 390);
 		grid.setAlignment(Pos.TOP_CENTER);
 		grid.setVgap(7);
@@ -186,8 +185,8 @@ public class SetupScenes {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 		grid.setAlignment(Pos.CENTER);
 
-		//Create scene and add grid
-		Scene sceneNames = new Scene(grid,Main.startSizeW,Main.startSizeH);
+		// Create scene and add grid
+		Scene sceneNames = new Scene(grid, Main.startSizeW, Main.startSizeH);
 
 		// Create components
 		Text prompt = new Text("Player " + (pCount) + ", please enter a name");
@@ -202,13 +201,13 @@ public class SetupScenes {
 		btn.setText("Submit");
 		btn.setBorder(null);
 		btn.setPrefSize(115, 30);
-		btn.setStyle("-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
+		btn.setStyle(
+				"-fx-background-color: linear-gradient(to right bottom, #42E596, #3CB3B8); -fx-background-radius: 25px;");
 		btn.setFont(new Font("Times New Roman", 19.0));
 		btn.setTextFill(Color.WHITE);
 		btn.setOnMouseEntered(event -> {
 			btn.setCursor(Cursor.HAND);
 		});
-
 
 		// Set placement of components
 		GridPane.setConstraints(prompt, 0, 0);
@@ -217,68 +216,75 @@ public class SetupScenes {
 		GridPane.setHalignment(btn, HPos.CENTER);
 		GridPane.setColumnSpan(btn, 2);
 
-
-		//Add components to grid
+		// Add components to grid
 		grid.getChildren().addAll(prompt, name, btn);
 
-		//Create button press event
+		// Create button press event
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
 					System.out.println(name.getText());
-					//Check if text field is left blank and throw exception if yes.
+
+					// Limit length of name
+
+					// Check if text field is left blank or is a single space and throw exception if yes.
 					if (name.getText().equalsIgnoreCase("") || name.getText().equalsIgnoreCase(" ")) {
 						throw new IllegalCallerException();
 					} else {
-						//Add name to nList in Main and add 1 to pCount
-						Main.nList.add(name.getText());
-						pCount++;
-
-						//If all names have been set, clear frameworkRoot and call startGame()
-						if (pCount > Main.pAmount) {
-							Main.frameworkRoot.getChildren().clear();
-							levelSelect();
+						//Limit length of name
+						if (name.getText().length() > 10) {
+							prompt.setText("Please enter a shorter name");
 						} else {
-							//If not, clear text field and prompt next player
-							prompt.setText("Player " + (pCount) + ", please enter a name");
-							name.clear();
+							// Add name to nList in Main and add 1 to pCount
+							Main.nList.add(name.getText());
+							pCount++;
+
+							// If all names have been set, call levelSelect()
+							if (pCount > Main.pAmount) {
+								levelSelect();
+							} else {
+								// If not, clear text field and prompt next player
+								prompt.setText("Player " + (pCount) + ", please enter a name");
+								name.clear();
+							}
 						}
 					}
 				} catch (IllegalCallerException e) {
 					prompt.setText("Please enter only letters and numbers");
 				}
-
-				// @TODO Lav endnu en exception s� man ikke kan lave for lange navne
 			}
 		});
 
-		//Set scene on stage
+		// Set scene on stage
 		Main.mainStage.setScene(sceneNames);
 	}
-	
+
 	/*
 	 * levelSelect()
 	 * 
-	 * Creates the scene that allows the players to select which level they want to play.
+	 * Creates the scene that allows the players to select which level they want to
+	 * play. Calls startGame()
+	 * 
+	 * By: Helene, William & Tore
 	 */
 	public static void levelSelect() {
-		//Setup panes
+		// Setup panes
 		GridPane buttons = new GridPane();
-		//buttons.setGridLinesVisible(true);
+		// buttons.setGridLinesVisible(true);
 		buttons.setMinSize(650, 390);
 		buttons.setAlignment(Pos.TOP_CENTER);
 		buttons.setVgap(25);
 		buttons.setHgap(25);
 		buttons.setPadding(new Insets(10, 10, 10, 10));
 		buttons.setAlignment(Pos.CENTER);
-		
+
 		VBox main = new VBox();
 		main.setAlignment(Pos.CENTER);
 
-		//Create scene and add "main"
-		Scene sceneLevel = new Scene(main,Main.startSizeW,Main.startSizeH);
+		// Create scene and add "main"
+		Scene sceneLevel = new Scene(main, Main.startSizeW, Main.startSizeH);
 
-		//Create components
+		// Create components
 		Text prompt = new Text("Please select a level");
 		Button cityLevel = new Button("City");
 		Button forestLevel = new Button("Forest");
@@ -286,11 +292,11 @@ public class SetupScenes {
 		Button villageLevel = new Button("Village");
 		Button hillLevel = new Button("Hills");
 		Button rockyHillLevel = new Button("Rocky hills");
-		
+
 		// Init the prompt
 		prompt.setFont(new Font("Times New Roman", 25.0));
 		prompt.setStyle("-fx-translate-y: 75;");
-		
+
 		// Style of the buttons
 		cityLevel.setBorder(null);
 		cityLevel.setPrefSize(175, 55);
@@ -309,7 +315,7 @@ public class SetupScenes {
 		forestLevel.setOnMouseEntered(event -> {
 			forestLevel.setCursor(Cursor.HAND);
 		});
-		
+
 		mountainLevel.setBorder(null);
 		mountainLevel.setPrefSize(175, 55);
 		mountainLevel.setStyle("-fx-background-image: url(\"\");");
@@ -318,7 +324,7 @@ public class SetupScenes {
 		mountainLevel.setOnMouseEntered(event -> {
 			mountainLevel.setCursor(Cursor.HAND);
 		});
-		
+
 		villageLevel.setBorder(null);
 		villageLevel.setPrefSize(175, 55);
 		villageLevel.setStyle("-fx-background-image: url(\"\");");
@@ -327,7 +333,7 @@ public class SetupScenes {
 		villageLevel.setOnMouseEntered(event -> {
 			villageLevel.setCursor(Cursor.HAND);
 		});
-		
+
 		hillLevel.setBorder(null);
 		hillLevel.setPrefSize(175, 55);
 		hillLevel.setStyle("-fx-background-image: url(\"\");");
@@ -336,7 +342,7 @@ public class SetupScenes {
 		hillLevel.setOnMouseEntered(event -> {
 			hillLevel.setCursor(Cursor.HAND);
 		});
-		
+
 		rockyHillLevel.setBorder(null);
 		rockyHillLevel.setPrefSize(175, 55);
 		rockyHillLevel.setStyle("-fx-background-image: url(\"\");");
@@ -345,21 +351,20 @@ public class SetupScenes {
 		rockyHillLevel.setOnMouseEntered(event -> {
 			rockyHillLevel.setCursor(Cursor.HAND);
 		});
-		
-		
-		//Set placement of components
+
+		// Set placement of components
 		GridPane.setConstraints(cityLevel, 0, 0);
 		GridPane.setConstraints(forestLevel, 0, 1);
 		GridPane.setConstraints(mountainLevel, 1, 0);
-		GridPane.setConstraints(villageLevel, 1, 1); 
+		GridPane.setConstraints(villageLevel, 1, 1);
 		GridPane.setConstraints(hillLevel, 2, 0);
 		GridPane.setConstraints(rockyHillLevel, 2, 1);
 
-		//Add components to panes
-		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel,rockyHillLevel);
-		main.getChildren().addAll(prompt,buttons);
+		// Add components to panes
+		buttons.getChildren().addAll(cityLevel, forestLevel, mountainLevel, villageLevel, hillLevel, rockyHillLevel);
+		main.getChildren().addAll(prompt, buttons);
 
-		//Set button press event for cityLevel
+		// Set button press event for cityLevel
 		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "CITY";
@@ -368,8 +373,7 @@ public class SetupScenes {
 			}
 		});
 
-
-		//Set button press event for forestLevel
+		// Set button press event for forestLevel
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
@@ -378,7 +382,7 @@ public class SetupScenes {
 			}
 		});
 
-		//Set button press event for mountainLevel
+		// Set button press event for mountainLevel
 		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "MOUNTAINS";
@@ -387,7 +391,7 @@ public class SetupScenes {
 			}
 		});
 
-		//Set button press event for villageLevel
+		// Set button press event for villageLevel
 		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "VILLAGE";
@@ -396,7 +400,7 @@ public class SetupScenes {
 			}
 		});
 
-		//Set button press event for hillLevel
+		// Set button press event for hillLevel
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "HILLS";
@@ -405,7 +409,7 @@ public class SetupScenes {
 			}
 		});
 
-		//Set button press event for rockyHillLevel
+		// Set button press event for rockyHillLevel
 		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "ROCKYHILLS";
@@ -414,7 +418,7 @@ public class SetupScenes {
 			}
 		});
 
-		//Set scene on stage
+		// Set scene on stage
 		Main.mainStage.setScene(sceneLevel);
 	}
 
@@ -430,9 +434,8 @@ public class SetupScenes {
 
 		Main.imageView = new ImageView(Main.background);
 		// reposition Stage - Skal m�ske laves om
-		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-Main.n) / 2);
-		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()- Main.m) / 2);
-
+		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth() - Main.n) / 2);
+		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight() - Main.m) / 2);
 
 		// set background image
 		double w = Main.background.getWidth();
@@ -443,15 +446,16 @@ public class SetupScenes {
 		} else
 			Main.imageView.setFitHeight(Main.m);
 
-		//Skal udredes, men gider ikke lige nu. @TODO i guess.
+		// Skal udredes, men gider ikke lige nu. @TODO i guess.
 		Main.mainRoot = new Group();
 		Main.mainRoot.getChildren().add(Main.imageView);
-		Main.mainRoot.getChildren().addAll(Main.frameworkRoot, Main.gameRoot); //Noget galt her tror jeg mainRoot er vist allerede en Group fra Main.
+		Main.mainRoot.getChildren().addAll(Main.frameworkRoot, Main.gameRoot); // Noget galt her tror jeg mainRoot er
+																				// vist allerede en Group fra Main.
 
 		Scene scene = new Scene(Main.mainRoot, Main.n, Main.m);
 		Main.mainStage.setScene(scene);
 
-		//Call Main.initMain()
+		// Call Main.initMain()
 		Main.initMain();
 	}
 
