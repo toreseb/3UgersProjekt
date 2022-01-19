@@ -29,6 +29,7 @@ public class Gorilla extends GameObject {
 	public Projectile banana;
 	public String hasPow;
 	public Image gorillaImg;
+	public Image gorillaThrowImg; 
 
 	public String name;
 
@@ -36,9 +37,6 @@ public class Gorilla extends GameObject {
 	public static Image heart = new Image("Heart.png");
 	public ImageView gorilla;
 	private boolean right = true;
-	boolean firstFrame = true;
-	boolean secondFrame = false;
-	public Image gorillaThrowImg; 
 
 	/*
 	 * Gorilla()
@@ -162,10 +160,10 @@ public class Gorilla extends GameObject {
 			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
 					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
 			if (c < maxThrow) {
-				xEnd = event.getSceneX(); // move line end to follow the mouse
+				xEnd = event.getSceneX();
 				yEnd = event.getSceneY();
 			} else {
-				xEnd = xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow; // move line end to follow the mouse
+				xEnd = xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow;
 				yEnd = yBegin - ((yBegin - event.getSceneY()) / c) * maxThrow;
 			}
 			double xSpeed = xEnd - xBegin;
@@ -210,7 +208,7 @@ public class Gorilla extends GameObject {
 	 *
 	 * by: William
 	 */
-	private double startPosX, startPosY;
+	double startPosX, startPosY;
 
 	public void moveGorilla(Group shape) {
 		shape.setOnMouseEntered(event -> {

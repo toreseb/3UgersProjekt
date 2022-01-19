@@ -328,8 +328,8 @@ public class SetupScenes {
 		Text forest = new Text("Forest");
 		Text mountain = new Text("Mountain");
 		Text village = new Text("Village");
-		Text hill = new Text("Hill");
-		Text rocky = new Text("Rocky Hill");
+		Text hill = new Text("Hills");
+		Text rocky = new Text("Rocky Hills");
 
 		// Style of the text
 		city.setFont(new Font("Times New Roman", 30.0));
