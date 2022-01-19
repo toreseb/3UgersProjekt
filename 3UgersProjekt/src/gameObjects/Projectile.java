@@ -24,7 +24,7 @@ public abstract class Projectile extends GameObject {
 	public static int width = 20;
 	public static int height = 20;
 
-	protected Image banana = new Image("Banana.png"); // ???
+	protected Image banana = new Image("Banana.png");
 	protected Image hand = new Image("GorillaHand.png");
 	protected ImageView viewHand;
 
