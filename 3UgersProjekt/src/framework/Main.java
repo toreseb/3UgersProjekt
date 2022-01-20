@@ -84,7 +84,7 @@ public class Main extends Application {
 		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight() - startSizeH) / 2);
 
 		// Window icon
-		Image icon = new Image("Banana.png");
+		Image icon = new Image(ClassLoader.getSystemResource("Banana.png").toString());
 		mainStage.getIcons().add(icon);
 		
 		SetupScenes.disclaimer();

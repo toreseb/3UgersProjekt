@@ -28,7 +28,7 @@ public class Ice extends Projectile {
 	 * Sets the image of the projectile and calls initShape() from Projectile.
 	 */
 	protected void initShape() {
-		banana = new Image("Iceball.png");
+		banana = new Image(ClassLoader.getSystemResource("Iceball.png").toString());
 		super.initShape();
 	}
 

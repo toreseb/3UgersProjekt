@@ -76,8 +76,8 @@ public class PlayerTurn {
 					if (Main.pList.get(cPlayer).slimed != 0) {
 						Main.pList.get(cPlayer).slimed--;
 						if ((Main.pList.get(cPlayer).slimed == 0) && (Main.pList.get(cPlayer).normalImage == false)) {
-							Main.pList.get(cPlayer).gorillaImg = new Image("Gorilla.png");
-							Main.pList.get(cPlayer).gorillaThrowImg = new Image("GorillaThrow.png");
+							Main.pList.get(cPlayer).gorillaImg = new Image(ClassLoader.getSystemResource("Gorilla.png").toString());
+							Main.pList.get(cPlayer).gorillaThrowImg = new Image(ClassLoader.getSystemResource("GorillaThrow.png").toString());
 							Main.pList.get(cPlayer).normalImage = true;
 						}
 					}
@@ -103,7 +103,7 @@ public class PlayerTurn {
 					if (Main.pList.get(Main.cPlayer).frozen != 0) {
 						Main.pList.get(Main.cPlayer).frozen--;
 						if ((Main.pList.get(Main.cPlayer).frozen == 0) && (Main.pList.get(Main.cPlayer).normalImage == false)) {
-							Main.pList.get(Main.cPlayer).gorillaImg = new Image("Gorilla.png");
+							Main.pList.get(Main.cPlayer).gorillaImg = new Image(ClassLoader.getSystemResource("Gorilla.png").toString());
 							Main.pList.get(Main.cPlayer).normalImage = true;
 						}
 					}

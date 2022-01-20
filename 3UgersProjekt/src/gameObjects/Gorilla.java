@@ -102,8 +102,8 @@ public class Gorilla extends GameObject {
 	 * By: William
 	 */
 	protected void initShape() {
-		gorillaImg = new Image("Gorilla.png");
-		gorillaThrowImg = new Image("GorillaThrow.png");
+		gorillaImg = new Image(ClassLoader.getSystemResource("Gorilla.png").toString());
+		gorillaThrowImg = new Image(ClassLoader.getSystemResource("GorillaThrow.png").toString());
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);

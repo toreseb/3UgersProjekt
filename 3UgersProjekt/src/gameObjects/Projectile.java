@@ -25,7 +25,7 @@ public abstract class Projectile extends GameObject {
 	public static int height = 20;
 
 	protected Image banana;
-	protected Image hand = new Image("GorillaHand.png");
+	protected Image hand = new Image(ClassLoader.getSystemResource("GorillaHand.png").toString());
 	protected ImageView viewHand;
 
 	/*
@@ -232,7 +232,7 @@ public abstract class Projectile extends GameObject {
 	 */
 	public static void explosion(double x, double y) {
 		int size = 100;
-		Image bang = new Image("Bang.png");
+		Image bang = new Image(ClassLoader.getSystemResource("Bang.png").toString());
 		ImageView imageView = new ImageView(bang);
 		imageView.setFitWidth(size);
 		imageView.setFitHeight(size);

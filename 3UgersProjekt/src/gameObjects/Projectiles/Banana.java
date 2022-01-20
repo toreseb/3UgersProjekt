@@ -27,7 +27,7 @@ public class Banana extends Projectile {
 	 * Sets the image of the projectile and calls initShape() from Projectile.
 	 */
 	protected void initShape() {
-		banana = new Image("Banana.png");
+		banana = new Image(ClassLoader.getSystemResource("Banana.png").toString());
 		super.initShape();
 	}
 

@@ -430,7 +430,7 @@ public class SetupScenes {
 		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "CITY";
-				Main.background = new Image("City.gif");
+				Main.background = new Image(ClassLoader.getSystemResource("City.gif").toString());
 				startGame();
 			}
 		});
@@ -439,7 +439,7 @@ public class SetupScenes {
 		forestLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "FOREST";
-				Main.background = new Image("Forest.gif");
+				Main.background = new Image(ClassLoader.getSystemResource("Forest.gif").toString());
 				Main.imageView = new ImageView(Main.background);
 				startGame();
 			}
@@ -449,7 +449,7 @@ public class SetupScenes {
 		mountainLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "MOUNTAINS";
-				Main.background = new Image("Mountain.gif");
+				Main.background = new Image(ClassLoader.getSystemResource("Mountain.gif").toString());
 				startGame();
 			}
 		});
@@ -458,7 +458,7 @@ public class SetupScenes {
 		villageLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "VILLAGE";
-				Main.background = new Image("Village.gif");
+				Main.background = new Image(ClassLoader.getSystemResource("Village.gif").toString());
 				startGame();
 			}
 		});
@@ -467,7 +467,7 @@ public class SetupScenes {
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "HILL";
-				Main.background = new Image("Hills.gif");
+				Main.background = new Image(ClassLoader.getSystemResource("Hills.gif").toString());
 				startGame();
 			}
 		});
@@ -476,7 +476,7 @@ public class SetupScenes {
 		rockyHillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Main.levelName = "ROCKYHILLS";
-				Main.background = new Image("RockyHills.gif");
+				Main.background = new Image(ClassLoader.getSystemResource("RockyHills.gif").toString());
 				startGame();
 			}
 		});
