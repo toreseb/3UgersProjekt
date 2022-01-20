@@ -11,7 +11,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -28,10 +27,46 @@ import javafx.stage.Screen;
  *
  * This class makes the scenes for the start window that allow the user to define the different variables of the game.
  *
- * By: Helene Moesgaard
+ * By: Helene
  */
 public class SetupScenes {
 	public static int pCount = 1;
+	
+	/*
+	 * disclaimer()
+	 * 
+	 * Sets the scene of mainStage to one that shows a disclaimer of where the backgrounds are from.
+	 * 
+	 * By: Helene
+	 */
+	public static void disclaimer() {
+		// Fields
+		VBox root = new VBox();
+		Text disclaimer = new Text("The background of each level is from Tenor.com:");
+		Text city = new Text("City: https://tenor.com/view/anime-lofi-city-night-chill-gif-16619449");
+		Text mountain = new Text("Mountain: https://tenor.com/view/waterfall-nature-pixel-art-gif-11326194");
+		Text hills = new Text("Hills: https://tenor.com/view/forest-rendering-graphics-arts-nature-gif-10984145");
+		Text forest = new Text("Forest: https://tenor.com/view/pixel-art-gif-11326229");
+		Text village = new Text("Village: https://tenor.com/view/game-pixel-pixel-art-city-buildings-gif-16026910");
+		Text rockyHills = new Text("Rocky Hills: https://tenor.com/view/aesthetic-gif-18036231");
+		Button btn = new Button("Continue");
+		
+		// Add components to root
+		root.getChildren().addAll(disclaimer,city,mountain,hills,forest,village,rockyHills,btn);
+		
+		// Create scene with root
+		Scene scene = new Scene(root,Main.startSizeW,Main.startSizeH);
+		
+		// Set scene on mainStage
+		Main.mainStage.setScene(scene);
+		
+		// Set button event
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				windowSize();
+			}
+		});
+	}
 
 	/*
 	 * windowSize()
@@ -106,7 +141,6 @@ public class SetupScenes {
 
 		// Submits the values given when it's clicked
 		submitBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 				// Get values from sliders
 				Main.n = (int) widthSlider.getValue();
@@ -132,7 +166,6 @@ public class SetupScenes {
 		});
 
 		// Setting up the grid pane
-		// pane.setGridLinesVisible(true);
 		pane.setMinSize(650, 390);
 		pane.setAlignment(Pos.TOP_CENTER);
 		pane.setVgap(7);
@@ -168,9 +201,8 @@ public class SetupScenes {
 	}
 
 	/*
-	 * playerNames()
-	 * Sets the scene of mainStage to one with a text field and a button and asks
-	 * all players, one after the other, to set their name.
+	 * playerNames() Sets the scene of mainStage to one with a text field and a
+	 * button and asks all players, one after the other, to set their name.
 	 *
 	 * Helene & William
 	 */
@@ -223,15 +255,11 @@ public class SetupScenes {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
-					System.out.println(name.getText());
-
-					// Limit length of name
-
 					// Check if text field is left blank or is a single space and throw exception if yes.
 					if (name.getText().equalsIgnoreCase("") || name.getText().equalsIgnoreCase(" ")) {
 						throw new IllegalCallerException();
 					} else {
-						//Limit length of name
+						// Limit length of name
 						if (name.getText().length() > 10) {
 							prompt.setText("Please enter a shorter name");
 						} else {
@@ -295,40 +323,28 @@ public class SetupScenes {
 		Text city = new Text("City");
 		Text forest = new Text("Forest");
 		Text mountain = new Text("Mountain");
-		Text village = new Text("village");
-		Text hill = new Text("Hill");
-		Text rocky = new Text("Rocky Hill");
+		Text village = new Text("Village");
+		Text hill = new Text("Hills");
+		Text rocky = new Text("Rocky Hills");
 
 		// Style of the text
 		city.setFont(new Font("Times New Roman", 30.0));
-		city.setStyle("    -fx-fill: white;\n"
-				+ "    -fx-stroke: black;\n"
-				+ "    -fx-stroke-width: 1;");
+		city.setStyle("    -fx-fill: white;\n" + "    -fx-stroke: black;\n" + "    -fx-stroke-width: 1;");
 
 		forest.setFont(new Font("Times New Roman", 30.0));
-		forest.setStyle("-fx-fill: white;\n"
-				+ "    -fx-stroke: black;\n"
-				+ "    -fx-stroke-width: 1;");
+		forest.setStyle("-fx-fill: white;\n" + "    -fx-stroke: black;\n" + "    -fx-stroke-width: 1;");
 
 		mountain.setFont(new Font("Times New Roman", 30.0));
-		mountain.setStyle("-fx-fill: white;\n"
-				+ "    -fx-stroke: black;\n"
-				+ "    -fx-stroke-width: 1;");
+		mountain.setStyle("-fx-fill: white;\n" + "    -fx-stroke: black;\n" + "    -fx-stroke-width: 1;");
 
 		village.setFont(new Font("Times New Roman", 30.0));
-		village.setStyle("-fx-fill: white;\n"
-				+ "    -fx-stroke: black;\n"
-				+ "    -fx-stroke-width: 1;");
+		village.setStyle("-fx-fill: white;\n" + "    -fx-stroke: black;\n" + "    -fx-stroke-width: 1;");
 
 		hill.setFont(new Font("Times New Roman", 30.0));
-		hill.setStyle("-fx-fill: white;\n"
-				+ "    -fx-stroke: black;\n"
-				+ "    -fx-stroke-width: 1;");
+		hill.setStyle("-fx-fill: white;\n" + "    -fx-stroke: black;\n" + "    -fx-stroke-width: 1;");
 
 		rocky.setFont(new Font("Times New Roman", 30.0));
-		rocky.setStyle("-fx-fill: white;\n"
-				+ "    -fx-stroke: black;\n"
-				+ "    -fx-stroke-width: 1;");
+		rocky.setStyle("-fx-fill: white;\n" + "    -fx-stroke: black;\n" + "    -fx-stroke-width: 1;");
 
 		// Init the prompt
 		prompt.setFont(new Font("Times New Roman", 25.0));
@@ -348,7 +364,8 @@ public class SetupScenes {
 		forestLevel.setBorder(null);
 		forestLevel.setGraphic(forest);
 		forestLevel.setPrefSize(200, 75);
-		forestLevel.setStyle("-fx-background-image: url(\"Forest.gif\"); -fx-background-position: center; -fx-stroke: white");
+		forestLevel.setStyle(
+				"-fx-background-image: url(\"Forest.gif\"); -fx-background-position: center; -fx-stroke: white");
 		forestLevel.setFont(new Font("Times New Roman", 19.0));
 		forestLevel.setTextFill(Color.BLACK);
 		forestLevel.setOnMouseEntered(event -> {
@@ -404,10 +421,10 @@ public class SetupScenes {
 		GridPane.setConstraints(hillLevel, 2, 0);
 		GridPane.setConstraints(rockyHillLevel, 2, 1);
 
-		//Add components to panes
-		buttons.getChildren().addAll(cityLevel,forestLevel,mountainLevel,villageLevel,hillLevel,rockyHillLevel, city, hill, mountain,
-				rocky, village, forest);
-		main.getChildren().addAll(prompt,buttons);
+		// Add components to panes
+		buttons.getChildren().addAll(cityLevel, forestLevel, mountainLevel, villageLevel, hillLevel, rockyHillLevel,
+				city, hill, mountain, rocky, village, forest);
+		main.getChildren().addAll(prompt, buttons);
 
 		// Set button press event for cityLevel
 		cityLevel.setOnAction(new EventHandler<ActionEvent>() {
@@ -449,8 +466,8 @@ public class SetupScenes {
 		// Set button press event for hillLevel
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Main.levelName = "HILLS";
-				Main.background = new Image("Hill.gif");
+				Main.levelName = "HILL";
+				Main.background = new Image("Hills.gif");
 				startGame();
 			}
 		});
@@ -473,17 +490,18 @@ public class SetupScenes {
 	 *
 	 * Sets a new scene for the game on the stage with the user-given dimensions,
 	 * repositions the stage and calls Main.initMain().
-	 *
-	 * Skal m�ske omskrives, men nu har vi noget der virker.
+	 * 
+	 * By: Helene & Embla
 	 */
 	public static void startGame() {
 
 		Main.imageView = new ImageView(Main.background);
-		// reposition Stage - Skal m�ske laves om
+		
+		// Recenter stage
 		Main.mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth() - Main.n) / 2);
 		Main.mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight() - Main.m) / 2);
 
-		// set background image
+		// Set background image
 		double w = Main.background.getWidth();
 		double h = Main.background.getHeight();
 		Main.imageView.setPreserveRatio(true);
@@ -492,11 +510,9 @@ public class SetupScenes {
 		} else
 			Main.imageView.setFitHeight(Main.m);
 
-		// Skal udredes, men gider ikke lige nu. @TODO i guess.
 		Main.mainRoot = new Group();
 		Main.mainRoot.getChildren().add(Main.imageView);
-		Main.mainRoot.getChildren().addAll(Main.frameworkRoot, Main.gameRoot); // Noget galt her tror jeg mainRoot er
-																				// vist allerede en Group fra Main.
+		Main.mainRoot.getChildren().addAll(Main.frameworkRoot, Main.gameRoot);
 
 		Scene scene = new Scene(Main.mainRoot, Main.n, Main.m);
 		Main.mainStage.setScene(scene);

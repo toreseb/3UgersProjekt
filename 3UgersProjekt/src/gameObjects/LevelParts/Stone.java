@@ -1,26 +1,41 @@
 package gameObjects.LevelParts;
 
 import gameObjects.LevelPart;
-import javafx.scene.Group;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
+/*
+ * Stone extends the abstract class LevelPart. 
+ * 
+ * This class makes a stone with a random size within bounds.
+ * 
+ * By: Tore
+ */
 public class Stone extends LevelPart {
 	
 	public static int maxWidth = LevelPart.maxWidth;
 	public static int divHeight = LevelPart.divHeight;
 	
+	/*
+	 * Stone()
+	 * 
+	 * Calls the constructor in LevelPart.
+	 */
 	public Stone(int posX, int width, int height) {
 		super(posX, width, height);
-		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
+	/*
+	 * initShape()
+	 * 
+	 * Makes the stone and defines the hitBox.
+	 */
 	protected void initShape() {
 		dwidth = (double)width;
 		dheight = (double)height;
 		Polygon p = new Polygon();
+		
+		// Choose appropriate shape depending on size
 		if(height <= 150) {
 			initSmallStone(p);
 		}else {
@@ -30,6 +45,11 @@ public class Stone extends LevelPart {
 		groupShape.getChildren().add(p);
 	}
 	
+	/*
+	 * initSmallStone()
+	 * 
+	 * Sets shape and colour of the small stone.
+	 */
 	void initSmallStone(Polygon p) {
 		p.getPoints().addAll(new Double[] {
 		dwidth/3,0.0,
@@ -44,6 +64,11 @@ public class Stone extends LevelPart {
 		p.setFill(Color.GRAY);
 	}
 	
+	/*
+	 * initBigStone()
+	 * 
+	 * Sets shape and colour of the big stone.
+	 */
 	void initBigStone(Polygon p) {
 		p.getPoints().addAll(new Double[] {
 		dwidth/3,0.0,

@@ -100,7 +100,6 @@ public class GameOver {
 		gameOver.setText("Game Over");
 		int winnerNum = 0;
 		for (Gorilla g : Main.pList) {
-			System.out.println(Main.nList.get(Main.pList.indexOf(g)) + ": " + g.isDead);
 			if (!g.isDead) {
 				winnerNum = Main.pList.indexOf(g);
 			}

@@ -1,9 +1,6 @@
 package gameObjects;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import framework.Main;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,7 +11,7 @@ import javafx.scene.image.ImageView;
  * 
  * It contains all the fields and methods a basic powerup needs.
  * 
- * By: Helene Moesgaard
+ * By: Helene
  */
 
 public abstract class PowerUp extends GameObject {
@@ -24,11 +21,21 @@ public abstract class PowerUp extends GameObject {
 	public static int width = 25;
 	public static int height = 25;
 
+	/*
+	 * PowerUp()
+	 * 
+	 * Calls the constructor in GameObject and adds the power up to cLevel.
+	 */
 	public PowerUp(double posX, double posY) {
 		super(posX, posY, width, height);
 		Main.cLevel.powerUps.add(this);
 	}
 
+	/*
+	 * initShape()
+	 * 
+	 * Takes the image defined in the sub class' initShape, formats it and adds it to groupShape. Then calls initShape() in GameObject.
+	 */
 	protected void initShape() {
 		//Sub class defines its own image
 		
@@ -43,13 +50,24 @@ public abstract class PowerUp extends GameObject {
 		super.initShape();
 	}
 
+	/*
+	 * collected()
+	 * 
+	 * Deletes power up.
+	 */
 	public void collected() {
 		Main.gameRoot.getChildren().remove(groupShape);
 		Main.cLevel.powerUps.remove(this);
 		this.deleteObject();
 	}
 
-	@Override
+	/*
+	 * step()
+	 * 
+	 * Calls step() in GameObject.
+	 * 
+	 * Animates power up by shifting position up and down.
+	 */
 	protected void step() {
 		super.step();
 		counter++;
@@ -64,10 +82,19 @@ public abstract class PowerUp extends GameObject {
 			vectorPos.set(1, vectorPos.get(1) + 3);
 		}
 
+		// Spaces out movement
 		if (counter == 80) {
 			counter = 0;
 		}
 	}
+	
+	/*
+	 * newCoords()
+	 * 
+	 * Sets a random position.
+	 * 
+	 * By: Tore
+	 */
 	public void newCoords() {
 		vectorPos.set(0,Math.random()*(Main.n));
 		vectorPos.set(1,Math.random()*(Main.m));

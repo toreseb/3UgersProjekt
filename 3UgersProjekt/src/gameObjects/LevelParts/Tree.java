@@ -7,6 +7,13 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/*
+ * Tree extends the abstract class LevelPart. 
+ * 
+ * This class makes a tree with a random size within bounds.
+ * 
+ * By: Tore
+ */
 public class Tree extends LevelPart {
 	
 	public Rectangle base;
@@ -17,21 +24,35 @@ public class Tree extends LevelPart {
 	
 	public Shape specialHitbox;
 
+	/*
+	 * Tree()
+	 * 
+	 * Calls the constructor in LevelPart.
+	 */
 	public Tree(int posX, int width, int height) {
 		super(posX, width, height);
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/*
+	 * initShape()
+	 * 
+	 * Makes a rectangle with a hitBox as the trunk and triangles with special hitBoxes as leaves.
+	 */
 	protected void initShape() {
 		dwidth = (double)width;
 		dheight = (double)height;
+		
+		//Make trunk and define it as hitbox
 		base = new Rectangle(width*3/8,20,width*2/8, height-20);
 		base.setFill(new Color(164d/255,116d/255,73d/255,1));
 		hitBox = base;
+		
+		// Define base size and amount of triangles
 		double triangleHeights = 50;
 		int triangles = (int)Math.floor(dheight/triangleHeights);
 		triangleHeights += (dheight % triangleHeights)/triangles;
+		
+		//Make appropriate amount of triangles
 		leaves = new Group();
 		for(int i = 0; i < triangles; i++) {
 			Polygon p = new Polygon();
@@ -52,9 +73,8 @@ public class Tree extends LevelPart {
 		super.initShape();
 	}
 	
-	@Override
-	protected void initHitbox() {//Skal overrides, da det er anderledes med træer.
-		// TODO Auto-generated method stub
+	protected void initHitbox() {
+		//Has to be overwrittet, as it is different with trees than the others
 	}
 
 }
