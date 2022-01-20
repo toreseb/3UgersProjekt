@@ -1,29 +1,44 @@
 package framework;
 
-import gameObjects.GameObject;
 import gameObjects.LevelPart;
 import gameObjects.PowerUp;
 import gameObjects.PowerUps.*;
-import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/*
+ * This class spawns a random powerup in a random position.
+ * 
+ * By: Helene & Tore
+ */
 public class SpawnPowerup {
-	private static int antal = 4;
 	private static int x;
 	private static int y;
 
 	public static boolean newPowerUp = false;
 
+	/*
+	 * rnd()
+	 * 
+	 * Returns a random int between 0 and the number given as parameter
+	 */
 	public static int rnd(int num) {
 		return (int) (Math.random() * num);
 	}
 
+	/*
+	 * spawnPower()
+	 * 
+	 * Spawns a random powerup in a random position.
+	 * 
+	 * By: mainly Tore
+	 */
 	public static void spawnPower() {
 
 		boolean isBad = true;
 
+		// Finds a random position. If it is within another object, it finds a new one
+		// until it isn't.
 		while (isBad) {
 			isBad = false;
 			x = rnd(Main.n);
@@ -38,6 +53,7 @@ public class SpawnPowerup {
 			}
 		}
 
+		// Makes a random powerup out of four options with the position found earlier
 		PowerUp powerUp;
 		int rnd = rnd(4);
 		if (rnd < 1) {
@@ -50,6 +66,7 @@ public class SpawnPowerup {
 			powerUp = new AnvilPower(x, y);
 		}
 
+		// Adds powerup to game
 		Main.cLevel.powerUps.add(powerUp);
 	}
 }

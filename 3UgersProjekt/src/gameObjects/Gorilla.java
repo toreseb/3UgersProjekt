@@ -2,15 +2,12 @@ package gameObjects;
 
 import framework.*;
 import gameObjects.Projectiles.*;
-import java.util.ArrayList;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import javafx.scene.image.*;
@@ -19,7 +16,7 @@ import javafx.scene.image.*;
  * The function of this class is: Create the gorilla Draw the gorilla Enables
  * the gorilla to throw the banana
  *
- * by: William Holberg
+ * by: William
  */
 
 public class Gorilla extends GameObject {
@@ -32,6 +29,7 @@ public class Gorilla extends GameObject {
 	public Projectile banana;
 	public String hasPow;
 	public Image gorillaImg;
+	public Image gorillaThrowImg; 
 
 	public String name;
 
@@ -39,11 +37,16 @@ public class Gorilla extends GameObject {
 	public static Image heart = new Image("Heart.png");
 	public ImageView gorilla;
 	private boolean right = true;
-	boolean firstFrame = true;
-	boolean secondFrame = false;
-	public Image gorillaThrowImg; 
 
-	// Constructor
+	/*
+	 * Gorilla()
+	 * 
+	 * Constructor for Gorilla.
+	 * 
+	 * Calls the constructor in GameObject.
+	 * 
+	 * Sets variables, draws hearts, sets name, and adds to pList.
+	 */
 	public Gorilla(int posX) {
 		super(posX, height, width, height);
 		numLife = 3;
@@ -64,8 +67,6 @@ public class Gorilla extends GameObject {
 		displayName();
 		
 		if (Main.pList.indexOf(this) == 1) rotate();
-		
-		step();
 	}
 
 
@@ -73,20 +74,33 @@ public class Gorilla extends GameObject {
 	 * Implementation of the must have functions from GameObject: drawShape()
 	 * initShape() step()
 	 */
-	@Override
+	
+	/*
+	 * step()
+	 * 
+	 * Handles the step of the gorilla.
+	 * 
+	 * By: Tore
+	 */
 	public void step() {
 		if(vectorPos.get(1) <= height+10) {
 			toTop();
 		}
 		if(isDead) {
 			Main.gameRoot.getChildren().remove(groupShape);
-			Main.cLevel.parts.remove(this);
+			Main.pList.remove(this);
 		}
 		
 		super.step();
 	}
 
-	@Override
+	/*
+	 * initShape()
+	 * 
+	 * Sets and formats images of gorilla and calls initShape() in GameObject.
+	 * 
+	 * By: Tore
+	 */
 	protected void initShape() {
 		gorillaImg = new Image("Gorilla.png");
 		gorillaThrowImg = new Image("GorillaThrow.png");
@@ -109,8 +123,10 @@ public class Gorilla extends GameObject {
 		int maxThrow = 200;
 		double xBegin = vectorPos.get(0) + width / 2; // gorilla center coordinates
 		double yBegin = Main.m - (vectorPos.get(1) - width / 2);
+		
+		// Makes line to show aim of shot.
 		Line line = new Line(xBegin, yBegin, xBegin, yBegin); // draw line: begins and ends in gorilla center
-		Main.mainRoot.getChildren().add(line); // Her bruges mainRoot, da den skal tegne oven på hele billedet
+		Main.mainRoot.getChildren().add(line); 
 
 		gorilla.setImage(gorillaThrowImg);
 		Main.mainRoot.setOnMouseMoved(event -> {
@@ -144,10 +160,10 @@ public class Gorilla extends GameObject {
 			double c = Math.sqrt((xBegin - event.getSceneX()) * (xBegin - event.getSceneX())
 					+ (yBegin - event.getSceneY()) * (yBegin - event.getSceneY()));
 			if (c < maxThrow) {
-				xEnd = event.getSceneX(); // move line end to follow the mouse
+				xEnd = event.getSceneX();
 				yEnd = event.getSceneY();
 			} else {
-				xEnd = xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow; // move line end to follow the mouse
+				xEnd = xBegin - ((xBegin - event.getSceneX()) / c) * maxThrow;
 				yEnd = yBegin - ((yBegin - event.getSceneY()) / c) * maxThrow;
 			}
 			double xSpeed = xEnd - xBegin;
@@ -169,6 +185,13 @@ public class Gorilla extends GameObject {
 		});
 	}
 
+	/*
+	 * rotate()
+	 * 
+	 * Rotates player to face the direction of the mouse while lining up their shot.
+	 * 
+	 * By: Embla
+	 */
 	public void rotate() {
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(gorilla);
@@ -183,11 +206,12 @@ public class Gorilla extends GameObject {
 	/*
 	 * Enables for moving the gorilla
 	 *
-	 * by: William Holberg
+	 * by: William
 	 */
-	private double startPosX, startPosY;
+	double startPosX, startPosY;
 
 	public void moveGorilla(Group shape) {
+		gorilla.setImage(gorillaImg);
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {
 				shape.setCursor(Cursor.HAND);
@@ -198,6 +222,7 @@ public class Gorilla extends GameObject {
 			startPosX = event.getSceneX();
 			startPosY = event.getSceneY();
 		});
+		
 
 		// Sets the new position to the shape when the mouse is dragged
 		shape.setOnMouseDragged(event -> {
@@ -220,6 +245,9 @@ public class Gorilla extends GameObject {
 				moveable = false;
 				if (!Main.pList.get(Main.cPlayer).moveable) {
 					Main.frameworkRoot.getChildren().remove(PlayerTurn.root); // Removes the prompt
+					
+					//Update image
+					gorilla.setImage(gorillaImg);
 				}
 
 				shape.setCursor(Cursor.DEFAULT);
@@ -239,6 +267,13 @@ public class Gorilla extends GameObject {
 		});
 	}
 
+	/*
+	 * drawHearts()
+	 * 
+	 * Draws the hearts above a player.
+	 * 
+	 * By: William, Tore & Embla
+	 */
 	public void drawHearts() {
 		this.lifeBar.getChildren().clear();
 		for (int i=0; i<curNumLife; i++) {
@@ -251,7 +286,14 @@ public class Gorilla extends GameObject {
 			lifeBar.getChildren().add(health);
 		}
 	}
-
+	
+	/*
+	 * displayName()
+	 * 
+	 * Sets and places name above gorilla.
+	 * 
+	 * By: Embla
+	 */
 	public void displayName() {
 		Text nameText = new Text(name);
 		nameText.setX(width/2-nameText.getLayoutBounds().getWidth() / 2);
@@ -259,6 +301,13 @@ public class Gorilla extends GameObject {
 		groupShape.getChildren().add(nameText);
 	}
 
+	/*
+	 * toTop()
+	 * 
+	 * Places the gorilla on top of level parts.
+	 * 
+	 * By: Tore
+	 */
 	void toTop() {
 		for (GameObject gO : Main.objList) {
 			if(LevelPart.class.isAssignableFrom(gO.getClass())) {

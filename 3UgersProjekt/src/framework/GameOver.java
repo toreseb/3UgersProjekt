@@ -43,6 +43,7 @@ public class GameOver {
 		}
 		Main.cPlayer = 0;
 		Main.timer.stop();
+		PlayerTurn.root.getChildren().clear();
 
 		Main.mainStage.setScene(new Scene(createContent(), WIDTH, HEIGHT));
 
@@ -99,7 +100,6 @@ public class GameOver {
 		gameOver.setText("Game Over");
 		int winnerNum = 0;
 		for (Gorilla g : Main.pList) {
-			System.out.println(Main.nList.get(Main.pList.indexOf(g)) + ": " + g.isDead);
 			if (!g.isDead) {
 				winnerNum = Main.pList.indexOf(g);
 			}
