@@ -188,6 +188,7 @@ public class Gorilla extends GameObject {
 	private double startPosX, startPosY;
 
 	public void moveGorilla(Group shape) {
+		gorilla.setImage(gorillaImg);
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {
 				shape.setCursor(Cursor.HAND);
@@ -198,6 +199,7 @@ public class Gorilla extends GameObject {
 			startPosX = event.getSceneX();
 			startPosY = event.getSceneY();
 		});
+		
 
 		// Sets the new position to the shape when the mouse is dragged
 		shape.setOnMouseDragged(event -> {
