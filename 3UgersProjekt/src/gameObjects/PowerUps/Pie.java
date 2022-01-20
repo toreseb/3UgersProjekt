@@ -28,7 +28,7 @@ public class Pie extends PowerUp {
 	 * Sets the image of the power up and calls initShape() from PowerUp.
 	 */
 	protected void initShape() {
-		image = new Image("Pie.png");
+		image = new Image(ClassLoader.getSystemResource("Pie.png").toString());
 		super.initShape();
 	}
 

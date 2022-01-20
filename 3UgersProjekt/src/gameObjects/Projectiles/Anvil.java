@@ -28,7 +28,7 @@ public class Anvil extends Projectile {
 	 * Sets the image of the projectile and calls initShape() from Projectile.
 	 */
 	protected void initShape() {
-		banana = new Image("Anvil.png");
+		banana = new Image(ClassLoader.getSystemResource("Anvil.png").toString());
 		super.initShape();
 	}
 

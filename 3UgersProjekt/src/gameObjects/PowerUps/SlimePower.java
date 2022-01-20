@@ -28,7 +28,7 @@ public class SlimePower extends PowerUp {
 	 * Sets the image of the power up and calls initShape() from PowerUp.
 	 */
 	protected void initShape() {
-		image = new Image("StaticSlimeTransparent.png");
+		image = new Image(ClassLoader.getSystemResource("StaticSlimeTransparent.png").toString());
 		
 		super.initShape();
 	}

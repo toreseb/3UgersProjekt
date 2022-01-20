@@ -10,15 +10,15 @@ import javafx.scene.image.ImageView;
 import javafx.stage.*;
 
 /**
- * This class contains the functions: 
- * - main() 
- * - start() 
- * - run() 
- * - initMain() 
- * - initTimer 
- * - clearLists 
+ * This class contains the functions:
+ * - main()
+ * - start()
+ * - run()
+ * - initMain()
+ * - initTimer
+ * - clearLists
  * - fullClear lists
- * 
+ *
  * This class starts and runs the game.
  *
  * By: Tore & Helene
@@ -58,7 +58,7 @@ public class Main extends Application {
 
 	/*
 	 * main()
-	 * 
+	 *
 	 * This function calls launch() which opens the JavaFX window and keeps it
 	 * running. It also closes the program.
 	 */
@@ -84,9 +84,9 @@ public class Main extends Application {
 		mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight() - startSizeH) / 2);
 
 		// Window icon
-		Image icon = new Image("Banana.png");
+		Image icon = new Image(ClassLoader.getSystemResource("Banana.png").toString());
 		mainStage.getIcons().add(icon);
-
+		
 		SetupScenes.disclaimer();
 
 		mainStage.show();
@@ -94,10 +94,10 @@ public class Main extends Application {
 
 	/*
 	 * run()
-	 * 
+	 *
 	 * This function is called by the timer (every frame) and handles everything
 	 * that needs to happen this often.
-	 * 
+	 *
 	 * By: Tore
 	 */
 	static void run() {
@@ -119,10 +119,10 @@ public class Main extends Application {
 
 	/*
 	 * initMain()
-	 * 
+	 *
 	 * This function starts the timer, creates the level, creates the gorillas, and
 	 * starts the game by calling the first players turn.
-	 * 
+	 *
 	 * By: Tore
 	 */
 	public static void initMain() {
@@ -143,9 +143,9 @@ public class Main extends Application {
 
 	/*
 	 * initTimer()
-	 * 
+	 *
 	 * Starts timer for animations and handles timer events
-	 * 
+	 *
 	 * By: Tore
 	 */
 	static void initTimer() {
@@ -171,9 +171,9 @@ public class Main extends Application {
 
 	/*
 	 * clearLists()
-	 * 
+	 *
 	 * Deletes all objects in the array list delList.
-	 * 
+	 *
 	 * By: Tore
 	 */
 	private static void clearLists() {
@@ -184,9 +184,9 @@ public class Main extends Application {
 
 	/*
 	 * fullClearLists()
-	 * 
+	 *
 	 * Essentially restarts everything. Clears cLevel and objList.
-	 * 
+	 *
 	 * By: Tore
 	 */
 	public static void fullClearLists() {

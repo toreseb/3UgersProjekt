@@ -28,7 +28,7 @@ public class IcePower extends PowerUp {
 	 * Sets the image of the power up and calls initShape() from PowerUp.
 	 */
 	protected void initShape() {
-		image = new Image("Iceball.png");
+		image = new Image(ClassLoader.getSystemResource("Iceball.png").toString());
 		
 		super.initShape();
 	}

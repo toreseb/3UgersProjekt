@@ -62,8 +62,8 @@ public class GameOver {
 		Button playAgain = new Button();
 		Group root = new Group();
 		GridPane pane = new GridPane();
-		Image city = new Image("City.gif");
-		Image banana = new Image("Banana.png");
+		Image city = new Image(ClassLoader.getSystemResource("City.gif").toString());
+		Image banana = new Image(ClassLoader.getSystemResource("Banana.png").toString());
 		ImageView background = new ImageView(city);
 		ImageView btnImg = new ImageView(banana);
 		Label winner = new Label();

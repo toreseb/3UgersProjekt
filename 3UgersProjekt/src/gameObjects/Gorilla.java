@@ -99,11 +99,11 @@ public class Gorilla extends GameObject {
 	 * 
 	 * Sets and formats images of gorilla and calls initShape() in GameObject.
 	 * 
-	 * By: Tore
+	 * By: tore og William
 	 */
 	protected void initShape() {
-		gorillaImg = new Image("Gorilla.png");
-		gorillaThrowImg = new Image("GorillaThrow.png");
+		gorillaImg = new Image(ClassLoader.getSystemResource("Gorilla.png").toString());
+		gorillaThrowImg = new Image(ClassLoader.getSystemResource("GorillaThrow.png").toString());
 		gorilla = new ImageView(gorillaImg);
 		gorilla.setFitHeight(height);
 		gorilla.setFitWidth(width);
@@ -211,6 +211,7 @@ public class Gorilla extends GameObject {
 	double startPosX, startPosY;
 
 	public void moveGorilla(Group shape) {
+		gorilla.setImage(gorillaImg);
 		shape.setOnMouseEntered(event -> {
 			if (moveable) {
 				shape.setCursor(Cursor.HAND);
@@ -221,6 +222,7 @@ public class Gorilla extends GameObject {
 			startPosX = event.getSceneX();
 			startPosY = event.getSceneY();
 		});
+		
 
 		// Sets the new position to the shape when the mouse is dragged
 		shape.setOnMouseDragged(event -> {

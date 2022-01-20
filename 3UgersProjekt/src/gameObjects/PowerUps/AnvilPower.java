@@ -28,7 +28,7 @@ public class AnvilPower extends PowerUp {
 	 * Sets the image of the power up and calls initShape() from PowerUp.
 	 */
 	protected void initShape() {
-		image = new Image("Anvil.png");
+		image = new Image(ClassLoader.getSystemResource("Anvil.png").toString());
 		
 		super.initShape();
 	}
