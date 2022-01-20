@@ -449,8 +449,8 @@ public class SetupScenes {
 		// Set button press event for hillLevel
 		hillLevel.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				Main.levelName = "HILLS";
-				Main.background = new Image("Hill.gif");
+				Main.levelName = "HILL";
+				Main.background = new Image("Hills.gif");
 				startGame();
 			}
 		});

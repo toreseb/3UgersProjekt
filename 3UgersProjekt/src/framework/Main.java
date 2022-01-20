@@ -86,7 +86,7 @@ public class Main extends Application {
 		// Window icon
 		Image icon = new Image("Banana.png");
 		mainStage.getIcons().add(icon);
-
+		
 		SetupScenes.windowSize();
 
 		mainStage.show();
