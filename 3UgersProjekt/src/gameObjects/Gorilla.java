@@ -99,7 +99,7 @@ public class Gorilla extends GameObject {
 	 * 
 	 * Sets and formats images of gorilla and calls initShape() in GameObject.
 	 * 
-	 * By: Tore
+	 * By: William
 	 */
 	protected void initShape() {
 		gorillaImg = new Image("Gorilla.png");
