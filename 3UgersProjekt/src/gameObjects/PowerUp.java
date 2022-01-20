@@ -87,17 +87,4 @@ public abstract class PowerUp extends GameObject {
 			counter = 0;
 		}
 	}
-	
-	/*
-	 * newCoords()
-	 * 
-	 * Sets a random position.
-	 * 
-	 * By: Tore
-	 */
-	public void newCoords() {
-		vectorPos.set(0,Math.random()*(Main.n));
-		vectorPos.set(1,Math.random()*(Main.m));
-		super.step();
-	}
 }
