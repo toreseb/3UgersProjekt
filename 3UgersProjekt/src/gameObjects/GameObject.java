@@ -102,6 +102,4 @@ public abstract class GameObject {
 	public void deleteObject() {
 		Main.delList.add(this);
 	}
-	
- 
 }
