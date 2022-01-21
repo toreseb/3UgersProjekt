@@ -50,7 +50,7 @@ public class Stone extends LevelPart {
 	 * 
 	 * Sets shape and colour of the small stone.
 	 */
-	void initSmallStone(Polygon p) {
+	private void initSmallStone(Polygon p) {
 		p.getPoints().addAll(new Double[] {
 		dwidth/3,0.0,
 		dwidth*3/5,dheight/20,
@@ -69,7 +69,7 @@ public class Stone extends LevelPart {
 	 * 
 	 * Sets shape and colour of the big stone.
 	 */
-	void initBigStone(Polygon p) {
+	private void initBigStone(Polygon p) {
 		p.getPoints().addAll(new Double[] {
 		dwidth/3,0.0,
 		dwidth*3/5,dheight/50,

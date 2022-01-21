@@ -24,7 +24,7 @@ public abstract class GameObject {
 	 ********************/
 
 	public int id;
-	static int idCounter = 0;
+	private static int idCounter = 0;
 	public Vector<Double> vectorPos = new Vector<Double>(2); // The position for the objects
 
 	public int width, height; // the width and height of the shapes
@@ -83,7 +83,7 @@ public abstract class GameObject {
 		groupShape.setTranslateY(Main.m - vectorPos.get(1));
 	}
 
-	void draw() {
+	protected void draw() {
 	} //This normally visually creates and runs the different objects, but because we use javaFX, it is done internally, so it isn't needed.
 
 	/*

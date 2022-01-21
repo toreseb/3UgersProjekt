@@ -12,7 +12,7 @@ import gameObjects.LevelParts.*;
  * By: Tore
  */
 public class Level {
-	int width, height;
+	private int width, height;
 
 	// Create lists to contain things that go in the level
 	public ArrayList<LevelPart> parts = new ArrayList<LevelPart>();
@@ -51,7 +51,7 @@ public class Level {
 	 * 
 	 * Creates randomly sized level parts until the window is filled.
 	 */
-	void initLevelParts() {
+	private void initLevelParts() {
 
 		int widthLeft = width;
 

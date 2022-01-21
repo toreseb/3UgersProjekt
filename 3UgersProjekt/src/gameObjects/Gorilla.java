@@ -208,7 +208,7 @@ public class Gorilla extends GameObject {
 	 *
 	 * by: William
 	 */
-	double startPosX, startPosY;
+	private double startPosX, startPosY;
 
 	public void moveGorilla(Group shape) {
 		gorilla.setImage(gorillaImg);
@@ -308,7 +308,7 @@ public class Gorilla extends GameObject {
 	 * 
 	 * By: Tore
 	 */
-	void toTop() {
+	private void toTop() {
 		for (GameObject gO : Main.objList) {
 			if(LevelPart.class.isAssignableFrom(gO.getClass())) {
 				while(objectCollision(gO)) {

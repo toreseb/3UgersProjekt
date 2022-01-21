@@ -19,8 +19,7 @@ import javafx.scene.image.ImageView;
 public abstract class Projectile extends GameObject {
 	private double xSpeed;
 	private double ySpeed;
-	double g = 9.82;
-	int count = 0;
+	private double g = 9.82;
 	public static int width = 20;
 	public static int height = 20;
 
@@ -212,7 +211,7 @@ public abstract class Projectile extends GameObject {
 	 * 
 	 * Rotates the image of the projectile.
 	 */
-	void initAnimation(int angle) {
+	protected void initAnimation(int angle) {
 		// rotate
 		RotateTransition rotate = new RotateTransition();
 		rotate.setNode(groupShape);
