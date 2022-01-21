@@ -7,8 +7,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * Embla har skrevet denne class
- *
+ * Projectile: creates the object which is thrown by the gorilla
+ * 
+ *By: Embla
  */
 public class Projectile extends GameObject {
 	private double xSpeed;
@@ -16,6 +17,7 @@ public class Projectile extends GameObject {
 	private double direction;
 	private double g = 9.82;
 
+	//Constructor
 	public Projectile(int posX, int posY, double direction, double speed) {
 
 		super(posX, posY, 2, 2);
@@ -24,18 +26,21 @@ public class Projectile extends GameObject {
 		ySpeed = -Math.sin(this.direction) * speed; // calculation y begin speed
 	}
 
+	//Draws the shape
 	@Override
 	public void drawShape(Group root) {
 		Circle circle = new Circle(vectorPos.get(0), vectorPos.get(1), 5, Color.GOLD);
 		root.getChildren().add(circle);
 	}
 
+	//Calculates the new position of the projectile in a parable
 	public void step() {
 		ySpeed += g / 60; // calc new ySpeed from acceleration - 60 frames per second
 		vectorPos.set(0, (int) (vectorPos.get(0) + xSpeed));
 		vectorPos.set(1, (int) (vectorPos.get(1) + ySpeed));
 	}
 
+	// Collision with walls (stop xSpeed) and floor (check distance from other gorilla and deletes object)
 	@Override
 	public void collision() {
 		if (vectorPos.get(0) - width / 2 < 0)
@@ -55,7 +60,6 @@ public class Projectile extends GameObject {
 				Main.cPlayer = 0;
 			}
 			Main.promptPlayer();
-			//Main.mainStage.getScene().getWindow().setWidth(Main.mainStage.getScene().getWidth() + 14);
 			this.deleteObject();
 		}
 	}

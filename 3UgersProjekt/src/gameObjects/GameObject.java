@@ -42,12 +42,14 @@ public abstract class GameObject {
 		Main.objList.add(this);// Adds the player to a list.
 	}
 	
-	
+	// Draws the shape of the object
 	public abstract void drawShape(Group root);
 	
+	//Runs the physics of the object
 	public abstract void step();
 	
-	void draw(Group root2) {	
+	// Removes and draws the object every frame
+	private void draw(Group root2) {	
 		Group root = new Group();
 		drawShape(root);
 		root2.getChildren().add(root);
@@ -63,6 +65,7 @@ public abstract class GameObject {
 		draw(root);
 	}
 	
+	//Object collision with walls
 	public void collision() {
 		if (vectorPos.get(0)-width/2< 0)
 			vectorPos.set(0,0+width/2);
@@ -97,6 +100,7 @@ public abstract class GameObject {
 	 *  Tore  *
 	 *********/
 	
+	// Adds object to delete list
 	public void deleteObject() {
 		Main.delList.add(this);
 	}

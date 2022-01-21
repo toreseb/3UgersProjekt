@@ -251,18 +251,18 @@ public class Main extends Application {
 		frameworkRoot.getChildren().add(placement);
 	}
 
+	// Start running timer
 	static void initTimer() {
 		AnimationTimer timer = new AnimationTimer() {
 
 			private long lastToggle;
 
-			@Override
 			public void handle(long now) {
 				if (lastToggle == 0L) {
 					lastToggle = now;
 				} else {
 					long diff = now - lastToggle;
-					if (diff >= 16_000_000L) { // 500,000,000ns == 500ms
+					if (diff >= 16_000_000L) { // 16,000,000ns == 16ms == 1/60s
 						Main.run();
 						lastToggle = now;
 					}
@@ -272,6 +272,7 @@ public class Main extends Application {
 		timer.start();
 	}
 
+	//Clears objects from object list
 	private static void clearLists() {
 		for (GameObject gameObject : delList) {
 			objList.remove(gameObject);
