@@ -4,8 +4,6 @@ import framework.Main;
 import java.util.Vector;
 
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.shape.Circle;
 
 /**
  * The function of this class is:
@@ -26,7 +24,7 @@ public abstract class GameObject {
 	 ********************/ 
 	
 	public int id;
-	static int idCounter = 0;
+	private static int idCounter = 0;
 	protected Vector<Integer> vectorPos= new Vector<Integer>(2); 		// The position for the objects
 	
 	public int width, height; 				// the width and height of the shapes

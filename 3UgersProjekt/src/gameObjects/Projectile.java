@@ -14,7 +14,7 @@ public class Projectile extends GameObject {
 	private double xSpeed;
 	private double ySpeed;
 	private double direction;
-	double g = 9.82;
+	private double g = 9.82;
 
 	public Projectile(int posX, int posY, double direction, double speed) {
 

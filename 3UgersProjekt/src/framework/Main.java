@@ -28,7 +28,6 @@ public class Main extends Application {
 
 	public static Stage mainStage;
 	public static Scene mainScene;
-	// public static Group root2 = new Group();
 
 	public static Timer mainT = new Timer();
 
@@ -46,11 +45,11 @@ public class Main extends Application {
 	/*
 	 * start()
 	 *
-	 * Creates the first scene/stage. xxx hvilken en?
+	 * Creates the first stage.
 	 *
 	 * Asks for two integer values as the dimensions of the game.
 	 *
-	 * By: Helene Moesgaard.
+	 * By: Helene
 	 */
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
@@ -77,6 +76,7 @@ public class Main extends Application {
 
 		mainStage.setScene(new Scene(root, 300, 200));
 
+		// Setup components
 		Text text = new Text();
 		TextField setN = new TextField();
 		setN.setPromptText("300 to 2000");
@@ -108,10 +108,10 @@ public class Main extends Application {
 		btn.setText("Submit");
 		btn.setLayoutX(150);
 		btn.setLayoutY(80);
+		
+		// Set button event handler
 		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
 				try {
 					int newN = Integer.parseInt(setN.getText());
 					int newM = Integer.parseInt(setM.getText());
@@ -148,6 +148,7 @@ public class Main extends Application {
 		mainT.cancel();
 	}
 
+	// Calls run for every game object
 	static void run() {
 		gameRoot.getChildren().clear();
 		for (GameObject gO : objList) {
@@ -157,6 +158,7 @@ public class Main extends Application {
 
 	}
 
+	// Initiates timer, creates gorillas and calls the first turn
 	public static void initMain() {
 		initTimer();
 		Gorilla p0 = new Gorilla(Gorilla.width * 2, m - Gorilla.height / 2);
@@ -164,7 +166,7 @@ public class Main extends Application {
 		pList.add(p0);
 		pList.add(p1);
 
-		// Kald tur
+		// Call turn
 		promptPlayer();
 	}
 
@@ -175,7 +177,7 @@ public class Main extends Application {
 	 * 
 	 * Creates a prompt for a player to set values for throw.
 	 * 
-	 * By: Helene Moesgaard.
+	 * By: Helene
 	 */
 	public static void promptPlayer() {
 		// Create components
@@ -188,30 +190,31 @@ public class Main extends Application {
 		TextField angleText = new TextField();
 		angleText.setPromptText("0 to 90");
 		Button submit = new Button("Submit");
-
+		
+		// Setup border pane
 		BorderPane placement = new BorderPane();
 		placement.setPrefWidth(n);
 		placement.setPrefHeight(m);
 		placement.setPadding(new Insets(10, 10, 10, 10));
 
-		// Set size and event of button
-		// submit.setLayoutX(150);
-		// submit.setLayoutY(80);
+		// Set button event handler
 		submit.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
+				// Try to get button input - angle and speed
 				try {
 					double angle = Double.parseDouble(angleText.getText());
 					double speed = Double.parseDouble(speedText.getText());
 					if((angle > 90 || angle < 0)||(speed > 60 || speed < 0)){
+						// Throw exception if input is out of bounds
 						throw new IllegalArgumentException();
 					}
-					
+					// Throw banana and remove prompt(placement)
 					pList.get(cPlayer).throwBanana(angle, speed);
 					Main.frameworkRoot.getChildren().remove(placement);
+					
 				} catch (Exception e) {
-					Text advarsel = new Text("Angiv venligst kun tal i de givne områder!");
+					// Show warning
+					Text advarsel = new Text("Please only enter integers within bounds!");
 					placement.setTop(advarsel);
 				}
 
@@ -228,6 +231,7 @@ public class Main extends Application {
 		GridPane.setConstraints(submit, 0, 3);
 		group.getChildren().addAll(player, speedLabel, angleLabel, speedText, angleText, submit);
 
+		// Place prompt above correct player
 		switch (cPlayer) {
 		case 0: {
 			placement.setLeft(group);
@@ -242,7 +246,7 @@ public class Main extends Application {
 		}
 
 		placement.setTop(score);
-		placement.setAlignment(score, Pos.CENTER);
+		BorderPane.setAlignment(score, Pos.CENTER);
 
 		frameworkRoot.getChildren().add(placement);
 	}
